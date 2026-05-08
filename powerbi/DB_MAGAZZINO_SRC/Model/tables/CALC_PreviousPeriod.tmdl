@@ -1,0 +1,75 @@
+﻿table CALC_PreviousPeriod
+
+	calculationGroup
+		precedence: 2
+
+		calculationItem Value = SELECTEDMEASURE()
+
+		calculationItem 'Last DAY' =
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				
+				VAR Result =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    DATEADD ( DIM_Calendario[Date], -NumOfInterval, DAY )
+				)
+				
+				RETURN
+				    Result
+
+		calculationItem 'Last MONTH' =
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				
+				VAR Result =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    DATEADD ( DIM_Calendario[Date], -NumOfInterval, MONTH )
+				)
+				
+				RETURN
+				    Result
+
+		calculationItem 'Last QUARTER' =
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				
+				VAR Result =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    DATEADD ( DIM_Calendario[Date], -NumOfInterval, QUARTER )
+				)
+				
+				RETURN
+				    Result
+
+		calculationItem 'Last YEAR' =
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				
+				VAR Result =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    DATEADD ( DIM_Calendario[Date], -NumOfInterval, YEAR )
+				)
+				
+				RETURN
+				    Result
+
+	measure 'Value Previous' = SUMX('CALC_PreviousPeriod','CALC_PreviousPeriod'[Previous Period])
+		formatString: 0
+
+	column 'Previous Period'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: #,0.00
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

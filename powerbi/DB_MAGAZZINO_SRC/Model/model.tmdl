@@ -32,7 +32,7 @@ queryGroup QUERY_CMP
 
 	annotation PBI_QueryGroupOrder = 5
 
-annotation PBI_QueryOrder = ["CALENDARIO","ServerName","database","azienda","StartDate","RangeStart","RangeEnd","ARTICOLI","CLIENTI","FORNITORI","MEZZI_TRASPORTO","GRUPPI_VENDITE","SPEDIZIONIERI","UBICAZIONE","MAGAZZINO","PROGETTO","REPARTO","ANALISI_MAGAZZINO","ANALISI_PRODOTTO","ACCANTONAMENTI","MOVCG","ORDINI","ANALISI_MIX","CAMBI","ANALISI_VENDITE","DOCUMENTO ACQUISTO","DOCUMENTO VENDITA","ANALISI_DOC_VENDITA","ANALISI_DOC_ACQUISTO","PIANO_DEI_CONTI","AREA","COMUNI","CONTO_DEPOSITO_OLD","PREZZI_MIX","TAB_COMPETENZA","ACQUISTI_MIX_TEMPA","QUERY_BASE_DF","QUERY_BASE_WEB","Tab_CMP_Progressivo","ANALISI_CMP","Tab_Stock","TAB_GIACENZA","MAGAZZINO_CMP","PROPANO_COSTI","QUANTITA_PROPANO","CONTO_DEPOSITO","QUANTITA_MIX","MIX_COSTI"]
+annotation PBI_QueryOrder = ["DIM_Calendario","ServerName","database","azienda","StartDate","RangeStart","RangeEnd","DIM_Articoli","DIM_Clienti","DIM_Fornitori","DIM_MezziTrasporto","DIM_GruppiVendita","DIM_Spedizionieri","DIM_Deposito","FACT_Magazzino","DIM_Progetto","DIM_Reparto","KPI_Magazzino","KPI_Prodotto","FACT_Accantonamenti","FACT_MovimentiCG","FACT_Ordini","KPI_Mix","FACT_Cambi","KPI_Vendite","FACT_DocumentoAcquisto","FACT_DocumentoVendita","KPI_VenditeDocumento","KPI_AcquistiDocumento","DIM_PianoConti","DIM_Area","DIM_Comuni","FACT_ContoDepositoOLD","FACT_PrezziMix","BRIDGE_Competenza","FACT_AcquistiMixTemp","UTIL_DataflowQuery","UTIL_WebQuery","FACT_CMPProgressivo","KPI_CMP","FACT_Stock","FACT_Giacenza","FACT_MagazzinoCMP","FACT_PropanoCosti","FACT_QuantitaPropano","FACT_ContoDeposito","FACT_QuantitaMix","FACT_MixCosti"]
 
 annotation __TEdtr = 1
 
@@ -42,62 +42,62 @@ annotation __PBIService_Versioning_SaveVersion = b66f99cc-213d-488d-b364-773c0e4
 
 annotation __LastRPTime = 134213411353852357
 
-ref table ARTICOLI
-ref table CLIENTI
-ref table FORNITORI
-ref table MEZZI_TRASPORTO
-ref table GRUPPI_VENDITE
-ref table SPEDIZIONIERI
-ref table UBICAZIONE
-ref table CALENDARIO
-ref table MAGAZZINO
-ref table PROGETTO
-ref table REPARTO
-ref table ANALISI_MAGAZZINO
-ref table ANALISI_PRODOTTO
-ref table ACCANTONAMENTI
-ref table MOVCG
-ref table 'Tab PROPANO'
-ref table ORDINI
-ref table 'Tab MIX'
-ref table ANALISI_MIX
-ref table CAMBI
-ref table ANALISI_VENDITE
-ref table 'DOCUMENTO ACQUISTO'
-ref table 'DOCUMENTO VENDITA'
-ref table ANALISI_DOC_VENDITA
-ref table ANALISI_DOC_ACQUISTO
-ref table 'CALC_Rolling AVG'
+ref table DIM_Articoli
+ref table DIM_Clienti
+ref table DIM_Fornitori
+ref table DIM_MezziTrasporto
+ref table DIM_GruppiVendita
+ref table DIM_Spedizionieri
+ref table DIM_Deposito
+ref table DIM_Calendario
+ref table FACT_Magazzino
+ref table DIM_Progetto
+ref table DIM_Reparto
+ref table KPI_Magazzino
+ref table KPI_Prodotto
+ref table FACT_Accantonamenti
+ref table FACT_MovimentiCG
+ref table FACT_Propano
+ref table FACT_Ordini
+ref table FACT_Mix
+ref table KPI_Mix
+ref table FACT_Cambi
+ref table KPI_Vendite
+ref table FACT_DocumentoAcquisto
+ref table FACT_DocumentoVendita
+ref table KPI_VenditeDocumento
+ref table KPI_AcquistiDocumento
+ref table CALC_RollingAvg
 ref table CALC_ToDate
-ref table TimeRange
-ref table 'CALC_Previous Period'
-ref table 'Select Measure Value and %'
-ref table 'Select a Measure CG'
-ref table PIANO_DEI_CONTI
-ref table AREA
-ref table COMUNI
-ref table 'Tab VENDITE'
-ref table 'Obiettivo Vendite'
-ref table NrGiorni
-ref table 'Tab Clienti Persi'
-ref table Obiettivo
-ref table LinestResult
-ref table Stat-Vendite
-ref table CONTO_DEPOSITO_OLD
-ref table PREZZI_MIX
-ref table TAB_COMPETENZA
-ref table ACQUISTI_MIX_TEMPA
-ref table QUERY_BASE_DF
-ref table QUERY_BASE_WEB
-ref table Tab_CMP_Progressivo
-ref table ANALISI_CMP
-ref table Tab_Stock
-ref table TAB_GIACENZA
-ref table MAGAZZINO_CMP
-ref table PROPANO_COSTI
-ref table QUANTITA_PROPANO
-ref table CONTO_DEPOSITO
-ref table QUANTITA_MIX
-ref table MIX_COSTI
+ref table PARAM_TimeRange
+ref table CALC_PreviousPeriod
+ref table UTIL_SelectMeasureValuePct
+ref table UTIL_SelectMeasureCG
+ref table DIM_PianoConti
+ref table DIM_Area
+ref table DIM_Comuni
+ref table FACT_Vendite
+ref table KPI_ObiettivoVendite
+ref table PARAM_NrGiorni
+ref table KPI_ClientiPersi
+ref table KPI_Obiettivo
+ref table UTIL_LinestResult
+ref table UTIL_StatVendite
+ref table FACT_ContoDepositoOLD
+ref table FACT_PrezziMix
+ref table BRIDGE_Competenza
+ref table FACT_AcquistiMixTemp
+ref table UTIL_DataflowQuery
+ref table UTIL_WebQuery
+ref table FACT_CMPProgressivo
+ref table KPI_CMP
+ref table FACT_Stock
+ref table FACT_Giacenza
+ref table FACT_MagazzinoCMP
+ref table FACT_PropanoCosti
+ref table FACT_QuantitaPropano
+ref table FACT_ContoDeposito
+ref table FACT_QuantitaMix
+ref table FACT_MixCosti
 
 ref cultureInfo it-IT

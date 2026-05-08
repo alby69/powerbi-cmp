@@ -1,0 +1,107 @@
+﻿table FACT_Accantonamenti
+
+	column 'Data Accantonamento'
+		dataType: dateTime
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Data Accantonamento
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Data Registrazione Coge'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Registrazione Coge
+		annotation SummarizationSetBy = Automatic
+
+	column Conto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Conto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dare
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Dare
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Avere
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Avere
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Note
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mezzo Trasporto'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Mezzo Trasporto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contropartita
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Contropartita
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reparto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Reparto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Progetto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Progetto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ACCANTONAMENTI-bd46d15b-81f5-4182-a63d-da42bc9749fb = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
+				    ACCANTONAMENTI_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="ACCANTONAMENTI",version=""]}[Data]
+				in
+				    ACCANTONAMENTI_
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigazione
+

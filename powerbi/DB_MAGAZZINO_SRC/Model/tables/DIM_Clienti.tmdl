@@ -1,0 +1,78 @@
+﻿table DIM_Clienti
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indirizzo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Indirizzo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indirizzo 2'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Indirizzo 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Città
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Città
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gruppo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Gruppo
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAP
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Cliente'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome & Codice' = DIM_Clienti[Nome] & "_" & DIM_Clienti[Codice Cliente]
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CLIENTI-9a4807bb-587d-48df-8a31-e8089e7197e0 = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    CLIENTI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="CLIENTI",version=""]}[Data]
+				in
+				    CLIENTI_
+
+	annotation PBI_ResultType = Table
+

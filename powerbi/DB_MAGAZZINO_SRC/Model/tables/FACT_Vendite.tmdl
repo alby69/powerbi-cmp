@@ -1,0 +1,116 @@
+﻿table FACT_Vendite
+
+	measure 'Qta Tab Vendite' = SUMX('FACT_Vendite','FACT_Vendite'[Qta])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '# Qta Vendite' = SUM('FACT_Vendite'[# Qta])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Codice Articolo'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Articoli[Codice Articolo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qta
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Qta]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Soggetto
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FACT_Magazzino[Soggetto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FACT_Magazzino[Categoria]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Deposito
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FACT_Magazzino[Deposito]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthInCalendar
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Calendario[MonthInCalendar]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		formatString: Short Date
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Calendario[Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gruppo =
+			
+			IF (
+			    'FACT_Vendite'[Categoria] = "NAZPERM",
+			    SWITCH (
+			        TRUE(),
+			        'FACT_Vendite'[Soggetto] = "C00261", "LIQUIGAS",
+			        'FACT_Vendite'[Soggetto] = "C00229", "BUTANGAS",
+			        'FACT_Vendite'[Soggetto] = "C00525", "ANORD",
+			        "IPEM"
+			    ),
+			    BLANK()    -- oppure puoi mettere un valore di default, es. "Altro"
+			)
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '# Qta'
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: [# Qta]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tab VENDITE-64a33be6-1e7a-4d2e-8b36-05c752792334' = calculated
+		mode: import
+		source = ```
+				
+				VAR filtro_articolo = {"1","1T","2","2T"}
+				
+				VAR tab_vendite =
+				        SUMMARIZECOLUMNS(            
+				            DIM_Calendario[MonthInCalendar],
+				            DIM_Calendario[Date],
+				            DIM_Articoli[Codice Articolo],
+				            FACT_Magazzino[Soggetto],
+				            FACT_Magazzino[Categoria],
+				            FACT_Magazzino[Deposito],
+				            FILTER(MAGAZZINO,FACT_Magazzino[Movimento] = "Vendita"),
+				            TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),            
+				            "Qta", ABS([Qta Ton]),
+				            "# Qta",COUNT(FACT_Magazzino[Indice])
+				
+				        )
+				RETURN
+				    FILTER(
+				        tab_vendite,
+				        DIM_Calendario[MonthInCalendar] <> BLANK()
+				    )
+				
+				```
+
+	annotation PBI_Id = 3ac231cfec2b4c2589b5b284d7fb0a55
+

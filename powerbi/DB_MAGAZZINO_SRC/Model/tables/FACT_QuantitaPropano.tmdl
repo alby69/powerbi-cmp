@@ -1,0 +1,229 @@
+﻿table FACT_QuantitaPropano
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movimento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Costo Unitario'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Costo Unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition QUANTITA_PROPANO = m
+		mode: import
+		queryGroup: QUERY_CMP
+		source = ```
+				// QUANTITA_PROPANO
+				
+				let
+				// =====================================================
+				// STEP 1 - SOURCE
+				// =====================================================
+				Source = CONTO_DEPOSITO,
+				
+				Filtrato =
+				    Table.SelectRows(
+				        Source,
+				        each [Movimento] = "Acquisto" and [Deposito] = "IPEM"
+				    ),
+				
+				// =====================================================
+				// STEP 2 - QUANTITA
+				// =====================================================
+				Qta =
+				    Table.Group(
+				        Filtrato,
+				        {"Nave","Data"},
+				        {{"Quantità", each List.Sum([Quantità]), type number}}
+				    ),
+				
+				// =====================================================
+				// STEP 3 - COSTI (già aggregati in PROPANO_COSTI)
+				// =====================================================
+				Costi =
+				    Table.Group(
+				        PROPANO_COSTI,
+				        {"Nave","Data"},
+				        {{"Importo", each List.Sum([Importo]), type number}}
+				    ),
+				
+				// =====================================================
+				// STEP 4 - NORMALIZZAZIONE
+				// =====================================================
+				QtaFix =
+				    Table.TransformColumns(
+				        Qta,
+				        {
+				            {"Nave", each Text.Upper(Text.Trim(_)), type text},
+				            {"Data", each Date.From(_), type date}
+				        }
+				    ),
+				
+				CostiFix =
+				    Table.TransformColumns(
+				        Costi,
+				        {
+				            {"Nave", each Text.Upper(Text.Trim(_)), type text},
+				            {"Data", each Date.From(_), type date}
+				        }
+				    ),
+				
+				// =====================================================
+				// STEP 5 - JOIN BASE (MODELLO PRINCIPALE)
+				// =====================================================
+				Join =
+				    Table.NestedJoin(
+				        QtaFix,
+				        {"Nave","Data"},
+				        CostiFix,
+				        {"Nave","Data"},
+				        "C",
+				        JoinKind.LeftOuter
+				    ),
+				
+				Expand =
+				    Table.ExpandTableColumn(
+				        Join,
+				        "C",
+				        {"Importo"},
+				        {"Importo"}
+				    ),
+				
+				// =====================================================
+				// STEP 6 - NULL SAFE (IMPORTO)
+				// =====================================================
+				ImportoFix =
+				    Table.ReplaceValue(
+				        Expand,
+				        null,
+				        0,
+				        Replacer.ReplaceValue,
+				        {"Importo"}
+				    ),
+				
+				// =====================================================
+				// STEP 7 - BUSINESS LOGIC
+				// =====================================================
+				AddArticolo =
+				    Table.AddColumn(ImportoFix, "Articolo", each "2T", type text),
+				
+				AddMov =
+				    Table.AddColumn(AddArticolo, "Movimento", each "Acquisto", type text),
+				
+				AddCostoUnit =
+				    Table.AddColumn(
+				        AddMov,
+				        "Costo Unitario",
+				        each 
+				            if [Quantità] = null or [Quantità] = 0 or [Importo] = null 
+				            then null 
+				            else [Importo] / [Quantità],
+				        type number
+				    ),
+				
+				// =====================================================
+				// STEP 8 - MISMATCH ANALYSIS (DEBUG ONLY)
+				// =====================================================
+				QtaKeys = QtaFix[Nave] & "|" & List.Transform(QtaFix[Data Competenza], each Date.ToText(_)),
+				CostiKeys = CostiFix[Nave] & "|" & List.Transform(CostiFix[Data Competenza], each Date.ToText(_)),
+				
+				MissingInCosti =
+				    Table.SelectRows(QtaFix, each not List.Contains(CostiKeys, [Nave] & "|" & Date.ToText([Data Competenza]))),
+				
+				MissingInQta =
+				    Table.SelectRows(CostiFix, each not List.Contains(QtaKeys, [Nave] & "|" & Date.ToText([Data Competenza]))),
+				
+				TotalKeys = List.Count(List.Union({QtaKeys, CostiKeys})),
+				MatchedKeys = List.Count(List.Intersect({QtaKeys, CostiKeys})),
+				
+				Coverage =
+				    if TotalKeys = 0 then 0 else MatchedKeys / TotalKeys,
+				
+				Score =
+				    if Coverage = 1 then 100
+				    else if Coverage >= 0.8 then 80
+				    else if Coverage >= 0.5 then 50
+				    else if Coverage > 0 then 20
+				    else 0,
+				
+				IssueType =
+				    if Coverage = 1 then "OK"
+				    else if Table.RowCount(MissingInCosti) > 0 and Table.RowCount(MissingInQta) = 0 then "Problema COSTI"
+				    else if Table.RowCount(MissingInQta) > 0 and Table.RowCount(MissingInCosti) = 0 then "Problema QTA"
+				    else "Problema MISTO",
+				
+				// =====================================================
+				// STEP 9 - FINAL OUTPUT
+				// =====================================================
+				Final =
+				    Table.SelectColumns(
+				        AddCostoUnit,
+				        {"Data","Articolo","Movimento","Quantità","Importo","Costo Unitario"}
+				    ),
+				
+				// =====================================================
+				// STEP 10 - DEBUG TABLE (SEPARATO, NON IN OUTPUT)
+				// =====================================================
+				Debug =
+				    #table(
+				        {"Coverage","Score","IssueType","MissingInCosti","MissingInQta"},
+				        {
+				            {
+				                Coverage,
+				                Score,
+				                IssueType,
+				                Table.RowCount(MissingInCosti),
+				                Table.RowCount(MissingInQta)
+				            }
+				        }
+				    )
+				
+				in
+				Final
+				```
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

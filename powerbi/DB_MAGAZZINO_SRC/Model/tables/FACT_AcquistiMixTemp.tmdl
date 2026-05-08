@@ -1,0 +1,44 @@
+﻿table FACT_AcquistiMixTemp
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fornitore
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Fornitore
+
+		annotation SummarizationSetBy = Automatic
+
+	column Qta
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Qta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ACQUISTI_MIX_TEMPA = m
+		mode: import
+		queryGroup: GOOGLE_SHEETS
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"a989179f-746e-4a2d-9ae7-6fadb9c887fd" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="a989179f-746e-4a2d-9ae7-6fadb9c887fd"]}[Data],
+				    tab_acquisti_mix_tempa_ = #"a989179f-746e-4a2d-9ae7-6fadb9c887fd"{[entity="tab_acquisti_mix_tempa",version=""]}[Data]
+				in
+				    tab_acquisti_mix_tempa_
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,35 @@
+﻿table BRIDGE_Competenza
+
+	column 'Codice Mezzo'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Mezzo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Competenza'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Competenza
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition TAB_COMPETENZA = m
+		mode: import
+		queryGroup: GOOGLE_SHEETS
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"a989179f-746e-4a2d-9ae7-6fadb9c887fd" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="a989179f-746e-4a2d-9ae7-6fadb9c887fd"]}[Data],
+				    tab_competenza_ = #"a989179f-746e-4a2d-9ae7-6fadb9c887fd"{[entity="tab_competenza",version=""]}[Data]
+				in
+				    tab_competenza_
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

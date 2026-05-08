@@ -1,0 +1,31 @@
+﻿table DIM_Deposito
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Ubicazione'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Ubicazione
+
+		annotation SummarizationSetBy = Automatic
+
+	partition UBICAZIONE-cd9f04a1-f4f2-498e-a4f2-3cdc0aaaa7cb = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    UBICAZIONE_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="UBICAZIONE",version=""]}[Data]
+				in
+				    UBICAZIONE_
+
+	annotation PBI_ResultType = Table
+

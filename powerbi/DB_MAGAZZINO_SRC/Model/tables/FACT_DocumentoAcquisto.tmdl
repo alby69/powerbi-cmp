@@ -1,0 +1,163 @@
+﻿table FACT_DocumentoAcquisto
+
+	column Documento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Fornitore'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Fornitore
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column No_
+		dataType: string
+		summarizeBy: none
+		sourceColumn: No_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posting Group'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Posting Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descrizione
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Descrizione
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Descrizione 2'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Descrizione 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Iva
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Iva
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Importo Ivato'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo Ivato
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Reparto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Reparto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Progetto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Progetto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordine
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Ordine
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Costo Unitario'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Costo Unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Posting Date'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Posting Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Unità di Misura'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unità di Misura
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Documento'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Tipo Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ubicazione
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Ubicazione
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DOCUMENTO ACQUISTO-805b83b7-2274-44fa-842c-d8056fc6b70d' = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3"]}[Data],
+				    #"DOCUMENTO ACQUISTO_" = #"5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3"{[entity="DOCUMENTO ACQUISTO",version=""]}[Data]
+				in
+				    #"DOCUMENTO ACQUISTO_"
+
+	annotation PBI_ResultType = Table
+

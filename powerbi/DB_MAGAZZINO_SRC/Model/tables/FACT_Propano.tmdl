@@ -1,0 +1,66 @@
+﻿table FACT_Propano
+
+	measure 'Costo Tab Propano' = DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Importo Costo Tab Propano' = [Total Costs NAVI]
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Qta Ton IPEM'
+		formatString: #,0
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Qta Ton IPEM]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthInCalendar
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Calendario[MonthInCalendar]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Mezzo'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_MezziTrasporto[Codice Mezzo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Articolo'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Articoli[Codice Articolo]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tab PROPANO-f816341a-f99a-47b1-b4f2-01abda773f31' = calculated
+		mode: import
+		source = ```
+				
+				VAR filtro_articolo = {"2","2T"}
+				
+				VAR tab_propano =
+				        SUMMARIZECOLUMNS(
+				            //DIM_Calendario[MonthOfYear],        
+				            DIM_Calendario[MonthInCalendar],
+				            //DIM_Calendario[Date], 
+				            DIM_MezziTrasporto[Codice Mezzo],
+				            DIM_Articoli[Codice Articolo],
+				            FILTER(MEZZI_TRASPORTO,LEFT(DIM_MezziTrasporto[Codice Mezzo],1) = "N" ),
+				            TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),            
+				            //"Costo", DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD]),
+				            //"Importo Costo Tab Propano", [Total Costs NAVI],
+				            "Qta Ton IPEM", [Qta Ton Acquisto IPEM CD]
+				        )
+				RETURN
+				    FILTER(tab_propano,
+				        [Qta Ton IPEM] > 0 && DIM_Calendario[MonthInCalendar] <> ""
+				    )
+				```
+
+	annotation PBI_Id = 92ab77ab20124dcf865872b2038dc98a
+

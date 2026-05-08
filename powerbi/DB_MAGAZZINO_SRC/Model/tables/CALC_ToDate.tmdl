@@ -5,11 +5,11 @@
 
 		calculationItem Value = SELECTEDMEASURE()
 
-		calculationItem MTD = TOTALMTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+		calculationItem MTD = TOTALMTD (SELECTEDMEASURE(), DIM_Calendario[Date] )
 
-		calculationItem QTD = TOTALQTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+		calculationItem QTD = TOTALQTD (SELECTEDMEASURE(), DIM_Calendario[Date] )
 
-		calculationItem YTD = TOTALYTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+		calculationItem YTD = TOTALYTD (SELECTEDMEASURE(), DIM_Calendario[Date] )
 
 	column DIM
 		dataType: string

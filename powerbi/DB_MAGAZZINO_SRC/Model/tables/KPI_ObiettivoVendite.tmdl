@@ -1,0 +1,25 @@
+﻿table KPI_ObiettivoVendite
+
+	measure 'Valore Obiettivo Vendite' = SELECTEDVALUE('KPI_ObiettivoVendite'[Obiettivo Vendite])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Obiettivo Vendite'
+		dataType: double
+		formatString: #,0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Obiettivo Vendite-9720c80e-d1d5-474b-af80-9b4d8b1a8944' = calculated
+		mode: import
+		source = GENERATESERIES([Qta Vendita CUM], 10000000, 1000)
+
+	annotation PBI_Id = 64bf9f735e764451bfb0b374bf41f363
+

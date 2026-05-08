@@ -1,0 +1,61 @@
+﻿table UTIL_StatVendite
+
+	calculationGroup
+		precedence: 5
+
+		calculationItem SUM = ```
+				
+				    SUMX(
+				        'FACT_DocumentoVendita',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem AVG = ```
+				
+				    AVERAGEX(
+				        'FACT_DocumentoVendita',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MEDIAN = ```
+				
+				    MEDIANX(
+				        'FACT_DocumentoVendita',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MAX = ```
+				
+				    MAXX(
+				        'FACT_DocumentoVendita',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MIN = ```
+				
+				    MINX(
+				        'FACT_DocumentoVendita',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+	column Statistica
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinale
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinale
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

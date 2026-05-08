@@ -1,0 +1,50 @@
+﻿table DIM_Comuni
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitudine
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Longitudine
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Latitudine
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Latitudine
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition COMUNI-ede85461-84ce-4705-bc0e-64f6e51b0112 = m
+		mode: import
+		queryGroup: GEOGRAFIA
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"93072853-e11a-47d3-a9ae-146e46949f0a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="93072853-e11a-47d3-a9ae-146e46949f0a"]}[Data],
+				    COMUNI_ = #"93072853-e11a-47d3-a9ae-146e46949f0a"{[entity="COMUNI",version=""]}[Data],
+				  #"Removed Columns" = Table.RemoveColumns(COMUNI_, {"Codice"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

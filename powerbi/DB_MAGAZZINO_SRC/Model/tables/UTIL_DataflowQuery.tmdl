@@ -1,0 +1,40 @@
+﻿table UTIL_DataflowQuery
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition QUERY_BASE_DF = m
+		mode: import
+		queryGroup: DIM
+		source =
+				//==================================================
+				// QUERY_BASE_DF
+				//==================================================
+				
+				let
+				    Output =
+				        [
+				            ORDINI = ORDINI,
+				            MOVCG = MOVCG,
+				            DOCVEN = #"DOCUMENTO VENDITA",
+				            CD = CONTO_DEPOSITO_OLD,
+				            CAMBI = CAMBI
+				        ]
+				in
+				    Output
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Record
+

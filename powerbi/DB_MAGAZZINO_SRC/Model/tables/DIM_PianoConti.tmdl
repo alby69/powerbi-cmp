@@ -1,0 +1,53 @@
+﻿table DIM_PianoConti
+
+	column 'Codice Conto'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Conto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reparto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Reparto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Progetto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Progetto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PIANO_DEI_CONTI-5277f593-ddbb-4e89-9c90-a227e319326f = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    PIANO_DEI_CONTI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="PIANO_DEI_CONTI",version=""]}[Data]
+				in
+				    PIANO_DEI_CONTI_
+
+	annotation PBI_ResultType = Table
+

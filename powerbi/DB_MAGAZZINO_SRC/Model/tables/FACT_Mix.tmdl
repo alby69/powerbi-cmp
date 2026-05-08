@@ -1,0 +1,158 @@
+﻿table FACT_Mix
+
+	measure '# Qta BIL MIX' = SUM('FACT_Mix'[# Qta BIL])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qta BIL MIX' = SUMX('FACT_Mix','FACT_Mix'[Qta BIL])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Costo Tab MIX' =
+			CALCULATE(
+			    DIVIDE([Costo Totale],[Qta_BIL],0),
+			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}
+			)
+			//Costo Tab MIX = DIVIDE([Costo Totale],[Qta_BIL],0)
+			
+			
+			
+			
+			)
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Importo Costo Tab MIX' =
+			
+			CALCULATE(
+			    [Costo Totale],
+			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}
+			))
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Costo Tab MIX Resa' =
+			CALCULATE(
+			    DIVIDE([Costo Totale],[Qta_RESA],0),
+			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}))
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qta RESA MIX' = SUMX('FACT_Mix','FACT_Mix'[Qta Resa])
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Prezzo USD'
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Prezzo USD]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Prezzo € Mese'
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Prezzo € Mese]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Qta BIL'
+		formatString: #,0.00
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Qta BIL]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Cliente'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Clienti[Codice Cliente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Articolo'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Articoli[Codice Articolo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column '# Qta BIL'
+		formatString: 0
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [# Qta BIL]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Cliente' = ```
+			
+			    SWITCH (
+			        TRUE(),
+			        'FACT_Mix'[Codice Cliente] = "C01049", "MITSUI",
+			        'FACT_Mix'[Codice Cliente] = "C00991", "TOTAL",
+			        "ALTRO"
+			    )
+			```
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		formatString: Short Date
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DIM_Calendario[Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Qta Resa'
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Qta Resa]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Tab MIX-21d23dbb-920a-4559-81df-a046d6f015a4' = calculated
+		mode: import
+		source = ```
+				
+				
+				VAR filtro_articolo = {"1","1T"}
+				VAR filtro_cliente = {"C00991","C01049"}
+				
+				VAR tab_filtro = 
+					SUMMARIZECOLUMNS(
+				        //DIM_Calendario[MonthOfYear],        
+				        //DIM_Calendario[MonthInCalendar],
+				        DIM_Calendario[Date], 
+				        DIM_Clienti[Codice Cliente],
+				        DIM_Articoli[Codice Articolo],
+				        TREATAS(filtro_cliente,DIM_Clienti[Codice Cliente]),
+				        TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),
+				        "Prezzo USD",[Prezzo USD Mese],
+				        "Prezzo € Mese", [Prezzo € MIX Mese],
+				        "Qta BIL", [Qta_BIL],        
+				        "# Qta BIL",COUNT(FACT_Ordini[Ordine]),
+				        "Qta Resa", [Qta_RESA]
+				        
+				    )
+				    
+				RETURN
+					FILTER(
+						tab_filtro,
+						[Qta BIL] > 0
+					)
+				
+				```
+
+	annotation PBI_Id = 39dc432dfde14d2aaff6675fa5305f16
+

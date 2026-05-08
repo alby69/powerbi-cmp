@@ -1,0 +1,194 @@
+﻿table FACT_MixCosti
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movimento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition MIX_COSTI = m
+		mode: import
+		queryGroup: QUERY_CMP
+		source = ```
+				// MIX_COSTI
+				
+				let
+				//--------------------------------------------------
+				// SORGENTI
+				//--------------------------------------------------
+				    DF = QUERY_BASE_DF,
+				    WB = QUERY_BASE_WEB,
+				
+				    ORDINI = DF[ORDINI],
+				    PREZZI = WB[PREZZI],
+				    CAMBI = DF[CAMBI],
+				
+				//--------------------------------------------------
+				// FILTRI
+				//--------------------------------------------------
+				    filtro_articolo = {"1","1T"},
+				    filtro_cliente = {"C00991","C01049"},
+				
+				//--------------------------------------------------
+				// ORDINI MIX
+				//--------------------------------------------------
+				    ORDINI_F = Table.SelectRows(
+				        ORDINI,
+				        each 
+				            Text.StartsWith([Ordine], "ODA") and
+				            List.Contains(filtro_articolo, [Articolo]) and
+				            List.Contains(filtro_cliente, [Codice Cliente Fatturazione])
+				    ),
+				
+				//--------------------------------------------------
+				// DATA + CHIAVI
+				//--------------------------------------------------
+				    AddKeys = Table.AddColumn(
+				        Table.AddColumn(ORDINI_F,"Anno", each Date.Year([Data Registrazione]), Int64.Type),
+				        "Mese", each Date.Month([Data Registrazione]), Int64.Type
+				    ),
+				
+				//--------------------------------------------------
+				// QTA BIL (come DAX)
+				//--------------------------------------------------
+				    AddQta = Table.AddColumn(
+				        AddKeys,
+				        "Qta",
+				        each 
+				            let q = [Quantity]
+				            in if q = null then null
+				               else if q >= 1000 then q / 1000
+				               else q,
+				        type number
+				    ),
+				
+				//--------------------------------------------------
+				// PREZZI MENSILI
+				//--------------------------------------------------
+				    PREZZI_K = Table.AddColumn(
+				        Table.AddColumn(PREZZI,"Anno", each Date.Year([Data]), Int64.Type),
+				        "Mese", each Date.Month([Data]), Int64.Type
+				    ),
+				
+				    PREZZI_M = Table.Group(
+				        PREZZI_K,
+				        {"Anno","Mese","Fornitore"},
+				        {{"Prezzo USD", each List.Average(List.RemoveNulls([Prezzo USD])), type number}}
+				    ),
+				
+				//--------------------------------------------------
+				// CAMBI
+				//--------------------------------------------------
+				    CAMBI_K = Table.AddColumn(
+				        Table.AddColumn(CAMBI,"Anno", each Date.Year([Data]), Int64.Type),
+				        "Mese", each Date.Month([Data]), Int64.Type
+				    ),
+				
+				    CAMBI_M = Table.Group(
+				        CAMBI_K,
+				        {"Anno","Mese"},
+				        {{"Tasso", each List.Average(List.RemoveNulls([Tasso])), type number}}
+				    ),
+				
+				//--------------------------------------------------
+				// JOIN PREZZI
+				//--------------------------------------------------
+				    JoinP = Table.NestedJoin(
+				        AddQta,
+				        {"Anno","Mese","Codice Cliente Fatturazione"},
+				        PREZZI_M,
+				        {"Anno","Mese","Fornitore"},
+				        "P",
+				        JoinKind.LeftOuter
+				    ),
+				
+				    ExpandP = Table.ExpandTableColumn(JoinP,"P",{"Prezzo USD"}),
+				    //--------------------------------------------------
+				// JOIN CAMBI
+				//--------------------------------------------------
+				    JoinC = Table.NestedJoin(
+				        ExpandP,
+				        {"Anno","Mese"},
+				        CAMBI_M,
+				        {"Anno","Mese"},
+				        "C",
+				        JoinKind.LeftOuter
+				    ),
+				
+				    ExpandC = Table.ExpandTableColumn(JoinC,"C",{"Tasso"}),
+				
+				//--------------------------------------------------
+				// IMPORTO (€)
+				//--------------------------------------------------
+				    AddImporto = Table.AddColumn(
+				        ExpandC,
+				        "Importo",
+				        each 
+				            let q = [Qta],
+				                p = [Prezzo USD],
+				                t = [Tasso]
+				            in 
+				                if q = null or p = null or t = null or t = 0 then null
+				                else q * (p / t),
+				        type number
+				    ),
+				    //--------------------------------------------------
+				// OUTPUT
+				//--------------------------------------------------
+				    AddData = Table.AddColumn(
+				        AddImporto,
+				        "Data",
+				        each Date.From([Data Registrazione]),
+				        type date
+				    ),
+				
+				    AddMov = Table.AddColumn(AddData,"Movimento",each "Acquisto"),
+				
+				    Select = Table.SelectColumns(
+				        AddMov,
+				        {"Data","Articolo","Movimento","Importo"}
+				    ),
+				
+				    Grouped = Table.Group(
+				        Select,
+				        {"Data","Articolo","Movimento"},
+				        {
+				            {"Importo", each List.Sum(List.RemoveNulls([Importo])), type number}
+				        }
+				    ),
+				    #"Modificato tipo" = Table.TransformColumnTypes(Grouped,{{"Movimento", type text}})
+				
+				in
+				    #"Modificato tipo"
+				```
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

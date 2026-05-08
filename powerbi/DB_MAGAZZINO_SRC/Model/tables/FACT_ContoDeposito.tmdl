@@ -1,0 +1,124 @@
+﻿table FACT_ContoDeposito
+
+	column 'Entry No_'
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Entry No_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Movimento'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Movimento
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Deposito
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Deposito
+
+		annotation SummarizationSetBy = Automatic
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movimento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Nave
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nave
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Note
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition CONTO_DEPOSITO = m
+		mode: import
+		queryGroup: QUERY_CMP
+		source = ```
+				// CONTO_DEPOSITO
+				
+				let
+				    Source = CONTO_DEPOSITO_OLD,
+				
+				    Merge =
+				        Table.NestedJoin(
+				            Source,
+				            {"Nave"},
+				            TAB_COMPETENZA,
+				            {"Codice Mezzo"},
+				            "Comp",
+				            JoinKind.LeftOuter
+				        ),
+				
+				    Espanso =
+				        Table.ExpandTableColumn(
+				            Merge,
+				            "Comp",
+				            {"Data Competenza"},
+				            {"Data Competenza Lookup"}   // 👈 rinominata qui
+				        ),
+				
+				    DataCompetenza =
+				        Table.AddColumn(
+				            Espanso,
+				            "Data Competenza",
+				            each 
+				                if [Data Competenza Lookup] <> null 
+				                then [Data Competenza Lookup] 
+				                else [Data Movimento],
+				            type date
+				        ),
+				
+				    Rimosse =
+				        Table.RemoveColumns(
+				            DataCompetenza,
+				            {"Data Competenza Lookup"}   // 👈 pulizia finale
+				        ),
+				    #"Rinominate colonne" = Table.RenameColumns(Rimosse,{{"Data Competenza", "Data"}})
+				in
+				    #"Rinominate colonne"
+				```
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

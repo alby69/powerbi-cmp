@@ -1,0 +1,41 @@
+﻿table KPI_ClientiPersi
+
+	column 'Codice Cliente Fatturazione'
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DOCUMENTO VENDITA[Codice Cliente Fatturazione]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tab Clienti Persi-42e34cb5-bf0e-4ad4-a018-35232f23ac2b' = calculated
+		mode: import
+		source = ```
+				
+				// Sono Clienti che non hanno acquistato negli ultimi nr_days, ma hanno acquistato prima
+				
+				VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
+				VAR nr_days = SELECTEDVALUE(NrGiorni[NrGiorni],90)
+				
+				VAR tab_data = 
+				    FILTER(
+				        ALLSELECTED(CALENDARIO),
+				        DIM_Calendario[Date] > ( MIN(DIM_Calendario[Date]) - nr_days ) &&
+				        DIM_Calendario[Date] < MIN(DIM_Calendario[Date])
+				    )
+				
+				VAR tab_clienti_persi = 
+				    FILTER(
+				        Lista_Clienti,
+				        CALCULATE(
+				            COUNTROWS('FACT_DocumentoVendita'),
+				            tab_data
+				        ) = 0
+				    )
+				
+				
+				RETURN
+				    tab_clienti_persi
+				```
+
+	annotation PBI_Id = b1f3fdd4d2244926b9d9be4f602b418a
+

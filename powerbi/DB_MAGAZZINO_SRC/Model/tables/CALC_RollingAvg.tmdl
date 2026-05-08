@@ -1,0 +1,110 @@
+﻿table CALC_RollingAvg
+
+	calculationGroup
+
+		calculationItem Value = SELECTEDMEASURE()
+
+		calculationItem 'Rolling AVG DAY' = ```
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
+				
+				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, DAY )
+				    
+				VAR Result = 
+				    CALCULATE (
+				        AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), SELECTEDMEASURE() ),
+				                Period
+				     )
+				
+				VAR LastDateWithSale =
+				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				VAR FirstVisibleDate =
+				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
+				RETURN
+				    
+				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
+				// controlla che la data sia nel range delle vendite
+				```
+
+		calculationItem 'Rolling AVG MONTH' = ```
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
+				
+				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, MONTH )
+				    
+				VAR Result = 
+				    CALCULATE (
+				        AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), SELECTEDMEASURE() ),
+				                Period
+				     )
+				
+				VAR LastDateWithSale =
+				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				VAR FirstVisibleDate =
+				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
+				RETURN
+				    
+				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
+				// controlla che la data sia nel range delle vendite
+				```
+
+		calculationItem 'Rolling AVG QUARTER' = ```
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
+				
+				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, QUARTER )
+				    
+				VAR Result = 
+				    CALCULATE (
+				        AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), SELECTEDMEASURE() ),
+				                Period
+				     )
+				
+				VAR LastDateWithSale =
+				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				VAR FirstVisibleDate =
+				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
+				RETURN
+				    
+				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
+				// controlla che la data sia nel range delle vendite
+				```
+
+		calculationItem 'Rolling AVG YEAR' = ```
+				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
+				
+				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, YEAR )
+				    
+				VAR Result = 
+				    CALCULATE (
+				        AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), SELECTEDMEASURE() ),
+				                Period
+				     )
+				
+				VAR LastDateWithSale =
+				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				VAR FirstVisibleDate =
+				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
+				RETURN
+				    
+				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
+				// controlla che la data sia nel range delle vendite
+				```
+
+	column 'Rolling AVG'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

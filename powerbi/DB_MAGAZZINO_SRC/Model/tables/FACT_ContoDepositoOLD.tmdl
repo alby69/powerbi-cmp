@@ -1,0 +1,108 @@
+﻿table FACT_ContoDepositoOLD
+	isHidden
+
+	column 'Entry No_'
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Entry No_
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Movimento'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Movimento
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Deposito
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Deposito
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Articolo
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movimento
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Movimento
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		isHidden
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Nave
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Nave
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Note
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Note
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CONTO_DEPOSITO_OLD = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				  Origine = PowerPlatform.Dataflows([]),
+				  #"Navigazione 1" = Origine{[Id = "Workspaces"]}[Data],
+				  #"Navigazione 2" = #"Navigazione 1"{[workspaceId = "903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				  #"Navigazione 3" = #"Navigazione 2"{[dataflowId = "bb824426-3526-4734-9406-d0645879f240"]}[Data],
+				  #"Navigazione 4" = #"Navigazione 3"{[entity = "CONTO_DEPOSITO", version = ""]}[Data]
+				in
+				  #"Navigazione 4"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigazione
+

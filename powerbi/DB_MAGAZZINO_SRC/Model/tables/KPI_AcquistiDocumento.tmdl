@@ -1,0 +1,41 @@
+﻿table KPI_AcquistiDocumento
+
+	measure 'Importo ACQ' =
+			
+			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Importo] )
+			/*
+			    CALCULATE(
+			        SUMX('DOC ACQUISTO','DOC ACQUISTO'[Importo]),
+			        //FILTER('DOC ACQUISTO', 'DOC ACQUISTO'[Progetto] IN {"ML02","ML01","PS01","PS02"})
+			    )
+			*/
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Materia Prima ACQ' =
+			
+			CALCULATE (
+			    [Importo ACQ],
+			    FILTER ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[No_] = "4020002" )
+			)
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qta ACQ' =
+			
+			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Quantità] )
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ANALISI_DOC_ACQUISTO-81b4dd66-090f-4c56-b5de-1102a4544e10 = m
+		mode: import
+		source =
+				let
+				    Origine = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Colonna1 = _t]),
+				    #"Modificato tipo" = Table.TransformColumnTypes(Origine,{{"Colonna1", type text}}),
+				    #"Rimosse colonne" = Table.RemoveColumns(#"Modificato tipo",{"Colonna1"})
+				in
+				    #"Rimosse colonne"
+
+	annotation PBI_ResultType = Table
+
