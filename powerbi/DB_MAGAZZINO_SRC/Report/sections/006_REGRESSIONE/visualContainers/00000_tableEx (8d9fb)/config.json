@@ -1,0 +1,127 @@
+{
+  "name": "8d9fb83e7e6e6da2c816",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 0,
+        "y": 214.68354430379748,
+        "z": 0,
+        "width": 573.83966244725741,
+        "height": 504.9789029535865,
+        "tabOrder": 0
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita CUM"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Regression Line"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita Forecast"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthInCalendar"
+          },
+          "Name": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Vendita CUM"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita CUM"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Regression Line"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Regression Line"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Vendita Forecast"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita Forecast"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Vendita"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "MonthInCalendar"
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {}
+  }
+}

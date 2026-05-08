@@ -1,0 +1,160 @@
+{
+  "name": "0115b41ec75379396b43",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 16.484848484848484,
+        "y": 97.939393939393938,
+        "z": 0,
+        "width": 623.5151515151515,
+        "height": 593.4545454545455,
+        "tabOrder": 0
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "queryRef": "Tab MIX.Codice Cliente"
+        },
+        {
+          "queryRef": "Tab MIX.Qta BIL"
+        },
+        {
+          "queryRef": "Tab MIX.Costo Tab MIX"
+        },
+        {
+          "queryRef": "Tab MIX.Importo Costo Tab MIX"
+        },
+        {
+          "queryRef": "Tab MIX.Prezzo € Mese"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "t",
+          "Entity": "Tab MIX",
+          "Type": 0
+        },
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "t"
+              }
+            },
+            "Property": "Qta BIL"
+          },
+          "Name": "Tab MIX.Qta BIL",
+          "NativeReferenceName": "Qta BIL"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "t"
+              }
+            },
+            "Property": "Prezzo € Mese"
+          },
+          "Name": "Tab MIX.Prezzo € Mese",
+          "NativeReferenceName": "Prezzo € Mese"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "t"
+              }
+            },
+            "Property": "Codice Cliente"
+          },
+          "Name": "Tab MIX.Codice Cliente",
+          "NativeReferenceName": "Codice Cliente"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "t"
+              }
+            },
+            "Property": "Costo Tab MIX"
+          },
+          "Name": "Tab MIX.Costo Tab MIX",
+          "NativeReferenceName": "Costo Tab MIX"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "t"
+              }
+            },
+            "Property": "Importo Costo Tab MIX"
+          },
+          "Name": "Tab MIX.Importo Costo Tab MIX",
+          "NativeReferenceName": "Importo Costo Tab MIX"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthInCalendar"
+          },
+          "Name": "CALENDARIO.MonthInCalendar",
+          "NativeReferenceName": "MonthInCalendar1"
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "vcObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'TAB MIX'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

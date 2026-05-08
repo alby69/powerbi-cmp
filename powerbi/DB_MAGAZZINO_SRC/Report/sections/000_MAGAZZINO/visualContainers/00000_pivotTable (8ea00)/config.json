@@ -1,0 +1,530 @@
+{
+  "name": "8ea0074489fc52c82983",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 25.676077265973255,
+        "y": 181.63447251114414,
+        "z": 1000,
+        "width": 1254.3239227340268,
+        "height": 538.24665676077268,
+        "tabOrder": 0
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "pivotTable",
+    "projections": {
+      "Rows": [
+        {
+          "queryRef": "CALENDARIO.MonthInCalendar",
+          "active": true
+        }
+      ],
+      "Values": [
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita Prodotto"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Importo Vendita"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+        },
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Giacenza Iniziale"
+        },
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Ton Giacenza"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Giacenza Iniziale"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Giacenza"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Movimento Mese"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.CMP Giacenza"
+        },
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.CMP Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Costo Venduto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Margine Unitario"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Margine"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.% Profitto"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a4",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        },
+        {
+          "Name": "a1",
+          "Entity": "ANALISI_MAGAZZINO",
+          "Type": 0
+        },
+        {
+          "Name": "a2",
+          "Entity": "ANALISI_PRODOTTO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthInCalendar"
+          },
+          "Name": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a4"
+              }
+            },
+            "Property": "Importo Vendita"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Importo Vendita"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a4"
+              }
+            },
+            "Property": "Prezzo Vendita"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "CMP Giacenza"
+          },
+          "Name": "ANALISI_PRODOTTO.CMP Giacenza"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Qta Acquisto"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Acquisto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Importo Acquisto"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Acquisto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "CMP Acquisto"
+          },
+          "Name": "ANALISI_PRODOTTO.CMP Acquisto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Costo Venduto"
+          },
+          "Name": "ANALISI_PRODOTTO.Costo Venduto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Importo Margine"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Margine"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "% Profitto"
+          },
+          "Name": "ANALISI_PRODOTTO.% Profitto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Margine Unitario"
+          },
+          "Name": "ANALISI_PRODOTTO.Margine Unitario"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a4"
+              }
+            },
+            "Property": "Qta Vendita Prodotto"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita Prodotto",
+          "NativeReferenceName": "Qta Vendita"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Importo Giacenza"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Giacenza",
+          "NativeReferenceName": "Importo Giacenza"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Importo Movimento Mese"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Movimento Mese",
+          "NativeReferenceName": "Importo Movimento Mese"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Qta Ton Giacenza"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Ton Giacenza",
+          "NativeReferenceName": "Qta Ton Giacenza"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Qta Giacenza Iniziale"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Giacenza Iniziale",
+          "NativeReferenceName": "Qta Giacenza Iniziale"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Importo Giacenza Iniziale"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Giacenza Iniziale",
+          "NativeReferenceName": "Importo Giacenza Iniziale"
+        }
+      ]
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "CALENDARIO.MonthInCalendar"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CALENDARIO"
+                    }
+                  },
+                  "Property": "MonthInCalendar"
+                }
+              }
+            ],
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "identityValues": null,
+          "children": [
+            {
+              "identityValues": [
+                {
+                  "Literal": {
+                    "Value": "'gen 2024'"
+                  }
+                }
+              ],
+              "isToggled": true
+            }
+          ]
+        }
+      }
+    ],
+    "columnProperties": {
+      "ANALISI_MAGAZZINO.Qta Ton Giacenza CUM ALL": {
+        "displayName": "Qta Ton Giacenza"
+      },
+      "CALENDARIO.MonthInCalendar": {
+        "displayName": "Mese/Anno"
+      },
+      "ANALISI_DOC_VENDITA.Qta Vendita Prodotto": {
+        "displayName": "Qta Vendita"
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "86.02453614204912D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CALENDARIO.MonthInCalendar"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.54962757664993D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MAGAZZINO.Qta Ton Giacenza CUM ALL"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.45613073733645D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MAGAZZINO.Qta Acquisto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "125.8590113326018D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Importo Acquisto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "66.76890825549954D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.CMP Acquisto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72.05179282868527D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.CMP Acquisto 2LM"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118.01765750203924D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Importo Margine Cliente 2"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.84336592187165D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.CMP Giacenza"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "69.22372832739131D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "74.58139795384174D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Margine Unitario"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "83.82374906646751D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_DOC_VENDITA.Qta Vendita Prodotto"
+          }
+        }
+      ],
+      "subTotals": [
+        {
+          "properties": {
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

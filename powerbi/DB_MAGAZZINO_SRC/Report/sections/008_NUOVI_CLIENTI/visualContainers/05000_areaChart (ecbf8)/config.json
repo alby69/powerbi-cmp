@@ -1,0 +1,175 @@
+{
+  "name": "ecbf8e0c96660a010704",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 589.37426210153478,
+        "y": 69.5159386068477,
+        "z": 5000,
+        "width": 690.6257378984651,
+        "height": 244.81700118063753,
+        "tabOrder": 5000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "areaChart",
+    "projections": {
+      "Category": [
+        {
+          "queryRef": "CALENDARIO.MonthInCalendar",
+          "active": true
+        }
+      ],
+      "Y": [
+        {
+          "queryRef": "ANALISI_VENDITE.% Nuovi Clienti"
+        },
+        {
+          "queryRef": "ANALISI_VENDITE.% Importo Vendite Nuovi Clienti"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_VENDITE",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "% Nuovi Clienti"
+          },
+          "Name": "ANALISI_VENDITE.% Nuovi Clienti"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "% Importo Vendite Nuovi Clienti"
+          },
+          "Name": "ANALISI_VENDITE.% Importo Vendite Nuovi Clienti"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthInCalendar"
+          },
+          "Name": "CALENDARIO.MonthInCalendar"
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "concatenateLabels": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "maxMarginFactor": {
+              "expr": {
+                "Literal": {
+                  "Value": "15L"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'solid'"
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'TopCenter'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "vcObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

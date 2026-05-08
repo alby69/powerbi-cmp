@@ -1,0 +1,33 @@
+{
+  "id": 8367490,
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "ReportSectiona25f843db337ada27a43",
+      "config": "{}",
+      "id": 45694722,
+      "name": "Pod"
+    }
+  ],
+  "publicCustomVisuals": [],
+  "reportId": 2100729,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "id": 25567169,
+        "items": [
+          {
+            "id": 159945570,
+            "name": "CY22SU09",
+            "path": "BaseThemes/CY22SU09.json",
+            "resourcePackageId": 25567169,
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ]
+}

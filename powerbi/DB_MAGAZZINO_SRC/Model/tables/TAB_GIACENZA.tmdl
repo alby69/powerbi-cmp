@@ -1,0 +1,61 @@
+﻿table TAB_GIACENZA
+
+	column Data
+		dataType: dateTime
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variazione
+			isDefault
+			relationship: d2c7bce3-dd2c-4128-85f7-990eadb64053
+			defaultHierarchy: LocalDateTable_9ec9e902-c2d7-4394-92c3-6f2b724303ec.'Gerarchia data'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition TAB_GIACENZA = m
+		mode: import
+		queryGroup: GOOGLE_SHEETS
+		source =
+				let
+				    Origine = PowerBI.Dataflows(null),
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Origine{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"a989179f-746e-4a2d-9ae7-6fadb9c887fd" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="a989179f-746e-4a2d-9ae7-6fadb9c887fd"]}[Data],
+				    tab_giacenza1 = #"a989179f-746e-4a2d-9ae7-6fadb9c887fd"{[entity="tab_giacenza"]}[Data],
+				    #"Riordinate colonne" = Table.ReorderColumns(tab_giacenza1,{"Data", "Articolo", "Qta", "Importo"}),
+				    #"Rinominate colonne" = Table.RenameColumns(#"Riordinate colonne",{{"Qta", "Quantità"}}),
+				    #"Filtrate righe" = Table.SelectRows(#"Rinominate colonne", each [Data] <> null and [Data] <> "")
+				in
+				    #"Filtrate righe"
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

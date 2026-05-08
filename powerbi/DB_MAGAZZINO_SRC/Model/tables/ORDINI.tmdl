@@ -1,0 +1,165 @@
+﻿table ORDINI
+
+	column Ordine
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Ordine
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Cliente Vendita'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Cliente Vendita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Cliente Fatturazione'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Cliente Fatturazione
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Spedizione'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Spedizione
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Registrazione'
+		dataType: dateTime
+		formatString: Short Date
+		summarizeBy: none
+		sourceColumn: Data Registrazione
+
+		variation Variazione
+			isDefault
+			relationship: 31e9df0f-db19-4e34-a385-cc1686dcbed5
+			defaultHierarchy: LocalDateTable_649f623b-90c6-4767-a85a-33bc099571cb.'Gerarchia data'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Data Spedizione'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Spedizione
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ARC
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ARC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Spedizioniere
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Spedizioniere
+
+		annotation SummarizationSetBy = Automatic
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ubicazione
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Ubicazione
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'VAT _'
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: VAT _
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Net Weight'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Net Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Categoria
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cod_ Causale Vendita'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Cod_ Causale Vendita
+
+		annotation SummarizationSetBy = Automatic
+
+	column Accisa
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Accisa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Densità T_A_'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Densità T_A_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Densità 15 C'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Densità 15 C
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ORDINI-75dde2e1-3858-4ba5-84e2-e5e4ed410ab1 = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"3f7bdf65-9391-4d91-9a41-2a5b893c841a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3f7bdf65-9391-4d91-9a41-2a5b893c841a"]}[Data],
+				    ORDINI_ = #"3f7bdf65-9391-4d91-9a41-2a5b893c841a"{[entity="ORDINI",version=""]}[Data]
+				in
+				    ORDINI_
+
+	annotation PBI_ResultType = Table
+

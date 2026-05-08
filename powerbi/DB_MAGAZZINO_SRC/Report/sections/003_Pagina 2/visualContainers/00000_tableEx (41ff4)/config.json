@@ -1,0 +1,234 @@
+{
+  "name": "41ff43b074566eac913b",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 0,
+        "y": 174.76369092273066,
+        "z": 0,
+        "width": 583.82595648912218,
+        "height": 193.00825206301573,
+        "tabOrder": 0
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CALENDARIO.Year"
+        },
+        {
+          "queryRef": "CALENDARIO.MonthName"
+        },
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Importo Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.CMP Acquisto"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+        },
+        {
+          "queryRef": "ANALISI_PRODOTTO.Margine Unitario Mese"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        },
+        {
+          "Name": "a2",
+          "Entity": "ANALISI_MAGAZZINO",
+          "Type": 0
+        },
+        {
+          "Name": "a3",
+          "Entity": "ANALISI_PRODOTTO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "Year"
+          },
+          "Name": "CALENDARIO.Year"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthName"
+          },
+          "Name": "CALENDARIO.MonthName"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Prezzo Vendita"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a2"
+              }
+            },
+            "Property": "Qta Acquisto"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Acquisto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a3"
+              }
+            },
+            "Property": "Margine Unitario"
+          },
+          "Name": "ANALISI_PRODOTTO.Margine Unitario Mese"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a3"
+              }
+            },
+            "Property": "Importo Acquisto"
+          },
+          "Name": "ANALISI_PRODOTTO.Importo Acquisto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a3"
+              }
+            },
+            "Property": "CMP Acquisto"
+          },
+          "Name": "ANALISI_PRODOTTO.CMP Acquisto"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Year"
+            }
+          }
+        }
+      ]
+    },
+    "columnProperties": {
+      "CALENDARIO.MonthName": {
+        "displayName": "Mese"
+      },
+      "CALENDARIO.Year": {
+        "displayName": "Anno"
+      },
+      "ANALISI_PRODOTTO.Margine Unitario Mese": {
+        "displayName": "Margine"
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71.93407582658403D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CALENDARIO.MonthName"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78.30770615721765D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_DOC_VENDITA.Prezzo Vendita"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71.22846441947566D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.CMP Acquisto"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

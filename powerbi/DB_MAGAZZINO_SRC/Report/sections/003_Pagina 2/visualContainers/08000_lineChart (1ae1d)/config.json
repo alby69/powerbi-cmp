@@ -1,0 +1,109 @@
+{
+  "name": "1ae1d4da6507a86c32d7",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 0,
+        "y": 381.21530382595648,
+        "z": 8000,
+        "width": 583.82595648912218,
+        "height": 153.6384096024006,
+        "tabOrder": 8000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "lineChart",
+    "projections": {
+      "Category": [
+        {
+          "queryRef": "CALENDARIO.Date",
+          "active": true
+        }
+      ],
+      "Y": [
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita Forecast"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "Date"
+          },
+          "Name": "CALENDARIO.Date"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Vendita Forecast"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita Forecast"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Date"
+            }
+          }
+        }
+      ]
+    },
+    "queryOptions": {
+      "keepProjectionOrder": true
+    },
+    "showAllRoles": [
+      "Category"
+    ],
+    "drillFilterOtherVisuals": true,
+    "hasDefaultSort": true,
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

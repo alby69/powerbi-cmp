@@ -1,0 +1,496 @@
+{
+  "name": "f798b8c6daa13547a428",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 219.49256342957131,
+        "y": 45.914260717410322,
+        "z": 0,
+        "width": 1060.5074365704288,
+        "height": 674.15573053368325,
+        "tabOrder": 0
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "pivotTable",
+    "projections": {
+      "Rows": [
+        {
+          "queryRef": "CALENDARIO.MonthName",
+          "active": true
+        },
+        {
+          "queryRef": "CLIENTI.Nome & Codice",
+          "active": true
+        }
+      ],
+      "Values": [
+        {
+          "queryRef": "ANALISI_MIX.NR ATB Giorno"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Qta_BIL"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Qta_RESA"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Tasso Giorno Cliente"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Prezzo USD MIX"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Importo USD"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Costo MIX"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Prezzo € MIX Mese"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Importo €"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Importo Accisa €"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Importo Trasporto"
+        },
+        {
+          "queryRef": "ANALISI_MIX.Costo Totale"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c1",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a1",
+          "Entity": "ANALISI_MIX",
+          "Type": 0
+        },
+        {
+          "Name": "c2",
+          "Entity": "CLIENTI",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "MonthName"
+          },
+          "Name": "CALENDARIO.MonthName"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "NR ATB Giorno"
+          },
+          "Name": "ANALISI_MIX.NR ATB Giorno"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Qta_BIL"
+          },
+          "Name": "ANALISI_MIX.Qta_BIL"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Qta_RESA"
+          },
+          "Name": "ANALISI_MIX.Qta_RESA"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Prezzo USD MIX"
+          },
+          "Name": "ANALISI_MIX.Prezzo USD MIX"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Importo USD"
+          },
+          "Name": "ANALISI_MIX.Importo USD"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Costo MIX"
+          },
+          "Name": "ANALISI_MIX.Costo MIX"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Prezzo € MIX Mese"
+          },
+          "Name": "ANALISI_MIX.Prezzo € MIX Mese"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Importo €"
+          },
+          "Name": "ANALISI_MIX.Importo €"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Importo Accisa €"
+          },
+          "Name": "ANALISI_MIX.Importo Accisa €"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Importo Trasporto"
+          },
+          "Name": "ANALISI_MIX.Importo Trasporto"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Costo Totale"
+          },
+          "Name": "ANALISI_MIX.Costo Totale"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a1"
+              }
+            },
+            "Property": "Tasso Giorno Cliente"
+          },
+          "Name": "ANALISI_MIX.Tasso Giorno Cliente"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c2"
+              }
+            },
+            "Property": "Nome & Codice"
+          },
+          "Name": "CLIENTI.Nome & Codice"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "MonthName"
+            }
+          }
+        }
+      ]
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "CALENDARIO.MonthName"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CALENDARIO"
+                    }
+                  },
+                  "Property": "MonthName"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "CLIENTI.Nome & Codice"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "identityValues": null
+        }
+      }
+    ],
+    "columnProperties": {
+      "ANALISI_MIX.NR ATB Giorno": {
+        "displayName": "Nr ATB"
+      },
+      "ANALISI_MIX.Prezzo USD MIX": {
+        "displayName": "Prezzo USD"
+      },
+      "ANALISI_MIX.Prezzo € MIX Mese": {
+        "displayName": "Prezzo € MIX"
+      }
+    },
+    "queryOptions": {
+      "keepProjectionOrder": true
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "63.821213448083185D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo Accisa €"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "75.7727615603115D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo Trasporto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56.53337594353064D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.NR ATB Giorno"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70.87539003026868D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo € 2"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72.63307892376041D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Qta_BIL"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56.78609906785914D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo USD MIX"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.4965009245629D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo € MIX Mese"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "90.39189930579911D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo €"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "92.54980079681275D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Costo Totale"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "197.86540322204348D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CALENDARIO.MonthName"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "58.40062858913257D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Tasso Giorno Cliente"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

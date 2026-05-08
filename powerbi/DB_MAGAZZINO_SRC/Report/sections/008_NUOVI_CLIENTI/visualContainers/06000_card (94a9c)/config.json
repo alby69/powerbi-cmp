@@ -1,0 +1,81 @@
+{
+  "name": "94a9c0ae8b1857673886",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 386.87131050767414,
+        "y": 71.0271546635183,
+        "z": 6000,
+        "width": 143.56552538370721,
+        "height": 84.628099173553721,
+        "tabOrder": 6000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "card",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "ANALISI_VENDITE.% Nuovi Clienti"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "a",
+          "Entity": "ANALISI_VENDITE",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "% Nuovi Clienti"
+          },
+          "Name": "ANALISI_VENDITE.% Nuovi Clienti"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 2,
+          "Expression": {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "% Nuovi Clienti"
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "hasDefaultSort": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

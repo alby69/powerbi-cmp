@@ -1,0 +1,102 @@
+﻿table LinestResult
+
+	column Slope1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Slope1]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Intercept
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Intercept]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column StandardErrorSlope1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [StandardErrorSlope1]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column StandardErrorIntercept
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [StandardErrorIntercept]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CoefficientOfDetermination
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [CoefficientOfDetermination]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column StandardError
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [StandardError]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FStatistic
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [FStatistic]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DegreesOfFreedom
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DegreesOfFreedom]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RegressionSumOfSquares
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [RegressionSumOfSquares]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ResidualSumOfSquares
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [ResidualSumOfSquares]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition LinestResult-196c76a0-0e58-4a34-b71d-35525b4956d2 = calculated
+		mode: import
+		source =
+				LINEST(
+				    'Tab VENDITE'[Qta],
+				    'Tab VENDITE'[Date]
+				)
+
+	annotation PBI_Id = 4c8727125d1647e6ade902c55ea91ea8
+

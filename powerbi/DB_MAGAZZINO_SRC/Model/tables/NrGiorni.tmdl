@@ -1,0 +1,23 @@
+﻿table NrGiorni
+
+	measure 'Valore NrGiorni' = SELECTEDVALUE('NrGiorni'[NrGiorni], 90)
+		formatString: 0
+
+	column NrGiorni
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition NrGiorni-2cefaf07-aded-4018-8f8d-abbde8d137e2 = calculated
+		mode: import
+		source = GENERATESERIES(10, 365, 1)
+
+	annotation PBI_Id = f7ade728b4d148a1aeac9583049b3050
+

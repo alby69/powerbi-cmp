@@ -1,0 +1,185 @@
+{
+  "name": "5204e953d0447193ca01",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 511.23505976095612,
+        "y": 416.89243027888443,
+        "z": 0,
+        "width": 768.76494023904377,
+        "height": 303.42629482071709,
+        "tabOrder": 4000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "lineStackedColumnComboChart",
+    "projections": {
+      "Category": [
+        {
+          "queryRef": "CALENDARIO.MonthName",
+          "active": true
+        }
+      ],
+      "Y": [
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Bar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Unmet Bar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Met Bar"
+        }
+      ],
+      "Y2": [
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Marker Value"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthName"
+          },
+          "Name": "CALENDARIO.MonthName"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Unmet Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Unmet Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Met Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Met Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Marker Value"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Marker Value"
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "secShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "lineStyles": [
+        {
+          "properties": {
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "0L"
+                }
+              }
+            },
+            "showMarker": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "markerShape": {
+              "expr": {
+                "Literal": {
+                  "Value": "'longDash'"
+                }
+              }
+            },
+            "markerSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

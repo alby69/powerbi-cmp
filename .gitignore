@@ -1,0 +1,13 @@
+# Power BI cache
+*.pbix.lock
+*.log
+
+# Excel temp files
+~$*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/

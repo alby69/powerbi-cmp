@@ -1,0 +1,157 @@
+{
+  "name": "1748cbeb9dbd1366e550",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 12.664310954063604,
+        "y": 119.40636042402826,
+        "z": 1000,
+        "width": 322.93992932862193,
+        "height": 599.74558303886931,
+        "tabOrder": 1000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "pivotTable",
+    "projections": {
+      "Rows": [
+        {
+          "queryRef": "CALENDARIO.MonthName",
+          "active": true
+        },
+        {
+          "queryRef": "CONTO_DEPOSITO.Movimento",
+          "active": true
+        }
+      ],
+      "Columns": [
+        {
+          "queryRef": "CONTO_DEPOSITO.Deposito",
+          "active": true
+        }
+      ],
+      "Values": [
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Ton CD"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c1",
+          "Entity": "CONTO_DEPOSITO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_MAGAZZINO",
+          "Type": 0
+        },
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Ton CD"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Ton CD"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "Deposito"
+          },
+          "Name": "CONTO_DEPOSITO.Deposito",
+          "NativeReferenceName": "Deposito"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "Movimento"
+          },
+          "Name": "CONTO_DEPOSITO.Movimento",
+          "NativeReferenceName": "Movimento"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthName"
+          },
+          "Name": "CALENDARIO.MonthName",
+          "NativeReferenceName": "MonthName"
+        }
+      ]
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "CALENDARIO.MonthName"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CALENDARIO"
+                    }
+                  },
+                  "Property": "MonthName"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "CONTO_DEPOSITO.Movimento"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {
+          "identityValues": null
+        }
+      }
+    ],
+    "queryOptions": {
+      "keepProjectionOrder": true
+    },
+    "showAllRoles": [
+      "Rows",
+      "Columns"
+    ],
+    "drillFilterOtherVisuals": true,
+    "objects": {}
+  }
+}

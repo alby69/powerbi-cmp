@@ -1,0 +1,81 @@
+{
+  "name": "7c63cba02cc2e0036350",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 386.87131050767414,
+        "y": 155.65525383707202,
+        "z": 7000,
+        "width": 143.56552538370721,
+        "height": 84.628099173553721,
+        "tabOrder": 7000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "card",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "ANALISI_VENDITE.% Importo Vendite Nuovi Clienti"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "a",
+          "Entity": "ANALISI_VENDITE",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "% Importo Vendite Nuovi Clienti"
+          },
+          "Name": "ANALISI_VENDITE.% Importo Vendite Nuovi Clienti"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 2,
+          "Expression": {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "% Importo Vendite Nuovi Clienti"
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "hasDefaultSort": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

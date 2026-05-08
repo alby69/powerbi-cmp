@@ -1,0 +1,139 @@
+{
+  "name": "c676c30d14438c697029",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 0,
+        "y": 104.5418326693227,
+        "z": 5000,
+        "width": 762.390438247012,
+        "height": 312.35059760956176,
+        "tabOrder": 5000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CALENDARIO.MonthName"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Importo Vendita"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Importo Vendita Forecast"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Bar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Unmet Bar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Met Bar"
+        },
+        {
+          "queryRef": "ANALISI_DOC_VENDITA.Marker Value"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_DOC_VENDITA",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "MonthName"
+          },
+          "Name": "CALENDARIO.MonthName"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Unmet Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Unmet Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Met Bar"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Met Bar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Marker Value"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Marker Value"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Importo Vendita"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Importo Vendita"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Importo Vendita Forecast"
+          },
+          "Name": "ANALISI_DOC_VENDITA.Importo Vendita Forecast"
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

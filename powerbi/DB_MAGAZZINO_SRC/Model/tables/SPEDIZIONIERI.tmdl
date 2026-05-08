@@ -1,0 +1,66 @@
+﻿table SPEDIZIONIERI
+
+	column Name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indirizzo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Indirizzo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Località
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Località
+
+		annotation SummarizationSetBy = Automatic
+
+	column Città
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Città
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAP
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CAP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Civico
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Civico
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Spedizioniere'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Spedizioniere
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SPEDIZIONIERI-20ffe69b-57e5-4338-9579-e4fd586546de = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    SPEDIZIONIERI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="SPEDIZIONIERI",version=""]}[Data]
+				in
+				    SPEDIZIONIERI_
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,110 @@
+﻿table MAGAZZINO
+
+	column Articolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Deposito
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Deposito
+
+		annotation SummarizationSetBy = Automatic
+
+	column Movimento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Movimento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unità
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Unità
+
+		annotation SummarizationSetBy = Automatic
+
+	column Soggetto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Soggetto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Documento'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Documento
+
+		variation Variation
+			isDefault
+			relationship: 276dcee1-45f4-4b48-b68e-55560daf929d
+			defaultHierarchy: LocalDateTable_8a079956-630b-4a2b-b92c-c33915f1764b.'Gerarchia data'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Mezzo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Mezzo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indice
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Indice
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MAGAZZINO-f57b548f-0324-4230-bc85-a4573e869a91 = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bb824426-3526-4734-9406-d0645879f240" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bb824426-3526-4734-9406-d0645879f240"]}[Data],
+				    MAGAZZINO_ = #"bb824426-3526-4734-9406-d0645879f240"{[entity="MAGAZZINO",version=""]}[Data]
+				in
+				    MAGAZZINO_
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigazione
+

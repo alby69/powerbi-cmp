@@ -1,0 +1,324 @@
+{
+  "objects": {
+    "columnWidth": [
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "144.87119228915907D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Tab_Stock.Movimento"
+        }
+      },
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "91.68385034320038D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Tab_Stock.Quantità"
+        }
+      },
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "99.36998702982143D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Tab_Stock.Importo"
+        }
+      }
+    ]
+  },
+  "projectionOrdering": {
+    "Values": [
+      6,
+      0,
+      2,
+      1,
+      3,
+      4,
+      5,
+      7
+    ]
+  },
+  "queryMetadata": {
+    "Select": [
+      {
+        "Restatement": "Movimento",
+        "Name": "Tab_Stock.Movimento",
+        "Type": 2048
+      },
+      {
+        "Restatement": "QtaProgressiva",
+        "Name": "Tab_Stock.QtaProgressiva",
+        "Type": 1
+      },
+      {
+        "Restatement": "Quantità",
+        "Name": "Tab_Stock.Quantità",
+        "Type": 1
+      },
+      {
+        "Restatement": "ValoreMov",
+        "Name": "Tab_Stock.ValoreMov",
+        "Type": 1
+      },
+      {
+        "Restatement": "ValoreProgressivo",
+        "Name": "Tab_Stock.ValoreProgressivo",
+        "Type": 1
+      },
+      {
+        "Restatement": "Importo",
+        "Name": "Tab_Stock.Importo",
+        "Type": 1
+      },
+      {
+        "Restatement": "Date",
+        "Name": "CALENDARIO.Date",
+        "Type": 4,
+        "Format": "d"
+      },
+      {
+        "Restatement": "CMP",
+        "Name": "Tab_Stock.CMP",
+        "Type": 1
+      }
+    ]
+  },
+  "visualElements": [
+    {
+      "DataRoles": [
+        {
+          "Name": "Values",
+          "Projection": 6,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 0,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 2,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 1,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 3,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 4,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 5,
+          "isActive": false
+        },
+        {
+          "Name": "Values",
+          "Projection": 7,
+          "isActive": false
+        }
+      ]
+    }
+  ],
+  "selects": [
+    {
+      "displayName": "Movimento",
+      "queryName": "Tab_Stock.Movimento",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 1
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "Movimento"
+        }
+      }
+    },
+    {
+      "displayName": "QtaProgressiva",
+      "queryName": "Tab_Stock.QtaProgressiva",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "QtaProgressiva"
+        }
+      }
+    },
+    {
+      "displayName": "Quantità",
+      "queryName": "Tab_Stock.Quantità",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "Quantità"
+        }
+      }
+    },
+    {
+      "displayName": "ValoreMov",
+      "queryName": "Tab_Stock.ValoreMov",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "ValoreMov"
+        }
+      }
+    },
+    {
+      "displayName": "ValoreProgressivo",
+      "queryName": "Tab_Stock.ValoreProgressivo",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "ValoreProgressivo"
+        }
+      }
+    },
+    {
+      "displayName": "Importo",
+      "queryName": "Tab_Stock.Importo",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "Importo"
+        }
+      }
+    },
+    {
+      "displayName": "Date",
+      "format": "d",
+      "queryName": "CALENDARIO.Date",
+      "roles": {
+        "Values": true
+      },
+      "sort": 1,
+      "sortOrder": 0,
+      "type": {
+        "category": null,
+        "underlyingType": 519
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "CALENDARIO"
+            }
+          },
+          "Property": "Date"
+        }
+      }
+    },
+    {
+      "displayName": "CMP",
+      "queryName": "Tab_Stock.CMP",
+      "roles": {
+        "Values": true
+      },
+      "type": {
+        "category": null,
+        "underlyingType": 259
+      },
+      "expr": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab_Stock"
+            }
+          },
+          "Property": "CMP"
+        }
+      }
+    }
+  ]
+}

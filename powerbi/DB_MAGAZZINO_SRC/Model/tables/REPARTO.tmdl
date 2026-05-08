@@ -1,0 +1,33 @@
+﻿table REPARTO
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Reparto'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Reparto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition REPARTO-18dcc7e5-da85-4c26-8cfe-c15862bc8013 = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    REPARTO_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="REPARTO",version=""]}[Data]
+				in
+				    REPARTO_
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigazione
+

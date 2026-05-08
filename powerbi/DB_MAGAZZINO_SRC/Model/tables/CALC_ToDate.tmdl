@@ -1,0 +1,29 @@
+﻿table CALC_ToDate
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem Value = SELECTEDMEASURE()
+
+		calculationItem MTD = TOTALMTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+
+		calculationItem QTD = TOTALQTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+
+		calculationItem YTD = TOTALYTD (SELECTEDMEASURE(), CALENDARIO[Date] )
+
+	column DIM
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

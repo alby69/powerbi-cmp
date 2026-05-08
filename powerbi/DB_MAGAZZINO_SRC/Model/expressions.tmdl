@@ -1,0 +1,36 @@
+﻿expression ServerName = "IPEMSERVER\bcdemo" meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Text
+
+expression database = "IPEM" meta [IsParameterQuery=true, List={"IPEM", "IpemStaging"}, DefaultValue="IPEM", Type="Any", IsParameterQueryRequired=true]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Text
+
+expression azienda = "Ipem Euro" meta [IsParameterQuery=true, List={"STAGING Ipem Euro", "Ipem Euro"}, DefaultValue="Ipem Euro", Type="Any", IsParameterQueryRequired=true]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Text
+
+expression StartDate = #date(2020, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Date
+
+	annotation PBI_NavigationStepName = Navigazione
+
+expression RangeStart = #date(2020, 1, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Date
+
+	annotation PBI_NavigationStepName = Navigazione
+
+expression RangeEnd = #date(2026, 12, 31) meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = "Date"]
+	queryGroup: SETUP
+
+	annotation PBI_ResultType = Date
+
+	annotation PBI_NavigationStepName = Navigazione
+

@@ -1,0 +1,43 @@
+﻿table Obiettivo
+
+	column Obiettivo
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Ordine di Obiettivo'
+
+		relatedColumnDetails
+			groupByColumn: 'Campi di Obiettivo'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Campi di Obiettivo'
+		isHidden
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Ordine di Obiettivo'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordine di Obiettivo'
+		isHidden
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Obiettivo-1a41ab11-b7d1-430a-bac7-9da3a57908f2 = calculated
+		mode: import
+		source =
+				{
+				    ("Qta Vendita CUM", NAMEOF('ANALISI_DOC_VENDITA'[Qta Vendita CUM]), 0)
+				}
+
+	annotation PBI_Id = bdd9c992f2914527bd922737848eb61c
+

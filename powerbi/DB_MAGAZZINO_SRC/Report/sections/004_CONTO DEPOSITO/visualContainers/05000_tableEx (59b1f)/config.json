@@ -1,0 +1,173 @@
+{
+  "name": "59b1f8d6a22a63ee1d63",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 700.15547703180209,
+        "y": 151.97173144876325,
+        "z": 5000,
+        "width": 579.84452296819791,
+        "height": 566.27561837455835,
+        "tabOrder": 5000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CONTO_DEPOSITO.Movimento"
+        },
+        {
+          "queryRef": "ANALISI_MAGAZZINO.Qta Ton CD"
+        },
+        {
+          "queryRef": "CONTO_DEPOSITO.Note"
+        },
+        {
+          "queryRef": "CONTO_DEPOSITO.Data Competenza"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c1",
+          "Entity": "CONTO_DEPOSITO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_MAGAZZINO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "Movimento"
+          },
+          "Name": "CONTO_DEPOSITO.Movimento",
+          "NativeReferenceName": "Movimento"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Qta Ton CD"
+          },
+          "Name": "ANALISI_MAGAZZINO.Qta Ton CD",
+          "NativeReferenceName": "Qta"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "Note"
+          },
+          "Name": "CONTO_DEPOSITO.Note",
+          "NativeReferenceName": "Note"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "Data Competenza"
+          },
+          "Name": "CONTO_DEPOSITO.Data Competenza",
+          "NativeReferenceName": "Data Competenza"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "Data Competenza"
+            }
+          }
+        }
+      ]
+    },
+    "columnProperties": {
+      "ANALISI_MAGAZZINO.Qta Ton CD": {
+        "displayName": "Qta"
+      }
+    },
+    "queryOptions": {
+      "keepProjectionOrder": true
+    },
+    "showAllRoles": [
+      "Values"
+    ],
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "91.32365720777499D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MAGAZZINO.Qta Ton CD"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.37455830388693D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CONTO_DEPOSITO.Movimento"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "195.2332155477032D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CONTO_DEPOSITO.Note"
+          }
+        }
+      ]
+    }
+  }
+}

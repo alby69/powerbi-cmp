@@ -1,0 +1,197 @@
+{
+  "name": "90c37cb80cb11a28ed0c",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 589.61085972850674,
+        "y": 539.80090497737558,
+        "z": 9000,
+        "width": 690.38914027149326,
+        "height": 179.54751131221718,
+        "tabOrder": 9000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CLIENTI.Nome & Codice"
+        },
+        {
+          "queryRef": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "queryRef": "ANALISI_VENDITE.Importo Vendite Nuovi Clienti"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CLIENTI",
+          "Type": 0
+        },
+        {
+          "Name": "c1",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "a",
+          "Entity": "ANALISI_VENDITE",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "Nome & Codice"
+          },
+          "Name": "CLIENTI.Nome & Codice"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c1"
+              }
+            },
+            "Property": "MonthInCalendar"
+          },
+          "Name": "CALENDARIO.MonthInCalendar"
+        },
+        {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "a"
+              }
+            },
+            "Property": "Importo Vendite Nuovi Clienti"
+          },
+          "Name": "ANALISI_VENDITE.Importo Vendite Nuovi Clienti"
+        }
+      ],
+      "OrderBy": [
+        {
+          "Direction": 1,
+          "Expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "MonthInCalendar"
+            }
+          }
+        }
+      ]
+    },
+    "columnProperties": {
+      "CLIENTI.Nome & Codice": {
+        "displayName": "Cliente"
+      },
+      "CALENDARIO.MonthInCalendar": {
+        "displayName": "Mese/Anno"
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "274.8377327376701D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CLIENTI.Nome & Codice"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "116.48408765654302D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_VENDITE.Importo Vendite Nuovi Clienti"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.30933674263547D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CALENDARIO.MonthInCalendar"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.1
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "vcObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Default'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

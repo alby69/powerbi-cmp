@@ -1,0 +1,152 @@
+﻿table MOVCG
+
+	column 'Entry No_'
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Entry No_
+
+		annotation SummarizationSetBy = Automatic
+
+	column Conto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Conto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Registrazione'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Registrazione
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Documento'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Tipo Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Documento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descrizione
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Descrizione
+
+		annotation SummarizationSetBy = Automatic
+
+	column Importo
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Importo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Reparto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Reparto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Progetto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Progetto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Code'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Source Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantità
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Quantità
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Categoria
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gen_ Prod_ Posting Group'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Gen_ Prod_ Posting Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Documento'
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Documento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Documento Esterno'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Documento Esterno
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Type'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Source Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source No_'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Source No_
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mezzo Trasporto'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Mezzo Trasporto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MOVCG-12a575ac-4786-428b-83df-ab1b55c0d1d5 = m
+		mode: import
+		queryGroup: FACT
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
+				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="MOVCG",version=""]}[Data]
+				in
+				    MOVCG_
+
+	annotation PBI_ResultType = Table
+

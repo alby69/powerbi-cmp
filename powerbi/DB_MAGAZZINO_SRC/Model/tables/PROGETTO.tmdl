@@ -1,0 +1,31 @@
+﻿table PROGETTO
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Progetto'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Progetto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PROGETTO-df85ad8c-18c7-4dd7-8a11-7ad2139b21d7 = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    PROGETTO_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="PROGETTO",version=""]}[Data]
+				in
+				    PROGETTO_
+
+	annotation PBI_ResultType = Table
+

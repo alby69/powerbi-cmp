@@ -1,0 +1,67 @@
+﻿table PREZZI_MIX
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variazione
+			isDefault
+			relationship: 92f8be31-68e5-4dda-97ce-bbb84fbcbe13
+			defaultHierarchy: LocalDateTable_e7ffeb37-9f43-4da1-b3eb-151e3224b40c.'Gerarchia data'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Fornitore
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Fornitore
+
+		annotation SummarizationSetBy = Automatic
+
+	column Platts
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Platts
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delta
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Delta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Prezzo USD'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Prezzo USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition PREZZI_MIX = m
+		mode: import
+		queryGroup: GOOGLE_SHEETS
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"a989179f-746e-4a2d-9ae7-6fadb9c887fd" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="a989179f-746e-4a2d-9ae7-6fadb9c887fd"]}[Data],
+				    tab_prezzi_mix_ = #"a989179f-746e-4a2d-9ae7-6fadb9c887fd"{[entity="tab_prezzi_mix",version=""]}[Data]
+				in
+				    tab_prezzi_mix_
+
+	annotation PBI_NavigationStepName = Navigazione
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,89 @@
+﻿table FORNITORI
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome 2'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Indirizzo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Indirizzo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indirizzo 2'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Indirizzo 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Città
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Città
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CAP
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CAP
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincia
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Fornitore'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Fornitore
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FORNITORI-f212044c-744f-4148-b506-4c1beced0eca = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    FORNITORI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="FORNITORI",version=""]}[Data]
+				in
+				    FORNITORI_
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

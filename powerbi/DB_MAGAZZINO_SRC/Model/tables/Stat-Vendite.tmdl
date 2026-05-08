@@ -1,0 +1,61 @@
+﻿table Stat-Vendite
+
+	calculationGroup
+		precedence: 5
+
+		calculationItem SUM = ```
+				
+				    SUMX(
+				        'DOCUMENTO VENDITA',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem AVG = ```
+				
+				    AVERAGEX(
+				        'DOCUMENTO VENDITA',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MEDIAN = ```
+				
+				    MEDIANX(
+				        'DOCUMENTO VENDITA',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MAX = ```
+				
+				    MAXX(
+				        'DOCUMENTO VENDITA',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+		calculationItem MIN = ```
+				
+				    MINX(
+				        'DOCUMENTO VENDITA',
+				        SELECTEDMEASURE()
+				    )
+				```
+
+	column Statistica
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinale
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinale
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

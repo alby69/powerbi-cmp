@@ -1,0 +1,32 @@
+﻿table 'Select Measure Value and %'
+
+	calculationGroup
+		precedence: 3
+
+		calculationItem Value = SELECTEDMEASURE()
+
+		calculationItem % =
+				DIVIDE (
+				    SELECTEDMEASURE(),
+				    CALCULATE(
+				        SELECTEDMEASURE(),
+				        ALLSELECTED(CALENDARIO)
+				    )
+				)
+
+	column Measure
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

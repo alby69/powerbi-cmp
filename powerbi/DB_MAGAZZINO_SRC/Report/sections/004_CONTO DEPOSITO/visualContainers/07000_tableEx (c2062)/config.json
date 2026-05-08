@@ -1,0 +1,86 @@
+{
+  "name": "c2062af058117b999084",
+  "layouts": [
+    {
+      "id": 0,
+      "position": {
+        "x": 335.906432748538,
+        "y": 118.83040935672514,
+        "z": 7000,
+        "width": 339.64912280701753,
+        "height": 599.766081871345,
+        "tabOrder": 7000
+      }
+    }
+  ],
+  "singleVisual": {
+    "visualType": "tableEx",
+    "projections": {
+      "Values": [
+        {
+          "queryRef": "CALENDARIO.Date"
+        },
+        {
+          "queryRef": "MAGAZZINO.Movimento"
+        },
+        {
+          "queryRef": "MAGAZZINO.Quantità"
+        }
+      ]
+    },
+    "prototypeQuery": {
+      "Version": 2,
+      "From": [
+        {
+          "Name": "c",
+          "Entity": "CALENDARIO",
+          "Type": 0
+        },
+        {
+          "Name": "m",
+          "Entity": "MAGAZZINO",
+          "Type": 0
+        }
+      ],
+      "Select": [
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "c"
+              }
+            },
+            "Property": "Date"
+          },
+          "Name": "CALENDARIO.Date",
+          "NativeReferenceName": "Date"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "m"
+              }
+            },
+            "Property": "Movimento"
+          },
+          "Name": "MAGAZZINO.Movimento",
+          "NativeReferenceName": "Movimento"
+        },
+        {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Source": "m"
+              }
+            },
+            "Property": "Quantità"
+          },
+          "Name": "MAGAZZINO.Quantità",
+          "NativeReferenceName": "Quantità"
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

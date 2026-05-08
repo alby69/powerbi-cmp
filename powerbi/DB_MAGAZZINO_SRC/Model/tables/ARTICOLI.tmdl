@@ -1,0 +1,103 @@
+﻿table ARTICOLI
+
+	column Nome
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Cost'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Last Direct Cost'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Last Direct Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gen_ Prod_ Posting Group'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Gen_ Prod_ Posting Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nr_ Accisa'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Nr_ Accisa
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Densità T_A_'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Densità T_A_
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Densità 15 C'
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: Densità 15 C
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gruppo Articolo' = ```
+			
+			    SWITCH( TRUE(),
+			        ARTICOLI[Codice Articolo] IN {"1","1T"},"MIX",
+			        ARTICOLI[Codice Articolo] IN {"2","2T"},"PROPANO",
+			        ARTICOLI[Codice Articolo] IN {"2M","2MT"},"BLEND",
+			        ARTICOLI[Codice Articolo] IN {"3","3T"},"BUTANO",
+			        ARTICOLI[Codice Articolo] IN {"D"},"DENAT",
+			        BLANK()
+			    )
+			```
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Codice Articolo'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Codice Articolo
+
+		annotation SummarizationSetBy = Automatic
+
+	column GruppoArticolo
+		dataType: string
+		summarizeBy: none
+		sourceColumn: GruppoArticolo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ARTICOLI-da487acd-fb16-45f1-a9de-92d3f9cc51c1 = m
+		mode: import
+		queryGroup: DIM
+		source =
+				let
+				    Origine = PowerPlatform.Dataflows(null),
+				    Workspaces = Origine{[Id="Workspaces"]}[Data],
+				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    ARTICOLI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="ARTICOLI",version=""]}[Data]
+				in
+				    ARTICOLI_
+
+	annotation PBI_ResultType = Table
+
