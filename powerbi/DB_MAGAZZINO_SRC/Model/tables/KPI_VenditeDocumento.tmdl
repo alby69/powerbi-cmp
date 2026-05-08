@@ -287,12 +287,6 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Doc Vendita YTD' =
-			
-			TOTALYTD ( [Qta Doc Vendita Articolo], DIM_Calendario[Date] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita Gruppo Articolo' =
 			
@@ -347,103 +341,7 @@
 
 		changedProperty = FormatString
 
-	measure 'Qta Vendita LY' =
-			
-			CALCULATE ( [Qta Vendita], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
-		displayFolder: QTA
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita 2LY' =
-			
-			CALCULATE ( [Qta Vendita], DATEADD ( DIM_Calendario[Date], -2, YEAR ) )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita 3LY' =
-			
-			CALCULATE ( [Qta Vendita], DATEADD ( DIM_Calendario[Date], -3, YEAR ) )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita CUM' =
-			
-			IF (
-			    ISBLANK ( [Qta Vendita] ),
-			    BLANK (),
-			    CALCULATE (
-			        [Qta Vendita],
-			        FILTER (
-			            ALLSELECTED ( DIM_Calendario[Date] ),
-			            DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			        )
-			    )
-			)
-		formatString: #,0.00
-		displayFolder: QTA
-
-		changedProperty = FormatString
-
-	measure 'Qta Vendita Mediana' =
-			
-			MEDIANX ( CALENDARIO, [Qta Vendita] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita AVG Day' =
-			
-			AVERAGEX ( VALUES(DIM_Calendario[Date]), [Qta Vendita] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita AVG N Days' =
-			
-			VAR nr_days = 28
-			VAR Period =
-			    DATESINPERIOD (
-			        'FACT_DocumentoVendita'[Data Registrazione],
-			        LASTDATE ( 'FACT_DocumentoVendita'[Data Registrazione] ),
-			        - nr_days,
-			        DAY
-			    )
-			VAR sum_sales =
-			    CALCULATE ( [Qta Vendita], Period )
-			VAR nr_sales =
-			    CALCULATE ( DISTINCTCOUNT ('FACT_DocumentoVendita'[Data Registrazione] ), Period )
-			RETURN
-			    DIVIDE ( sum_sales, nr_sales, 0 )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Vendita R12' =
-			
-			VAR NumOfMonths = 12
-			VAR LastSelectedDay =
-			    MAX ( DIM_Calendario[Date] )
-			VAR Period =
-			    DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfMonths, MONTH )
-			VAR Result =
-			    CALCULATE (
-			        AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), [Qta Vendita] ),
-			        Period
-			    )
-			VAR LastDateWithSale =
-			    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
-			VAR FirstVisibleDate =
-			    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
-			RETURN
-			    IF ( FirstVisibleDate <= LastDateWithSale, Result )
-			// controlla che la data sia nel range delle vendite
-		displayFolder: QTA
-
-		changedProperty = FormatString
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita ALL' =
 			
@@ -466,12 +364,6 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita YTD' =
-			
-			TOTALYTD ( [Qta Vendita], DIM_Calendario[Date] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita AVG YTD Monthly' = ```
 			
@@ -560,28 +452,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Netto Doc Vendita CUM' =
-			
-			CALCULATE (
-			    [Importo Netto Doc Vendita],
-			    FILTER (
-			        ALLSELECTED ( CALENDARIO ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
-			)
-		displayFolder: TIME
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Importo Netto Doc Vendita LM' =
-			
-			CALCULATE (
-			    [Importo Netto Filter Doc Vendita],
-			    DATEADD ( DIM_Calendario[Date], -1, MONTH )
-			)
-		displayFolder: TIME
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Netto Doc Vendita LM CUM' =
 			
@@ -596,15 +467,6 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Netto Doc Vendita -2M' =
-			
-			CALCULATE (
-			    [Importo Netto Filter Doc Vendita],
-			    DATEADD ( DIM_Calendario[Date], -2, MONTH )
-			)
-		displayFolder: TIME
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Netto Doc Vendita -2M CUM' =
 			
@@ -619,20 +481,6 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Netto Doc Vendita LY' =
-			
-			IF (
-			    HASONEVALUE ( DIM_Calendario[Date] ),
-			    CALCULATE (
-			        [Importo Netto Filter Doc Vendita],
-			        DATEADD ( DIM_Calendario[Date], -1, YEAR )
-			    ),
-			    BLANK ()
-			)
-		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
-		displayFolder: TIME
-
-		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Vendite CY-LY' =
 			
@@ -642,20 +490,6 @@
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	measure 'Importo Vendita LY' =
-			
-			CALCULATE ( [Importo Vendita], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
-		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
-		displayFolder: TIME
-
-		changedProperty = FormatString
-
-	measure 'Importo Vendita LQ' =
-			
-			CALCULATE ( [Importo Vendita], DATEADD ( DIM_Calendario[Date], -1, QUARTER ) )
-		displayFolder: TIME
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast CUM' = ```
 			
@@ -862,25 +696,6 @@
 
 		changedProperty = FormatString
 
-	measure 'Importo Vendita AVG N Days' =
-			
-			VAR nr_days = 28
-			VAR Period =
-			    DATESINPERIOD (
-			        'FACT_DocumentoVendita'[Data Registrazione],
-			        LASTDATE ( 'FACT_DocumentoVendita'[Data Registrazione] ),
-			        - nr_days,
-			        DAY
-			    )
-			VAR sum_sales =
-			    CALCULATE ( [Importo Vendita], Period )
-			VAR nr_sales =
-			    CALCULATE ( DISTINCTCOUNT ( 'FACT_DocumentoVendita'[Data Registrazione] ), Period )
-			RETURN
-			    DIVIDE ( sum_sales, nr_sales, 0 )
-		displayFolder: FORECAST
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Vendita AVG N Days LQ' =
 			

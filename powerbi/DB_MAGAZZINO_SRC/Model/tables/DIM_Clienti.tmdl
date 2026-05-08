@@ -49,6 +49,34 @@
 
 		annotation SummarizationSetBy = Automatic
 
+	column Regione
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Regione
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaGeografica
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AreaGeografica
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Longitudine
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Latitudine
+
+		annotation SummarizationSetBy = Automatic
+
 	column 'Codice Cliente'
 		dataType: string
 		summarizeBy: none
@@ -69,10 +97,25 @@
 				    Origine = PowerPlatform.Dataflows(null),
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
-				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    CLIENTI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="CLIENTI",version=""]}[Data]
+
+				    // Load CLIENTE
+				    CLIENTI_DF = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    CLIENTI_ = CLIENTI_DF{[entity="CLIENTI",version=""]}[Data],
+
+				    // Load COMUNI & AREA for flattening
+				    GEOGRAFIA_DF = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="93072853-e11a-47d3-a9ae-146e46949f0a"]}[Data],
+				    COMUNI_ = GEOGRAFIA_DF{[entity="COMUNI",version=""]}[Data],
+				    AREA_ = GEOGRAFIA_DF{[entity="AREA",version=""]}[Data],
+
+				    // Join CLIENTI + COMUNI
+				    JoinedComuni = Table.NestedJoin(CLIENTI_, {"Città"}, COMUNI_, {"Nome"}, "COMUNI", JoinKind.LeftOuter),
+				    ExpandedComuni = Table.ExpandTableColumn(JoinedComuni, "COMUNI", {"Provincia", "Longitudine", "Latitudine"}, {"Provincia_Comuni", "Longitudine", "Latitudine"}),
+
+				    // Join + AREA
+				    JoinedArea = Table.NestedJoin(ExpandedComuni, {"Provincia_Comuni"}, AREA_, {"Sigla"}, "AREA", JoinKind.LeftOuter),
+				    ExpandedArea = Table.ExpandTableColumn(JoinedArea, "AREA", {"Regione", "Provincia"}, {"Regione", "AreaGeografica"})
 				in
-				    CLIENTI_
+				    ExpandedArea
 
 	annotation PBI_ResultType = Table
 

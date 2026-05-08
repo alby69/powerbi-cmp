@@ -7,7 +7,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Unit Cost'
+	column CostoUnitario
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Unit Cost
@@ -16,7 +16,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Last Direct Cost'
+	column UltimoCostoDiretto
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Last Direct Cost
@@ -25,21 +25,21 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Gen_ Prod_ Posting Group'
+	column GruppoRegistrazioneProdotto
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Gen_ Prod_ Posting Group
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Nr_ Accisa'
+	column NumeroAccisa
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Nr_ Accisa
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Densità T_A_'
+	column DensitàTA
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Densità T_A_
@@ -48,7 +48,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Densità 15 C'
+	column Densità15C
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Densità 15 C

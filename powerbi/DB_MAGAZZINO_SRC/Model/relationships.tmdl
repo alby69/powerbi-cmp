@@ -128,10 +128,6 @@ relationship c98a52f8-d166-4b02-905c-6006ca18bfc7
 	fromColumn: FACT_DocumentoVendita.Categoria
 	toColumn: DIM_GruppiVendita.'Codice Categoria'
 
-relationship 9da9c180-6c4d-465d-8668-0d8091e8d763
-	fromColumn: DIM_Comuni.Provincia
-	toColumn: DIM_Area.Sigla
-
 relationship c3e64c27-9f8e-459c-bf03-cb4d38ac4d0d
 	fromColumn: FACT_Ordini.'Data Spedizione'
 	toColumn: DIM_Calendario.Date
@@ -164,10 +160,6 @@ relationship 84b63609-82f6-4421-856d-cd41e346c24d
 	fromCardinality: one
 	fromColumn: KPI_ClientiPersi.'Codice Cliente Fatturazione'
 	toColumn: DIM_Clienti.'Codice Cliente'
-
-relationship 700ea205-8388-d46a-3b85-a23a9976e69c
-	fromColumn: DIM_Clienti.Città
-	toColumn: DIM_Comuni.Nome
 
 relationship 276dcee1-45f4-4b48-b68e-55560daf929d
 	fromColumn: FACT_Magazzino.'Data Documento'

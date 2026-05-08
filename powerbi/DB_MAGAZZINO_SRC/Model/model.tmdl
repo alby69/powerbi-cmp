@@ -32,7 +32,7 @@ queryGroup QUERY_CMP
 
 	annotation PBI_QueryGroupOrder = 5
 
-annotation PBI_QueryOrder = ["DIM_Calendario","ServerName","database","azienda","StartDate","RangeStart","RangeEnd","DIM_Articoli","DIM_Clienti","DIM_Fornitori","DIM_MezziTrasporto","DIM_GruppiVendita","DIM_Spedizionieri","DIM_Deposito","FACT_Magazzino","DIM_Progetto","DIM_Reparto","KPI_Magazzino","KPI_Prodotto","FACT_Accantonamenti","FACT_MovimentiCG","FACT_Ordini","KPI_Mix","FACT_Cambi","KPI_Vendite","FACT_DocumentoAcquisto","FACT_DocumentoVendita","KPI_VenditeDocumento","KPI_AcquistiDocumento","DIM_PianoConti","DIM_Area","DIM_Comuni","FACT_ContoDepositoOLD","FACT_PrezziMix","BRIDGE_Competenza","FACT_AcquistiMixTemp","UTIL_DataflowQuery","UTIL_WebQuery","FACT_CMPProgressivo","KPI_CMP","FACT_Stock","FACT_Giacenza","FACT_MagazzinoCMP","FACT_PropanoCosti","FACT_QuantitaPropano","FACT_ContoDeposito","FACT_QuantitaMix","FACT_MixCosti"]
+annotation PBI_QueryOrder = ["DIM_Calendario","ServerName","database","azienda","StartDate","RangeStart","RangeEnd","DIM_Articoli","DIM_Clienti","DIM_Fornitori","DIM_MezziTrasporto","DIM_GruppiVendita","DIM_Spedizionieri","DIM_Deposito","FACT_Magazzino","DIM_Progetto","DIM_Reparto","KPI_Magazzino","KPI_Prodotto","FACT_Accantonamenti","FACT_MovimentiCG","FACT_Ordini","KPI_Mix","FACT_Cambi","KPI_Vendite","FACT_DocumentoAcquisto","FACT_DocumentoVendita","KPI_VenditeDocumento","KPI_AcquistiDocumento","DIM_PianoConti","FACT_ContoDepositoOLD","FACT_PrezziMix","BRIDGE_Competenza","FACT_AcquistiMixTemp","UTIL_DataflowQuery","UTIL_WebQuery","FACT_CMPProgressivo","KPI_CMP","FACT_Stock","FACT_Giacenza","FACT_MagazzinoCMP","FACT_PropanoCosti","FACT_QuantitaPropano","FACT_ContoDeposito","FACT_QuantitaMix","FACT_MixCosti"]
 
 annotation __TEdtr = 1
 
@@ -74,8 +74,6 @@ ref table CALC_PreviousPeriod
 ref table UTIL_SelectMeasureValuePct
 ref table UTIL_SelectMeasureCG
 ref table DIM_PianoConti
-ref table DIM_Area
-ref table DIM_Comuni
 ref table FACT_Vendite
 ref table KPI_ObiettivoVendite
 ref table PARAM_NrGiorni

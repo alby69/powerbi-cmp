@@ -28,19 +28,6 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Ton YTD' =
-			
-			TOTALYTD ( [Qta Ton], DIM_Calendario[Date] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Ton LY' =
-			
-			CALCULATE ( [Qta Ton], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Ton Diff YoY' =
 			
@@ -147,23 +134,6 @@
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	measure 'Importo Qta Ton YTD' =
-			
-			TOTALYTD ( [Importo Qta Ton], DIM_Calendario[Date] )
-		displayFolder: IMPORTO_MAG
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Importo Qta Ton CUM YTD LY' =
-			
-			IF (
-			    HASONEVALUE ( DIM_Calendario[MonthName] ),
-			    CALCULATE ( [Importo Qta Ton CUM YTD], DATEADD ( DIM_Calendario[Date], -1, YEAR ) ),
-			    BLANK ()
-			)
-		displayFolder: IMPORTO_MAG
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Qta Ton CY-LY' =
 			
@@ -453,16 +423,6 @@
 			```
 		displayFolder: QTA CONTO DEPOSITO
 
-	measure 'Qta Ton Acquisto IPEM CD LY' =
-			
-			IF (
-			    HASONEVALUE ( DIM_Calendario[MonthName] ),
-			    CALCULATE ( [Qta Ton Acquisto IPEM CD], DATEADD ( DIM_Calendario[Date], -1, YEAR ) ),
-			    BLANK ()
-			)
-		displayFolder: QTA CONTO DEPOSITO
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Ton CD Giacenza IPEM' =
 			
