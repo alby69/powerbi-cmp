@@ -269,7 +269,29 @@ measure 'MeasureName' = <DAX expression>
 | 1.4 | Audit bidirectional relationships | ✅ Done | 4 reviewed, 1 removed (AutoDetected su quantità, già inattivo) |
 | 1.5 | Remove unused columns | ✅ Done | 15 variation blocks in table TMDL referencing deleted LocalDateTable rimosse |
 
-**Results after Phase 1:**
+### Phase 2 — Standardization ✅
+
+| # | Task | Status | Note |
+|---|------|--------|------|
+| 2.1 | Apply Naming Convention | ✅ Done | Applied to tables, columns and measures. PascalCase and Italian for business logic. |
+| 2.2 | Rename Tables | ✅ Done | All tables prefixed with DIM_, FACT_, KPI_, CALC_, etc. |
+| 2.3 | Apply Display Folders | ✅ Done | Measures organized in KPI <Area> folders. |
+
+### Phase 3 — DAX & Model Optimization ✅
+
+| # | Task | Status | Note |
+|---|------|--------|------|
+| 3.1 | Eliminate Duplicate Measures | ✅ Done | Consolidated logic between Doc and CG analysis. |
+| 3.4 | Redundant TI Measures | ✅ Done | Removed manual YTD/LY measures in favor of Calculation Groups. |
+| 3.5 | Convert to Star Schema | ✅ Done | Flattened COMUNI and AREA into DIM_Clienti. Relationships updated. |
+
+### Phase 4 — Documentation ✅
+
+| # | Task | Status | Note |
+|---|------|--------|------|
+| 4.1 | Update Documents | ✅ Done | Data Dictionary and Refactoring Plan updated. |
+
+**Results after Phase 4:**
 | Metric | Before | After |
 |--------|--------|-------|
 | Table files | 75 | 57 |

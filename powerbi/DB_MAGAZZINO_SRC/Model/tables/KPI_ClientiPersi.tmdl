@@ -13,12 +13,12 @@
 				
 				// Sono Clienti che non hanno acquistato negli ultimi nr_days, ma hanno acquistato prima
 				
-				VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
+				VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[CodiceClienteFatturazione])
 				VAR nr_days = SELECTEDVALUE(NrGiorni[NrGiorni],90)
 				
 				VAR tab_data = 
 				    FILTER(
-				        ALLSELECTED(CALENDARIO),
+				        ALLSELECTED(DIM_Calendario),
 				        DIM_Calendario[Date] > ( MIN(DIM_Calendario[Date]) - nr_days ) &&
 				        DIM_Calendario[Date] < MIN(DIM_Calendario[Date])
 				    )

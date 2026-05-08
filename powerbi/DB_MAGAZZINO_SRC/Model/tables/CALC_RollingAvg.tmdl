@@ -17,7 +17,7 @@
 				     )
 				
 				VAR LastDateWithSale =
-				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				    MAX ( 'FACT_DocumentoVendita'[DataRegistrazione] ) // Trova ultimo giorno di vendita
 				VAR FirstVisibleDate =
 				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
 				RETURN
@@ -39,7 +39,7 @@
 				     )
 				
 				VAR LastDateWithSale =
-				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				    MAX ( 'FACT_DocumentoVendita'[DataRegistrazione] ) // Trova ultimo giorno di vendita
 				VAR FirstVisibleDate =
 				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
 				RETURN
@@ -61,7 +61,7 @@
 				     )
 				
 				VAR LastDateWithSale =
-				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				    MAX ( 'FACT_DocumentoVendita'[DataRegistrazione] ) // Trova ultimo giorno di vendita
 				VAR FirstVisibleDate =
 				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
 				RETURN
@@ -83,7 +83,7 @@
 				     )
 				
 				VAR LastDateWithSale =
-				    MAX ( 'FACT_DocumentoVendita'[Data Registrazione] ) // Trova ultimo giorno di vendita
+				    MAX ( 'FACT_DocumentoVendita'[DataRegistrazione] ) // Trova ultimo giorno di vendita
 				VAR FirstVisibleDate =
 				    MIN ( DIM_Calendario[Date] ) // Trova la prima data visibile
 				RETURN

@@ -96,7 +96,7 @@
 				  #"Navigazione 1" = Origine{[Id = "Workspaces"]}[Data],
 				  #"Navigazione 2" = #"Navigazione 1"{[workspaceId = "903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				  #"Navigazione 3" = #"Navigazione 2"{[dataflowId = "bb824426-3526-4734-9406-d0645879f240"]}[Data],
-				  #"Navigazione 4" = #"Navigazione 3"{[entity = "CONTO_DEPOSITO", version = ""]}[Data]
+				  #"Navigazione 4" = #"Navigazione 3"{[entity = "FACT_ContoDeposito", version = ""]}[Data]
 				in
 				  #"Navigazione 4"
 

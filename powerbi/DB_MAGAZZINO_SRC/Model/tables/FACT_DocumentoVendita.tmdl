@@ -1,61 +1,16 @@
 ﻿table FACT_DocumentoVendita
 
-	column Documento
+	column CodiceClienteFatturazione
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Documento
+		sourceColumn: Codice Cliente Fatturazione
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Cliente Vendita'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Codice Cliente Vendita
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Tipo Riga'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Tipo Riga
-
-		annotation SummarizationSetBy = Automatic
-
-	column No_
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: No_
-
-		annotation SummarizationSetBy = Automatic
-
-	column Ubicazione
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Ubicazione
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Posting Group'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Posting Group
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Data Spedizione'
-		dataType: dateTime
-		formatString: Long Date
-		summarizeBy: none
-		sourceColumn: Data Spedizione
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column Descrizione
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Descrizione
 
 		annotation SummarizationSetBy = Automatic
 
@@ -68,19 +23,10 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Prezzo Unitario'
+	column PrezzoUnitario
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Prezzo Unitario
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column Iva
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Iva
 
 		annotation SummarizationSetBy = Automatic
 
@@ -95,37 +41,60 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Importo Ivato'
+	column CostoTrasporto
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Importo Ivato
+		sourceColumn: Costo Trasporto
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Peso Lordo'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Peso Lordo
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Peso Netto'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Peso Netto
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column Reparto
+	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Reparto
+		sourceColumn: Ubicazione
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoDocumento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Tipo Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataSpedizione
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Spedizione
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DataRegistrazione
+		dataType: dateTime
+		formatString: Long Date
+		summarizeBy: none
+		sourceColumn: Data Registrazione
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TipoRiga
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Tipo Riga
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodiceCategoria
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Categoria
 
 		annotation SummarizationSetBy = Automatic
 
@@ -136,111 +105,35 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Cliente Fatturazione'
+	column Reparto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente Fatturazione
+		sourceColumn: Reparto
 
 		annotation SummarizationSetBy = Automatic
 
-	column Categoria
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Categoria
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Gen_ Prod_ Posting Group'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Gen_ Prod_ Posting Group
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Data Registrazione'
-		dataType: dateTime
-		formatString: Long Date
-		summarizeBy: none
-		sourceColumn: Data Registrazione
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
-	column 'Unità di Misura'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Unità di Misura
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Causale Vendita'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Causale Vendita
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Qtà Imposta Fabbr_'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Qtà Imposta Fabbr_
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Importo Imposta Fabbr_'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Importo Imposta Fabbr_
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Costo Trasporto'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Costo Trasporto
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Importo Costo Trasporto'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Importo Costo Trasporto
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Imp_IVA Incl_Costo Trasporto'
-		dataType: double
-		summarizeBy: sum
-		sourceColumn: Imp_IVA Incl_Costo Trasporto
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Mezzo Trasporto'
+	column MezzoTrasporto
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Mezzo Trasporto
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Tipo Documento'
+	column GruppoRegistrazioneProdotto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Tipo Documento
+		sourceColumn: Gen_ Prod_ Posting Group
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'DOCUMENTO VENDITA-5a601343-a733-4399-96d9-2883df612481' = m
+	column Documento
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Documento
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DOCUMENTO VENDITA-b3711904-4c48-4384-8848-f6828556770e' = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -248,12 +141,9 @@
 				    Origine = PowerPlatform.Dataflows(null),
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
-				    #"5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3"]}[Data],
-				    #"DOCUMENTO VENDITA_" = #"5c8633f7-be9b-4d11-8c01-6bfc6ae5f4a3"{[entity="DOCUMENTO VENDITA",version=""]}[Data]
+				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
+				    #"DOCUMENTO VENDITA_" = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="DOCUMENTO VENDITA",version=""]}[Data]
 				in
 				    #"DOCUMENTO VENDITA_"
 
 	annotation PBI_ResultType = Table
-
-	annotation PBI_NavigationStepName = Navigazione
-

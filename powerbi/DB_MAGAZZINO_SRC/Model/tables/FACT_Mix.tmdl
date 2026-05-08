@@ -10,10 +10,10 @@
 
 	measure 'Costo Tab MIX' =
 			CALCULATE(
-			    DIVIDE([Costo Totale],[Qta_BIL],0),
-			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}
+			    DIVIDE([Costo Totale],[Qta BIL],0),
+			    FILTER(DIM_Clienti,DIM_Clienti[CodiceCliente] IN {"C01049","C00991"}
 			)
-			//Costo Tab MIX = DIVIDE([Costo Totale],[Qta_BIL],0)
+			//Costo Tab MIX = DIVIDE([Costo Totale],[Qta BIL],0)
 			
 			
 			
@@ -26,15 +26,15 @@
 			
 			CALCULATE(
 			    [Costo Totale],
-			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}
+			    FILTER(DIM_Clienti,DIM_Clienti[CodiceCliente] IN {"C01049","C00991"}
 			))
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Tab MIX Resa' =
 			CALCULATE(
-			    DIVIDE([Costo Totale],[Qta_RESA],0),
-			    FILTER(CLIENTI,DIM_Clienti[Codice Cliente] IN {"C01049","C00991"}))
+			    DIVIDE([Costo Totale],[Qta Resa],0),
+			    FILTER(DIM_Clienti,DIM_Clienti[CodiceCliente] IN {"C01049","C00991"}))
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -67,14 +67,14 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Cliente'
+	column CodiceCliente
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: DIM_Clienti[Codice Cliente]
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Articolo'
+	column CodiceArticolo
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: DIM_Articoli[Codice Articolo]
@@ -93,8 +93,8 @@
 			
 			    SWITCH (
 			        TRUE(),
-			        'FACT_Mix'[Codice Cliente] = "C01049", "MITSUI",
-			        'FACT_Mix'[Codice Cliente] = "C00991", "TOTAL",
+			        'FACT_Mix'[CodiceCliente] = "C01049", "MITSUI",
+			        'FACT_Mix'[CodiceCliente] = "C00991", "TOTAL",
 			        "ALTRO"
 			    )
 			```
@@ -134,15 +134,15 @@
 				        //DIM_Calendario[MonthOfYear],        
 				        //DIM_Calendario[MonthInCalendar],
 				        DIM_Calendario[Date], 
-				        DIM_Clienti[Codice Cliente],
-				        DIM_Articoli[Codice Articolo],
-				        TREATAS(filtro_cliente,DIM_Clienti[Codice Cliente]),
-				        TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),
+				        DIM_Clienti[CodiceCliente],
+				        DIM_Articoli[CodiceArticolo],
+				        TREATAS(filtro_cliente,DIM_Clienti[CodiceCliente]),
+				        TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
 				        "Prezzo USD",[Prezzo USD Mese],
 				        "Prezzo € Mese", [Prezzo € MIX Mese],
-				        "Qta BIL", [Qta_BIL],        
-				        "# Qta BIL",COUNT(FACT_Ordini[Ordine]),
-				        "Qta Resa", [Qta_RESA]
+				        "Qta BIL", [Qta BIL],
+				        "# Qta BIL",COUNT(FACT_Ordini[CodiceOrdine]),
+				        "Qta Resa", [Qta Resa]
 				        
 				    )
 				    
@@ -155,4 +155,3 @@
 				```
 
 	annotation PBI_Id = 39dc432dfde14d2aaff6675fa5305f16
-

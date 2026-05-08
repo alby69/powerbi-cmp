@@ -57,13 +57,13 @@
 				//--------------------------------------------------
 				// SORGENTI
 				//--------------------------------------------------
-				    Ordini = ORDINI,
-				    Clienti = CLIENTI,
-				    Articoli = ARTICOLI,
-				    Calendario = CALENDARIO,
+				    Ordini = FACT_Ordini,
+				    Clienti = DIM_Clienti,
+				    Articoli = DIM_Articoli,
+				    Calendario = DIM_Calendario,
 				
 				//--------------------------------------------------
-				// JOIN CLIENTI
+				// JOIN DIM_Clienti
 				//--------------------------------------------------
 				    Join1 = Table.NestedJoin(
 				        Ordini,
@@ -80,7 +80,7 @@
 				    ),
 				
 				//--------------------------------------------------
-				// JOIN ARTICOLI
+				// JOIN DIM_Articoli
 				//--------------------------------------------------
 				    Join2 = Table.NestedJoin(
 				        ExpandClienti,
@@ -106,7 +106,7 @@
 				    ),
 				
 				//--------------------------------------------------
-				// JOIN CALENDARIO
+				// JOIN DIM_Calendario
 				//--------------------------------------------------
 				    JoinCal = Table.NestedJoin(
 				        FilteredRows,
@@ -162,7 +162,7 @@
 				    #"Rinominate colonne" = Table.RenameColumns(#"Rimosse altre colonne",{{"Qta_BIL_calc", "Qta_BIL"}, {"Qta_RESA_calc", "Qta_RESA"}}),
 				    #"Riordinate colonne" = Table.ReorderColumns(#"Rinominate colonne",{"Date", "Codice Articolo", "Qta_BIL", "Qta_RESA"}),
 				    #"Rinominate colonne1" = Table.RenameColumns(#"Riordinate colonne",{{"Date", "Data"}}),
-				    #"Filtrate righe" = Table.SelectRows(#"Rinominate colonne1", each [Qta_BIL] <> null and [Qta_BIL] <> ""),
+				    #"Filtrate righe" = Table.SelectRows(#"Rinominate colonne1", each [Qta BIL] <> null and [Qta BIL] <> ""),
 				    #"Aggiunta colonna personalizzata" = Table.AddColumn(#"Filtrate righe", "Movimento", each "Acquisto"),
 				    #"Modificato tipo" = Table.TransformColumnTypes(#"Aggiunta colonna personalizzata",{{"Movimento", type text}}),
 				    #"Riordinate colonne1" = Table.ReorderColumns(#"Modificato tipo",{"Data", "Codice Articolo", "Movimento", "Qta_BIL", "Qta_RESA"}),

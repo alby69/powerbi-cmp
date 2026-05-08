@@ -8,7 +8,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Qta Ton IPEM'
+	column QuantityIPEM
 		formatString: #,0
 		summarizeBy: sum
 		isNameInferred
@@ -23,17 +23,17 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Mezzo'
+	column CodiceMezzo
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_MezziTrasporto[Codice Mezzo]
+		sourceColumn: DIM_MezziTrasporto[CodiceMezzo]
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Articolo'
+	column CodiceArticolo
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_Articoli[Codice Articolo]
+		sourceColumn: DIM_Articoli[CodiceArticolo]
 
 		annotation SummarizationSetBy = Automatic
 
@@ -48,10 +48,10 @@
 				            //DIM_Calendario[MonthOfYear],        
 				            DIM_Calendario[MonthInCalendar],
 				            //DIM_Calendario[Date], 
-				            DIM_MezziTrasporto[Codice Mezzo],
-				            DIM_Articoli[Codice Articolo],
-				            FILTER(MEZZI_TRASPORTO,LEFT(DIM_MezziTrasporto[Codice Mezzo],1) = "N" ),
-				            TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),            
+				            DIM_MezziTrasporto[CodiceMezzo],
+				            DIM_Articoli[CodiceArticolo],
+				            FILTER(DIM_MezziTrasporto,LEFT(DIM_MezziTrasporto[CodiceMezzo],1) = "N" ),
+				            TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
 				            //"Costo", DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD]),
 				            //"Importo Costo Tab Propano", [Total Costs NAVI],
 				            "Qta Ton IPEM", [Qta Ton Acquisto IPEM CD]
@@ -63,4 +63,3 @@
 				```
 
 	annotation PBI_Id = 92ab77ab20124dcf865872b2038dc98a
-

@@ -25,11 +25,11 @@
 				let
 				    Output =
 				        [
-				            ORDINI = ORDINI,
-				            MOVCG = MOVCG,
+				            FACT_Ordini = FACT_Ordini,
+				            FACT_MovimentiCG = FACT_MovimentiCG,
 				            DOCVEN = #"DOCUMENTO VENDITA",
 				            CD = CONTO_DEPOSITO_OLD,
-				            CAMBI = CAMBI
+				            FACT_Cambi = FACT_Cambi
 				        ]
 				in
 				    Output

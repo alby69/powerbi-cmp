@@ -45,7 +45,7 @@
 		source = ```
 				// PROPANO_COSTI
 				let
-				    Source = MOVCG,
+				    Source = FACT_MovimentiCG,
 				
 				    Filtrato =
 				        Table.SelectRows(

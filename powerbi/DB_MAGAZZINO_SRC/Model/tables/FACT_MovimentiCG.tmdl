@@ -135,7 +135,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition MOVCG-12a575ac-4786-428b-83df-ab1b55c0d1d5 = m
+	partition FACT_MovimentiCG-12a575ac-4786-428b-83df-ab1b55c0d1d5 = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -144,7 +144,7 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
-				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="MOVCG",version=""]}[Data]
+				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_MovimentiCG",version=""]}[Data]
 				in
 				    MOVCG_
 

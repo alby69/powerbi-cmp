@@ -25,7 +25,7 @@
 				let
 				    Output =
 				        [
-				            PREZZI = PREZZI_MIX,
+				            PREZZI = FACT_PrezziMix,
 				            COMP = TAB_COMPETENZA
 				        ]
 				in

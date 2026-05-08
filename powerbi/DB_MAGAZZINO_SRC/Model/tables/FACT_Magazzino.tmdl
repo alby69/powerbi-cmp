@@ -1,13 +1,13 @@
 ﻿table FACT_Magazzino
 
-	column Articolo
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Articolo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quantità
+	column Quantity
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Quantità
@@ -16,7 +16,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column Data
+	column Date
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
@@ -26,42 +26,42 @@
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column Deposito
+	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Deposito
 
 		annotation SummarizationSetBy = Automatic
 
-	column Movimento
+	column TipoMovimento
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Movimento
 
 		annotation SummarizationSetBy = Automatic
 
-	column Unità
+	column UnitàMisura
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Unità
 
 		annotation SummarizationSetBy = Automatic
 
-	column Soggetto
+	column CodiceSoggetto
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Soggetto
 
 		annotation SummarizationSetBy = Automatic
 
-	column Categoria
+	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Categoria
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Data Documento'
+	column DataDocumento
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
@@ -85,7 +85,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition MAGAZZINO-f57b548f-0324-4230-bc85-a4573e869a91 = m
+	partition FACT_Magazzino-f57b548f-0324-4230-bc85-a4573e869a91 = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -94,11 +94,10 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bb824426-3526-4734-9406-d0645879f240" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bb824426-3526-4734-9406-d0645879f240"]}[Data],
-				    MAGAZZINO_ = #"bb824426-3526-4734-9406-d0645879f240"{[entity="MAGAZZINO",version=""]}[Data]
+				    MAGAZZINO_ = #"bb824426-3526-4734-9406-d0645879f240"{[entity="FACT_Magazzino",version=""]}[Data]
 				in
 				    MAGAZZINO_
 
 	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navigazione
-

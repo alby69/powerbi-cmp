@@ -74,7 +74,7 @@
 				    // 1. FILTRI TEMPORALI
 				    Start = RangeStart,
 				    End = RangeEnd,
-				    Origine = MAGAZZINO,
+				    Origine = FACT_Magazzino,
 				    
 				    // 2. MOVIMENTI FISICI (WAREHOUSE)
 				    FiltratoIPEM = Table.SelectRows(Origine, each [Data] >= Start and [Data] <= End and [Deposito] = "IPEM"),
@@ -87,16 +87,16 @@
 				
 				    // 3. APERTURA ANNUALE (OPENING)
 				    // Gestione sicura dei nomi: cerchiamo 'Valore Giacenza' e rinominiamo in 'Importo'
-				    OpeningColFix = Table.RenameColumns(TAB_GIACENZA, {{"Valore Giacenza", "Importo"}}, MissingField.Ignore),
+				    OpeningColFix = Table.RenameColumns(FACT_Giacenza, {{"Valore Giacenza", "Importo"}}, MissingField.Ignore),
 				    OpeningAdded = Table.AddColumn(OpeningColFix, "Movimento", each "Opening", type text),
 				    OpeningSchema = Table.SelectColumns(OpeningAdded, {"Data", "Articolo", "Movimento", "Quantità", "Importo"}, MissingField.Ignore),
 				    OpeningTyped = Table.TransformColumnTypes(OpeningSchema, {{"Data", type date}, {"Quantità", type number}, {"Importo", type number}, {"Articolo", type text}}),
 				
 				    // 4. ACQUISTI VALORIZZATI
 				    // Mix: Allineamento date e join
-				    Mix_Normalized = Table.RenameColumns(QUANTITA_MIX, {{"Qta_BIL", "Quantità"}}, MissingField.Ignore),
+				    Mix_Normalized = Table.RenameColumns(FACT_QuantitaMix, {{"Qta_BIL", "Quantità"}}, MissingField.Ignore),
 				    Mix_DateFix = Table.TransformColumnTypes(Mix_Normalized, {{"Data", type date}}),
-				    Mix_Costi_DateFix = Table.TransformColumnTypes(MIX_COSTI, {{"Data", type date}}),
+				    Mix_Costi_DateFix = Table.TransformColumnTypes(FACT_MixCosti, {{"Data", type date}}),
 				    
 				    Mix_Join = Table.NestedJoin(Mix_DateFix, {"Articolo", "Data"}, Mix_Costi_DateFix, {"Articolo", "Data"}, "C", JoinKind.LeftOuter),
 				    Mix_Final = Table.ExpandTableColumn(Mix_Join, "C", {"Importo"}, {"Importo"}),
@@ -104,7 +104,7 @@
 				    Mix_Clean = Table.SelectColumns(Mix_FixNull, {"Data", "Articolo", "Movimento", "Quantità", "Importo"}),
 				   
 				    // Propano: Allineamento date
-				    Propano_DateFix = Table.TransformColumnTypes(QUANTITA_PROPANO, {{"Data", type date}}),
+				    Propano_DateFix = Table.TransformColumnTypes(FACT_QuantitaPropano, {{"Data", type date}}),
 				    Propano_Clean = Table.SelectColumns(Propano_DateFix, {"Data", "Articolo", "Movimento", "Quantità", "Importo"}, MissingField.Ignore),
 				
 				    // 5. UNIFICAZIONE FINALE

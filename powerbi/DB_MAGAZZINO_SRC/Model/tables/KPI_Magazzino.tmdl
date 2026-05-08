@@ -2,7 +2,7 @@
 
 	measure 'Qta Ton' =
 			
-			VAR qta = SUMX ( MAGAZZINO, FACT_Magazzino[Quantità] )
+			VAR qta = SUMX ( FACT_Magazzino, FACT_Magazzino[Quantity] )
 			
 			RETURN
 			    DIVIDE ( qta, 1000, 0 )
@@ -22,25 +22,12 @@
 			
 			CALCULATE (
 			    [Qta Ton],
-			    FILTER ( ALL ( CALENDARIO ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		displayFolder: QTA
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Ton YTD' =
-			
-			TOTALYTD ( [Qta Ton], DIM_Calendario[Date] )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Qta Ton LY' =
-			
-			CALCULATE ( [Qta Ton], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
-		displayFolder: QTA
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Ton Diff YoY' =
 			
@@ -52,8 +39,8 @@
 	measure 'Qta Acquisto' = ```
 			
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR qta_mix = [Qta RESA MIX] //[Qta BIL MIX]
 			VAR qta_propano = SUMX('FACT_Propano', 'FACT_Propano'[Qta Ton IPEM] )
@@ -74,13 +61,13 @@
 	measure Importo = ```
 			
 			CALCULATE(
-			    SUMX(MOVCG,FACT_MovimentiCG[Importo]),
+			    SUMX(FACT_MovimentiCG,FACT_MovimentiCG[Importo]),
 			    REMOVEFILTERS(FACT_MovimentiCG[Categoria])
 			)
 			
 			/*
 			Importo = 
-			SUMX(MOVCG,FACT_MovimentiCG[Importo])
+			SUMX(FACT_MovimentiCG,FACT_MovimentiCG[Importo])
 			*/
 			
 			
@@ -91,7 +78,7 @@
 
 	measure 'Importo Fornitori' =
 			
-			CALCULATE ( [Importo], FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "2030001" ) )
+			CALCULATE ( [Importo], FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "2030001" ) )
 		displayFolder: IMPORTO_MAG
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -100,7 +87,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "4020002" } )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "4020002" } )
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: IMPORTO_MAG
@@ -108,7 +95,7 @@
 	measure 'Importo x Doc Date' =
 			
 			CALCULATE (
-			    SUMX ( MOVCG, FACT_MovimentiCG[Importo] ),
+			    SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo] ),
 			    USERELATIONSHIP ( DIM_Calendario[Date], FACT_MovimentiCG[Data Documento] )
 			)
 		displayFolder: IMPORTO_MAG
@@ -117,7 +104,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "3100001" } && FACT_MovimentiCG[Progetto] = "PS01" )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "3100001" } && FACT_MovimentiCG[Progetto] = "PS01" )
 			)
 		displayFolder: IMPORTO_MAG
 
@@ -125,7 +112,7 @@
 
 	measure 'Importo Accantonamenti' =
 			
-			SUMX ( ACCANTONAMENTI, ACCANTONAMENTI[Importo] )
+			SUMX ( FACT_Accantonamenti, FACT_Accantonamenti[Importo] )
 		displayFolder: IMPORTO_MAG
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -147,23 +134,6 @@
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	measure 'Importo Qta Ton YTD' =
-			
-			TOTALYTD ( [Importo Qta Ton], DIM_Calendario[Date] )
-		displayFolder: IMPORTO_MAG
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Importo Qta Ton CUM YTD LY' =
-			
-			IF (
-			    HASONEVALUE ( DIM_Calendario[MonthName] ),
-			    CALCULATE ( [Importo Qta Ton CUM YTD], DATEADD ( DIM_Calendario[Date], -1, YEAR ) ),
-			    BLANK ()
-			)
-		displayFolder: IMPORTO_MAG
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Qta Ton CY-LY' =
 			
@@ -174,7 +144,7 @@
 
 	measure 'Importo Qta Ton Vendita' =
 			
-			[Qta Ton Vendita] * [Costo Acquisto Qta Ton]
+			[Qta Vendite] * [Costo Acquisto Qta Ton]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: IMPORTO_MAG
 
@@ -185,16 +155,16 @@
 	measure 'Importo Mag Progr' =
 			
 			VAR filtro_articolo =
-			    { SELECTEDVALUE ( DIM_Articoli[Codice Articolo] ) }
+			    { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo] ) }
 			VAR anno_inizio = 2021
 			VAR tab_filtro =
 			    FILTER (
-			        ALL ( MAGAZZINO ),
-			        FACT_Magazzino[Deposito] = "IPEM"
-			            && FACT_Magazzino[Articolo]
+			        ALL ( FACT_Magazzino ),
+			        FACT_Magazzino[CodiceDeposito] = "IPEM"
+			            && FACT_Magazzino[CodiceArticolo]
 			                IN filtro_articolo
-			                    && FACT_Magazzino[Data] >= DATE ( anno_inizio, 1, 1 )
-			                    && FACT_Magazzino[Data] <= MAX ( DIM_Calendario[Date] )
+			                    && FACT_Magazzino[Date] >= DATE ( anno_inizio, 1, 1 )
+			                    && FACT_Magazzino[Date] <= MAX ( DIM_Calendario[Date] )
 			    )
 			RETURN
 			    CALCULATE ( [Importo], tab_filtro )
@@ -212,21 +182,21 @@
 	measure 'Importo Qta Ton Prev' =
 			
 			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo] ) }
+			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
 			VAR cur_date =
 			    { SELECTEDVALUE ( DIM_Calendario[Date] ) }
 			VAR importo_iniziale =
 			    SUMX (
 			        FILTER (
-			            GIACENZA,
-			            GIACENZA[Data] = DATE ( 2021, 1, 1 )
-			                && GIACENZA[Gruppo] = filtro_gruppo
+			            FACT_Giacenza,
+			            FACT_Giacenza[Data] = DATE ( 2021, 1, 1 )
+			                && FACT_Giacenza[Gruppo] = filtro_gruppo
 			        ),
-			        GIACENZA[Importo]
+			        FACT_Giacenza[Importo]
 			    )
 			VAR tab_filtro =
 			    FILTER (
-			        ALLSELECTED ( CALENDARIO ),
+			        ALLSELECTED ( DIM_Calendario ),
 			        DIM_Calendario[Date] < MAX ( DIM_Calendario[Date] )
 			    )
 			RETURN
@@ -248,7 +218,7 @@
 			CALCULATE (
 			    ABS ( [Importo] ),
 			    FILTER (
-			        MOVCG,
+			        FACT_MovimentiCG,
 			        FACT_MovimentiCG[Conto] IN { "3000002", "3000003", "3000004", "3000005" }
 			    )
 			)
@@ -262,7 +232,7 @@
 			CALCULATE (
 			    ABS ( [Importo] ),
 			    FILTER (
-			        MOVCG,
+			        FACT_MovimentiCG,
 			        FACT_MovimentiCG[Conto] IN { "3100001", "3100002", "3100003", "3100004", "3100005" }
 			    )
 			)
@@ -275,7 +245,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo Dare CG] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "4010002" } )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "4010002" } )
 			)
 		displayFolder: IMPORTO_MAG
 
@@ -285,7 +255,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo Dare CG] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "3300002" } )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "3300002" } )
 			)
 		displayFolder: IMPORTO_MAG
 
@@ -293,7 +263,7 @@
 
 	measure 'Importo CMP' =
 			
-			[Importo Rimanenze Iniziali PROPANO CG] + [Importo Acquisto CG]
+			[Importo Rimanenze Iniziali PROPANO CG] + [Importo Acquisti (CG)]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: IMPORTO_MAG
 
@@ -309,7 +279,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo Dare CG] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "3300003" } )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "3300003" } )
 			)
 		displayFolder: IMPORTO_MAG
 
@@ -319,7 +289,7 @@
 			
 			CALCULATE (
 			    ABS ( [Importo Dare CG] ),
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] IN { "4010003" } )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] IN { "4010003" } )
 			)
 		displayFolder: IMPORTO_MAG
 
@@ -330,7 +300,7 @@
 			CALCULATE (
 			    [Qta Ton CD],
 			    FILTER (
-			        CONTO_DEPOSITO,
+			        FACT_ContoDeposito,
 			        FACT_ContoDeposito[Movimento] = "Acquisto"
 			            && FACT_ContoDeposito[Deposito] = "IPEM"
 			    )
@@ -341,7 +311,7 @@
 
 	measure 'Qta Ton CD' =
 			
-			SUMX ( CONTO_DEPOSITO, FACT_ContoDeposito[Quantità] )
+			SUMX ( FACT_ContoDeposito, FACT_ContoDeposito[Quantità] )
 		formatString: #,0.000
 		displayFolder: QTA CONTO DEPOSITO
 
@@ -349,7 +319,7 @@
 			
 			CALCULATE (
 			    [Qta Ton Acquisto IPEM CD],
-			    FILTER ( ALL ( CALENDARIO ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		displayFolder: QTA CONTO DEPOSITO
 
@@ -360,24 +330,24 @@
 			VAR InizioPeriodo =
 			    CALCULATE(
 			        MIN(FACT_ContoDeposito[Data Competenza]),
-			        ALLSELECTED(CONTO_DEPOSITO)
+			        ALLSELECTED(FACT_ContoDeposito)
 			    )
 			VAR DataCorrente = MAX(FACT_ContoDeposito[Data Competenza])
-			VAR OrdineCorrente = MAX(CONTO_DEPOSITO)
+			VAR OrdineCorrente = MAX(FACT_ContoDeposito)
 			
 			VAR UltimaGiacenzaPrecedente =
 			MAXX(
 			    FILTER(
-			        ALL(CONTO_DEPOSITO),
+			        ALL(FACT_ContoDeposito),
 			        FACT_ContoDeposito[Movimento] = "Giacenza" &&
-			        CONTO_DEPOSITO <= InizioPeriodo
+			        FACT_ContoDeposito <= InizioPeriodo
 			    ),
 			    FACT_ContoDeposito[Data Movimento]
 			)
 			
 			VAR Tab_Filtro =
 			FILTER(
-			    ALLSELECTED(CONTO_DEPOSITO),
+			    ALLSELECTED(FACT_ContoDeposito),
 			    (
 			        FACT_ContoDeposito[Movimento] = "Giacenza" &&
 			        FACT_ContoDeposito[Data Movimento] = UltimaGiacenzaPrecedente
@@ -417,7 +387,7 @@
 			VAR UltimaGiacenzaPrecedente =
 			    MAXX (
 			        FILTER (
-			            ALLSELECTED ( CONTO_DEPOSITO ),
+			            ALLSELECTED ( FACT_ContoDeposito ),
 			            FACT_ContoDeposito[Movimento] = "Giacenza"
 			                && FACT_ContoDeposito[Data Movimento] <= InizioPeriodo
 			        ),
@@ -425,7 +395,7 @@
 			    )
 			VAR Tab_Filtro =
 			    FILTER (
-			        ALLSELECTED ( CONTO_DEPOSITO ),
+			        ALLSELECTED ( FACT_ContoDeposito ),
 			        (
 			            FACT_ContoDeposito[Movimento] = "Giacenza"
 			                && FACT_ContoDeposito[Data Movimento] = UltimaGiacenzaPrecedente
@@ -453,23 +423,13 @@
 			```
 		displayFolder: QTA CONTO DEPOSITO
 
-	measure 'Qta Ton Acquisto IPEM CD LY' =
-			
-			IF (
-			    HASONEVALUE ( DIM_Calendario[MonthName] ),
-			    CALCULATE ( [Qta Ton Acquisto IPEM CD], DATEADD ( DIM_Calendario[Date], -1, YEAR ) ),
-			    BLANK ()
-			)
-		displayFolder: QTA CONTO DEPOSITO
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Ton CD Giacenza IPEM' =
 			
 			CALCULATE (
 			    [Qta Ton CD],
 			    FILTER (
-			        CONTO_DEPOSITO,
+			        FACT_ContoDeposito,
 			        FACT_ContoDeposito[Movimento] IN { "Giacenza" } &&
 			        FACT_ContoDeposito[Deposito] IN { "IPEM" }
 			    )
@@ -496,21 +456,21 @@
 	measure 'Importo Dare CG' = ```
 			
 			    CALCULATE(
-			        SUMX ( MOVCG, FACT_MovimentiCG[Importo]),
+			        SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo]),
 			        FACT_MovimentiCG[Importo] > 0
 			    )
 			```
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Unità Misura' = MINX(MAGAZZINO,FACT_Magazzino[Unità])
+	measure 'Unità Misura' = MINX(FACT_Magazzino,FACT_Magazzino[UnitàMisura])
 
 	measure 'Qta Ton CUM YTD' =
 			
 			CALCULATE (
 			    [Qta Ton],
 			    FILTER (
-			        ALL ( CALENDARIO ),
+			        ALL ( DIM_Calendario ),
 			        DIM_Calendario[Year] <= MAX ( DIM_Calendario[Year] )
 			            && DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
 			    )
@@ -529,7 +489,7 @@
 			    CALCULATE(
 			        [Qta Ton],
 			        FILTER(
-			            ALL(CALENDARIO),
+			            ALL(DIM_Calendario),
 			            DIM_Calendario[Date] > DataInizio &&
 			            DIM_Calendario[Date] <= MAX(DIM_Calendario[Date])
 			        )
@@ -548,7 +508,7 @@
 			    CALCULATE(
 			        [Qta Ton],
 			        FILTER(
-			            ALL(CALENDARIO),
+			            ALL(DIM_Calendario),
 			            DIM_Calendario[Date] >= DataInizio &&
 			            DIM_Calendario[Date] <= MAX(DIM_Calendario[Date])
 			        )
@@ -561,7 +521,7 @@
 			    BLANK(),
 			    CALCULATE (
 			        [Qta Ton],
-			        FILTER ( ALL ( CALENDARIO ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+			        FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			    )
 			)
 			*/
@@ -575,10 +535,10 @@
 			
 			    CALCULATE(
 			        [Qta Ton CUM ALL],
-			        REMOVEFILTERS(GRUPPI_VENDITE)
+			        REMOVEFILTERS(DIM_GruppiVendita)
 			    )
 			/*
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			
 			VAR qta_propano = [Qta Ton CD Giacenza IPEM]
 			VAR qta_mix =  [Qta Ton CUM ALL]
@@ -599,21 +559,21 @@
 	measure 'Qta Ton Prev' =
 			
 			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo] ) }
+			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
 			VAR cur_date =
 			    { SELECTEDVALUE ( DIM_Calendario[Date] ) }
 			VAR qta_iniziale =
 			    SUMX (
 			        FILTER (
-			            GIACENZA,
-			            GIACENZA[Data] = DATE ( 2021, 1, 1 )
-			                && GIACENZA[Gruppo] = filtro_gruppo
+			            FACT_Giacenza,
+			            FACT_Giacenza[Data] = DATE ( 2021, 1, 1 )
+			                && FACT_Giacenza[Gruppo] = filtro_gruppo
 			        ),
-			        GIACENZA[Qta]
+			        FACT_Giacenza[Qta]
 			    )
 			VAR tab_filtro =
 			    FILTER (
-			        ALLSELECTED ( CALENDARIO ),
+			        ALLSELECTED ( DIM_Calendario ),
 			        DIM_Calendario[Date] < MAX ( DIM_Calendario[Date] )
 			    )
 			RETURN
@@ -639,7 +599,7 @@
 			
 			    CALCULATE(
 			        [Qta Ton Giacenza OLD],
-			        FACT_Magazzino[Deposito] = "IPEM"
+			        FACT_Magazzino[CodiceDeposito] = "IPEM"
 			    )
 			```
 		displayFolder: QTA
@@ -659,7 +619,7 @@
 	measure 'Qta Vendita Deposito' = ```
 			
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			VAR filtro_deposito = { SELECTEDVALUE ( FACT_ContoDepositoOLD[Deposito], BLANK () ) }
 			VAR filtro_cliente = 
 			    {
@@ -674,18 +634,18 @@
 			    
 			VAR qta_mix = CALCULATE(
 			        SUMX('FACT_Vendite', 'FACT_Vendite'[Qta]),
-			        FILTER('FACT_Vendite','FACT_Vendite'[Codice Articolo] IN {"1","1T"} &&
-			            IF( filtro_cliente <> "",'FACT_Vendite'[Soggetto] IN filtro_cliente, 
-			                ('FACT_Vendite'[Categoria] <> "PASSAGGIO")
+			        FILTER('FACT_Vendite','FACT_Vendite'[CodiceArticolo] IN {"1","1T"} &&
+			            IF( filtro_cliente <> "",'FACT_Vendite'[CodiceSoggetto] IN filtro_cliente,
+			                ('FACT_Vendite'[CodiceCategoria] <> "PASSAGGIO")
 			            )
 			        )
 			)
 			
 			VAR qta_propano = CALCULATE(
 			        SUMX('FACT_Vendite', 'FACT_Vendite'[Qta]),
-			        FILTER('FACT_Vendite','FACT_Vendite'[Codice Articolo] IN {"2","2T"} &&
-			            IF( filtro_cliente <> "",'FACT_Vendite'[Soggetto] IN filtro_cliente, 
-			                ('FACT_Vendite'[Categoria] <> "PASSAGGIO")
+			        FILTER('FACT_Vendite','FACT_Vendite'[CodiceArticolo] IN {"2","2T"} &&
+			            IF( filtro_cliente <> "",'FACT_Vendite'[CodiceSoggetto] IN filtro_cliente,
+			                ('FACT_Vendite'[CodiceCategoria] <> "PASSAGGIO")
 			            )
 			        )
 			)
@@ -705,7 +665,7 @@
 
 	measure 'Qta Ton Giacenza 2' = ```
 			
-			VAR prodotto = SELECTEDVALUE(DIM_Articoli[Gruppo Articolo])
+			VAR prodotto = SELECTEDVALUE(DIM_Articoli[GruppoProdotto])
 			VAR start_date = DATE(2024,1,1)
 			
 			VAR giacenza_prop = 4901
@@ -757,7 +717,7 @@
 	measure 'Qta Ton Vendita MAG' =
 			CALCULATE(
 			    [Qta Ton],
-			    FACT_Magazzino[Movimento] = "Vendita"
+			    FACT_Magazzino[TipoMovimento] = "Vendita"
 			)
 		displayFolder: QTA
 
@@ -785,7 +745,7 @@
 			// non funziona perchè in magazzino IPEM la navi sono inserite come totale e non spaccato per ubicazione
 			    CALCULATE(
 			        [Qta Ton],
-			        FILTER(MAGAZZINO,FACT_Magazzino[Movimento] IN {"Acquisto","Rettifica Positiva"})
+			        FILTER(FACT_Magazzino,FACT_Magazzino[TipoMovimento] IN {"Acquisto","Rettifica Positiva"})
 			    )
 		displayFolder: QTA
 

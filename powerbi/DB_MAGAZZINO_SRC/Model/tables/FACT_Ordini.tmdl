@@ -1,34 +1,34 @@
 ﻿table FACT_Ordini
 
-	column Ordine
+	column CodiceOrdine
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Ordine
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Cliente Vendita'
+	column CodiceClienteVendita
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Codice Cliente Vendita
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Cliente Fatturazione'
+	column CodiceClienteFatturazione
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Codice Cliente Fatturazione
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Spedizione'
+	column CodiceSpedizione
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Codice Spedizione
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Data Registrazione'
+	column DataRegistrazione
 		dataType: dateTime
 		formatString: Short Date
 		summarizeBy: none
@@ -37,7 +37,7 @@
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column 'Data Spedizione'
+	column DataSpedizione
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
@@ -54,21 +54,21 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column Spedizioniere
+	column CodiceSpedizioniere
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Spedizioniere
 
 		annotation SummarizationSetBy = Automatic
 
-	column Articolo
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Articolo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Ubicazione
+	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Ubicazione
@@ -84,7 +84,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'VAT _'
+	column VAT
 		dataType: int64
 		formatString: 0
 		summarizeBy: sum
@@ -92,7 +92,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Net Weight'
+	column NetWeight
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Net Weight
@@ -101,14 +101,14 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column Categoria
+	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Categoria
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Cod_ Causale Vendita'
+	column CodiceCausaleVendita
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Cod_ Causale Vendita
@@ -124,7 +124,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Densità T_A_'
+	column DensitàTA
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Densità T_A_
@@ -133,7 +133,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Densità 15 C'
+	column Densità15C
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Densità 15 C
@@ -142,7 +142,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition ORDINI-75dde2e1-3858-4ba5-84e2-e5e4ed410ab1 = m
+	partition FACT_Ordini-75dde2e1-3858-4ba5-84e2-e5e4ed410ab1 = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -151,9 +151,8 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3f7bdf65-9391-4d91-9a41-2a5b893c841a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3f7bdf65-9391-4d91-9a41-2a5b893c841a"]}[Data],
-				    ORDINI_ = #"3f7bdf65-9391-4d91-9a41-2a5b893c841a"{[entity="ORDINI",version=""]}[Data]
+				    ORDINI_ = #"3f7bdf65-9391-4d91-9a41-2a5b893c841a"{[entity="FACT_Ordini",version=""]}[Data]
 				in
 				    ORDINI_
 
 	annotation PBI_ResultType = Table
-

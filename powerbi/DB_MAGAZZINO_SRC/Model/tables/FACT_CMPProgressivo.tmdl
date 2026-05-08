@@ -55,14 +55,14 @@
 				DF = QUERY_BASE_DF,
 				WB = QUERY_BASE_WEB,
 				
-				ORDINI_src = DF[ORDINI],
+				ORDINI_src = DF[FACT_Ordini],
 				DOCVEN_src = DF[DOCVEN],
-				CAMBI_src = DF[CAMBI],
+				CAMBI_src = DF[FACT_Cambi],
 				
 				PREZZI_src = WB[PREZZI],
 				
 				//--------------------------------------------------
-				// PREZZI + CAMBI
+				// PREZZI + FACT_Cambi
 				//--------------------------------------------------
 				
 				PREZZI_K =
@@ -134,7 +134,7 @@
 				ORDINI_P =
 				Table.ExpandTableColumn(ORDINI_JOIN_P,"P",{"Prezzo USD"}),
 				
-				// JOIN CAMBI
+				// JOIN FACT_Cambi
 				ORDINI_JOIN_C =
 				Table.NestedJoin(
 				    ORDINI_P,

@@ -7,14 +7,14 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Mezzo'
+	column CodiceMezzo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Codice Mezzo
 
 		annotation SummarizationSetBy = Automatic
 
-	partition MEZZI_TRASPORTO-20ac333d-610c-43a7-82a0-dadb048ab505 = m
+	partition DIM_MezziTrasporto-20ac333d-610c-43a7-82a0-dadb048ab505 = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -23,9 +23,8 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    MEZZI_TRASPORTO_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="MEZZI_TRASPORTO",version=""]}[Data]
+				    MEZZI_TRASPORTO_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="DIM_MezziTrasporto",version=""]}[Data]
 				in
 				    MEZZI_TRASPORTO_
 
 	annotation PBI_ResultType = Table
-

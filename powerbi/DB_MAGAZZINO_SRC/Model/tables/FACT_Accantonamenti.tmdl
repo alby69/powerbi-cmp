@@ -88,7 +88,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition ACCANTONAMENTI-bd46d15b-81f5-4182-a63d-da42bc9749fb = m
+	partition FACT_Accantonamenti-bd46d15b-81f5-4182-a63d-da42bc9749fb = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -97,7 +97,7 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
-				    ACCANTONAMENTI_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="ACCANTONAMENTI",version=""]}[Data]
+				    ACCANTONAMENTI_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_Accantonamenti",version=""]}[Data]
 				in
 				    ACCANTONAMENTI_
 

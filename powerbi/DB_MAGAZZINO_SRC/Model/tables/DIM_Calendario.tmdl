@@ -147,7 +147,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition CALENDARIO-6784be33-3785-4a7b-98ff-0ae7ee02b32c = m
+	partition DIM_Calendario-6784be33-3785-4a7b-98ff-0ae7ee02b32c = m
 		mode: import
 		queryGroup: SETUP
 		source =
@@ -156,7 +156,7 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"2ad89faa-71f7-4553-9d0c-9c74486153bd" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="2ad89faa-71f7-4553-9d0c-9c74486153bd"]}[Data],
-				    CALENDARIO_ = #"2ad89faa-71f7-4553-9d0c-9c74486153bd"{[entity="CALENDARIO",version=""]}[Data]
+				    CALENDARIO_ = #"2ad89faa-71f7-4553-9d0c-9c74486153bd"{[entity="DIM_Calendario",version=""]}[Data]
 				in
 				    CALENDARIO_
 

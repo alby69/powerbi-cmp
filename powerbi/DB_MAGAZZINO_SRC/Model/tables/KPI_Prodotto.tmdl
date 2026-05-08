@@ -5,12 +5,12 @@
 			VAR importo_cg =
 			    CALCULATE (
 			        [Importo],
-			        FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4030004" && FACT_MovimentiCG[Source Code] = "ACQUISTI" )
+			        FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4030004" && FACT_MovimentiCG[Source Code] = "ACQUISTI" )
 			    )
 			VAR importo_acc =
 			    CALCULATE (
 			        [Importo Accantonamenti],
-			        FILTER ( ACCANTONAMENTI, ACCANTONAMENTI[Conto] = "4030004" )
+			        FILTER ( FACT_Accantonamenti, FACT_Accantonamenti[Conto] = "4030004" )
 			    )
 			RETURN
 			    importo_cg + importo_acc
@@ -21,7 +21,7 @@
 			
 			CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, ( FACT_MovimentiCG[Conto] = "4030008" && FACT_MovimentiCG[Progetto] = "ML04" ) )
+			    FILTER ( FACT_MovimentiCG, ( FACT_MovimentiCG[Conto] = "4030008" && FACT_MovimentiCG[Progetto] = "ML04" ) )
 			)
 		displayFolder: COSTO_ACQUISTO
 
@@ -32,7 +32,7 @@
 			CALCULATE (
 			    [Importo],
 			    FILTER (
-			        MOVCG,
+			        FACT_MovimentiCG,
 			        ( FACT_MovimentiCG[Conto] = "4030002"
 			            && FACT_MovimentiCG[Source Code] = "ACQUISTI" )
 			    )
@@ -44,14 +44,14 @@
 			
 			CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04" )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04" )
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
 
 	measure 'Recupero Controstallie' =
 			
-			CALCULATE ( [Importo], FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "3400025" ) )
+			CALCULATE ( [Importo], FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "3400025" ) )
 		displayFolder: COSTO_ACQUISTO
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -59,13 +59,13 @@
 	measure 'Recupero Dazi Doganali' =
 			
 			VAR filtro_nave =
-			    { SELECTEDVALUE ( DIM_MezziTrasporto[Codice Mezzo] ) }
+			    { SELECTEDVALUE ( DIM_MezziTrasporto[CodiceMezzo] ) }
 			VAR importo_rec =
 			    CALCULATE (
 			        [Importo Doc Vendita],
 			        FILTER (
 			            'FACT_DocumentoVendita',
-			            'FACT_DocumentoVendita'[No_] = "3400026"
+			            'FACT_DocumentoVendita'[CodiceArticolo] = "3400026"
 			                || 'FACT_DocumentoVendita'[Progetto] = "ML04"
 			                || 'FACT_DocumentoVendita'[Mezzo Trasporto] IN filtro_nave
 			        )
@@ -83,7 +83,7 @@
 
 	measure 'Recupero Spese Terzi' =
 			
-			CALCULATE ( [Importo], FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "3400023" ) )
+			CALCULATE ( [Importo], FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "3400023" ) )
 		displayFolder: COSTO_ACQUISTO
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -92,7 +92,7 @@
 			
 			CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4030006" && FACT_MovimentiCG[Progetto] = "ML04" )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4030006" && FACT_MovimentiCG[Progetto] = "ML04" )
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
@@ -102,7 +102,7 @@
 			VAR trasp =
 			    CALCULATE (
 			        [Importo],
-			        FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4030003" && FACT_MovimentiCG[Source Code] = "REGACQ" )
+			        FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4030003" && FACT_MovimentiCG[Source Code] = "REGACQ" )
 			    )
 			
 			/*
@@ -110,7 +110,7 @@
 			    CALCULATE (
 			        [Importo],
 			        FILTER (
-			            MOVCG,
+			            FACT_MovimentiCG,
 			            FACT_MovimentiCG[Conto] = "2030004"
 			                && FACT_MovimentiCG[Source Code] = "REGACQ"
 			                && FACT_MovimentiCG[Progetto] = "AS10"
@@ -150,12 +150,12 @@
 			VAR imp_mp =
 			    CALCULATE (
 			        [Importo Accantonamenti],
-			        FILTER ( ACCANTONAMENTI, ACCANTONAMENTI[Conto] = "4020002" )
+			        FILTER ( FACT_Accantonamenti, FACT_Accantonamenti[Conto] = "4020002" )
 			    )
 			VAR imp_mp_2 =
 			    CALCULATE (
 			        [Importo Accantonamenti],
-			        FILTER ( ACCANTONAMENTI, ACCANTONAMENTI[Conto] = "2030004" )
+			        FILTER ( FACT_Accantonamenti, FACT_Accantonamenti[Conto] = "2030004" )
 			    )
 			RETURN
 			    imp_mp + imp_mp_2
@@ -173,13 +173,13 @@
 			VAR imp_mp =
 			    CALCULATE (
 			        [Importo],
-			        FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4020002" && FACT_MovimentiCG[Source Code] = "REGACQ" )
+			        FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4020002" && FACT_MovimentiCG[Source Code] = "REGACQ" )
 			    )
 			VAR imp_mp_2 =
 			    CALCULATE (
 			        [Importo],
 			        FILTER (
-			            MOVCG,
+			            FACT_MovimentiCG,
 			            FACT_MovimentiCG[Conto] = "2030004"
 			                && FACT_MovimentiCG[Source Code]
 			                IN { "REGACQ", "REGACQIC" }
@@ -196,7 +196,7 @@
 			CALCULATE (
 			    [Importo],
 			    FILTER (
-			        MOVCG,
+			        FACT_MovimentiCG,
 			        FACT_MovimentiCG[Conto] = "2030004"
 			            && FACT_MovimentiCG[Source Type] = ""
 			            && FACT_MovimentiCG[Mezzo Trasporto] <> ""
@@ -210,7 +210,7 @@
 			
 			CALCULATE (
 			    [Importo ACQ],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04" )
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04" )
 			)
 		displayFolder: COSTO_ACQUISTO
 
@@ -226,7 +226,7 @@
 
 	measure 'Recupero Spese Trasporto' =
 			
-			CALCULATE ( ABS ( [Importo] ), FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "3400024" ) )
+			CALCULATE ( ABS ( [Importo] ), FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "3400024" ) )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
 
@@ -238,7 +238,7 @@
 			
 			CALCULATE (
 			    [CMP Acquisto],
-			    FILTER ( ALL ( CALENDARIO ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: CMP
@@ -261,7 +261,7 @@
 			
 			CALCULATE (
 			    [CMP Prodotto],
-			    FILTER ( ALL ( CALENDARIO ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		displayFolder: CMP
 
@@ -269,8 +269,8 @@
 
 	measure 'CMP Acquisto' = ```
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR cmp_mix = [Costo Tab MIX Resa]
 			VAR cmp_propano = [Costo Tab Propano]
@@ -311,8 +311,8 @@
 
 	measure 'Importo Acquisto' = ```
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR imp_mix = [Importo Costo Tab MIX]
 			VAR imp_propano = [Importo Costo Tab Propano]
@@ -333,12 +333,12 @@
 
 	measure 'Margine Unitario' = ```
 			
-			    IF ([Prezzo Vendite] > 0,
-			        [Prezzo Vendite] - [CMP Acquisto],
+			    IF ([Prezzo Medio Vendita] > 0,
+			        [Prezzo Medio Vendita] - [CMP Acquisto],
 			        0
 			    )
 			/*
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			
 			VAR imp_mix = [Prezzo Vendita] - [CMP Acquisto]
 			VAR imp_propano = [Prezzo Vendita] - [CMP Acquisto]
@@ -365,39 +365,10 @@
 
 		changedProperty = FormatString
 
-	measure 'QoQ Profitto Cliente' = ```
-			
-			VAR last_q = 
-			    CALCULATE(
-			        [% Profitto],
-			        DATEADD(DIM_Calendario[Date],-1,QUARTER)
-			    )
-			RETURN    
-			    [% Profitto] - last_q
-			```
-		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: MARGINE
-
-		changedProperty = FormatString
-
-	measure 'QoQ Vendite Cliente' = ```
-			
-			VAR last_q = 
-			    CALCULATE(
-			        [Importo Vendita %],
-			        DATEADD(DIM_Calendario[Date],-1,QUARTER)
-			    )
-			RETURN    
-			    [Importo Vendita %] - last_q
-			```
-		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: MARGINE
-
-		changedProperty = FormatString
 
 	measure 'Trasporto Vendite' =
 			
-			CALCULATE ( [Importo], FILTER ( MOVCG, ( FACT_MovimentiCG[Conto] = "4110045" ) ) )
+			CALCULATE ( [Importo], FILTER ( FACT_MovimentiCG, ( FACT_MovimentiCG[Conto] = "4110045" ) ) )
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -437,16 +408,16 @@
 	measure 'Importo Giacenza Iniziale' =
 			
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			//VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			//VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR qta_mix = CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4010003") //rimaneze iniziale MIX
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4010003") //rimaneze iniziale MIX
 			)
 			VAR qta_propano = CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "4010002") //rimaneze iniziale Propano
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "4010002") //rimaneze iniziale Propano
 			)
 			
 			VAR qta_ALL = qta_mix + qta_propano
@@ -553,8 +524,8 @@
 
 	measure 'CMP Acquisto 2' = ```
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR cmp_mix = AVERAGEX('FACT_Mix', 'FACT_Mix'[Costo] )
 			VAR cmp_propano = AVERAGEX('FACT_Propano', 'FACT_Propano'[Costo] )
@@ -578,8 +549,8 @@
 
 	measure 'Nr Mezzi' =
 			CALCULATE(
-			    COUNTX(MEZZI_TRASPORTO,[Qta Ton Acquisto IPEM CD]),
-			    DIM_MezziTrasporto[Codice Mezzo] <> "ATB"
+			    COUNTX(DIM_MezziTrasporto,[Qta Ton Acquisto IPEM CD]),
+			    DIM_MezziTrasporto[CodiceMezzo] <> "ATB"
 			)
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -624,16 +595,16 @@
 	measure 'Importo Giacenza Finale' = ```
 			
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[Gruppo Articolo], BLANK () ) }
-			//VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[Codice Articolo], BLANK () ) }
+			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			//VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR qta_mix = CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "3300003") //rimaneze iniziale MIX
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "3300003") //rimaneze iniziale MIX
 			)
 			VAR qta_propano = CALCULATE (
 			    [Importo],
-			    FILTER ( MOVCG, FACT_MovimentiCG[Conto] = "3300002") //rimaneze iniziale Propano
+			    FILTER ( FACT_MovimentiCG, FACT_MovimentiCG[Conto] = "3300002") //rimaneze iniziale Propano
 			)
 			
 			VAR qta_ALL = qta_mix + qta_propano
@@ -663,7 +634,7 @@
 			    CALCULATE (
 			        [Importo Acquisto] - ([Qta Vendita] * [CMP Giacenza]),
 			        FILTER (
-			            ALL (CALENDARIO),
+			            ALL (DIM_Calendario),
 			            DIM_Calendario[Date] <= DataMax
 			        )
 			    )
@@ -677,7 +648,7 @@
 	measure 'Importo Giacenza Iniziale (Finale)'
 		displayFolder: IMPORTO_PRODOTTO
 
-		annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":"\nVAR ValoreCorrente = [Importo Giacenza Iniziale]   -- da MOVCG, presente solo a gen\n\nVAR ValorePrecedente =\n    CALCULATE(\n        [Importo Giacenza],                        -- giacenza FINALE del mese precedente\n        DATEADD(DIM_Calendario[Date], -1, MONTH)\n    )\n\nRETURN\n    IF(NOT ISBLANK(ValoreCorrente), ValoreCorrente, ValorePrecedente)"}
+		annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":"\nVAR ValoreCorrente = [Importo Giacenza Iniziale]   -- da FACT_MovimentiCG, presente solo a gen\n\nVAR ValorePrecedente =\n    CALCULATE(\n        [Importo Giacenza],                        -- giacenza FINALE del mese precedente\n        DATEADD(DIM_Calendario[Date], -1, MONTH)\n    )\n\nRETURN\n    IF(NOT ISBLANK(ValoreCorrente), ValoreCorrente, ValorePrecedente)"}
 
 		annotation 277cc1b9-af89-4597-8e15-cacc25c0886b = ```
 				È stata rilevata una dipendenza circolare: Measure: 'ANALISI_PRODOTTO'[Importo Giacenza Iniziale (Finale)], Measure: 'ANALISI_PRODOTTO'[Importo Giacenza], Measure: 'ANALISI_PRODOTTO'[Importo Giacenza Iniziale (Finale)].
