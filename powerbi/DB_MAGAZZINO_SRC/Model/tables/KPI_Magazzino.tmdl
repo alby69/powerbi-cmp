@@ -43,7 +43,7 @@
 			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
 			VAR qta_mix = [Qta RESA MIX] //[Qta BIL MIX]
-			VAR qta_propano = SUMX('FACT_Propano', 'FACT_Propano'[Qta Ton IPEM] )
+			VAR qta_propano = SUMX('FACT_Propano', 'FACT_Propano'[QuantityIPEM] )
 			
 			    
 			RETURN

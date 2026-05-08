@@ -17,7 +17,7 @@
 	column Indirizzo2
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Indirizzo 2
+		sourceColumn: Indirizzo2
 
 		annotation SummarizationSetBy = Automatic
 
@@ -80,7 +80,7 @@
 	column CodiceCliente
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente
+		sourceColumn: CodiceCliente
 
 		annotation SummarizationSetBy = Automatic
 
@@ -89,7 +89,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition DIM_Clienti-9a4807bb-587d-48df-8a31-e8089e7197e0 = m
+	partition DIM_Clienti = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -100,21 +100,22 @@
 
 				    // Load CLIENTE
 				    CLIENTI_DF = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    CLIENTI_ = CLIENTI_DF{[entity="DIM_Clienti",version=""]}[Data],
+				    CLIENTI_ = CLIENTI_DF{[entity="CLIENTI",version=""]}[Data],
 
 				    // Load COMUNI & AREA for flattening
 				    GEOGRAFIA_DF = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="93072853-e11a-47d3-a9ae-146e46949f0a"]}[Data],
 				    COMUNI_ = GEOGRAFIA_DF{[entity="COMUNI",version=""]}[Data],
 				    AREA_ = GEOGRAFIA_DF{[entity="AREA",version=""]}[Data],
 
-				    // Join DIM_Clienti + COMUNI
+				    // Join CLIENTI + COMUNI
 				    JoinedComuni = Table.NestedJoin(CLIENTI_, {"Città"}, COMUNI_, {"Nome"}, "COMUNI", JoinKind.LeftOuter),
 				    ExpandedComuni = Table.ExpandTableColumn(JoinedComuni, "COMUNI", {"Provincia", "Longitudine", "Latitudine"}, {"Provincia_Comuni", "Longitudine", "Latitudine"}),
 
 				    // Join + AREA
 				    JoinedArea = Table.NestedJoin(ExpandedComuni, {"Provincia_Comuni"}, AREA_, {"Sigla"}, "AREA", JoinKind.LeftOuter),
-				    ExpandedArea = Table.ExpandTableColumn(JoinedArea, "AREA", {"Regione", "Provincia"}, {"Regione", "AreaGeografica"})
+				    ExpandedArea = Table.ExpandTableColumn(JoinedArea, "AREA", {"Regione", "Provincia"}, {"Regione", "AreaGeografica"}),
+				    #"Rinominate colonne" = Table.RenameColumns(ExpandedArea,{{"Codice Cliente", "CodiceCliente"}, {"Indirizzo 2", "Indirizzo2"}})
 				in
-				    ExpandedArea
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table

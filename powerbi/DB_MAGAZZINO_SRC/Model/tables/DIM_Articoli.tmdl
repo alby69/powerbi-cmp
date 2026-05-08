@@ -10,7 +10,7 @@
 	column CostoUnitario
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Unit Cost
+		sourceColumn: CostoUnitario
 
 		annotation SummarizationSetBy = Automatic
 
@@ -19,7 +19,7 @@
 	column UltimoCostoDiretto
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Last Direct Cost
+		sourceColumn: UltimoCostoDiretto
 
 		annotation SummarizationSetBy = Automatic
 
@@ -28,21 +28,21 @@
 	column GruppoRegistrazioneProdotto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Gen_ Prod_ Posting Group
+		sourceColumn: GruppoRegistrazioneProdotto
 
 		annotation SummarizationSetBy = Automatic
 
 	column NumeroAccisa
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Nr_ Accisa
+		sourceColumn: NumeroAccisa
 
 		annotation SummarizationSetBy = Automatic
 
 	column DensitàTA
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Densità T_A_
+		sourceColumn: DensitàTA
 
 		annotation SummarizationSetBy = Automatic
 
@@ -51,7 +51,7 @@
 	column Densità15C
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Densità 15 C
+		sourceColumn: Densità15C
 
 		annotation SummarizationSetBy = Automatic
 
@@ -75,18 +75,18 @@
 	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Articolo
+		sourceColumn: CodiceArticolo
 
 		annotation SummarizationSetBy = Automatic
 
 	column GruppoCategoria
 		dataType: string
 		summarizeBy: none
-		sourceColumn: GruppoArticolo
+		sourceColumn: GruppoCategoria
 
 		annotation SummarizationSetBy = Automatic
 
-	partition DIM_Articoli-da487acd-fb16-45f1-a9de-92d3f9cc51c1 = m
+	partition DIM_Articoli = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -95,8 +95,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    ARTICOLI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="DIM_Articoli",version=""]}[Data]
+				    ARTICOLI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="ARTICOLI",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(ARTICOLI_,{{"Codice Articolo", "CodiceArticolo"}, {"Unit Cost", "CostoUnitario"}, {"Last Direct Cost", "UltimoCostoDiretto"}, {"Gen_ Prod_ Posting Group", "GruppoRegistrazioneProdotto"}, {"Nr_ Accisa", "NumeroAccisa"}, {"Densità T_A_", "DensitàTA"}, {"Densità 15 C", "Densità15C"}, {"GruppoArticolo", "GruppoCategoria"}})
 				in
-				    ARTICOLI_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table

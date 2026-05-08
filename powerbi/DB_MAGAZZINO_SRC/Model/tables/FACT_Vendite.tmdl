@@ -84,7 +84,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Tab VENDITE-64a33be6-1e7a-4d2e-8b36-05c752792334' = calculated
+	partition FACT_Vendite = calculated
 		mode: import
 		source = ```
 				
@@ -100,7 +100,7 @@
 				            FACT_Magazzino[CodiceDeposito],
 				            FILTER(FACT_Magazzino,FACT_Magazzino[TipoMovimento] = "Vendita"),
 				            TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
-				            "Qta", ABS([Qta Ton]),
+				            "Qta", ABS([Quantity]),
 				            "# Qta",COUNT(FACT_Magazzino[Indice])
 				
 				        )

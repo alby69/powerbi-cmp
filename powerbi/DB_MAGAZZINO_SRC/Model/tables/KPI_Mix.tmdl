@@ -62,7 +62,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'NR ATB Giorno' =
+	measure '# ATB Giorno' =
 			
 			COUNT ( FACT_Ordini[CodiceOrdine] )
 		formatString: 0
@@ -242,7 +242,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo MIX' =
-			[Costo Tab MIX]
+			[Costo Mix]
 			/*
 			VAR curr_cli = { SELECTEDVALUE(ClientiFattFiltrati[No_]) }
 			

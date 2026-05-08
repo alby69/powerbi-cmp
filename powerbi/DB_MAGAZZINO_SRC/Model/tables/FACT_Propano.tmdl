@@ -1,10 +1,10 @@
 ﻿table FACT_Propano
 
-	measure 'Costo Tab Propano' = DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD])
+	measure 'Costo Propano' = DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD])
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Costo Tab Propano' = [Total Costs NAVI]
+	measure 'Importo Costo Propano' = [Total Costs NAVI]
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -37,7 +37,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Tab PROPANO-f816341a-f99a-47b1-b4f2-01abda773f31' = calculated
+	partition FACT_Propano = calculated
 		mode: import
 		source = ```
 				
@@ -45,15 +45,11 @@
 				
 				VAR tab_propano =
 				        SUMMARIZECOLUMNS(
-				            //DIM_Calendario[MonthOfYear],        
 				            DIM_Calendario[MonthInCalendar],
-				            //DIM_Calendario[Date], 
 				            DIM_MezziTrasporto[CodiceMezzo],
 				            DIM_Articoli[CodiceArticolo],
 				            FILTER(DIM_MezziTrasporto,LEFT(DIM_MezziTrasporto[CodiceMezzo],1) = "N" ),
 				            TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
-				            //"Costo", DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD]),
-				            //"Importo Costo Tab Propano", [Total Costs NAVI],
 				            "Qta Ton IPEM", [Qta Ton Acquisto IPEM CD]
 				        )
 				RETURN

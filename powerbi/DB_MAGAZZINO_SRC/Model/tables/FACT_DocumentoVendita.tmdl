@@ -3,14 +3,14 @@
 	column CodiceClienteFatturazione
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente Fatturazione
+		sourceColumn: CodiceClienteFatturazione
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
-		sourceColumn: No_
+		sourceColumn: CodiceArticolo
 
 		annotation SummarizationSetBy = Automatic
 
@@ -26,7 +26,7 @@
 	column PrezzoUnitario
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Prezzo Unitario
+		sourceColumn: PrezzoUnitario
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,7 +44,7 @@
 	column CostoTrasporto
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Costo Trasporto
+		sourceColumn: CostoTrasporto
 
 		annotation SummarizationSetBy = Automatic
 
@@ -53,14 +53,14 @@
 	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Ubicazione
+		sourceColumn: CodiceDeposito
 
 		annotation SummarizationSetBy = Automatic
 
 	column TipoDocumento
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Tipo Documento
+		sourceColumn: TipoDocumento
 
 		annotation SummarizationSetBy = Automatic
 
@@ -68,7 +68,7 @@
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Spedizione
+		sourceColumn: DataSpedizione
 
 		annotation SummarizationSetBy = Automatic
 
@@ -78,7 +78,7 @@
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Registrazione
+		sourceColumn: DataRegistrazione
 
 		annotation SummarizationSetBy = Automatic
 
@@ -87,14 +87,14 @@
 	column TipoRiga
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Tipo Riga
+		sourceColumn: TipoRiga
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Categoria
+		sourceColumn: CodiceCategoria
 
 		annotation SummarizationSetBy = Automatic
 
@@ -115,14 +115,14 @@
 	column MezzoTrasporto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Mezzo Trasporto
+		sourceColumn: MezzoTrasporto
 
 		annotation SummarizationSetBy = Automatic
 
 	column GruppoRegistrazioneProdotto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Gen_ Prod_ Posting Group
+		sourceColumn: GruppoRegistrazioneProdotto
 
 		annotation SummarizationSetBy = Automatic
 
@@ -133,7 +133,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'DOCUMENTO VENDITA-b3711904-4c48-4384-8848-f6828556770e' = m
+	partition FACT_DocumentoVendita = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -142,8 +142,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    #"DOCUMENTO VENDITA_" = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="DOCUMENTO VENDITA",version=""]}[Data]
+				    #"DOCUMENTO VENDITA_" = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="DOCUMENTO VENDITA",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(#"DOCUMENTO VENDITA_",{{"Codice Cliente Fatturazione", "CodiceClienteFatturazione"}, {"No_", "CodiceArticolo"}, {"Prezzo Unitario", "PrezzoUnitario"}, {"Costo Trasporto", "CostoTrasporto"}, {"Ubicazione", "CodiceDeposito"}, {"Tipo Documento", "TipoDocumento"}, {"Data Spedizione", "DataSpedizione"}, {"Data Registrazione", "DataRegistrazione"}, {"Tipo Riga", "TipoRiga"}, {"Categoria", "CodiceCategoria"}, {"Mezzo Trasporto", "MezzoTrasporto"}, {"Gen_ Prod_ Posting Group", "GruppoRegistrazioneProdotto"}})
 				in
-				    #"DOCUMENTO VENDITA_"
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table

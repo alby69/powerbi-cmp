@@ -3,28 +3,28 @@
 	column CodiceOrdine
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Ordine
+		sourceColumn: CodiceOrdine
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceClienteVendita
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente Vendita
+		sourceColumn: CodiceClienteVendita
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceClienteFatturazione
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente Fatturazione
+		sourceColumn: CodiceClienteFatturazione
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceSpedizione
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Spedizione
+		sourceColumn: CodiceSpedizione
 
 		annotation SummarizationSetBy = Automatic
 
@@ -32,7 +32,7 @@
 		dataType: dateTime
 		formatString: Short Date
 		summarizeBy: none
-		sourceColumn: Data Registrazione
+		sourceColumn: DataRegistrazione
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -41,7 +41,7 @@
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Spedizione
+		sourceColumn: DataSpedizione
 
 		annotation SummarizationSetBy = Automatic
 
@@ -57,21 +57,21 @@
 	column CodiceSpedizioniere
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Spedizioniere
+		sourceColumn: CodiceSpedizioniere
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Articolo
+		sourceColumn: CodiceArticolo
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Ubicazione
+		sourceColumn: CodiceDeposito
 
 		annotation SummarizationSetBy = Automatic
 
@@ -88,14 +88,14 @@
 		dataType: int64
 		formatString: 0
 		summarizeBy: sum
-		sourceColumn: VAT _
+		sourceColumn: VAT
 
 		annotation SummarizationSetBy = Automatic
 
 	column NetWeight
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Net Weight
+		sourceColumn: NetWeight
 
 		annotation SummarizationSetBy = Automatic
 
@@ -104,14 +104,14 @@
 	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Categoria
+		sourceColumn: CodiceCategoria
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceCausaleVendita
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Cod_ Causale Vendita
+		sourceColumn: CodiceCausaleVendita
 
 		annotation SummarizationSetBy = Automatic
 
@@ -127,7 +127,7 @@
 	column DensitàTA
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Densità T_A_
+		sourceColumn: DensitàTA
 
 		annotation SummarizationSetBy = Automatic
 
@@ -136,13 +136,13 @@
 	column Densità15C
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Densità 15 C
+		sourceColumn: Densità15C
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition FACT_Ordini-75dde2e1-3858-4ba5-84e2-e5e4ed410ab1 = m
+	partition FACT_Ordini = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -151,8 +151,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3f7bdf65-9391-4d91-9a41-2a5b893c841a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3f7bdf65-9391-4d91-9a41-2a5b893c841a"]}[Data],
-				    ORDINI_ = #"3f7bdf65-9391-4d91-9a41-2a5b893c841a"{[entity="FACT_Ordini",version=""]}[Data]
+				    ORDINI_ = #"3f7bdf65-9391-4d91-9a41-2a5b893c841a"{[entity="ORDINI",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(ORDINI_,{{"Ordine", "CodiceOrdine"}, {"Codice Cliente Vendita", "CodiceClienteVendita"}, {"Codice Cliente Fatturazione", "CodiceClienteFatturazione"}, {"Codice Spedizione", "CodiceSpedizione"}, {"Data Registrazione", "DataRegistrazione"}, {"Data Spedizione", "DataSpedizione"}, {"Spedizioniere", "CodiceSpedizioniere"}, {"Articolo", "CodiceArticolo"}, {"Ubicazione", "CodiceDeposito"}, {"VAT _", "VAT"}, {"Net Weight", "NetWeight"}, {"Categoria", "CodiceCategoria"}, {"Cod_ Causale Vendita", "CodiceCausaleVendita"}, {"Densità T_A_", "DensitàTA"}, {"Densità 15 C", "Densità15C"}})
 				in
-				    ORDINI_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table

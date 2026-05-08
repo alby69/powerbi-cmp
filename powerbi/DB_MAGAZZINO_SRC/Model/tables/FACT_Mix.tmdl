@@ -8,21 +8,16 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Costo Tab MIX' =
+	measure 'Costo Mix' =
 			CALCULATE(
 			    DIVIDE([Costo Totale],[Qta BIL],0),
 			    FILTER(DIM_Clienti,DIM_Clienti[CodiceCliente] IN {"C01049","C00991"}
 			)
-			//Costo Tab MIX = DIVIDE([Costo Totale],[Qta BIL],0)
-			
-			
-			
-			
 			)
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Costo Tab MIX' =
+	measure 'Importo Costo Mix' =
 			
 			CALCULATE(
 			    [Costo Totale],
@@ -31,7 +26,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Costo Tab MIX Resa' =
+	measure 'Costo Mix Resa' =
 			CALCULATE(
 			    DIVIDE([Costo Totale],[Qta Resa],0),
 			    FILTER(DIM_Clienti,DIM_Clienti[CodiceCliente] IN {"C01049","C00991"}))
@@ -51,11 +46,11 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Prezzo € Mese'
+	column 'Prezzo Euro Mese'
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		summarizeBy: sum
 		isNameInferred
-		sourceColumn: [Prezzo € Mese]
+		sourceColumn: [Prezzo Euro Mese]
 
 		annotation SummarizationSetBy = Automatic
 
@@ -70,14 +65,14 @@
 	column CodiceCliente
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_Clienti[Codice Cliente]
+		sourceColumn: DIM_Clienti[CodiceCliente]
 
 		annotation SummarizationSetBy = Automatic
 
 	column CodiceArticolo
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_Articoli[Codice Articolo]
+		sourceColumn: DIM_Articoli[CodiceArticolo]
 
 		annotation SummarizationSetBy = Automatic
 
@@ -121,7 +116,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition 'Tab MIX-21d23dbb-920a-4559-81df-a046d6f015a4' = calculated
+	partition FACT_Mix = calculated
 		mode: import
 		source = ```
 				
@@ -131,15 +126,13 @@
 				
 				VAR tab_filtro = 
 					SUMMARIZECOLUMNS(
-				        //DIM_Calendario[MonthOfYear],        
-				        //DIM_Calendario[MonthInCalendar],
 				        DIM_Calendario[Date], 
 				        DIM_Clienti[CodiceCliente],
 				        DIM_Articoli[CodiceArticolo],
 				        TREATAS(filtro_cliente,DIM_Clienti[CodiceCliente]),
 				        TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
 				        "Prezzo USD",[Prezzo USD Mese],
-				        "Prezzo € Mese", [Prezzo € MIX Mese],
+				        "Prezzo Euro Mese", [Prezzo Euro MIX Mese],
 				        "Qta BIL", [Qta BIL],
 				        "# Qta BIL",COUNT(FACT_Ordini[CodiceOrdine]),
 				        "Qta Resa", [Qta Resa]

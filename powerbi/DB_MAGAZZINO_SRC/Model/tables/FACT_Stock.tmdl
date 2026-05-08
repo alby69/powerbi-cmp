@@ -93,22 +93,22 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition Tab_Stock = m
+	partition FACT_Stock = m
 		mode: import
 		queryGroup: QUERY_CMP
 		source = ```
 				// TAB_STOCK
-				
+
 				let
-				    Source = MAGAZZINO_CMP,
+				    Source = FACT_MagazzinoCMP,
 				    Sorted = Table.Sort(Source, {{"ArticoloBase", Order.Ascending}, {"Anno", Order.Ascending}, {"Data", Order.Ascending}, {"Priority", Order.Ascending}}),
-				
+
 				    CalcoloCMP = Table.Group(Sorted, {"ArticoloBase", "Anno"}, {
-				        {"Dati", (tbl) => 
+				        {"Dati", (tbl) =>
 				            let
 				                Records = Table.ToRecords(tbl),
 				                Count = List.Count(Records),
-				                
+
 				                Iterazione = List.Generate(
 				                    () => [
 				                        i = 0,
@@ -122,20 +122,20 @@
 				                    each let
 				                        n = [i] + 1,
 				                        row = Records{n},
-				                        
+
 				                        isAcquistoReale = (row[Movimento] = "Acquisto" and row[Importo] <> 0),
 				                        isOpening = (row[Movimento] = "Opening"),
-				                        
+
 				                        qNew = if isOpening then row[Quantità] else [q] + row[Quantità],
-				                        
+
 				                        // Valore Movimento:
 				                        // Se è un carico (Acquisto con prezzo o Opening), prendiamo l'importo
 				                        // Se è uno scarico o una rettifica, usiamo il CMP calcolato precedentemente
-				                        vMov = if isOpening or isAcquistoReale then row[Importo] 
+				                        vMov = if isOpening or isAcquistoReale then row[Importo]
 				                               else row[Quantità] * [cmp],
-				                        
+
 				                        vNew = if isOpening then row[Importo] else [v] + vMov,
-				                        
+
 				                        // Il CMP si aggiorna SOLO su nuovi carichi valorizzati
 				                        cmpNew = if (isAcquistoReale or isOpening) and qNew > 0 then vNew / qNew else [cmp]
 				                    in
@@ -148,7 +148,7 @@
 				                        ],
 				                    each [[q], [v], [cmp], [valMov]]
 				                ),
-				                
+
 				                // Unione dei risultati
 				                Columns = Table.FromRecords(Iterazione),
 				                Result = Table.FromColumns(
@@ -160,11 +160,11 @@
 				            type table
 				        }
 				    }),
-				
-				    Expanded = Table.ExpandTableColumn(CalcoloCMP, "Dati", 
+
+				    Expanded = Table.ExpandTableColumn(CalcoloCMP, "Dati",
 				        {"Data", "Articolo", "Movimento", "Quantità", "Importo", "QtaProgressiva", "ValoreProgressivo", "CMP", "ValoreMov"}
 				    ),
-				
+
 				    Typed = Table.TransformColumnTypes(Expanded,{{"QtaProgressiva", type number}, {"ValoreProgressivo", type number}, {"CMP", type number}, {"ValoreMov", type number}, {"Data", type date}, {"Articolo", type text}, {"Movimento", type text}, {"Quantità", type number}, {"Importo", type number}})
 				in
 				    Typed
@@ -173,4 +173,3 @@
 	annotation PBI_NavigationStepName = Navigazione
 
 	annotation PBI_ResultType = Table
-

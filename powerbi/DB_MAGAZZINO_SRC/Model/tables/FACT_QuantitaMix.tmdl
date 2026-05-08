@@ -1,6 +1,6 @@
 ﻿table FACT_QuantitaMix
 
-	column Data
+	column Date
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
@@ -9,21 +9,21 @@
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column Articolo
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Articolo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Movimento
+	column TipoMovimento
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Movimento
 
 		annotation SummarizationSetBy = Automatic
 
-	column Qta_BIL
+	column QuantityBIL
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Qta_BIL
@@ -32,7 +32,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column Qta_RESA
+	column QuantityRESA
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Qta_RESA
@@ -41,19 +41,19 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition QUANTITA_MIX = m
+	partition FACT_QuantitaMix = m
 		mode: import
 		queryGroup: QUERY_CMP
 		source = ```
 				// QUANTITA_MIX
-				
+
 				let
 				//--------------------------------------------------
 				// FILTRI
 				//--------------------------------------------------
 				    filtro_articolo = {"1","1T"},
 				    filtro_cliente = {"C00991","C01049"},
-				
+
 				//--------------------------------------------------
 				// SORGENTI
 				//--------------------------------------------------
@@ -61,56 +61,56 @@
 				    Clienti = DIM_Clienti,
 				    Articoli = DIM_Articoli,
 				    Calendario = DIM_Calendario,
-				
+
 				//--------------------------------------------------
 				// JOIN DIM_Clienti
 				//--------------------------------------------------
 				    Join1 = Table.NestedJoin(
 				        Ordini,
-				        {"Codice Cliente Fatturazione"},
+				        {"CodiceClienteFatturazione"},
 				        Clienti,
-				        {"Codice Cliente"},
+				        {"CodiceCliente"},
 				        "Clienti",
 				        JoinKind.Inner
 				    ),
 				    ExpandClienti = Table.ExpandTableColumn(
 				        Join1,
 				        "Clienti",
-				        {"Codice Cliente"}
+				        {"CodiceCliente"}
 				    ),
-				
+
 				//--------------------------------------------------
 				// JOIN DIM_Articoli
 				//--------------------------------------------------
 				    Join2 = Table.NestedJoin(
 				        ExpandClienti,
-				        {"Articolo"},
+				        {"CodiceArticolo"},
 				        Articoli,
-				        {"Codice Articolo"},
+				        {"CodiceArticolo"},
 				        "Articoli",
 				        JoinKind.Inner
 				    ),
 				    ExpandArticoli = Table.ExpandTableColumn(
 				        Join2,
 				        "Articoli",
-				        {"Codice Articolo"}
+				        {"CodiceArticolo"}
 				    ),
-				
+
 				//--------------------------------------------------
 				// FILTRI (TREATAS equivalente)
 				//--------------------------------------------------
 				    FilteredRows = Table.SelectRows(
 				        ExpandArticoli,
-				        each List.Contains(filtro_cliente, [Codice Cliente]) and
-				             List.Contains(filtro_articolo, [Codice Articolo])
+				        each List.Contains(filtro_cliente, [CodiceCliente]) and
+				             List.Contains(filtro_articolo, [CodiceArticolo])
 				    ),
-				
+
 				//--------------------------------------------------
 				// JOIN DIM_Calendario
 				//--------------------------------------------------
 				    JoinCal = Table.NestedJoin(
 				        FilteredRows,
-				        {"Data Registrazione"},
+				        {"DataRegistrazione"},
 				        Calendario,
 				        {"Date"},
 				        "Calendario",
@@ -121,53 +121,53 @@
 				        "Calendario",
 				        {"Date"}
 				    ),
-				
+
 				//==================================================
 				// CALCOLI (EX MISURE DAX)
 				//==================================================
-				
+
 				//--------------------------------------------------
 				// QTA BIL (da Quantity)
 				//--------------------------------------------------
 				    AddQtaBIL = Table.AddColumn(
 				        ExpandCal,
 				        "Qta_BIL_calc",
-				        each 
-				            if Text.StartsWith([Ordine], "ODA") then
+				        each
+				            if Text.StartsWith([CodiceOrdine], "ODA") then
 				                if [Quantity] = null then null
 				                else if [Quantity] >= 1000 then [Quantity] / 1000
 				                else [Quantity]
 				            else null,
 				        type number
 				    ),
-				
+
 				//--------------------------------------------------
 				// QTA RESA (da Net Weight) ✅ CORRETTA
 				//--------------------------------------------------
 				    AddQtaRESA = Table.AddColumn(
 				        AddQtaBIL,
 				        "Qta_RESA_calc",
-				        each 
-				            if Text.StartsWith([Ordine], "ODA") and 
-				               List.Contains(filtro_articolo, [Codice Articolo]) then
-				                let nw = [Net Weight]
-				                in 
+				        each
+				            if Text.StartsWith([CodiceOrdine], "ODA") and
+				               List.Contains(filtro_articolo, [CodiceArticolo]) then
+				                let nw = [NetWeight]
+				                in
 				                    if nw = null then null
 				                    else if nw >= 1000 then nw / 1000
 				                    else nw
 				            else null,
 				        type number
 				    ),
-				    #"Rimosse altre colonne" = Table.SelectColumns(AddQtaRESA,{"Codice Articolo", "Date", "Qta_BIL_calc", "Qta_RESA_calc"}),
+				    #"Rimosse altre colonne" = Table.SelectColumns(AddQtaRESA,{"CodiceArticolo", "Date", "Qta_BIL_calc", "Qta_RESA_calc"}),
 				    #"Rinominate colonne" = Table.RenameColumns(#"Rimosse altre colonne",{{"Qta_BIL_calc", "Qta_BIL"}, {"Qta_RESA_calc", "Qta_RESA"}}),
-				    #"Riordinate colonne" = Table.ReorderColumns(#"Rinominate colonne",{"Date", "Codice Articolo", "Qta_BIL", "Qta_RESA"}),
+				    #"Riordinate colonne" = Table.ReorderColumns(#"Rinominate colonne",{"Date", "CodiceArticolo", "Qta_BIL", "Qta_RESA"}),
 				    #"Rinominate colonne1" = Table.RenameColumns(#"Riordinate colonne",{{"Date", "Data"}}),
-				    #"Filtrate righe" = Table.SelectRows(#"Rinominate colonne1", each [Qta BIL] <> null and [Qta BIL] <> ""),
+				    #"Filtrate righe" = Table.SelectRows(#"Rinominate colonne1", each [Qta_BIL] <> null and [Qta_BIL] <> ""),
 				    #"Aggiunta colonna personalizzata" = Table.AddColumn(#"Filtrate righe", "Movimento", each "Acquisto"),
 				    #"Modificato tipo" = Table.TransformColumnTypes(#"Aggiunta colonna personalizzata",{{"Movimento", type text}}),
-				    #"Riordinate colonne1" = Table.ReorderColumns(#"Modificato tipo",{"Data", "Codice Articolo", "Movimento", "Qta_BIL", "Qta_RESA"}),
-				    #"Rinominate colonne2" = Table.RenameColumns(#"Riordinate colonne1",{{"Codice Articolo", "Articolo"}})
-				
+				    #"Riordinate colonne1" = Table.ReorderColumns(#"Modificato tipo",{"Data", "CodiceArticolo", "Movimento", "Qta_BIL", "Qta_RESA"}),
+				    #"Rinominate colonne2" = Table.RenameColumns(#"Riordinate colonne1",{{"CodiceArticolo", "Articolo"}})
+
 				in
 				    #"Rinominate colonne2"
 				```
@@ -175,4 +175,3 @@
 	annotation PBI_NavigationStepName = Navigazione
 
 	annotation PBI_ResultType = Table
-

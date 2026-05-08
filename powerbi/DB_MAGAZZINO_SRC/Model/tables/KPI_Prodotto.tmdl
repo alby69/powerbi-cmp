@@ -272,11 +272,11 @@
 			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
-			VAR cmp_mix = [Costo Tab MIX Resa]
-			VAR cmp_propano = [Costo Tab Propano]
+			VAR cmp_mix = [Costo Mix Resa]
+			VAR cmp_propano = [Costo Propano]
 			
 			VAR qta_mix = SUMX('FACT_Mix', 'FACT_Mix'[Qta BIL] )
-			VAR qta_propano = SUMX('FACT_Propano', 'FACT_Propano'[Qta Ton IPEM] )
+			VAR qta_propano = SUMX('FACT_Propano', 'FACT_Propano'[QuantityIPEM] )
 			
 			VAR cmp_ALL = DIVIDE((cmp_mix * qta_mix) + (cmp_propano * qta_propano),qta_mix + qta_propano)
 			
@@ -314,8 +314,8 @@
 			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			VAR filtro_articolo = { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo], BLANK () ) }
 			
-			VAR imp_mix = [Importo Costo Tab MIX]
-			VAR imp_propano = [Importo Costo Tab Propano]
+			VAR imp_mix = [Importo Costo Mix]
+			VAR imp_propano = [Importo Costo Propano]
 			
 			    
 			RETURN
@@ -547,7 +547,7 @@
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: MARGINE
 
-	measure 'Nr Mezzi' =
+	measure '# Mezzi' =
 			CALCULATE(
 			    COUNTX(DIM_MezziTrasporto,[Qta Ton Acquisto IPEM CD]),
 			    DIM_MezziTrasporto[CodiceMezzo] <> "ATB"

@@ -486,7 +486,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Prezzo Vendite MIX' = ```
+	measure 'Prezzo Medio Vendita Mix' = ```
 			
 			VAR filtro_gruppo =
 			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
@@ -499,46 +499,29 @@
 			VAR tab_filtro =
 			    FILTER (
 			        'FACT_Mix',
-			        'FACT_Mix'[Codice Articolo]
+			        'FACT_Mix'[CodiceArticolo]
 			            IN filtro_articolo
 			            && 'FACT_Mix'[MonthInCalendar] IN filtro_calendario
-			    ) /*
-			VAR imp_prezzo = 
-			        SUMX(
-			            tab_filtro,
-			            'FACT_Mix'[Importo Costo]        
-			        )
-			VAR qta_prezzo = 
-			        SUMX(
-			            tab_filtro,
-			            'FACT_Mix'[Qta BIL]        
-			        )
-			*/
+			    )
 			RETURN
-			    //DIVIDE(imp_prezzo,qta_prezzo,0)
 			    AVERAGEX (
 			        tab_filtro,
-			        'FACT_Mix'[Prezzo € Mese]
+			        'FACT_Mix'[Prezzo Euro Mese]
 			    )
 			```
+		displayFolder: KPI Vendite
+		annotation PBI_Description = "Prezzo medio vendita per i prodotti Mix"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo Permute' = [CMP Acquisto]
+		displayFolder: KPI Vendite
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Vendite' = [Qta Vendita] * [Prezzo Medio Vendita]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
-
-		changedProperty = FormatString
-
-		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
-
-	measure 'Prezzo Vendite YTD' =
-			
-			TOTALYTD ( [Prezzo Medio Vendita], DIM_Calendario[Date] )
-		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: KPI Vendite
 
 		changedProperty = FormatString
 
