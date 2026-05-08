@@ -365,35 +365,6 @@
 
 		changedProperty = FormatString
 
-	measure 'QoQ Profitto Cliente' = ```
-			
-			VAR last_q = 
-			    CALCULATE(
-			        [% Profitto],
-			        DATEADD(DIM_Calendario[Date],-1,QUARTER)
-			    )
-			RETURN    
-			    [% Profitto] - last_q
-			```
-		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: MARGINE
-
-		changedProperty = FormatString
-
-	measure 'QoQ Vendite Cliente' = ```
-			
-			VAR last_q = 
-			    CALCULATE(
-			        [Importo Vendita %],
-			        DATEADD(DIM_Calendario[Date],-1,QUARTER)
-			    )
-			RETURN    
-			    [Importo Vendita %] - last_q
-			```
-		formatString: 0.00%;-0.00%;0.00%
-		displayFolder: MARGINE
-
-		changedProperty = FormatString
 
 	measure 'Trasporto Vendite' =
 			
