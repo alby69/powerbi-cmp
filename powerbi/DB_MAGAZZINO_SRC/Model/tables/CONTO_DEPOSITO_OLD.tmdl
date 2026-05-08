@@ -19,11 +19,6 @@
 		summarizeBy: none
 		sourceColumn: Data Movimento
 
-		variation Variazione
-			isDefault
-			relationship: 601787dd-b080-43e5-8434-138791d48627
-			defaultHierarchy: LocalDateTable_b2dbc956-a483-4c6c-8ce1-76e714173baf.'Gerarchia data'
-
 		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic

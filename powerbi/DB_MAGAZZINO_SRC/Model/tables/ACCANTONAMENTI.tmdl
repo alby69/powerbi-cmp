@@ -17,12 +17,6 @@
 		formatString: Long Date
 		summarizeBy: none
 		sourceColumn: Data Registrazione Coge
-
-		variation Variazione
-			isDefault
-			relationship: da369ef2-d79d-4e1e-ae3b-f3484dbe1282
-			defaultHierarchy: LocalDateTable_ae14ceb6-a29e-4fc4-bab4-e8cecfa63833.'Gerarchia data'
-
 		annotation SummarizationSetBy = Automatic
 
 	column Conto

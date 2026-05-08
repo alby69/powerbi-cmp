@@ -5,12 +5,6 @@
 		formatString: Long Date
 		summarizeBy: none
 		sourceColumn: Data
-
-		variation Variazione
-			isDefault
-			relationship: 7aceb75d-2641-4dce-a476-5844330afb67
-			defaultHierarchy: LocalDateTable_f457ce0f-870c-4e3f-9895-841161ed62a9.'Gerarchia data'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

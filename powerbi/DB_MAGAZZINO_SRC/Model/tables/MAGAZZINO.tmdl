@@ -66,12 +66,6 @@
 		formatString: Long Date
 		summarizeBy: none
 		sourceColumn: Data Documento
-
-		variation Variation
-			isDefault
-			relationship: 276dcee1-45f4-4b48-b68e-55560daf929d
-			defaultHierarchy: LocalDateTable_8a079956-630b-4a2b-b92c-c33915f1764b.'Gerarchia data'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date

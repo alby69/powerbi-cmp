@@ -1,5 +1,7 @@
 ﻿table CALENDARIO
 
+	annotation PBI_CalendarTable = true
+
 	measure 'Anno_Mese HASONEVALUE' = HASONEVALUE(CALENDARIO[MonthInCalendar])
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -9,11 +11,6 @@
 		formatString: Short Date
 		summarizeBy: none
 		sourceColumn: Date
-
-		variation Variazione
-			isDefault
-			relationship: 7cf08bec-45d9-44b5-ab71-f7f445e06302
-			defaultHierarchy: LocalDateTable_5fdf6b65-ed73-4edd-bab3-05204d992959.'Gerarchia data'
 
 		changedProperty = FormatString
 
@@ -107,11 +104,6 @@
 		formatString: Long Date
 		summarizeBy: none
 		sourceColumn: WeekEnding
-
-		variation Variazione
-			isDefault
-			relationship: ea795c0c-9700-479e-90d3-c8afec1848ce
-			defaultHierarchy: LocalDateTable_8a478964-1c2c-4374-a7cc-993370e99d48.'Gerarchia data'
 
 		annotation SummarizationSetBy = Automatic
 

@@ -34,8 +34,6 @@ queryGroup QUERY_CMP
 
 annotation PBI_QueryOrder = ["CALENDARIO","ServerName","database","azienda","StartDate","RangeStart","RangeEnd","ARTICOLI","CLIENTI","FORNITORI","MEZZI_TRASPORTO","GRUPPI_VENDITE","SPEDIZIONIERI","UBICAZIONE","MAGAZZINO","PROGETTO","REPARTO","ANALISI_MAGAZZINO","ANALISI_PRODOTTO","ACCANTONAMENTI","MOVCG","ORDINI","ANALISI_MIX","CAMBI","ANALISI_VENDITE","DOCUMENTO ACQUISTO","DOCUMENTO VENDITA","ANALISI_DOC_VENDITA","ANALISI_DOC_ACQUISTO","PIANO_DEI_CONTI","AREA","COMUNI","CONTO_DEPOSITO_OLD","PREZZI_MIX","TAB_COMPETENZA","ACQUISTI_MIX_TEMPA","QUERY_BASE_DF","QUERY_BASE_WEB","Tab_CMP_Progressivo","ANALISI_CMP","Tab_Stock","TAB_GIACENZA","MAGAZZINO_CMP","PROPANO_COSTI","QUANTITA_PROPANO","CONTO_DEPOSITO","QUANTITA_MIX","MIX_COSTI"]
 
-annotation __PBI_TimeIntelligenceEnabled = 1
-
 annotation __TEdtr = 1
 
 annotation PBI_ProTooling = ["WebModelingEdit","CalcGroup"]
@@ -44,7 +42,6 @@ annotation __PBIService_Versioning_SaveVersion = b66f99cc-213d-488d-b364-773c0e4
 
 annotation __LastRPTime = 134213411353852357
 
-ref table DateTableTemplate_508d27aa-1c32-418b-92d0-30c661f6b4f1
 ref table ARTICOLI
 ref table CLIENTI
 ref table FORNITORI
@@ -53,14 +50,12 @@ ref table GRUPPI_VENDITE
 ref table SPEDIZIONIERI
 ref table UBICAZIONE
 ref table CALENDARIO
-ref table LocalDateTable_8a478964-1c2c-4374-a7cc-993370e99d48
 ref table MAGAZZINO
 ref table PROGETTO
 ref table REPARTO
 ref table ANALISI_MAGAZZINO
 ref table ANALISI_PRODOTTO
 ref table ACCANTONAMENTI
-ref table LocalDateTable_ae14ceb6-a29e-4fc4-bab4-e8cecfa63833
 ref table MOVCG
 ref table 'Tab PROPANO'
 ref table ORDINI
@@ -72,7 +67,6 @@ ref table 'DOCUMENTO ACQUISTO'
 ref table 'DOCUMENTO VENDITA'
 ref table ANALISI_DOC_VENDITA
 ref table ANALISI_DOC_ACQUISTO
-ref table LocalDateTable_5fdf6b65-ed73-4edd-bab3-05204d992959
 ref table 'CALC_Rolling AVG'
 ref table CALC_ToDate
 ref table TimeRange
@@ -82,7 +76,6 @@ ref table 'Select a Measure CG'
 ref table PIANO_DEI_CONTI
 ref table AREA
 ref table COMUNI
-ref table LocalDateTable_649f623b-90c6-4767-a85a-33bc099571cb
 ref table 'Tab VENDITE'
 ref table 'Obiettivo Vendite'
 ref table NrGiorni
@@ -90,35 +83,21 @@ ref table 'Tab Clienti Persi'
 ref table Obiettivo
 ref table LinestResult
 ref table Stat-Vendite
-ref table LocalDateTable_8a079956-630b-4a2b-b92c-c33915f1764b
 ref table CONTO_DEPOSITO_OLD
-ref table LocalDateTable_b2dbc956-a483-4c6c-8ce1-76e714173baf
 ref table PREZZI_MIX
-ref table LocalDateTable_e7ffeb37-9f43-4da1-b3eb-151e3224b40c
 ref table TAB_COMPETENZA
-ref table LocalDateTable_e9ebc3c5-74dd-4cb8-b49a-d13068d454e6
 ref table ACQUISTI_MIX_TEMPA
-ref table LocalDateTable_00278357-a99b-443a-9f49-34af5efb78d0
 ref table QUERY_BASE_DF
 ref table QUERY_BASE_WEB
 ref table Tab_CMP_Progressivo
 ref table ANALISI_CMP
 ref table Tab_Stock
 ref table TAB_GIACENZA
-ref table LocalDateTable_9ec9e902-c2d7-4394-92c3-6f2b724303ec
 ref table MAGAZZINO_CMP
 ref table PROPANO_COSTI
-ref table LocalDateTable_f457ce0f-870c-4e3f-9895-841161ed62a9
 ref table QUANTITA_PROPANO
-ref table LocalDateTable_0284d813-d31b-4563-aa0c-32b86816523f
 ref table CONTO_DEPOSITO
-ref table LocalDateTable_e88b2aef-28e5-4459-928b-1c9192db121f
-ref table LocalDateTable_c762b592-c4e6-43b7-a98d-a13191427d3b
 ref table QUANTITA_MIX
-ref table LocalDateTable_b2fd2859-eee3-403f-b846-28dd445cdac5
 ref table MIX_COSTI
-ref table LocalDateTable_e266bb13-5716-476c-af0b-ebcfd1779a6a
-ref table LocalDateTable_cde1638f-9b5b-4103-b5d1-6bc3f5431ca2
 
 ref cultureInfo it-IT
-

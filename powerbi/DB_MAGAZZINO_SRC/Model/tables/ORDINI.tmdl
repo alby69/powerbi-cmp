@@ -33,12 +33,6 @@
 		formatString: Short Date
 		summarizeBy: none
 		sourceColumn: Data Registrazione
-
-		variation Variazione
-			isDefault
-			relationship: 31e9df0f-db19-4e34-a385-cc1686dcbed5
-			defaultHierarchy: LocalDateTable_649f623b-90c6-4767-a85a-33bc099571cb.'Gerarchia data'
-
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
