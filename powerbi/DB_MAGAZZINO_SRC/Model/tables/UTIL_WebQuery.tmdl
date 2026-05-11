@@ -14,24 +14,17 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition QUERY_BASE_WEB = m
+	partition UTIL_WebQuery = m
 		mode: import
 		queryGroup: DIM
 		source =
-				//==================================================
-				// QUERY_BASE_WEB
-				//==================================================
-				
 				let
 				    Output =
 				        [
 				            PREZZI = FACT_PrezziMix,
-				            COMP = TAB_COMPETENZA
+				            COMPETENZA = BRIDGE_Competenza
 				        ]
 				in
 				    Output
 
-	annotation PBI_NavigationStepName = Navigazione
-
 	annotation PBI_ResultType = Record
-

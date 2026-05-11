@@ -14,21 +14,21 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition QUERY_BASE_DF = m
+	partition UTIL_DataflowQuery = m
 		mode: import
 		queryGroup: DIM
 		source =
 				//==================================================
-				// QUERY_BASE_DF
+				// UTIL_DataflowQuery
 				//==================================================
-				
+
 				let
 				    Output =
 				        [
 				            FACT_Ordini = FACT_Ordini,
 				            FACT_MovimentiCG = FACT_MovimentiCG,
-				            DOCVEN = #"DOCUMENTO VENDITA",
-				            CD = CONTO_DEPOSITO_OLD,
+				            FACT_DocumentoVendita = FACT_DocumentoVendita,
+				            FACT_ContoDepositoOLD = FACT_ContoDepositoOLD,
 				            FACT_Cambi = FACT_Cambi
 				        ]
 				in
@@ -37,4 +37,3 @@
 	annotation PBI_NavigationStepName = Navigazione
 
 	annotation PBI_ResultType = Record
-
