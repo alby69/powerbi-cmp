@@ -5,7 +5,7 @@
 		calculationItem Value = SELECTEDMEASURE()
 
 		calculationItem 'Rolling AVG DAY' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, DAY )
@@ -23,11 +23,10 @@
 				RETURN
 				    
 				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
-				// controlla che la data sia nel range delle vendite
 				```
 
 		calculationItem 'Rolling AVG MONTH' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, MONTH )
@@ -45,11 +44,10 @@
 				RETURN
 				    
 				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
-				// controlla che la data sia nel range delle vendite
 				```
 
 		calculationItem 'Rolling AVG QUARTER' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, QUARTER )
@@ -67,11 +65,10 @@
 				RETURN
 				    
 				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
-				// controlla che la data sia nel range delle vendite
 				```
 
 		calculationItem 'Rolling AVG YEAR' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(TimeRange[TimeRange],BLANK()) }
+				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, YEAR )
@@ -89,10 +86,9 @@
 				RETURN
 				    
 				    IF ( FirstVisibleDate <= LastDateWithSale, Result )
-				// controlla che la data sia nel range delle vendite
 				```
 
-	column 'Rolling AVG'
+	column RollingAvg
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Name
@@ -107,4 +103,3 @@
 		sourceColumn: Ordinal
 
 		annotation SummarizationSetBy = Automatic
-

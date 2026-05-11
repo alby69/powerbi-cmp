@@ -24,11 +24,11 @@
 	column CodiceFornitore
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Fornitore
+		sourceColumn: CodiceFornitore
 
 		annotation SummarizationSetBy = Automatic
 
-	partition FORNITORI-9f9393e8-5696-412e-a57a-6f16d7a468be = m
+	partition DIM_Fornitori = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -37,8 +37,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    FORNITORI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="FORNITORI",version=""]}[Data]
+				    FORNITORI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="FORNITORI",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(FORNITORI_,{{"Codice Fornitore", "CodiceFornitore"}})
 				in
-				    FORNITORI_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table

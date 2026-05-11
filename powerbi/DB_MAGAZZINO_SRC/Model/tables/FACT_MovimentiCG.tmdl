@@ -1,32 +1,32 @@
 ﻿table FACT_MovimentiCG
 
-	column 'Entry No_'
+	column EntryNo
 		dataType: int64
 		formatString: 0
 		summarizeBy: sum
-		sourceColumn: Entry No_
+		sourceColumn: EntryNo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Conto
+	column CodiceConto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Conto
+		sourceColumn: CodiceConto
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Data Registrazione'
+	column DataRegistrazione
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Registrazione
+		sourceColumn: DataRegistrazione
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Tipo Documento'
+	column TipoDocumento
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Tipo Documento
+		sourceColumn: TipoDocumento
 
 		annotation SummarizationSetBy = Automatic
 
@@ -67,17 +67,17 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Source Code'
+	column CodiceSorgente
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Source Code
+		sourceColumn: CodiceSorgente
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quantità
+	column Quantity
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Quantità
+		sourceColumn: Quantity
 
 		annotation SummarizationSetBy = Automatic
 
@@ -90,52 +90,52 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Gen_ Prod_ Posting Group'
+	column GruppoRegistrazioneProdotto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Gen_ Prod_ Posting Group
+		sourceColumn: GruppoRegistrazioneProdotto
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Data Documento'
+	column DataDocumento
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Documento
+		sourceColumn: DataDocumento
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column 'Documento Esterno'
+	column DocumentoEsterno
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Documento Esterno
+		sourceColumn: DocumentoEsterno
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Source Type'
+	column TipoSorgente
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Source Type
+		sourceColumn: TipoSorgente
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Source No_'
+	column CodiceSoggetto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Source No_
+		sourceColumn: CodiceSoggetto
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Mezzo Trasporto'
+	column MezzoTrasporto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Mezzo Trasporto
+		sourceColumn: MezzoTrasporto
 
 		annotation SummarizationSetBy = Automatic
 
-	partition FACT_MovimentiCG-12a575ac-4786-428b-83df-ab1b55c0d1d5 = m
+	partition FACT_MovimentiCG = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -144,9 +144,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
-				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_MovimentiCG",version=""]}[Data]
+				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_MovimentiCG",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(MOVCG_,{{"Entry No_", "EntryNo"}, {"Conto", "CodiceConto"}, {"Data Registrazione", "DataRegistrazione"}, {"Tipo Documento", "TipoDocumento"}, {"Source Code", "CodiceSorgente"}, {"Quantità", "Quantity"}, {"Gen_ Prod_ Posting Group", "GruppoRegistrazioneProdotto"}, {"Data Documento", "DataDocumento"}, {"Documento Esterno", "DocumentoEsterno"}, {"Source Type", "TipoSorgente"}, {"Source No_", "CodiceSoggetto"}, {"Mezzo Trasporto", "MezzoTrasporto"}})
 				in
-				    MOVCG_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table
-
