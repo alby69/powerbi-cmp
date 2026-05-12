@@ -1,33 +1,30 @@
 ﻿table KPI_AcquistiDocumento
 
-	measure 'Importo ACQ' =
+	measure 'Importo Acquisti (Doc)' =
 			
 			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Importo] )
-			/*
-			    CALCULATE(
-			        SUMX('DOC ACQUISTO','DOC ACQUISTO'[Importo]),
-			        //FILTER('DOC ACQUISTO', 'DOC ACQUISTO'[Progetto] IN {"ML02","ML01","PS01","PS02"})
-			    )
-			*/
+		displayFolder: KPI Acquisti Documento
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Materia Prima ACQ' =
+	measure 'Importo Materia Prima (Doc)' =
 			
 			CALCULATE (
-			    [Importo ACQ],
-			    FILTER ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[No_] = "4020002" )
+			    [Importo Acquisti (Doc)],
+			    'FACT_DocumentoAcquisto'[CodiceArticolo] = "4020002"
 			)
+		displayFolder: KPI Acquisti Documento
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta ACQ' =
+	measure 'Qta Acquisti (Doc)' =
 			
-			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Quantità] )
+			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Quantity] )
+		displayFolder: KPI Acquisti Documento
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition ANALISI_DOC_ACQUISTO-81b4dd66-090f-4c56-b5de-1102a4544e10 = m
+	partition KPI_AcquistiDocumento = m
 		mode: import
 		source =
 				let
@@ -38,4 +35,3 @@
 				    #"Rimosse colonne"
 
 	annotation PBI_ResultType = Table
-

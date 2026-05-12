@@ -25,7 +25,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition ACQUISTI_MIX_TEMPA = m
+	partition FACT_AcquistiMixTemp = m
 		mode: import
 		queryGroup: GOOGLE_SHEETS
 		source =

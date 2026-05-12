@@ -8,7 +8,7 @@
 			    "articoli": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI"
+			          "ConceptualEntity": "DIM_Articoli"
 			        }
 			      },
 			      "State": "Generated",
@@ -23,7 +23,7 @@
 			    "articoli.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -39,7 +39,7 @@
 			    "articoli.unit_cost": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Unit Cost"
 			        }
 			      },
@@ -161,7 +161,7 @@
 			    "articoli.last_direct_cost": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Last Direct Cost"
 			        }
 			      },
@@ -277,7 +277,7 @@
 			    "articoli.gen__prod__posting_group": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Gen_ Prod_ Posting Group"
 			        }
 			      },
@@ -293,7 +293,7 @@
 			    "articoli.nr__accisa": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Nr_ Accisa"
 			        }
 			      },
@@ -309,7 +309,7 @@
 			    "articoli.densità_T_A_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Densità T_A_"
 			        }
 			      },
@@ -325,7 +325,7 @@
 			    "articoli.densità_15_c": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Densità 15 C"
 			        }
 			      },
@@ -341,7 +341,7 @@
 			    "articoli.gruppo_articolo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Gruppo Articolo"
 			        }
 			      },
@@ -357,7 +357,7 @@
 			    "articoli.codice_articolo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ARTICOLI",
+			          "ConceptualEntity": "DIM_Articoli",
 			          "ConceptualProperty": "Codice Articolo"
 			        }
 			      },
@@ -373,7 +373,7 @@
 			    "clienti": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI"
+			          "ConceptualEntity": "DIM_Clienti"
 			        }
 			      },
 			      "State": "Generated",
@@ -388,7 +388,7 @@
 			    "clienti.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -404,7 +404,7 @@
 			    "clienti.indirizzo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Indirizzo"
 			        }
 			      },
@@ -420,7 +420,7 @@
 			    "clienti.indirizzo_2": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Indirizzo 2"
 			        }
 			      },
@@ -436,7 +436,7 @@
 			    "clienti.città": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Città"
 			        }
 			      },
@@ -455,7 +455,7 @@
 			    "clienti.gruppo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Gruppo"
 			        }
 			      },
@@ -471,7 +471,7 @@
 			    "clienti.cap": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "CAP"
 			        }
 			      },
@@ -587,7 +587,7 @@
 			    "clienti.provincia": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Provincia"
 			        }
 			      },
@@ -603,7 +603,7 @@
 			    "clienti.codice_cliente": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Codice Cliente"
 			        }
 			      },
@@ -862,7 +862,7 @@
 			    "mezzi_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MEZZI_TRASPORTO"
+			          "ConceptualEntity": "DIM_MezziTrasporto"
 			        }
 			      },
 			      "State": "Generated",
@@ -884,7 +884,7 @@
 			    "mezzi_trasporto.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MEZZI_TRASPORTO",
+			          "ConceptualEntity": "DIM_MezziTrasporto",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -900,7 +900,7 @@
 			    "mezzi_trasporto.codice_mezzo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MEZZI_TRASPORTO",
+			          "ConceptualEntity": "DIM_MezziTrasporto",
 			          "ConceptualProperty": "Codice Mezzo"
 			        }
 			      },
@@ -916,7 +916,7 @@
 			    "gruppi_vendite": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE"
+			          "ConceptualEntity": "DIM_GruppiVendita"
 			        }
 			      },
 			      "State": "Generated",
@@ -938,7 +938,7 @@
 			    "gruppi_vendite.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE",
+			          "ConceptualEntity": "DIM_GruppiVendita",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -954,7 +954,7 @@
 			    "gruppi_vendite.permuta": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE",
+			          "ConceptualEntity": "DIM_GruppiVendita",
 			          "ConceptualProperty": "Permuta"
 			        }
 			      },
@@ -970,7 +970,7 @@
 			    "gruppi_vendite.codice_categoria": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE",
+			          "ConceptualEntity": "DIM_GruppiVendita",
 			          "ConceptualProperty": "Codice Categoria"
 			        }
 			      },
@@ -986,7 +986,7 @@
 			    "gruppi_vendite.categoria_permute": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE",
+			          "ConceptualEntity": "DIM_GruppiVendita",
 			          "ConceptualProperty": "Categoria Permute"
 			        }
 			      },
@@ -1002,7 +1002,7 @@
 			    "gruppi_vendite.gruppo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "GRUPPI_VENDITE",
+			          "ConceptualEntity": "DIM_GruppiVendita",
 			          "ConceptualProperty": "Gruppo"
 			        }
 			      },
@@ -1018,7 +1018,7 @@
 			    "spedizionieri": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI"
+			          "ConceptualEntity": "DIM_Spedizionieri"
 			        }
 			      },
 			      "State": "Generated",
@@ -1033,7 +1033,7 @@
 			    "spedizionieri.name": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Name"
 			        }
 			      },
@@ -1080,7 +1080,7 @@
 			    "spedizionieri.indirizzo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Indirizzo"
 			        }
 			      },
@@ -1096,7 +1096,7 @@
 			    "spedizionieri.località": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Località"
 			        }
 			      },
@@ -1112,7 +1112,7 @@
 			    "spedizionieri.città": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Città"
 			        }
 			      },
@@ -1128,7 +1128,7 @@
 			    "spedizionieri.cap": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "CAP"
 			        }
 			      },
@@ -1244,7 +1244,7 @@
 			    "spedizionieri.civico": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Civico"
 			        }
 			      },
@@ -1260,7 +1260,7 @@
 			    "spedizionieri.codice_spedizioniere": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "SPEDIZIONIERI",
+			          "ConceptualEntity": "DIM_Spedizionieri",
 			          "ConceptualProperty": "Codice Spedizioniere"
 			        }
 			      },
@@ -1276,7 +1276,7 @@
 			    "ubicazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "UBICAZIONE"
+			          "ConceptualEntity": "DIM_Deposito"
 			        }
 			      },
 			      "State": "Generated",
@@ -1291,7 +1291,7 @@
 			    "ubicazione.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "UBICAZIONE",
+			          "ConceptualEntity": "DIM_Deposito",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -1307,7 +1307,7 @@
 			    "ubicazione.codice_ubicazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "UBICAZIONE",
+			          "ConceptualEntity": "DIM_Deposito",
 			          "ConceptualProperty": "Codice Ubicazione"
 			        }
 			      },
@@ -1323,7 +1323,7 @@
 			    "calendario": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO"
+			          "ConceptualEntity": "DIM_Calendario"
 			        }
 			      },
 			      "State": "Generated",
@@ -1343,7 +1343,7 @@
 			    "calendario.date": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "Date"
 			        }
 			      },
@@ -1370,7 +1370,7 @@
 			    "calendario.date.variazione.gerarchia_data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "Date",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data"
@@ -1458,7 +1458,7 @@
 			    "calendario.date.variazione.gerarchia_data.anno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "Date",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -1502,7 +1502,7 @@
 			    "calendario.date.variazione.gerarchia_data.trimestre": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "Date",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -1546,7 +1546,7 @@
 			    "calendario.date.variazione.gerarchia_data.mese": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "Date",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -1590,7 +1590,7 @@
 			    "calendario.date.variazione.gerarchia_data.giorno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "Date",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -1634,7 +1634,7 @@
 			    "calendario.year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "Year"
 			        }
 			      },
@@ -1670,7 +1670,7 @@
 			    "calendario.quarter_of_year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "QuarterOfYear"
 			        }
 			      },
@@ -1713,7 +1713,7 @@
 			    "calendario.month_of_year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "MonthOfYear"
 			        }
 			      },
@@ -1756,7 +1756,7 @@
 			    "calendario.day_of_month": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "DayOfMonth"
 			        }
 			      },
@@ -1789,7 +1789,7 @@
 			    "calendario.date_int": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "DateInt"
 			        }
 			      },
@@ -1832,7 +1832,7 @@
 			    "calendario.month_name": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "MonthName"
 			        }
 			      },
@@ -1915,7 +1915,7 @@
 			    "calendario.month_in_calendar": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "MonthInCalendar"
 			        }
 			      },
@@ -2063,7 +2063,7 @@
 			    "calendario.quarter_in_calendar": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "QuarterInCalendar"
 			        }
 			      },
@@ -2198,7 +2198,7 @@
 			    "calendario.day_in_week": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "DayInWeek"
 			        }
 			      },
@@ -2227,7 +2227,7 @@
 			    "calendario.day_of_week_name": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "DayOfWeekName"
 			        }
 			      },
@@ -2290,7 +2290,7 @@
 			    "calendario.week_ending": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "WeekEnding"
 			        }
 			      },
@@ -2414,7 +2414,7 @@
 			    "calendario.week_ending.variazione.gerarchia_data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "WeekEnding",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data"
@@ -2502,7 +2502,7 @@
 			    "calendario.week_ending.variazione.gerarchia_data.anno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "WeekEnding",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -2526,7 +2526,7 @@
 			    "calendario.week_ending.variazione.gerarchia_data.trimestre": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "WeekEnding",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -2550,7 +2550,7 @@
 			    "calendario.week_ending.variazione.gerarchia_data.mese": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "WeekEnding",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -2574,7 +2574,7 @@
 			    "calendario.week_ending.variazione.gerarchia_data.giorno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "VariationSource": "WeekEnding",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -2598,7 +2598,7 @@
 			    "calendario.week_number": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "Week Number"
 			        }
 			      },
@@ -2624,7 +2624,7 @@
 			    "calendario.monthn_year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "MonthnYear"
 			        }
 			      },
@@ -2657,7 +2657,7 @@
 			    "calendario.quartern_year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "QuarternYear"
 			        }
 			      },
@@ -2690,7 +2690,7 @@
 			    "calendario.short_year": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "ShortYear"
 			        }
 			      },
@@ -2723,7 +2723,7 @@
 			    "calendario.fy": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CALENDARIO",
+			          "ConceptualEntity": "DIM_Calendario",
 			          "ConceptualProperty": "FY"
 			        }
 			      },
@@ -2739,7 +2739,7 @@
 			    "magazzino": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO"
+			          "ConceptualEntity": "FACT_Magazzino"
 			        }
 			      },
 			      "State": "Generated",
@@ -2754,7 +2754,7 @@
 			    "magazzino.articolo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Articolo"
 			        }
 			      },
@@ -2773,7 +2773,7 @@
 			    "magazzino.quantità": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Quantità"
 			        }
 			      },
@@ -2789,7 +2789,7 @@
 			    "magazzino.data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Data"
 			        }
 			      },
@@ -2882,7 +2882,7 @@
 			    "magazzino.deposito": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Deposito"
 			        }
 			      },
@@ -2901,7 +2901,7 @@
 			    "magazzino.movimento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Movimento"
 			        }
 			      },
@@ -2917,7 +2917,7 @@
 			    "magazzino.unità": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Unità"
 			        }
 			      },
@@ -2933,7 +2933,7 @@
 			    "magazzino.soggetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Soggetto"
 			        }
 			      },
@@ -2952,7 +2952,7 @@
 			    "progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PROGETTO"
+			          "ConceptualEntity": "DIM_Progetto"
 			        }
 			      },
 			      "State": "Generated",
@@ -2967,7 +2967,7 @@
 			    "progetto.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PROGETTO",
+			          "ConceptualEntity": "DIM_Progetto",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -2983,7 +2983,7 @@
 			    "progetto.codice_progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PROGETTO",
+			          "ConceptualEntity": "DIM_Progetto",
 			          "ConceptualProperty": "Codice Progetto"
 			        }
 			      },
@@ -2999,7 +2999,7 @@
 			    "reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "REPARTO"
+			          "ConceptualEntity": "DIM_Reparto"
 			        }
 			      },
 			      "State": "Generated",
@@ -3014,7 +3014,7 @@
 			    "reparto.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "REPARTO",
+			          "ConceptualEntity": "DIM_Reparto",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -3030,7 +3030,7 @@
 			    "reparto.codice_reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "REPARTO",
+			          "ConceptualEntity": "DIM_Reparto",
 			          "ConceptualProperty": "Codice Reparto"
 			        }
 			      },
@@ -4987,7 +4987,7 @@
 			    "accantonamenti": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI"
+			          "ConceptualEntity": "FACT_Accantonamenti"
 			        }
 			      },
 			      "State": "Generated",
@@ -5002,7 +5002,7 @@
 			    "accantonamenti.data_accantonamento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Data Accantonamento"
 			        }
 			      },
@@ -5095,7 +5095,7 @@
 			    "accantonamenti.data_registrazione_coge": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Data Registrazione Coge"
 			        }
 			      },
@@ -5188,7 +5188,7 @@
 			    "accantonamenti.data_registrazione_coge.variazione.gerarchia_data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "VariationSource": "Data Registrazione Coge",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data"
@@ -5276,7 +5276,7 @@
 			    "accantonamenti.data_registrazione_coge.variazione.gerarchia_data.anno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "VariationSource": "Data Registrazione Coge",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -5370,7 +5370,7 @@
 			    "accantonamenti.data_registrazione_coge.variazione.gerarchia_data.trimestre": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "VariationSource": "Data Registrazione Coge",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -5464,7 +5464,7 @@
 			    "accantonamenti.data_registrazione_coge.variazione.gerarchia_data.mese": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "VariationSource": "Data Registrazione Coge",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -5558,7 +5558,7 @@
 			    "accantonamenti.data_registrazione_coge.variazione.gerarchia_data.giorno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "VariationSource": "Data Registrazione Coge",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -5652,7 +5652,7 @@
 			    "accantonamenti.conto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Conto"
 			        }
 			      },
@@ -5671,7 +5671,7 @@
 			    "accantonamenti.dare": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Dare"
 			        }
 			      },
@@ -5757,7 +5757,7 @@
 			    "accantonamenti.avere": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Avere"
 			        }
 			      },
@@ -5773,7 +5773,7 @@
 			    "accantonamenti.note": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Note"
 			        }
 			      },
@@ -5889,7 +5889,7 @@
 			    "accantonamenti.mezzo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Mezzo Trasporto"
 			        }
 			      },
@@ -5908,7 +5908,7 @@
 			    "accantonamenti.contropartita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Contropartita"
 			        }
 			      },
@@ -5924,7 +5924,7 @@
 			    "accantonamenti.reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Reparto"
 			        }
 			      },
@@ -5940,7 +5940,7 @@
 			    "accantonamenti.progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Progetto"
 			        }
 			      },
@@ -5956,7 +5956,7 @@
 			    "accantonamenti.importo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ACCANTONAMENTI",
+			          "ConceptualEntity": "FACT_Accantonamenti",
 			          "ConceptualProperty": "Importo"
 			        }
 			      },
@@ -5972,7 +5972,7 @@
 			    "movcg": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG"
+			          "ConceptualEntity": "FACT_MovimentiCG"
 			        }
 			      },
 			      "State": "Generated",
@@ -5987,7 +5987,7 @@
 			    "movcg.entry_no_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Entry No_"
 			        }
 			      },
@@ -6013,7 +6013,7 @@
 			    "movcg.conto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Conto"
 			        }
 			      },
@@ -6032,7 +6032,7 @@
 			    "movcg.data_registrazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Data Registrazione"
 			        }
 			      },
@@ -6125,7 +6125,7 @@
 			    "movcg.tipo_documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Tipo Documento"
 			        }
 			      },
@@ -6141,7 +6141,7 @@
 			    "movcg.documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Documento"
 			        }
 			      },
@@ -6157,7 +6157,7 @@
 			    "movcg.descrizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Descrizione"
 			        }
 			      },
@@ -6173,7 +6173,7 @@
 			    "movcg.importo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Importo"
 			        }
 			      },
@@ -6189,7 +6189,7 @@
 			    "movcg.reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Reparto"
 			        }
 			      },
@@ -6208,7 +6208,7 @@
 			    "movcg.progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Progetto"
 			        }
 			      },
@@ -6227,7 +6227,7 @@
 			    "movcg.source_code": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Source Code"
 			        }
 			      },
@@ -6263,7 +6263,7 @@
 			    "movcg.quantità": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Quantità"
 			        }
 			      },
@@ -6279,7 +6279,7 @@
 			    "movcg.categoria": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Categoria"
 			        }
 			      },
@@ -6298,7 +6298,7 @@
 			    "movcg.gen__prod__posting_group": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Gen_ Prod_ Posting Group"
 			        }
 			      },
@@ -6314,7 +6314,7 @@
 			    "movcg.data_documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Data Documento"
 			        }
 			      },
@@ -6407,7 +6407,7 @@
 			    "movcg.documento_esterno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Documento Esterno"
 			        }
 			      },
@@ -6423,7 +6423,7 @@
 			    "movcg.source_type": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Source Type"
 			        }
 			      },
@@ -6539,7 +6539,7 @@
 			    "movcg.source_no_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Source No_"
 			        }
 			      },
@@ -6565,7 +6565,7 @@
 			    "movcg.mezzo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MOVCG",
+			          "ConceptualEntity": "FACT_MovimentiCG",
 			          "ConceptualProperty": "Mezzo Trasporto"
 			        }
 			      },
@@ -6636,7 +6636,7 @@
 			    "ordini": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI"
+			          "ConceptualEntity": "FACT_Ordini"
 			        }
 			      },
 			      "State": "Generated",
@@ -6651,7 +6651,7 @@
 			    "ordini.ordine": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Ordine"
 			        }
 			      },
@@ -6667,7 +6667,7 @@
 			    "ordini.codice_cliente_vendita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Codice Cliente Vendita"
 			        }
 			      },
@@ -6683,7 +6683,7 @@
 			    "ordini.codice_cliente_fatturazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Codice Cliente Fatturazione"
 			        }
 			      },
@@ -6702,7 +6702,7 @@
 			    "ordini.codice_spedizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Codice Spedizione"
 			        }
 			      },
@@ -6718,7 +6718,7 @@
 			    "ordini.data_registrazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Data Registrazione"
 			        }
 			      },
@@ -6811,7 +6811,7 @@
 			    "ordini.data_spedizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Data Spedizione"
 			        }
 			      },
@@ -7024,7 +7024,7 @@
 			    "ordini.arc": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "ARC"
 			        }
 			      },
@@ -7110,7 +7110,7 @@
 			    "ordini.spedizioniere": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Spedizioniere"
 			        }
 			      },
@@ -7129,7 +7129,7 @@
 			    "ordini.articolo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Articolo"
 			        }
 			      },
@@ -7148,7 +7148,7 @@
 			    "ordini.ubicazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Ubicazione"
 			        }
 			      },
@@ -7167,7 +7167,7 @@
 			    "ordini.quantity": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Quantity"
 			        }
 			      },
@@ -7233,7 +7233,7 @@
 			    "ordini.vat__": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "VAT _"
 			        }
 			      },
@@ -7249,7 +7249,7 @@
 			    "ordini.net_weight": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Net Weight"
 			        }
 			      },
@@ -7371,7 +7371,7 @@
 			    "ordini.categoria": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Categoria"
 			        }
 			      },
@@ -7390,7 +7390,7 @@
 			    "ordini.cod__causale_vendita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Cod_ Causale Vendita"
 			        }
 			      },
@@ -7406,7 +7406,7 @@
 			    "ordini.accisa": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Accisa"
 			        }
 			      },
@@ -7422,7 +7422,7 @@
 			    "ordini.densità_T_A_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Densità T_A_"
 			        }
 			      },
@@ -7438,7 +7438,7 @@
 			    "ordini.densità_15_c": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "ConceptualProperty": "Densità 15 C"
 			        }
 			      },
@@ -8874,7 +8874,7 @@
 			    "magazzino.categoria": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "MAGAZZINO",
+			          "ConceptualEntity": "FACT_Magazzino",
 			          "ConceptualProperty": "Categoria"
 			        }
 			      },
@@ -8893,7 +8893,7 @@
 			    "clienti.nome__codice": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CLIENTI",
+			          "ConceptualEntity": "DIM_Clienti",
 			          "ConceptualProperty": "Nome & Codice"
 			        }
 			      },
@@ -8909,7 +8909,7 @@
 			    "cambi": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CAMBI"
+			          "ConceptualEntity": "FACT_Cambi"
 			        }
 			      },
 			      "State": "Generated",
@@ -8924,7 +8924,7 @@
 			    "cambi.data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CAMBI",
+			          "ConceptualEntity": "FACT_Cambi",
 			          "ConceptualProperty": "Data"
 			        }
 			      },
@@ -9160,7 +9160,7 @@
 			    "cambi.tasso": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "CAMBI",
+			          "ConceptualEntity": "FACT_Cambi",
 			          "ConceptualProperty": "Tasso"
 			        }
 			      },
@@ -11380,7 +11380,7 @@
 			    "documento_acquisto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			          "ConceptualEntity": "FACT_DocumentoAcquisto"
 			        }
 			      },
 			      "State": "Generated",
@@ -11395,7 +11395,7 @@
 			    "documento_acquisto.documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Documento"
 			        }
 			      },
@@ -11411,7 +11411,7 @@
 			    "documento_acquisto.codice_fornitore": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Codice Fornitore"
 			        }
 			      },
@@ -11430,7 +11430,7 @@
 			    "documento_acquisto.type": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Type"
 			        }
 			      },
@@ -11546,7 +11546,7 @@
 			    "documento_acquisto.no_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "No_"
 			        }
 			      },
@@ -11572,7 +11572,7 @@
 			    "documento_acquisto.posting_group": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Posting Group"
 			        }
 			      },
@@ -11648,7 +11648,7 @@
 			    "documento_acquisto.descrizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Descrizione"
 			        }
 			      },
@@ -11664,7 +11664,7 @@
 			    "documento_acquisto.descrizione_2": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Descrizione 2"
 			        }
 			      },
@@ -11680,7 +11680,7 @@
 			    "documento_acquisto.quantità": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Quantità"
 			        }
 			      },
@@ -11696,7 +11696,7 @@
 			    "documento_acquisto.iva": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Iva"
 			        }
 			      },
@@ -11712,7 +11712,7 @@
 			    "documento_acquisto.importo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Importo"
 			        }
 			      },
@@ -11728,7 +11728,7 @@
 			    "documento_acquisto.importo_ivato": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Importo Ivato"
 			        }
 			      },
@@ -11744,7 +11744,7 @@
 			    "documento_acquisto.reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Reparto"
 			        }
 			      },
@@ -11763,7 +11763,7 @@
 			    "documento_acquisto.progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Progetto"
 			        }
 			      },
@@ -11782,7 +11782,7 @@
 			    "documento_acquisto.ordine": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Ordine"
 			        }
 			      },
@@ -11798,7 +11798,7 @@
 			    "documento_acquisto.costo_unitario": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Costo Unitario"
 			        }
 			      },
@@ -11814,7 +11814,7 @@
 			    "documento_acquisto.posting_date": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Posting Date"
 			        }
 			      },
@@ -11857,7 +11857,7 @@
 			    "documento_acquisto.unità_di_misura": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Unità di Misura"
 			        }
 			      },
@@ -11873,7 +11873,7 @@
 			    "documento_acquisto.tipo_documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO ACQUISTO",
+			          "ConceptualEntity": "FACT_DocumentoAcquisto",
 			          "ConceptualProperty": "Tipo Documento"
 			        }
 			      },
@@ -11889,7 +11889,7 @@
 			    "documento_vendita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA"
+			          "ConceptualEntity": "FACT_DocumentoVendita"
 			        }
 			      },
 			      "State": "Generated",
@@ -11904,7 +11904,7 @@
 			    "documento_vendita.documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Documento"
 			        }
 			      },
@@ -11920,7 +11920,7 @@
 			    "documento_vendita.codice_cliente_vendita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Codice Cliente Vendita"
 			        }
 			      },
@@ -11936,7 +11936,7 @@
 			    "documento_vendita.tipo_riga": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Tipo Riga"
 			        }
 			      },
@@ -11952,7 +11952,7 @@
 			    "documento_vendita.no_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "No_"
 			        }
 			      },
@@ -11981,7 +11981,7 @@
 			    "documento_vendita.ubicazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Ubicazione"
 			        }
 			      },
@@ -12000,7 +12000,7 @@
 			    "documento_vendita.posting_group": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Posting Group"
 			        }
 			      },
@@ -12076,7 +12076,7 @@
 			    "documento_vendita.data_spedizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Data Spedizione"
 			        }
 			      },
@@ -12399,7 +12399,7 @@
 			    "documento_vendita.descrizione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Descrizione"
 			        }
 			      },
@@ -12415,7 +12415,7 @@
 			    "documento_vendita.quantity": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Quantity"
 			        }
 			      },
@@ -12481,7 +12481,7 @@
 			    "documento_vendita.prezzo_unitario": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Prezzo Unitario"
 			        }
 			      },
@@ -12497,7 +12497,7 @@
 			    "documento_vendita.iva": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Iva"
 			        }
 			      },
@@ -12513,7 +12513,7 @@
 			    "documento_vendita.importo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Importo"
 			        }
 			      },
@@ -12529,7 +12529,7 @@
 			    "documento_vendita.importo_ivato": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Importo Ivato"
 			        }
 			      },
@@ -12545,7 +12545,7 @@
 			    "documento_vendita.peso_lordo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Peso Lordo"
 			        }
 			      },
@@ -12561,7 +12561,7 @@
 			    "documento_vendita.peso_netto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Peso Netto"
 			        }
 			      },
@@ -12577,7 +12577,7 @@
 			    "documento_vendita.reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Reparto"
 			        }
 			      },
@@ -12596,7 +12596,7 @@
 			    "documento_vendita.progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Progetto"
 			        }
 			      },
@@ -12615,7 +12615,7 @@
 			    "documento_vendita.codice_cliente_fatturazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Codice Cliente Fatturazione"
 			        }
 			      },
@@ -12634,7 +12634,7 @@
 			    "documento_vendita.categoria": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Categoria"
 			        }
 			      },
@@ -12653,7 +12653,7 @@
 			    "documento_vendita.gen__prod__posting_group": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Gen_ Prod_ Posting Group"
 			        }
 			      },
@@ -12669,7 +12669,7 @@
 			    "documento_vendita.data_registrazione": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Data Registrazione"
 			        }
 			      },
@@ -12762,7 +12762,7 @@
 			    "documento_vendita.unità_di_misura": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Unità di Misura"
 			        }
 			      },
@@ -12778,7 +12778,7 @@
 			    "documento_vendita.causale_vendita": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Causale Vendita"
 			        }
 			      },
@@ -12794,7 +12794,7 @@
 			    "documento_vendita.qtà_imposta_fabbr_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Qtà Imposta Fabbr_"
 			        }
 			      },
@@ -12810,7 +12810,7 @@
 			    "documento_vendita.importo_imposta_fabbr_": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Importo Imposta Fabbr_"
 			        }
 			      },
@@ -12826,7 +12826,7 @@
 			    "documento_vendita.costo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Costo Trasporto"
 			        }
 			      },
@@ -12842,7 +12842,7 @@
 			    "documento_vendita.importo_costo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Importo Costo Trasporto"
 			        }
 			      },
@@ -12858,7 +12858,7 @@
 			    "documento_vendita.Imp_IVA_Incl_Costo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Imp_IVA Incl_Costo Trasporto"
 			        }
 			      },
@@ -12874,7 +12874,7 @@
 			    "documento_vendita.mezzo_trasporto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Mezzo Trasporto"
 			        }
 			      },
@@ -12893,7 +12893,7 @@
 			    "documento_vendita.tipo_documento": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "DOCUMENTO VENDITA",
+			          "ConceptualEntity": "FACT_DocumentoVendita",
 			          "ConceptualProperty": "Tipo Documento"
 			        }
 			      },
@@ -17306,7 +17306,7 @@
 			    "ordini.data_registrazione.variazione.gerarchia_data": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "VariationSource": "Data Registrazione",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data"
@@ -17394,7 +17394,7 @@
 			    "ordini.data_registrazione.variazione.gerarchia_data.anno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "VariationSource": "Data Registrazione",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -17488,7 +17488,7 @@
 			    "ordini.data_registrazione.variazione.gerarchia_data.trimestre": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "VariationSource": "Data Registrazione",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -17582,7 +17582,7 @@
 			    "ordini.data_registrazione.variazione.gerarchia_data.mese": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "VariationSource": "Data Registrazione",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -17676,7 +17676,7 @@
 			    "ordini.data_registrazione.variazione.gerarchia_data.giorno": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "ORDINI",
+			          "ConceptualEntity": "FACT_Ordini",
 			          "VariationSource": "Data Registrazione",
 			          "VariationSet": "Variazione",
 			          "Hierarchy": "Gerarchia data",
@@ -18234,7 +18234,7 @@
 			    "piano_dei_conti": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI"
+			          "ConceptualEntity": "DIM_PianoConti"
 			        }
 			      },
 			      "State": "Generated",
@@ -18268,7 +18268,7 @@
 			    "piano_dei_conti.codice_conto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI",
+			          "ConceptualEntity": "DIM_PianoConti",
 			          "ConceptualProperty": "Codice Conto"
 			        }
 			      },
@@ -18284,7 +18284,7 @@
 			    "piano_dei_conti.nome": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI",
+			          "ConceptualEntity": "DIM_PianoConti",
 			          "ConceptualProperty": "Nome"
 			        }
 			      },
@@ -18300,7 +18300,7 @@
 			    "piano_dei_conti.tipo": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI",
+			          "ConceptualEntity": "DIM_PianoConti",
 			          "ConceptualProperty": "Tipo"
 			        }
 			      },
@@ -18316,7 +18316,7 @@
 			    "piano_dei_conti.reparto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI",
+			          "ConceptualEntity": "DIM_PianoConti",
 			          "ConceptualProperty": "Reparto"
 			        }
 			      },
@@ -18332,7 +18332,7 @@
 			    "piano_dei_conti.progetto": {
 			      "Definition": {
 			        "Binding": {
-			          "ConceptualEntity": "PIANO_DEI_CONTI",
+			          "ConceptualEntity": "DIM_PianoConti",
 			          "ConceptualProperty": "Progetto"
 			        }
 			      },
@@ -18690,7 +18690,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_mese_has_ordini_data_registrazione_variazione_gerarchia_data_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18753,7 +18753,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_trimestre_has_ordini_data_registrazione_variazione_gerarchia_data_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18816,7 +18816,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_anno_has_ordini_data_registrazione_variazione_gerarchia_data_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18879,7 +18879,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_has_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18911,7 +18911,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_has_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18943,7 +18943,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_has_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -18975,7 +18975,7 @@
 			    },
 			    "ordini_data_registrazione_variazione_gerarchia_data_has_anno": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19007,7 +19007,7 @@
 			    },
 			    "ordini_data_registrazione_has_variazione_gerarchia_data": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19388,7 +19388,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_mese_has_accantonamenti_data_registrazione_coge_variazione_gerarchia_data_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19451,7 +19451,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_trimestre_has_accantonamenti_data_registrazione_coge_variazione_gerarchia_data_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19514,7 +19514,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_anno_has_accantonamenti_data_registrazione_coge_variazione_gerarchia_data_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19577,7 +19577,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_has_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19609,7 +19609,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_has_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19641,7 +19641,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_has_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19673,7 +19673,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_variazione_gerarchia_data_has_anno": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19705,7 +19705,7 @@
 			    },
 			    "accantonamenti_data_registrazione_coge_has_variazione_gerarchia_data": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19737,7 +19737,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_mese_has_calendario_week_ending_variazione_gerarchia_data_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19800,7 +19800,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_trimestre_has_calendario_week_ending_variazione_gerarchia_data_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19863,7 +19863,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_anno_has_calendario_week_ending_variazione_gerarchia_data_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19926,7 +19926,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_has_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19958,7 +19958,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_has_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -19990,7 +19990,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_has_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20022,7 +20022,7 @@
 			    },
 			    "calendario_week_ending_variazione_gerarchia_data_has_anno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20054,7 +20054,7 @@
 			    },
 			    "calendario_week_ending_has_variazione_gerarchia_data": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20086,7 +20086,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_mese_has_calendario_date_variazione_gerarchia_data_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20149,7 +20149,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_trimestre_has_calendario_date_variazione_gerarchia_data_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20212,7 +20212,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_anno_has_calendario_date_variazione_gerarchia_data_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20275,7 +20275,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_has_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20307,7 +20307,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_has_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20339,7 +20339,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_has_trimestre": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20371,7 +20371,7 @@
 			    },
 			    "calendario_date_variazione_gerarchia_data_has_anno": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20403,7 +20403,7 @@
 			    },
 			    "calendario_date_has_variazione_gerarchia_data": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20479,7 +20479,7 @@
 			    },
 			    "documento_vendita_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20523,7 +20523,7 @@
 			    },
 			    "documento_vendita_has_gruppi_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20567,7 +20567,7 @@
 			    },
 			    "documento_vendita_has_mezzi_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20611,7 +20611,7 @@
 			    },
 			    "documento_vendita_has_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20655,7 +20655,7 @@
 			    },
 			    "documento_vendita_has_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20699,7 +20699,7 @@
 			    },
 			    "documento_vendita_has_ubicazione": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20743,7 +20743,7 @@
 			    },
 			    "documento_vendita_has_articoli": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20787,7 +20787,7 @@
 			    },
 			    "documento_vendita_has_clienti": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20831,7 +20831,7 @@
 			    },
 			    "documento_acquisto_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20875,7 +20875,7 @@
 			    },
 			    "documento_acquisto_has_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20919,7 +20919,7 @@
 			    },
 			    "documento_acquisto_has_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -20963,7 +20963,7 @@
 			    },
 			    "documento_acquisto_has_fornitori": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21039,7 +21039,7 @@
 			    },
 			    "cambi_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "CAMBI"
+			        "ConceptualEntity": "FACT_Cambi"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21071,7 +21071,7 @@
 			    },
 			    "ordini_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21115,7 +21115,7 @@
 			    },
 			    "ordini_has_ubicazione": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21159,7 +21159,7 @@
 			    },
 			    "ordini_has_gruppi_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21203,7 +21203,7 @@
 			    },
 			    "ordini_has_articoli": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21247,7 +21247,7 @@
 			    },
 			    "ordini_has_clienti": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21291,7 +21291,7 @@
 			    },
 			    "ordini_has_spedizionieri": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21335,7 +21335,7 @@
 			    },
 			    "movcg_has_piano_dei_conti": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21379,7 +21379,7 @@
 			    },
 			    "movcg_has_gruppi_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21423,7 +21423,7 @@
 			    },
 			    "movcg_has_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21467,7 +21467,7 @@
 			    },
 			    "movcg_has_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21511,7 +21511,7 @@
 			    },
 			    "movcg_has_mezzi_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21555,7 +21555,7 @@
 			    },
 			    "movcg_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21599,7 +21599,7 @@
 			    },
 			    "accantonamenti_has_mezzi_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21643,7 +21643,7 @@
 			    },
 			    "accantonamenti_has_piano_dei_conti": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21687,7 +21687,7 @@
 			    },
 			    "accantonamenti_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21731,7 +21731,7 @@
 			    },
 			    "magazzino_has_gruppi_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21775,7 +21775,7 @@
 			    },
 			    "magazzino_has_calendario": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21826,7 +21826,7 @@
 			    },
 			    "magazzino_has_ubicazione": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21870,7 +21870,7 @@
 			    },
 			    "magazzino_has_clienti": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21914,7 +21914,7 @@
 			    },
 			    "magazzino_has_fornitori": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -21958,7 +21958,7 @@
 			    },
 			    "magazzino_has_articoli": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22002,7 +22002,7 @@
 			    },
 			    "calendario_has_cambi": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22034,7 +22034,7 @@
 			    },
 			    "calendario_has_tab_MIX": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22066,7 +22066,7 @@
 			    },
 			    "calendario_has_tab_PROPANO": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22098,7 +22098,7 @@
 			    },
 			    "clienti_has_comuni": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22482,7 +22482,7 @@
 			    },
 			    "piano_dei_conti_has_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "PIANO_DEI_CONTI"
+			        "ConceptualEntity": "DIM_PianoConti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22514,7 +22514,7 @@
 			    },
 			    "piano_dei_conti_has_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "PIANO_DEI_CONTI"
+			        "ConceptualEntity": "DIM_PianoConti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22546,7 +22546,7 @@
 			    },
 			    "piano_dei_conti_has_tipo": {
 			      "Binding": {
-			        "ConceptualEntity": "PIANO_DEI_CONTI"
+			        "ConceptualEntity": "DIM_PianoConti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22578,7 +22578,7 @@
 			    },
 			    "piano_dei_conti_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "PIANO_DEI_CONTI"
+			        "ConceptualEntity": "DIM_PianoConti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -22610,7 +22610,7 @@
 			    },
 			    "piano_dei_conti_has_codice_conto": {
 			      "Binding": {
-			        "ConceptualEntity": "PIANO_DEI_CONTI"
+			        "ConceptualEntity": "DIM_PianoConti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23011,7 +23011,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_CUM_YTD": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23043,7 +23043,7 @@
 			    },
 			    "documento_acquisto_has_analisi_doc_acquisto_qta_ACQ": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23075,7 +23075,7 @@
 			    },
 			    "documento_acquisto_has_analisi_doc_acquisto_materia_prima_ACQ": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23107,7 +23107,7 @@
 			    },
 			    "documento_acquisto_has_analisi_doc_acquisto_importo_ACQ": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23203,7 +23203,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_prezzo_trasporto_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23331,7 +23331,7 @@
 			    },
 			    "movcg_has_analisi_doc_vendita_costo_prodotto_2": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23363,7 +23363,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_costo_prodotto_2": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23395,7 +23395,7 @@
 			    },
 			    "movcg_has_analisi_doc_vendita_costo_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -23427,7 +23427,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_costo_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24291,7 +24291,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_netto_doc_vendita_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24483,7 +24483,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_3000002": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24899,7 +24899,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_netta": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24931,7 +24931,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_NC": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24963,7 +24963,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_FT": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -24995,7 +24995,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_IPEM": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25027,7 +25027,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25059,7 +25059,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_cliente": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25091,7 +25091,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_qta_doc_vendita_articolo": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25315,7 +25315,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_doc_vendita__trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25347,7 +25347,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_trasporto_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25443,7 +25443,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_netto_PASSAGGIO_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25475,7 +25475,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_NC_PASSAGGIO_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25507,7 +25507,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_FT_PASSAGGIO_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25603,7 +25603,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_netto_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25635,7 +25635,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_NC_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25667,7 +25667,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_FT_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25699,7 +25699,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_articolo_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25731,7 +25731,7 @@
 			    },
 			    "documento_vendita_has_analisi_doc_vendita_importo_doc_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25763,7 +25763,7 @@
 			    },
 			    "documento_vendita_has_tipo_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25795,7 +25795,7 @@
 			    },
 			    "documento_vendita_has_Imp_IVA_Incl_Costo_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25827,7 +25827,7 @@
 			    },
 			    "documento_vendita_has_importo_costo_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25859,7 +25859,7 @@
 			    },
 			    "documento_vendita_has_costo_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25891,7 +25891,7 @@
 			    },
 			    "documento_vendita_has_importo_imposta_fabbr_": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25923,7 +25923,7 @@
 			    },
 			    "documento_vendita_has_qtà_imposta_fabbr_": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25955,7 +25955,7 @@
 			    },
 			    "documento_vendita_has_causale_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -25987,7 +25987,7 @@
 			    },
 			    "documento_vendita_has_unità_di_misura": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26019,7 +26019,7 @@
 			    },
 			    "documento_vendita_has_data_registrazione": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26051,7 +26051,7 @@
 			    },
 			    "documento_vendita_has_gen__prod__posting_group": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26083,7 +26083,7 @@
 			    },
 			    "documento_vendita_has_peso_netto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26115,7 +26115,7 @@
 			    },
 			    "documento_vendita_has_peso_lordo": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26147,7 +26147,7 @@
 			    },
 			    "documento_vendita_has_importo_ivato": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26179,7 +26179,7 @@
 			    },
 			    "documento_vendita_has_importo": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26211,7 +26211,7 @@
 			    },
 			    "documento_vendita_has_iva": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26243,7 +26243,7 @@
 			    },
 			    "documento_vendita_has_prezzo_unitario": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26275,7 +26275,7 @@
 			    },
 			    "documento_vendita_has_quantity": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26307,7 +26307,7 @@
 			    },
 			    "documento_vendita_has_descrizione": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26339,7 +26339,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_giacenza_LM": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26371,7 +26371,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_giacenza_IPEM": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26499,7 +26499,7 @@
 			    },
 			    "documento_vendita_has_data_spedizione": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26531,7 +26531,7 @@
 			    },
 			    "documento_vendita_has_posting_group": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26563,7 +26563,7 @@
 			    },
 			    "documento_vendita_has_tipo_riga": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26595,7 +26595,7 @@
 			    },
 			    "documento_vendita_has_codice_cliente_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26627,7 +26627,7 @@
 			    },
 			    "documento_vendita_has_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26659,7 +26659,7 @@
 			    },
 			    "documento_acquisto_has_tipo_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26691,7 +26691,7 @@
 			    },
 			    "documento_acquisto_has_unità_di_misura": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26723,7 +26723,7 @@
 			    },
 			    "documento_acquisto_has_posting_date": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26755,7 +26755,7 @@
 			    },
 			    "documento_acquisto_has_costo_unitario": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26787,7 +26787,7 @@
 			    },
 			    "documento_acquisto_has_ordine": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26819,7 +26819,7 @@
 			    },
 			    "documento_acquisto_has_importo_ivato": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26851,7 +26851,7 @@
 			    },
 			    "documento_acquisto_has_importo": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26883,7 +26883,7 @@
 			    },
 			    "documento_acquisto_has_iva": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26915,7 +26915,7 @@
 			    },
 			    "documento_acquisto_has_quantità": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26947,7 +26947,7 @@
 			    },
 			    "documento_acquisto_has_descrizione_2": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -26979,7 +26979,7 @@
 			    },
 			    "documento_acquisto_has_descrizione": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27011,7 +27011,7 @@
 			    },
 			    "documento_acquisto_has_posting_group": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27043,7 +27043,7 @@
 			    },
 			    "documento_acquisto_has_no_": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27075,7 +27075,7 @@
 			    },
 			    "documento_acquisto_has_type": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27107,7 +27107,7 @@
 			    },
 			    "documento_acquisto_has_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27139,7 +27139,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_clienti": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27235,7 +27235,7 @@
 			    },
 			    "magazzino_has_analisi_vendite_qta_ton_vendita_LY": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27459,7 +27459,7 @@
 			    },
 			    "magazzino_has_analisi_vendite_qta_ton_vendite_progr": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27555,7 +27555,7 @@
 			    },
 			    "movcg_has_analisi_vendite_total_costs_CUM_ALL": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27587,7 +27587,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_total_costs_CUM_ALL": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27619,7 +27619,7 @@
 			    },
 			    "accantonamenti_has_analisi_vendite_total_costs_CUM_ALL": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27651,7 +27651,7 @@
 			    },
 			    "movcg_has_analisi_vendite_prezzo_passaggio": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27683,7 +27683,7 @@
 			    },
 			    "magazzino_has_analisi_vendite_prezzo_passaggio": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27715,7 +27715,7 @@
 			    },
 			    "movcg_has_analisi_vendite_prezzo_dirette": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27747,7 +27747,7 @@
 			    },
 			    "magazzino_has_analisi_vendite_prezzo_dirette": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27779,7 +27779,7 @@
 			    },
 			    "movcg_has_analisi_vendite_importo_clienti_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27811,7 +27811,7 @@
 			    },
 			    "movcg_has_analisi_vendite_importo_clienti_passaggi": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -27971,7 +27971,7 @@
 			    },
 			    "magazzino_has_analisi_vendite_qta_ton_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -28035,7 +28035,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_nuovi_clienti_2": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -28131,7 +28131,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_data_ultimo_acquisto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -28195,7 +28195,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_clienti_persi": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -28227,7 +28227,7 @@
 			    },
 			    "documento_vendita_has_analisi_vendite_nuovi_clienti": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -28925,7 +28925,7 @@
 			    },
 			    "cambi_has_tasso": {
 			      "Binding": {
-			        "ConceptualEntity": "CAMBI"
+			        "ConceptualEntity": "FACT_Cambi"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29053,7 +29053,7 @@
 			    },
 			    "cambi_has_data": {
 			      "Binding": {
-			        "ConceptualEntity": "CAMBI"
+			        "ConceptualEntity": "FACT_Cambi"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29085,7 +29085,7 @@
 			    },
 			    "clienti_has_nome__codice": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29149,7 +29149,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_giacenza": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29533,7 +29533,7 @@
 			    },
 			    "ordini_has_analisi_mix_prezzo_USD_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29789,7 +29789,7 @@
 			    },
 			    "ordini_has_analisi_mix_importo_accisa_": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29821,7 +29821,7 @@
 			    },
 			    "calendario_has_analisi_mix_importo_accisa_": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29853,7 +29853,7 @@
 			    },
 			    "ordini_has_analisi_mix_accisa__t": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29885,7 +29885,7 @@
 			    },
 			    "ordini_has_analisi_mix_importo_USD": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29917,7 +29917,7 @@
 			    },
 			    "calendario_has_analisi_mix_importo_USD": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29949,7 +29949,7 @@
 			    },
 			    "ordini_has_analisi_mix_qta_RESA": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -29981,7 +29981,7 @@
 			    },
 			    "ordini_has_analisi_mix_qta_BIL": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30045,7 +30045,7 @@
 			    },
 			    "ordini_has_analisi_mix_NR_ATB_giorno": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30109,7 +30109,7 @@
 			    },
 			    "cambi_has_analisi_mix_tasso_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CAMBI"
+			        "ConceptualEntity": "FACT_Cambi"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30173,7 +30173,7 @@
 			    },
 			    "cambi_has_analisi_mix_NR_tassi_mese": {
 			      "Binding": {
-			        "ConceptualEntity": "CAMBI"
+			        "ConceptualEntity": "FACT_Cambi"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30448,7 +30448,7 @@
 			    },
 			    "ordini_has_densità_15_c": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30480,7 +30480,7 @@
 			    },
 			    "ordini_has_densità_T_A_": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30512,7 +30512,7 @@
 			    },
 			    "ordini_has_accisa": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30544,7 +30544,7 @@
 			    },
 			    "ordini_has_cod__causale_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30576,7 +30576,7 @@
 			    },
 			    "ordini_has_net_weight": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30634,7 +30634,7 @@
 			    },
 			    "ordini_has_vat__": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30666,7 +30666,7 @@
 			    },
 			    "ordini_has_quantity": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30698,7 +30698,7 @@
 			    },
 			    "ordini_has_arc": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30890,7 +30890,7 @@
 			    },
 			    "ordini_has_data_spedizione": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30922,7 +30922,7 @@
 			    },
 			    "ordini_has_data_registrazione": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30954,7 +30954,7 @@
 			    },
 			    "ordini_has_codice_spedizione": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -30986,7 +30986,7 @@
 			    },
 			    "ordini_has_codice_cliente_vendita": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31018,7 +31018,7 @@
 			    },
 			    "ordini_has_ordine": {
 			      "Binding": {
-			        "ConceptualEntity": "ORDINI"
+			        "ConceptualEntity": "FACT_Ordini"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31293,7 +31293,7 @@
 			    },
 			    "movcg_has_source_no_": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31325,7 +31325,7 @@
 			    },
 			    "movcg_has_source_type": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31357,7 +31357,7 @@
 			    },
 			    "movcg_has_documento_esterno": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31389,7 +31389,7 @@
 			    },
 			    "movcg_has_data_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31421,7 +31421,7 @@
 			    },
 			    "movcg_has_gen__prod__posting_group": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31453,7 +31453,7 @@
 			    },
 			    "movcg_has_quantità": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31485,7 +31485,7 @@
 			    },
 			    "movcg_has_source_code": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31517,7 +31517,7 @@
 			    },
 			    "movcg_has_importo": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31549,7 +31549,7 @@
 			    },
 			    "movcg_has_descrizione": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31581,7 +31581,7 @@
 			    },
 			    "movcg_has_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31613,7 +31613,7 @@
 			    },
 			    "movcg_has_tipo_documento": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31645,7 +31645,7 @@
 			    },
 			    "movcg_has_data_registrazione": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31677,7 +31677,7 @@
 			    },
 			    "movcg_has_entry_no_": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31709,7 +31709,7 @@
 			    },
 			    "accantonamenti_has_importo": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31741,7 +31741,7 @@
 			    },
 			    "accantonamenti_has_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31773,7 +31773,7 @@
 			    },
 			    "accantonamenti_has_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31805,7 +31805,7 @@
 			    },
 			    "accantonamenti_has_contropartita": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31837,7 +31837,7 @@
 			    },
 			    "accantonamenti_has_note": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31869,7 +31869,7 @@
 			    },
 			    "accantonamenti_has_avere": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31901,7 +31901,7 @@
 			    },
 			    "accantonamenti_has_dare": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31933,7 +31933,7 @@
 			    },
 			    "accantonamenti_has_data_registrazione_coge": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -31965,7 +31965,7 @@
 			    },
 			    "accantonamenti_has_data_accantonamento": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32093,7 +32093,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_trasporto_vendite": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32669,7 +32669,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_CMP_prodotto_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32701,7 +32701,7 @@
 			    },
 			    "magazzino_has_analisi_prodotto_CMP_prodotto_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32733,7 +32733,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_CMP_prodotto_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32765,7 +32765,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_CMP_prodotto_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32797,7 +32797,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_CMP_acquisto_CD": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32829,7 +32829,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_CMP_acquisto_CD": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32861,7 +32861,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_CMP_acquisto_CD": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32893,7 +32893,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_CMP_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32925,7 +32925,7 @@
 			    },
 			    "magazzino_has_analisi_prodotto_CMP_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32957,7 +32957,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_CMP_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -32989,7 +32989,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_CMP_prodotto": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33053,7 +33053,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_recupero_spese_trasporto": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33117,7 +33117,7 @@
 			    },
 			    "documento_acquisto_has_analisi_prodotto_perizia_2": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33149,7 +33149,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_materia_prima__2": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33181,7 +33181,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_materia_prima_": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33213,7 +33213,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_total_costs_NAVI": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33245,7 +33245,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_total_costs_NAVI": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33277,7 +33277,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_total_costs_NAVI": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33309,7 +33309,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_materia_prima__OLD": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33341,7 +33341,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_costo_gpl": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33373,7 +33373,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_ton_CostoGPL_Resa": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33405,7 +33405,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_ton_CostoGPL_Resa": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33437,7 +33437,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_ton_CostoGPL_Resa": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33469,7 +33469,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_costi_accessori_gpl": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33501,7 +33501,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_costi_accessori_gpl": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33533,7 +33533,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_costi_accessori_gpl": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33565,7 +33565,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_trasporto_acquisti": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33597,7 +33597,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_rimorchio": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33629,7 +33629,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_recupero_spese_terzi": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33661,7 +33661,7 @@
 			    },
 			    "documento_vendita_has_analisi_prodotto_recupero_dazi_doganali": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33693,7 +33693,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_recupero_controstallie": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33725,7 +33725,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_perizia": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33757,7 +33757,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_dogana": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33789,7 +33789,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_controstallie": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33821,7 +33821,7 @@
 			    },
 			    "movcg_has_analisi_prodotto_agenzia": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33853,7 +33853,7 @@
 			    },
 			    "accantonamenti_has_analisi_prodotto_agenzia": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33885,7 +33885,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_unità_misura": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33917,7 +33917,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_dare_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -33981,7 +33981,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_valore_magazzino_2": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34013,7 +34013,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_valore_magazzino_2": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34045,7 +34045,7 @@
 			    },
 			    "documento_vendita_has_analisi_magazzino_valore_magazzino_2": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO VENDITA"
+			        "ConceptualEntity": "FACT_DocumentoVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34077,7 +34077,7 @@
 			    },
 			    "accantonamenti_has_analisi_magazzino_valore_magazzino_2": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34173,7 +34173,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_rimanenze_iniziali_MIX_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34205,7 +34205,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_rimanenze_finali_MIX_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34269,7 +34269,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_CMP": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34301,7 +34301,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_rimanenze_finali_PROPANO_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34333,7 +34333,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_rimanenze_iniziali_PROPANO_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34365,7 +34365,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_passaggi_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34397,7 +34397,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_vendita_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34493,7 +34493,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_mag_progr": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34717,7 +34717,7 @@
 			    },
 			    "accantonamenti_has_analisi_magazzino_importo_accantonamenti": {
 			      "Binding": {
-			        "ConceptualEntity": "ACCANTONAMENTI"
+			        "ConceptualEntity": "FACT_Accantonamenti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34749,7 +34749,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_acquisto_ALTRO": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34781,7 +34781,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_x_doc_date": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34813,7 +34813,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_acquisto_CG": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34845,7 +34845,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo_fornitori": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34877,7 +34877,7 @@
 			    },
 			    "movcg_has_analisi_magazzino_importo": {
 			      "Binding": {
-			        "ConceptualEntity": "MOVCG"
+			        "ConceptualEntity": "FACT_MovimentiCG"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34941,7 +34941,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_diff_YoY": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -34973,7 +34973,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_LY": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35037,7 +35037,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton_CUM": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35069,7 +35069,7 @@
 			    },
 			    "magazzino_has_analisi_magazzino_qta_ton": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35101,7 +35101,7 @@
 			    },
 			    "reparto_has_codice_reparto": {
 			      "Binding": {
-			        "ConceptualEntity": "REPARTO"
+			        "ConceptualEntity": "DIM_Reparto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35133,7 +35133,7 @@
 			    },
 			    "reparto_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "REPARTO"
+			        "ConceptualEntity": "DIM_Reparto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35165,7 +35165,7 @@
 			    },
 			    "progetto_has_codice_progetto": {
 			      "Binding": {
-			        "ConceptualEntity": "PROGETTO"
+			        "ConceptualEntity": "DIM_Progetto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35197,7 +35197,7 @@
 			    },
 			    "progetto_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "PROGETTO"
+			        "ConceptualEntity": "DIM_Progetto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35229,7 +35229,7 @@
 			    },
 			    "magazzino_has_unità": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35261,7 +35261,7 @@
 			    },
 			    "magazzino_has_movimento": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35293,7 +35293,7 @@
 			    },
 			    "magazzino_has_data": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35325,7 +35325,7 @@
 			    },
 			    "magazzino_has_quantità": {
 			      "Binding": {
-			        "ConceptualEntity": "MAGAZZINO"
+			        "ConceptualEntity": "FACT_Magazzino"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35357,7 +35357,7 @@
 			    },
 			    "calendario_has_fy": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35389,7 +35389,7 @@
 			    },
 			    "calendario_has_short_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35421,7 +35421,7 @@
 			    },
 			    "calendario_has_quartern_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35453,7 +35453,7 @@
 			    },
 			    "calendario_has_monthn_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35485,7 +35485,7 @@
 			    },
 			    "calendario_has_week_number": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35517,7 +35517,7 @@
 			    },
 			    "calendario_has_week_ending": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35549,7 +35549,7 @@
 			    },
 			    "calendario_has_day_of_week_name": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35581,7 +35581,7 @@
 			    },
 			    "calendario_has_day_in_week": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35613,7 +35613,7 @@
 			    },
 			    "calendario_has_quarter_in_calendar": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35694,7 +35694,7 @@
 			    },
 			    "calendario_has_month_name": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35726,7 +35726,7 @@
 			    },
 			    "calendario_has_date_int": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35758,7 +35758,7 @@
 			    },
 			    "calendario_has_day_of_month": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35790,7 +35790,7 @@
 			    },
 			    "calendario_has_month_of_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35822,7 +35822,7 @@
 			    },
 			    "calendario_has_quarter_of_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35854,7 +35854,7 @@
 			    },
 			    "calendario_has_year": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35886,7 +35886,7 @@
 			    },
 			    "calendario_has_date": {
 			      "Binding": {
-			        "ConceptualEntity": "CALENDARIO"
+			        "ConceptualEntity": "DIM_Calendario"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35918,7 +35918,7 @@
 			    },
 			    "ubicazione_has_codice_ubicazione": {
 			      "Binding": {
-			        "ConceptualEntity": "UBICAZIONE"
+			        "ConceptualEntity": "DIM_Deposito"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35950,7 +35950,7 @@
 			    },
 			    "ubicazione_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "UBICAZIONE"
+			        "ConceptualEntity": "DIM_Deposito"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -35982,7 +35982,7 @@
 			    },
 			    "spedizionieri_has_codice_spedizioniere": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36014,7 +36014,7 @@
 			    },
 			    "spedizionieri_has_civico": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36046,7 +36046,7 @@
 			    },
 			    "spedizionieri_has_cap": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36078,7 +36078,7 @@
 			    },
 			    "spedizionieri_has_città": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36110,7 +36110,7 @@
 			    },
 			    "spedizionieri_has_località": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36142,7 +36142,7 @@
 			    },
 			    "spedizionieri_has_indirizzo": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36174,7 +36174,7 @@
 			    },
 			    "spedizionieri_has_name": {
 			      "Binding": {
-			        "ConceptualEntity": "SPEDIZIONIERI"
+			        "ConceptualEntity": "DIM_Spedizionieri"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36218,7 +36218,7 @@
 			    },
 			    "gruppi_vendite_has_gruppo": {
 			      "Binding": {
-			        "ConceptualEntity": "GRUPPI_VENDITE"
+			        "ConceptualEntity": "DIM_GruppiVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36250,7 +36250,7 @@
 			    },
 			    "gruppi_vendite_has_categoria_permute": {
 			      "Binding": {
-			        "ConceptualEntity": "GRUPPI_VENDITE"
+			        "ConceptualEntity": "DIM_GruppiVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36282,7 +36282,7 @@
 			    },
 			    "gruppi_vendite_has_codice_categoria": {
 			      "Binding": {
-			        "ConceptualEntity": "GRUPPI_VENDITE"
+			        "ConceptualEntity": "DIM_GruppiVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36314,7 +36314,7 @@
 			    },
 			    "gruppi_vendite_has_permuta": {
 			      "Binding": {
-			        "ConceptualEntity": "GRUPPI_VENDITE"
+			        "ConceptualEntity": "DIM_GruppiVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36346,7 +36346,7 @@
 			    },
 			    "gruppi_vendite_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "GRUPPI_VENDITE"
+			        "ConceptualEntity": "DIM_GruppiVendita"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36378,7 +36378,7 @@
 			    },
 			    "mezzi_trasporto_has_codice_mezzo": {
 			      "Binding": {
-			        "ConceptualEntity": "MEZZI_TRASPORTO"
+			        "ConceptualEntity": "DIM_MezziTrasporto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36410,7 +36410,7 @@
 			    },
 			    "mezzi_trasporto_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "MEZZI_TRASPORTO"
+			        "ConceptualEntity": "DIM_MezziTrasporto"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36698,7 +36698,7 @@
 			    },
 			    "clienti_has_codice_cliente": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36730,7 +36730,7 @@
 			    },
 			    "clienti_has_provincia": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36762,7 +36762,7 @@
 			    },
 			    "clienti_has_cap": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36794,7 +36794,7 @@
 			    },
 			    "clienti_has_gruppo": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36826,7 +36826,7 @@
 			    },
 			    "clienti_has_indirizzo_2": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36858,7 +36858,7 @@
 			    },
 			    "clienti_has_indirizzo": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36890,7 +36890,7 @@
 			    },
 			    "clienti_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "CLIENTI"
+			        "ConceptualEntity": "DIM_Clienti"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36922,7 +36922,7 @@
 			    },
 			    "articoli_has_codice_articolo": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36954,7 +36954,7 @@
 			    },
 			    "articoli_has_gruppo_articolo": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -36986,7 +36986,7 @@
 			    },
 			    "articoli_has_densità_15_c": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37018,7 +37018,7 @@
 			    },
 			    "articoli_has_densità_T_A_": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37050,7 +37050,7 @@
 			    },
 			    "articoli_has_nr__accisa": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37082,7 +37082,7 @@
 			    },
 			    "articoli_has_gen__prod__posting_group": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37114,7 +37114,7 @@
 			    },
 			    "articoli_has_last_direct_cost": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37146,7 +37146,7 @@
 			    },
 			    "articoli_has_unit_cost": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37204,7 +37204,7 @@
 			    },
 			    "articoli_has_nome": {
 			      "Binding": {
-			        "ConceptualEntity": "ARTICOLI"
+			        "ConceptualEntity": "DIM_Articoli"
 			      },
 			      "State": "Generated",
 			      "Roles": {
@@ -37280,7 +37280,7 @@
 			    },
 			    "documento_acquisto_is_posted_on_posting_date": {
 			      "Binding": {
-			        "ConceptualEntity": "DOCUMENTO ACQUISTO"
+			        "ConceptualEntity": "FACT_DocumentoAcquisto"
 			      },
 			      "State": "Generated",
 			      "Roles": {

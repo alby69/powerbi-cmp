@@ -1,71 +1,71 @@
 ﻿table FACT_Magazzino
 
-	column Articolo
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Articolo
+		sourceColumn: CodiceArticolo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quantità
+	column Quantity
 		dataType: double
 		summarizeBy: sum
-		sourceColumn: Quantità
+		sourceColumn: Quantity
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column Data
+	column Date
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data
+		sourceColumn: Date
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column Deposito
+	column CodiceDeposito
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Deposito
+		sourceColumn: CodiceDeposito
 
 		annotation SummarizationSetBy = Automatic
 
-	column Movimento
+	column TipoMovimento
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Movimento
+		sourceColumn: TipoMovimento
 
 		annotation SummarizationSetBy = Automatic
 
-	column Unità
+	column UnitàMisura
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Unità
+		sourceColumn: UnitàMisura
 
 		annotation SummarizationSetBy = Automatic
 
-	column Soggetto
+	column CodiceSoggetto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Soggetto
+		sourceColumn: CodiceSoggetto
 
 		annotation SummarizationSetBy = Automatic
 
-	column Categoria
+	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Categoria
+		sourceColumn: CodiceCategoria
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Data Documento'
+	column DataDocumento
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
-		sourceColumn: Data Documento
+		sourceColumn: DataDocumento
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
@@ -85,7 +85,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition MAGAZZINO-f57b548f-0324-4230-bc85-a4573e869a91 = m
+	partition FACT_Magazzino = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -94,11 +94,11 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bb824426-3526-4734-9406-d0645879f240" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bb824426-3526-4734-9406-d0645879f240"]}[Data],
-				    MAGAZZINO_ = #"bb824426-3526-4734-9406-d0645879f240"{[entity="MAGAZZINO",version=""]}[Data]
+				    MAGAZZINO_ = #"bb824426-3526-4734-9406-d0645879f240"{[entity="MAGAZZINO",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(MAGAZZINO_,{{"Articolo", "CodiceArticolo"}, {"Quantità", "Quantity"}, {"Data", "Date"}, {"Deposito", "CodiceDeposito"}, {"Movimento", "TipoMovimento"}, {"Unità", "UnitàMisura"}, {"Soggetto", "CodiceSoggetto"}, {"Categoria", "CodiceCategoria"}, {"Data Documento", "DataDocumento"}})
 				in
-				    MAGAZZINO_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table
 
 	annotation PBI_NavigationStepName = Navigazione
-

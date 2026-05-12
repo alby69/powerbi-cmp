@@ -1,9 +1,9 @@
 ﻿table DIM_PianoConti
 
-	column 'Codice Conto'
+	column CodiceConto
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Conto
+		sourceColumn: CodiceConto
 
 		annotation SummarizationSetBy = Automatic
 
@@ -36,7 +36,7 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	partition PIANO_DEI_CONTI-5277f593-ddbb-4e89-9c90-a227e319326f = m
+	partition DIM_PianoConti = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -45,9 +45,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    PIANO_DEI_CONTI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="PIANO_DEI_CONTI",version=""]}[Data]
+				    PIANO_DEI_CONTI_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="PIANO_DEI_CONTI",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(PIANO_DEI_CONTI_,{{"Codice Conto", "CodiceConto"}})
 				in
-				    PIANO_DEI_CONTI_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table
-

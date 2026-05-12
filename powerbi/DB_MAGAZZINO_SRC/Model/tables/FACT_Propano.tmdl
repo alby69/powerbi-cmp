@@ -1,14 +1,14 @@
 ﻿table FACT_Propano
 
-	measure 'Costo Tab Propano' = DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD])
+	measure 'Costo Propano' = DIVIDE([Total Costs NAVI],[Qta Magazzino Acquisto IPEM CD])
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Costo Tab Propano' = [Total Costs NAVI]
+	measure 'Importo Costo Propano' = [Total Costs NAVI]
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	column 'Qta Ton IPEM'
+	column QuantityIPEM
 		formatString: #,0
 		summarizeBy: sum
 		isNameInferred
@@ -23,21 +23,21 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Mezzo'
+	column CodiceMezzo
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_MezziTrasporto[Codice Mezzo]
+		sourceColumn: DIM_MezziTrasporto[CodiceMezzo]
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Codice Articolo'
+	column CodiceArticolo
 		summarizeBy: none
 		isNameInferred
-		sourceColumn: DIM_Articoli[Codice Articolo]
+		sourceColumn: DIM_Articoli[CodiceArticolo]
 
 		annotation SummarizationSetBy = Automatic
 
-	partition 'Tab PROPANO-f816341a-f99a-47b1-b4f2-01abda773f31' = calculated
+	partition FACT_Propano = calculated
 		mode: import
 		source = ```
 				
@@ -45,16 +45,12 @@
 				
 				VAR tab_propano =
 				        SUMMARIZECOLUMNS(
-				            //DIM_Calendario[MonthOfYear],        
 				            DIM_Calendario[MonthInCalendar],
-				            //DIM_Calendario[Date], 
-				            DIM_MezziTrasporto[Codice Mezzo],
-				            DIM_Articoli[Codice Articolo],
-				            FILTER(MEZZI_TRASPORTO,LEFT(DIM_MezziTrasporto[Codice Mezzo],1) = "N" ),
-				            TREATAS(filtro_articolo,DIM_Articoli[Codice Articolo]),            
-				            //"Costo", DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD]),
-				            //"Importo Costo Tab Propano", [Total Costs NAVI],
-				            "Qta Ton IPEM", [Qta Ton Acquisto IPEM CD]
+				            DIM_MezziTrasporto[CodiceMezzo],
+				            DIM_Articoli[CodiceArticolo],
+				            FILTER(DIM_MezziTrasporto,LEFT(DIM_MezziTrasporto[CodiceMezzo],1) = "N" ),
+				            TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
+				            "Qta Ton IPEM", [Qta Magazzino Acquisto IPEM CD]
 				        )
 				RETURN
 				    FILTER(tab_propano,
@@ -63,4 +59,3 @@
 				```
 
 	annotation PBI_Id = 92ab77ab20124dcf865872b2038dc98a
-

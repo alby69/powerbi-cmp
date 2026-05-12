@@ -42,7 +42,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition PREZZI_MIX = m
+	partition FACT_PrezziMix = m
 		mode: import
 		queryGroup: GOOGLE_SHEETS
 		source =

@@ -7,64 +7,64 @@ relationship e0c0f221-e4cb-44fb-9bf3-9fbfdaaf7c3a
 	toColumn: DIM_Calendario.Date
 
 relationship 61e8ac90-9780-43e5-9297-d1d347f23859
-	fromColumn: FACT_Magazzino.Articolo
-	toColumn: DIM_Articoli.'Codice Articolo'
+	fromColumn: FACT_Magazzino.CodiceArticolo
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship 74a3f2d1-b645-4cae-83d6-b94a03f9bcec
-	fromColumn: FACT_Magazzino.Soggetto
-	toColumn: DIM_Fornitori.'Codice Fornitore'
+	fromColumn: FACT_Magazzino.CodiceSoggetto
+	toColumn: DIM_Fornitori.CodiceFornitore
 
 relationship 92366fed-6c9e-43ff-b38b-cb30b87d18b9
-	fromColumn: FACT_Magazzino.Soggetto
-	toColumn: DIM_Clienti.'Codice Cliente'
+	fromColumn: FACT_Magazzino.CodiceSoggetto
+	toColumn: DIM_Clienti.CodiceCliente
 
 relationship e46904c9-045c-4543-b764-757698fffa81
-	fromColumn: FACT_Magazzino.Deposito
-	toColumn: DIM_Deposito.'Codice Ubicazione'
+	fromColumn: FACT_Magazzino.CodiceDeposito
+	toColumn: DIM_Deposito.CodiceDeposito
 
 relationship ebcdda15-cc55-472e-910d-62015c4f2c2c
-	fromColumn: FACT_Magazzino.Data
+	fromColumn: FACT_Magazzino.Date
 	toColumn: DIM_Calendario.Date
 
 relationship a0e54fd0-ceef-4fba-96ec-4018870084e5
-	fromColumn: FACT_Ordini.Spedizioniere
-	toColumn: DIM_Spedizionieri.'Codice Spedizioniere'
+	fromColumn: FACT_Ordini.CodiceSpedizioniere
+	toColumn: DIM_Spedizionieri.CodiceSpedizioniere
 
 relationship 6f64d437-1ddb-4e87-8927-6ce6d3a91278
-	fromColumn: FACT_Ordini.'Codice Cliente Fatturazione'
-	toColumn: DIM_Clienti.'Codice Cliente'
+	fromColumn: FACT_Ordini.CodiceClienteFatturazione
+	toColumn: DIM_Clienti.CodiceCliente
 
 relationship 2b2a3aae-6ba2-47c0-bc31-1a720346ceac
-	fromColumn: FACT_Ordini.Articolo
-	toColumn: DIM_Articoli.'Codice Articolo'
+	fromColumn: FACT_Ordini.CodiceArticolo
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship c24b4347-bc06-4906-a2ab-76ad0e48173b
-	fromColumn: FACT_Ordini.Categoria
-	toColumn: DIM_GruppiVendita.'Codice Categoria'
+	fromColumn: FACT_Ordini.CodiceCategoria
+	toColumn: DIM_GruppiVendita.CodiceCategoria
 
 relationship c1fb494a-7b5a-49fc-8853-cf2a3645d874
-	fromColumn: FACT_Ordini.Ubicazione
-	toColumn: DIM_Deposito.'Codice Ubicazione'
+	fromColumn: FACT_Ordini.CodiceDeposito
+	toColumn: DIM_Deposito.CodiceDeposito
 
 relationship 92a2f71f-fd20-46d8-9f55-81dacd8ebc17
-	fromColumn: FACT_DocumentoVendita.'Codice Cliente Fatturazione'
-	toColumn: DIM_Clienti.'Codice Cliente'
+	fromColumn: FACT_DocumentoVendita.CodiceClienteFatturazione
+	toColumn: DIM_Clienti.CodiceCliente
 
 relationship 2d85046e-1dd8-46e8-bec2-c2a8564d3268
-	fromColumn: FACT_DocumentoVendita.No_
-	toColumn: DIM_Articoli.'Codice Articolo'
+	fromColumn: FACT_DocumentoVendita.CodiceArticolo
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship c18eb8ec-5627-4eab-af4d-fc03500e5c08
-	fromColumn: FACT_DocumentoVendita.Ubicazione
-	toColumn: DIM_Deposito.'Codice Ubicazione'
+	fromColumn: FACT_DocumentoVendita.CodiceDeposito
+	toColumn: DIM_Deposito.CodiceDeposito
 
 relationship eb2460a9-503f-41f5-9519-5918edeed6fe
 	fromColumn: FACT_DocumentoVendita.Progetto
-	toColumn: DIM_Progetto.'Codice Progetto'
+	toColumn: DIM_Progetto.CodiceProgetto
 
 relationship 45c45d2a-06fd-4752-8553-8cd41f638921
 	fromColumn: FACT_DocumentoVendita.Reparto
-	toColumn: DIM_Reparto.'Codice Reparto'
+	toColumn: DIM_Reparto.CodiceReparto
 
 relationship 0e8bb3df-e3fc-4a86-b722-2f271d6d6758
 	isActive: false
@@ -73,63 +73,63 @@ relationship 0e8bb3df-e3fc-4a86-b722-2f271d6d6758
 
 relationship b80a15f5-d885-4087-9fe8-ab8b4485c76b
 	fromColumn: FACT_DocumentoVendita.'Mezzo Trasporto'
-	toColumn: DIM_MezziTrasporto.'Codice Mezzo'
+	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship 58049c92-f1ab-4c5a-bfd9-52dbbbfc99ca
 	fromColumn: FACT_DocumentoAcquisto.'Codice Fornitore'
-	toColumn: DIM_Fornitori.'Codice Fornitore'
+	toColumn: DIM_Fornitori.CodiceFornitore
 
 relationship c4ec5697-57be-4b1d-bb2d-b0e118c7cd3f
 	fromColumn: FACT_DocumentoAcquisto.Progetto
-	toColumn: DIM_Progetto.'Codice Progetto'
+	toColumn: DIM_Progetto.CodiceProgetto
 
 relationship 0c550c75-82ee-4470-bcfe-70c89d5b7e49
 	fromColumn: FACT_DocumentoAcquisto.Reparto
-	toColumn: DIM_Reparto.'Codice Reparto'
+	toColumn: DIM_Reparto.CodiceReparto
 
 relationship a79301e7-3fbf-464c-87a8-a1409242b76e
 	fromColumn: FACT_DocumentoAcquisto.'Posting Date'
 	toColumn: DIM_Calendario.Date
 
 relationship c82bcfb0-c732-42bd-bc74-234eabe50e0e
-	fromColumn: FACT_Magazzino.Categoria
-	toColumn: DIM_GruppiVendita.'Codice Categoria'
+	fromColumn: FACT_Magazzino.CodiceCategoria
+	toColumn: DIM_GruppiVendita.CodiceCategoria
 
 relationship 69ebb350-eb80-4892-87e5-d5515413e304
 	fromColumn: FACT_MovimentiCG.'Mezzo Trasporto'
-	toColumn: DIM_MezziTrasporto.'Codice Mezzo'
+	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship b48a6011-239f-4acb-a06f-9e2d5aa13aaf
 	fromColumn: FACT_MovimentiCG.Progetto
-	toColumn: DIM_Progetto.'Codice Progetto'
+	toColumn: DIM_Progetto.CodiceProgetto
 
 relationship bc60b49d-b336-4413-b872-916ae80ac257
 	fromColumn: FACT_MovimentiCG.Reparto
-	toColumn: DIM_Reparto.'Codice Reparto'
+	toColumn: DIM_Reparto.CodiceReparto
 
 relationship b38b879a-f888-4137-b433-70c97116a214
 	isActive: false
 	fromColumn: FACT_MovimentiCG.Categoria
-	toColumn: DIM_GruppiVendita.'Codice Categoria'
+	toColumn: DIM_GruppiVendita.CodiceCategoria
 
 relationship a4dc0119-3c01-4e0f-b855-9c00277c64f4
 	fromColumn: FACT_MovimentiCG.Conto
-	toColumn: DIM_PianoConti.'Codice Conto'
+	toColumn: DIM_PianoConti.CodiceConto
 
 relationship f62e4884-0bdd-4dc8-8c58-49da692b9818
 	fromColumn: FACT_Accantonamenti.Conto
-	toColumn: DIM_PianoConti.'Codice Conto'
+	toColumn: DIM_PianoConti.CodiceConto
 
 relationship f1653539-d1a5-4fc5-9b6f-3f3ad39d6ea8
 	fromColumn: FACT_Accantonamenti.'Mezzo Trasporto'
-	toColumn: DIM_MezziTrasporto.'Codice Mezzo'
+	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship c98a52f8-d166-4b02-905c-6006ca18bfc7
 	fromColumn: FACT_DocumentoVendita.Categoria
 	toColumn: DIM_GruppiVendita.'Codice Categoria'
 
 relationship c3e64c27-9f8e-459c-bf03-cb4d38ac4d0d
-	fromColumn: FACT_Ordini.'Data Spedizione'
+	fromColumn: FACT_Ordini.DataSpedizione
 	toColumn: DIM_Calendario.Date
 
 relationship da369ef2-d79d-4e1e-ae3b-f3484dbe1282
@@ -137,7 +137,7 @@ relationship da369ef2-d79d-4e1e-ae3b-f3484dbe1282
 	toColumn: DIM_Calendario.Date
 
 relationship 31e9df0f-db19-4e34-a385-cc1686dcbed5
-	fromColumn: FACT_Ordini.'Data Registrazione'
+	fromColumn: FACT_Ordini.DataRegistrazione
 	toColumn: DIM_Calendario.Date
 
 relationship b90973fa-1a32-48f4-8020-b17fedf8555c
@@ -150,9 +150,7 @@ relationship 3869c865-a996-4e78-ae67-287d75e7a0d0
 	toColumn: DIM_Calendario.Date
 
 relationship 48416aed-fe45-48a9-8044-c83baf07eff1
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: FACT_Cambi.Data
+	fromColumn: FACT_Cambi.Date
 	toColumn: DIM_Calendario.Date
 
 relationship 84b63609-82f6-4421-856d-cd41e346c24d
@@ -162,24 +160,24 @@ relationship 84b63609-82f6-4421-856d-cd41e346c24d
 	toColumn: DIM_Clienti.'Codice Cliente'
 
 relationship 276dcee1-45f4-4b48-b68e-55560daf929d
-	fromColumn: FACT_Magazzino.'Data Documento'
+	fromColumn: FACT_Magazzino.DataDocumento
 	toColumn: DIM_Calendario.Date
 
 relationship 401dbfb2-cd9c-a770-b4c2-89bc1ed494b9
-	fromColumn: FACT_Vendite.'Codice Articolo'
-	toColumn: DIM_Articoli.'Codice Articolo'
+	fromColumn: FACT_Vendite.CodiceArticolo
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship 3069b028-b45c-4db5-b71e-f1a9c594d161
-	fromColumn: FACT_Vendite.Soggetto
-	toColumn: DIM_Clienti.'Codice Cliente'
+	fromColumn: FACT_Vendite.CodiceSoggetto
+	toColumn: DIM_Clienti.CodiceCliente
 
 relationship 8be350c5-abe9-4015-b2bb-3f8b2c969c55
-	fromColumn: FACT_Vendite.Categoria
-	toColumn: DIM_GruppiVendita.'Codice Categoria'
+	fromColumn: FACT_Vendite.CodiceCategoria
+	toColumn: DIM_GruppiVendita.CodiceCategoria
 
 relationship c021ddd8-bd8b-8d23-41fb-cdde06dffad1
-	fromColumn: FACT_Vendite.Deposito
-	toColumn: DIM_Deposito.'Codice Ubicazione'
+	fromColumn: FACT_Vendite.CodiceDeposito
+	toColumn: DIM_Deposito.CodiceDeposito
 
 relationship a5f8a577-a3df-4434-908e-4fa5282d5f81
 	fromColumn: FACT_Vendite.Date
@@ -205,7 +203,7 @@ relationship AutoDetected_f81cec85-f3e3-46a9-a680-d113daa1540b
 	crossFilteringBehavior: bothDirections
 	fromCardinality: one
 	fromColumn: BRIDGE_Competenza.'Codice Mezzo'
-	toColumn: DIM_MezziTrasporto.'Codice Mezzo'
+	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship 555c9ea6-167f-f48e-1e3d-ec2995ac647a
 	fromColumn: FACT_CMPProgressivo.Data
@@ -213,7 +211,7 @@ relationship 555c9ea6-167f-f48e-1e3d-ec2995ac647a
 
 relationship 07ae5442-4302-c158-dbfd-bda8210b6b10
 	fromColumn: FACT_CMPProgressivo.Articolo
-	toColumn: DIM_Articoli.'Codice Articolo'
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship a93fdd8b-d3ca-5f5b-9628-3c7f2f787478
 	toCardinality: many
@@ -221,12 +219,12 @@ relationship a93fdd8b-d3ca-5f5b-9628-3c7f2f787478
 	toColumn: DIM_Calendario.MonthInCalendar
 
 relationship 341b2cc4-e42c-be14-4cfd-2bbd531312c2
-	fromColumn: FACT_Propano.'Codice Mezzo'
-	toColumn: DIM_MezziTrasporto.'Codice Mezzo'
+	fromColumn: FACT_Propano.CodiceMezzo
+	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship badc1207-7b40-161b-9ba7-8e1343059ab7
-	fromColumn: FACT_Propano.'Codice Articolo'
-	toColumn: DIM_Articoli.'Codice Articolo'
+	fromColumn: FACT_Propano.CodiceArticolo
+	toColumn: DIM_Articoli.CodiceArticolo
 
 relationship d2c7bce3-dd2c-4128-85f7-990eadb64053
 	fromColumn: FACT_Giacenza.Data
@@ -270,4 +268,4 @@ relationship 8a8040a3-7eed-cdd1-3871-1372147db785
 
 relationship 588c2195-7221-edf4-3faf-5272d2531518
 	fromColumn: FACT_Stock.ArticoloBase
-	toColumn: DIM_Articoli.'Codice Articolo'
+	toColumn: DIM_Articoli.CodiceArticolo

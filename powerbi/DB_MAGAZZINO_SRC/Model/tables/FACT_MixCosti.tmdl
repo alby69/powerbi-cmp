@@ -45,9 +45,9 @@
 				    DF = QUERY_BASE_DF,
 				    WB = QUERY_BASE_WEB,
 				
-				    ORDINI = DF[ORDINI],
+				    FACT_Ordini = DF[FACT_Ordini],
 				    PREZZI = WB[PREZZI],
-				    CAMBI = DF[CAMBI],
+				    FACT_Cambi = DF[FACT_Cambi],
 				
 				//--------------------------------------------------
 				// FILTRI
@@ -56,10 +56,10 @@
 				    filtro_cliente = {"C00991","C01049"},
 				
 				//--------------------------------------------------
-				// ORDINI MIX
+				// FACT_Ordini MIX
 				//--------------------------------------------------
 				    ORDINI_F = Table.SelectRows(
-				        ORDINI,
+				        FACT_Ordini,
 				        each 
 				            Text.StartsWith([Ordine], "ODA") and
 				            List.Contains(filtro_articolo, [Articolo]) and
@@ -103,10 +103,10 @@
 				    ),
 				
 				//--------------------------------------------------
-				// CAMBI
+				// FACT_Cambi
 				//--------------------------------------------------
 				    CAMBI_K = Table.AddColumn(
-				        Table.AddColumn(CAMBI,"Anno", each Date.Year([Data]), Int64.Type),
+				        Table.AddColumn(FACT_Cambi,"Anno", each Date.Year([Data]), Int64.Type),
 				        "Mese", each Date.Month([Data]), Int64.Type
 				    ),
 				
@@ -130,7 +130,7 @@
 				
 				    ExpandP = Table.ExpandTableColumn(JoinP,"P",{"Prezzo USD"}),
 				    //--------------------------------------------------
-				// JOIN CAMBI
+				// JOIN FACT_Cambi
 				//--------------------------------------------------
 				    JoinC = Table.NestedJoin(
 				        ExpandP,

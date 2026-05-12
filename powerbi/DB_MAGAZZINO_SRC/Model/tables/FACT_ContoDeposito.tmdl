@@ -70,11 +70,11 @@
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	partition CONTO_DEPOSITO = m
+	partition FACT_ContoDeposito = m
 		mode: import
 		queryGroup: QUERY_CMP
 		source = ```
-				// CONTO_DEPOSITO
+				// FACT_ContoDeposito
 				
 				let
 				    Source = CONTO_DEPOSITO_OLD,

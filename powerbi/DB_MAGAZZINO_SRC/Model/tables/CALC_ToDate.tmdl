@@ -11,7 +11,7 @@
 
 		calculationItem YTD = TOTALYTD (SELECTEDMEASURE(), DIM_Calendario[Date] )
 
-	column DIM
+	column ToDate
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Name
@@ -26,4 +26,3 @@
 		sourceColumn: Ordinal
 
 		annotation SummarizationSetBy = Automatic
-

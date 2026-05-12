@@ -1,6 +1,6 @@
 ﻿table FACT_Cambi
 
-	column Data
+	column Date
 		dataType: dateTime
 		formatString: Long Date
 		summarizeBy: none
@@ -17,7 +17,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition CAMBI-38faa0fb-ab88-45a6-924c-318f608d663e = m
+	partition FACT_Cambi-38faa0fb-ab88-45a6-924c-318f608d663e = m
 		mode: import
 		queryGroup: FACT
 		source =
@@ -26,9 +26,8 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
-				    CAMBI_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="CAMBI",version=""]}[Data]
+				    CAMBI_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_Cambi",version=""]}[Data]
 				in
 				    CAMBI_
 
 	annotation PBI_ResultType = Table
-

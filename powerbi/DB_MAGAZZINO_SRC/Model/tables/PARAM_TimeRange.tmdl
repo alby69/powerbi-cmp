@@ -1,17 +1,16 @@
 ﻿table PARAM_TimeRange
 
-	measure 'Valore TimeRange' = SELECTEDVALUE('TimeRange'[TimeRange], 3)
+	measure PARAM_ValoreTimeRange = SELECTEDVALUE('PARAM_TimeRange'[PARAM_TimeRange], 3)
 
-	column TimeRange
+	column PARAM_TimeRange
 		formatString: 0
 		summarizeBy: sum
 		sourceColumn: [Value]
 
 		annotation SummarizationSetBy = Automatic
 
-	partition TimeRange-858baff3-4f99-415b-b846-ad728438b58c = calculated
+	partition PARAM_TimeRange = calculated
 		mode: import
 		source = GENERATESERIES(0, 12, 1)
 
 	annotation PBI_Id = 790959892f244a9abbfc001aeaff99e1
-

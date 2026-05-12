@@ -1,84 +1,20 @@
 ﻿table DIM_GruppiVendita
 
-	column Nome
+	column Gruppo
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Nome
+		sourceColumn: Gruppo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Permuta
-		dataType: int64
-		formatString: 0
-		summarizeBy: sum
-		sourceColumn: Permuta
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Codice Categoria'
+	column CodiceCategoria
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Categoria
+		sourceColumn: CodiceCategoria
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"GRUPPI_VENDITE","TableItemName":"Gruppo","ObjectType":4},"LinkType":"UsedInGroup"}]
-
-	column 'Categoria Permute'
-		dataType: string
-		summarizeBy: none
-		sourceColumn: Categoria Permute
-
-		annotation SummarizationSetBy = Automatic
-
-	column Gruppo =
-			SWITCH(
-			  TRUE,
-			  ISBLANK('GRUPPI_VENDITE'[Codice Categoria]),
-			  "(Vuoto)",
-			  'GRUPPI_VENDITE'[Codice Categoria] IN {"EXTRACEE"},
-			  "ALTRE",
-			  'GRUPPI_VENDITE'[Codice Categoria] IN {"NAZ",
-			    "NAZPERM",
-			    "UE"},
-			  "DIRETTE",
-			  'GRUPPI_VENDITE'[Codice Categoria] IN {"PASSAGGIO"},
-			  "PASSAGGIO",
-			  'GRUPPI_VENDITE'[Codice Categoria] IN {"NAZCOPERM"},
-			  "PERMUTE",
-			  'GRUPPI_VENDITE'[Codice Categoria]
-			)
-		summarizeBy: none
-
-		extendedProperty GroupingMetadata =
-				{
-				  "version": 0,
-				  "groupedColumns": [
-				    {
-				      "Column": {
-				        "Expression": {
-				          "SourceRef": {
-				            "Entity": "GRUPPI_VENDITE"
-				          }
-				        },
-				        "Property": "Codice Categoria"
-				      }
-				    }
-				  ]
-				}
-
-		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"g","Entity":"GRUPPI_VENDITE"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"g"}},"Property":"Codice Categoria"}}],"GroupItems":[{"DisplayName":"(Vuoto)","BlankDefaultPlaceholder":true},{"DisplayName":"ALTRE","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"g"}},"Property":"Codice Categoria"}}],"Values":[[{"Literal":{"Value":"'EXTRACEE'"}}]]}}},{"DisplayName":"DIRETTE","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"g"}},"Property":"Codice Categoria"}}],"Values":[[{"Literal":{"Value":"'NAZ'"}}],[{"Literal":{"Value":"'NAZPERM'"}}],[{"Literal":{"Value":"'UE'"}}]]}}},{"DisplayName":"PASSAGGIO","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"g"}},"Property":"Codice Categoria"}}],"Values":[[{"Literal":{"Value":"'PASSAGGIO'"}}]]}}},{"DisplayName":"PERMUTE","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"g"}},"Property":"Codice Categoria"}}],"Values":[[{"Literal":{"Value":"'NAZCOPERM'"}}]]}}}]}
-
-		annotation SummarizationSetBy = Automatic
-
-	column GruppoVendite
-		dataType: string
-		summarizeBy: none
-		sourceColumn: GruppoVendite
-
-		annotation SummarizationSetBy = Automatic
-
-	partition GRUPPI_VENDITE-cd9d8b88-c2ac-43f0-8db4-9710b2575e91 = m
+	partition DIM_GruppiVendita = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -87,9 +23,9 @@
 				    Workspaces = Origine{[Id="Workspaces"]}[Data],
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"]}[Data],
-				    GRUPPI_VENDITE_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="GRUPPI_VENDITE",version=""]}[Data]
+				    GRUPPI_VENDITE_ = #"bf21c8a4-9eaf-4781-ac5e-5e3f7ff0ec5a"{[entity="GRUPPI_VENDITE",version=""]}[Data],
+				    #"Rinominate colonne" = Table.RenameColumns(GRUPPI_VENDITE_,{{"Codice Categoria", "CodiceCategoria"}})
 				in
-				    GRUPPI_VENDITE_
+				    #"Rinominate colonne"
 
 	annotation PBI_ResultType = Table
-

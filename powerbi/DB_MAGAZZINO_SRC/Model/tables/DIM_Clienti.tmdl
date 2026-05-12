@@ -14,10 +14,10 @@
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Indirizzo 2'
+	column Indirizzo2
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Indirizzo 2
+		sourceColumn: Indirizzo2
 
 		annotation SummarizationSetBy = Automatic
 
@@ -80,16 +80,44 @@
 	column 'Codice Cliente'
 		dataType: string
 		summarizeBy: none
-		sourceColumn: Codice Cliente
+		sourceColumn: Regione
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Nome & Codice' = DIM_Clienti[Nome] & "_" & DIM_Clienti[Codice Cliente]
+	column AreaGeografica
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AreaGeografica
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Longitudine
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Latitudine
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodiceCliente
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CodiceCliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome & Codice' = DIM_Clienti[Nome] & "_" & DIM_Clienti[CodiceCliente]
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-	partition CLIENTI-9a4807bb-587d-48df-8a31-e8089e7197e0 = m
+	partition DIM_Clienti = m
 		mode: import
 		queryGroup: DIM
 		source =
@@ -118,4 +146,3 @@
 				    ExpandedArea
 
 	annotation PBI_ResultType = Table
-

@@ -1,63 +1,72 @@
 ﻿table KPI_CMP
 
-	measure Qta_CMP = SUM(FACT_MagazzinoCMP[Qta_BIL])
+	measure 'Qta CMP' = SUM(FACT_MagazzinoCMP[Qta_BIL])
+		displayFolder: KPI CMP
+		annotation PBI_Description = "Quantità BIL per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Costo_Medio_Acquisto_CMP = DIVIDE([Imp_Acquisto_CMP],[Qta_CMP])
+	measure 'Costo Medio Acquisto' = DIVIDE([Imp_Acquisto_CMP],[Qta CMP])
+		displayFolder: KPI CMP
+		annotation PBI_Description = "Costo medio di acquisto per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Giacenza_Qta_CMP = ```
+	measure 'Giacenza Quantità (CMP)' = ```
 			CALCULATE(
-			    MAX(Tab_Stock[Giacenza_Qta]),
+			    MAX(FACT_Stock[QtaProgressiva]),
 			    LASTDATE(DIM_Calendario[Date])
 			)
-			
-			
-			
 			```
+		displayFolder: KPI CMP
+		annotation PBI_Description = "Quantità in giacenza per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Giacenza_Valore_CMP = ```
+	measure 'Giacenza Valore (CMP)' = ```
 			CALCULATE(
-			    MAX(Tab_Stock[Giacenza_Imp]),
+			    MAX(FACT_Stock[ValoreProgressivo]),
 			    LASTDATE(DIM_Calendario[Date])
 			)
-			
 			```
+		displayFolder: KPI CMP
+		annotation PBI_Description = "Valore in giacenza per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure CMP =
+	measure 'CMP (Calcolato)' =
 			
 			DIVIDE(
-			    [Giacenza_Valore_CMP],
-			    [Giacenza_Qta_CMP]
+			    [Giacenza Valore (CMP)],
+			    [Giacenza Quantità (CMP)]
 			)
+		displayFolder: KPI CMP
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure COGS =
+	measure 'Costo Venduto (CMP)' =
 			
-			SUM(Tab_Stock[Qta_Ven]) * [CMP]
+			SUM(FACT_Stock[Quantità]) * [CMP (Calcolato)]
+		displayFolder: KPI CMP
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Giacenza_Qta_Periodo_CMP =
+	measure 'Giacenza Quantità Periodo' =
 			
-			SUM(Tab_Stock[Qta_Stock])
+			SUM(FACT_Stock[QtaProgressiva])
+		displayFolder: KPI CMP
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Giacenza_Valore_Periodo_CMP =
+	measure 'Giacenza Valore Periodo' =
 			
-			SUM(Tab_Stock[Valore_Stock])
+			SUM(FACT_Stock[ValoreProgressivo])
+		displayFolder: KPI CMP
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Importo_CMP = SUM(FACT_MagazzinoCMP[Importo])
+	measure 'Importo CMP' = SUM(FACT_MagazzinoCMP[Importo])
+		displayFolder: KPI CMP
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -72,4 +81,3 @@
 				    #"Rimosse colonne"
 
 	annotation PBI_ResultType = Table
-

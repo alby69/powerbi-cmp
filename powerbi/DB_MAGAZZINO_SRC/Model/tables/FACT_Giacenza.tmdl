@@ -1,6 +1,6 @@
 ﻿table FACT_Giacenza
 
-	column Data
+	column Date
 		dataType: dateTime
 		formatString: Short Date
 		summarizeBy: none
@@ -9,14 +9,14 @@
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	column Articolo
+	column CodiceArticolo
 		dataType: string
 		summarizeBy: none
 		sourceColumn: Articolo
 
 		annotation SummarizationSetBy = Automatic
 
-	column Quantità
+	column Quantity
 		dataType: double
 		summarizeBy: sum
 		sourceColumn: Quantità
@@ -34,7 +34,7 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition TAB_GIACENZA = m
+	partition FACT_Giacenza = m
 		mode: import
 		queryGroup: GOOGLE_SHEETS
 		source =
@@ -52,4 +52,3 @@
 	annotation PBI_NavigationStepName = Navigazione
 
 	annotation PBI_ResultType = Table
-

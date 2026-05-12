@@ -10,7 +10,7 @@
 				    SELECTEDMEASURE(),
 				    CALCULATE(
 				        SELECTEDMEASURE(),
-				        ALLSELECTED(CALENDARIO)
+				        ALLSELECTED(DIM_Calendario)
 				    )
 				)
 
