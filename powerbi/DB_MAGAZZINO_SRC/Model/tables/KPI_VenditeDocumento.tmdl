@@ -943,7 +943,7 @@
 			
 			VAR qta_propano = CALCULATE(
 			        SUMX('FACT_Vendite', 'FACT_Vendite'[Quantity]),
-			        'FACT_Vendite'[CodiceArticolo] IN {"1","1T"}
+			        'FACT_Vendite'[CodiceArticolo] IN {"2","2T"}
 			)
 			    
 			RETURN

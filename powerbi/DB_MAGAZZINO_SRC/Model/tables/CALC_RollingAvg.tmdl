@@ -5,7 +5,7 @@
 		calculationItem Value = SELECTEDMEASURE()
 
 		calculationItem 'Rolling AVG DAY' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 30)
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, DAY )
@@ -26,7 +26,7 @@
 				```
 
 		calculationItem 'Rolling AVG MONTH' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, MONTH )
@@ -47,7 +47,7 @@
 				```
 
 		calculationItem 'Rolling AVG QUARTER' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, QUARTER )
@@ -68,7 +68,7 @@
 				```
 
 		calculationItem 'Rolling AVG YEAR' = ```
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				VAR LastSelectedDay = MAX ( DIM_Calendario[Date] )
 				
 				VAR Period = DATESINPERIOD ( DIM_Calendario[Date], LastSelectedDay, - NumOfInterval, YEAR )

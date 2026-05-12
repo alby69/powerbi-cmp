@@ -92,7 +92,7 @@
 
 				    // 4. ACQUISTI VALORIZZATI
 				    // Mix: Allineamento date e join
-				    Mix_Normalized = Table.RenameColumns(FACT_QuantitaMix, {{"QuantityBIL", "Quantity"}}, MissingField.Ignore),
+				    Mix_Normalized = Table.RenameColumns(FACT_QuantitaMix, {{"Data", "Date"}, {"Articolo", "CodiceArticolo"}, {"Movimento", "TipoMovimento"}, {"Qta_BIL", "Quantity"}}, MissingField.Ignore),
 				    Mix_DateFix = Table.TransformColumnTypes(Mix_Normalized, {{"Date", type date}}),
 				    Mix_Costi_DateFix = Table.TransformColumnTypes(FACT_MixCosti, {{"Data", type date}}),
 

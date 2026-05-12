@@ -1,6 +1,6 @@
 ﻿table FACT_Propano
 
-	measure 'Costo Propano' = DIVIDE([Total Costs NAVI],[Qta Ton Acquisto IPEM CD])
+	measure 'Costo Propano' = DIVIDE([Total Costs NAVI],[Qta Magazzino Acquisto IPEM CD])
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -50,7 +50,7 @@
 				            DIM_Articoli[CodiceArticolo],
 				            FILTER(DIM_MezziTrasporto,LEFT(DIM_MezziTrasporto[CodiceMezzo],1) = "N" ),
 				            TREATAS(filtro_articolo,DIM_Articoli[CodiceArticolo]),
-				            "Qta Ton IPEM", [Qta Ton Acquisto IPEM CD]
+				            "Qta Ton IPEM", [Qta Magazzino Acquisto IPEM CD]
 				        )
 				RETURN
 				    FILTER(tab_propano,

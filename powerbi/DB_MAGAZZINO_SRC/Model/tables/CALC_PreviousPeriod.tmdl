@@ -6,7 +6,7 @@
 		calculationItem Value = SELECTEDMEASURE()
 
 		calculationItem 'Last DAY' =
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				
 				VAR Result =
 				CALCULATE (
@@ -18,7 +18,7 @@
 				    Result
 
 		calculationItem 'Last MONTH' =
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				
 				VAR Result =
 				CALCULATE (
@@ -30,7 +30,7 @@
 				    Result
 
 		calculationItem 'Last QUARTER' =
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				
 				VAR Result =
 				CALCULATE (
@@ -42,7 +42,7 @@
 				    Result
 
 		calculationItem 'Last YEAR' =
-				VAR NumOfInterval = { SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange],BLANK()) }
+				VAR NumOfInterval = SELECTEDVALUE(PARAM_TimeRange[PARAM_TimeRange], 1)
 				
 				VAR Result =
 				CALCULATE (
