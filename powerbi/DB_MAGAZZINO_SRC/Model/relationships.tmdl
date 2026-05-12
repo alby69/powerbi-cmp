@@ -125,8 +125,8 @@ relationship f1653539-d1a5-4fc5-9b6f-3f3ad39d6ea8
 	toColumn: DIM_MezziTrasporto.CodiceMezzo
 
 relationship c98a52f8-d166-4b02-905c-6006ca18bfc7
-	fromColumn: FACT_DocumentoVendita.CodiceCategoria
-	toColumn: DIM_GruppiVendita.CodiceCategoria
+	fromColumn: FACT_DocumentoVendita.Categoria
+	toColumn: DIM_GruppiVendita.'Codice Categoria'
 
 relationship c3e64c27-9f8e-459c-bf03-cb4d38ac4d0d
 	fromColumn: FACT_Ordini.DataSpedizione
@@ -157,7 +157,7 @@ relationship 84b63609-82f6-4421-856d-cd41e346c24d
 	crossFilteringBehavior: bothDirections
 	fromCardinality: one
 	fromColumn: KPI_ClientiPersi.'Codice Cliente Fatturazione'
-	toColumn: DIM_Clienti.CodiceCliente
+	toColumn: DIM_Clienti.'Codice Cliente'
 
 relationship 276dcee1-45f4-4b48-b68e-55560daf929d
 	fromColumn: FACT_Magazzino.DataDocumento

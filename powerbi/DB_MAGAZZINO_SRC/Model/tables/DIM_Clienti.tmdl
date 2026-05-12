@@ -77,6 +77,34 @@
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Codice Cliente'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Regione
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaGeografica
+		dataType: string
+		summarizeBy: none
+		sourceColumn: AreaGeografica
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Longitudine
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitudine
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Latitudine
+
+		annotation SummarizationSetBy = Automatic
+
 	column CodiceCliente
 		dataType: string
 		summarizeBy: none
@@ -113,9 +141,8 @@
 
 				    // Join + AREA
 				    JoinedArea = Table.NestedJoin(ExpandedComuni, {"Provincia_Comuni"}, AREA_, {"Sigla"}, "AREA", JoinKind.LeftOuter),
-				    ExpandedArea = Table.ExpandTableColumn(JoinedArea, "AREA", {"Regione", "Provincia"}, {"Regione", "AreaGeografica"}),
-				    #"Rinominate colonne" = Table.RenameColumns(ExpandedArea,{{"Codice Cliente", "CodiceCliente"}, {"Indirizzo 2", "Indirizzo2"}})
+				    ExpandedArea = Table.ExpandTableColumn(JoinedArea, "AREA", {"Regione", "Provincia"}, {"Regione", "AreaGeografica"})
 				in
-				    #"Rinominate colonne"
+				    ExpandedArea
 
 	annotation PBI_ResultType = Table

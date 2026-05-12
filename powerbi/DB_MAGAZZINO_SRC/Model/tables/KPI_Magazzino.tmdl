@@ -17,16 +17,10 @@
 			    [Qta Magazzino],
 			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
-		displayFolder: KPI Magazzino
+		displayFolder: QTA
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Magazzino Differenza YoY' =
-			
-			[Qta Magazzino] - CALCULATE([Qta Magazzino], SAMEPERIODLASTYEAR(DIM_Calendario[Date]))
-		displayFolder: KPI Magazzino
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Acquisti' = ```
 			
@@ -352,7 +346,7 @@
 			    BLANK()
 			)
 			```
-		displayFolder: KPI Magazzino CD
+		displayFolder: QTA CONTO DEPOSITO
 
 
 	measure 'Qta Magazzino CD Giacenza IPEM' =

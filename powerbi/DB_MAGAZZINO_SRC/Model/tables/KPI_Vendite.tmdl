@@ -99,7 +99,7 @@
 			
 			// Calcola nr di clienti che hanno acquistato in un certo mese e non acquistano da nr_giorni
 			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione] )
+			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[Codice Cliente Fatturazione] )
 			
 			VAR Clienti_Precedenti =
 			    CALCULATETABLE (
@@ -150,7 +150,7 @@
 		displayFolder: KPI Churn
 		annotation PBI_Description = "Numero di clienti persi (non acquistano da 365 giorni)"
 
-	measure 'Data Ultimo Acquisto Cliente' = LASTDATE('FACT_DocumentoVendita'[DataSpedizione])
+	measure 'Data Ultimo Acquisto Cliente' = LASTDATE('FACT_DocumentoVendita'[Data Spedizione])
 		displayFolder: KPI Churn
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -183,7 +183,7 @@
 			
 			// Sono Clienti che non hanno acquistato negli ultimi nr_days, ma hanno acquistato prima
 			
-			VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
 			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
 			
 			VAR tab_data = 
@@ -212,7 +212,7 @@
 			
 			// Sono Clienti che hanno acquistato negli ultimi nr_days, ma NON hanno acquistato prima
 			
-			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
 			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
 			
 			VAR tab_data = 
@@ -247,7 +247,7 @@
 			
 			// Sono Clienti che hanno acquistato negli ultimi nr_days e anche prima
 			
-			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
 			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
 			
 			VAR tab_data =
@@ -589,7 +589,7 @@
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	measure '# Clienti' = DISTINCTCOUNT('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+	measure '# Clienti' = DISTINCTCOUNT('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
 		displayFolder: KPI Vendite
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -598,7 +598,7 @@
 			
 			// Calcola vendite di clienti che hanno acquistato in un certo mese e non acquistano da nr_giorni
 			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione] )
+			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[Codice Cliente Fatturazione] )
 			
 			VAR Clienti_Precedenti =
 			    CALCULATETABLE (
