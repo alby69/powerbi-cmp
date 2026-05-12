@@ -145,8 +145,9 @@
 				    #"903f203e-7eed-4c27-ba7b-509c81c128c4" = Workspaces{[workspaceId="903f203e-7eed-4c27-ba7b-509c81c128c4"]}[Data],
 				    #"3244ac51-6341-4378-accd-b5b3e508daba" = #"903f203e-7eed-4c27-ba7b-509c81c128c4"{[dataflowId="3244ac51-6341-4378-accd-b5b3e508daba"]}[Data],
 				    MOVCG_ = #"3244ac51-6341-4378-accd-b5b3e508daba"{[entity="FACT_MovimentiCG",version=""]}[Data],
-				    #"Rinominate colonne" = Table.RenameColumns(MOVCG_,{{"Entry No_", "EntryNo"}, {"Conto", "CodiceConto"}, {"Data Registrazione", "DataRegistrazione"}, {"Tipo Documento", "TipoDocumento"}, {"Source Code", "CodiceSorgente"}, {"Quantità", "Quantity"}, {"Gen_ Prod_ Posting Group", "GruppoRegistrazioneProdotto"}, {"Data Documento", "DataDocumento"}, {"Documento Esterno", "DocumentoEsterno"}, {"Source Type", "TipoSorgente"}, {"Source No_", "CodiceSoggetto"}, {"Mezzo Trasporto", "MezzoTrasporto"}})
+				    #"Rinominate colonne" = Table.RenameColumns(MOVCG_,{{"Entry No_", "EntryNo"}, {"Conto", "CodiceConto"}, {"Data Registrazione", "DataRegistrazione"}, {"Tipo Documento", "TipoDocumento"}, {"Source Code", "CodiceSorgente"}, {"Quantità", "Quantity"}, {"Gen_ Prod_ Posting Group", "GruppoRegistrazioneProdotto"}, {"Data Documento", "DataDocumento"}, {"Documento Esterno", "DocumentoEsterno"}, {"Source Type", "TipoSorgente"}, {"Source No_", "CodiceSoggetto"}, {"Mezzo Trasporto", "MezzoTrasporto"}}),
+				    #"Modificato tipo" = Table.TransformColumnTypes(#"Rinominate colonne",{{"DataRegistrazione", type date}, {"DataDocumento", type date}, {"Quantity", type number}, {"Importo", type number}, {"EntryNo", Int64.Type}})
 				in
-				    #"Rinominate colonne"
+				    #"Modificato tipo"
 
 	annotation PBI_ResultType = Table
