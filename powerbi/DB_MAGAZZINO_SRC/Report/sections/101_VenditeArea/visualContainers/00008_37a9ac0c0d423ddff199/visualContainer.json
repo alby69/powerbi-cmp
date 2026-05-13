@@ -1,0 +1,124 @@
+{
+  "x": 316.0542540074,
+  "y": 84.3403205919,
+  "z": 9000.0,
+  "width": 108.3107274969,
+  "height": 237.0406905055,
+  "config": {
+    "name": "37a9ac0c0d423ddff199",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 316.0542540073983,
+          "y": 84.3403205918619,
+          "z": 9000,
+          "width": 108.31072749691738,
+          "height": 237.0406905055487,
+          "tabOrder": 9000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "Stat-Vendite.Statistica",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "s",
+            "Entity": "Stat-Vendite",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "s"
+                }
+              },
+              "Property": "Statistica"
+            },
+            "Name": "Stat-Vendite.Statistica",
+            "NativeReferenceName": "Statistica"
+          }
+        ]
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "filter": {
+                "filter": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "s",
+                      "Entity": "Stat-Vendite",
+                      "Type": 0
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "s"
+                                  }
+                                },
+                                "Property": "Statistica"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'SUM'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [],
+  "query": null,
+  "dataTransforms": null
+}

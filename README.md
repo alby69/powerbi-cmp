@@ -30,7 +30,8 @@ Progetto Power BI in formato **PBIP (Power BI Project)** con modello TMDL, conne
 │   │   │   ├── relationships.tmdl  # 71 relazioni
 │   │   │   ├── expressions.tmdl    # Parametri (RangeStart, RangeEnd, etc.)
 │   │   │   └── cultures/           # Traduzioni IT
-│   │   ├── Report/             # Pagine report (11 sezioni, 81 visual)
+│   │   ├── Report/             # Pagine report strutturate (VENDITE, ACQUISTI, MAGAZZINO, ANALISI)
+│   │   │   └── sections/       # 17 sezioni organizzate per range (100, 200, 300, 400)
 │   │   └── connections.json    # Connessione dataset remoto
 │   ├── DB_MAGAZZINO.pbix       # Report .pbix (collegato a dataset)
 │   └── datasets/               # Dataset esportati
@@ -75,9 +76,10 @@ Progetto Power BI in formato **PBIP (Power BI Project)** con modello TMDL, conne
 
 ## Stato refactoring
 
-Vedi [`docs/refactoring_plan.md`](docs/refactoring_plan.md) per dettagli sul piano di ottimizzazione in 4 fasi:
+Vedi [`docs/refactoring_plan.md`](docs/refactoring_plan.md) per dettagli sul piano di ottimizzazione in 5 fasi:
 
 - **Fase 1** — Quick Wins (Auto Date/Time off, LocalDateTable, relazioni)
 - **Fase 2** — Standardizzazione naming
 - **Fase 3** — Ottimizzazione DAX e star schema
 - **Fase 4** — Documentazione enterprise
+- **Fase 5** — Integrazione Report e Refactoring Visual (Integrazione ACQUISTI_PRODOTTO, ANALISI_VENDITE, DB_MAGAZZINO_REPORT)

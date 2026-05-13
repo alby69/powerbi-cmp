@@ -1,0 +1,497 @@
+{
+  "x": 0.0,
+  "y": 435.145631068,
+  "z": 7000.0,
+  "width": 1280.0970873786,
+  "height": 285.7281553398,
+  "config": {
+    "name": "8d0ff31ec947cb202d4c",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 435.1456310679612,
+          "z": 7000,
+          "width": 1280.097087378641,
+          "height": 285.7281553398058,
+          "tabOrder": 7000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "tableEx",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "CLIENTI.Nome"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Margin Growth %"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.YoY Growth %"
+          },
+          {
+            "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Sales"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Sales LY"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Costs Customer"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Profits"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Profits LY"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Profit Margins"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Profit Margins LY"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ANALISI_VENDITE",
+            "Type": 0
+          },
+          {
+            "Name": "a1",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          },
+          {
+            "Name": "c1",
+            "Entity": "CLIENTI",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Margin Growth %"
+            },
+            "Name": "ANALISI_VENDITE.Margin Growth %"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "YoY Growth %"
+            },
+            "Name": "ANALISI_VENDITE.YoY Growth %"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Sales"
+            },
+            "Name": "ANALISI_VENDITE.Total Sales"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Sales LY"
+            },
+            "Name": "ANALISI_VENDITE.Total Sales LY"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Profits Customer"
+            },
+            "Name": "ANALISI_VENDITE.Total Profits"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Profits Customer LY"
+            },
+            "Name": "ANALISI_VENDITE.Total Profits LY"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Profit Margins Customer"
+            },
+            "Name": "ANALISI_VENDITE.Profit Margins"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Profit Margins Customer LY"
+            },
+            "Name": "ANALISI_VENDITE.Profit Margins LY"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Qta Vendita"
+            },
+            "Name": "ANALISI_DOC_VENDITA.Qta Vendita"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Costs Customer"
+            },
+            "Name": "ANALISI_VENDITE.Total Costs Customer"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "Nome"
+            },
+            "Name": "CLIENTI.Nome"
+          }
+        ],
+        "OrderBy": [
+          {
+            "Direction": 2,
+            "Expression": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Source": "a"
+                  }
+                },
+                "Property": "Margin Growth %"
+              }
+            }
+          }
+        ]
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "columnWidth": [
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "96.19208313584424D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Margin Growth %"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "68.31891047301863D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.YoY Growth %"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "112.2733329696203D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Total Sales LY"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "124.24306782631366D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Total Profits"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "120.87925593979838D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Total Profits LY"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "96.75640560504952D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Profit Margins"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "93.45343380964553D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Profit Margins LY"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "120.86862836106056D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Total Costs Customer"
+            }
+          }
+        ],
+        "values": [
+          {
+            "properties": {
+              "fontSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "10D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "columnFormatting": [
+          {
+            "properties": {
+              "dataBars": {
+                "positiveColor": {
+                  "solid": {
+                    "color": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "'#00FF00'"
+                        }
+                      }
+                    }
+                  }
+                },
+                "negativeColor": {
+                  "solid": {
+                    "color": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "'#FF0000'"
+                        }
+                      }
+                    }
+                  }
+                },
+                "axisColor": {
+                  "solid": {
+                    "color": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "'#252423'"
+                        }
+                      }
+                    }
+                  }
+                },
+                "reverseDirection": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "false"
+                    }
+                  }
+                },
+                "hideText": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "false"
+                    }
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Margin Growth %"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "Filter974a009ea3cb58a72681",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Clienti_Fatt_Vendita"
+            }
+          },
+          "Property": "Nome & Codice"
+        }
+      },
+      "type": "Categorical",
+      "howCreated": 1,
+      "objects": {
+        "general": [
+          {
+            "properties": {
+              "isInvertedSelectionMode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    },
+    {
+      "expression": {
+        "Measure": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "ANALISI_DOC_VENDITA"
+            }
+          },
+          "Property": "Qta Vendita"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a1",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Measure": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "a1"
+                          }
+                        },
+                        "Property": "Qta Vendita"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "0L"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Advanced",
+      "howCreated": 0,
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

@@ -1,0 +1,418 @@
+{
+  "x": 171.3440197287,
+  "y": 79.9013563502,
+  "z": 4000.0,
+  "width": 549.5437731196,
+  "height": 355.1171393342,
+  "config": {
+    "name": "89b98daf0e58c2303630",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 171.34401972872996,
+          "y": 79.90135635018495,
+          "z": 4000,
+          "width": 549.5437731196055,
+          "height": 355.11713933415535,
+          "tabOrder": 4000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "scatterChart",
+      "projections": {
+        "Category": [
+          {
+            "queryRef": "CLIENTI.Citt\u00e0",
+            "active": true
+          }
+        ],
+        "X": [
+          {
+            "queryRef": "ANALISI_VENDITE.Margin Growth %",
+            "active": true
+          }
+        ],
+        "Y": [
+          {
+            "queryRef": "ANALISI_VENDITE.YoY Growth %"
+          }
+        ],
+        "Tooltips": [
+          {
+            "queryRef": "ANALISI_VENDITE.Total Sales"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Sales LY"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Profits"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Total Profits LY"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ANALISI_VENDITE",
+            "Type": 0
+          },
+          {
+            "Name": "c1",
+            "Entity": "CLIENTI",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Margin Growth %"
+            },
+            "Name": "ANALISI_VENDITE.Margin Growth %"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "YoY Growth %"
+            },
+            "Name": "ANALISI_VENDITE.YoY Growth %"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Sales LY"
+            },
+            "Name": "ANALISI_VENDITE.Total Sales LY"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Profits Customer"
+            },
+            "Name": "ANALISI_VENDITE.Total Profits"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Profits Customer LY"
+            },
+            "Name": "ANALISI_VENDITE.Total Profits LY"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Total Sales"
+            },
+            "Name": "ANALISI_VENDITE.Total Sales"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "Citt\u00e0"
+            },
+            "Name": "CLIENTI.Citt\u00e0"
+          }
+        ],
+        "OrderBy": [
+          {
+            "Direction": 2,
+            "Expression": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Source": "a"
+                  }
+                },
+                "Property": "Total Sales"
+              }
+            }
+          }
+        ]
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "categoryLabels": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "fontSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "properties": {
+              "gridlineStyle": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'solid'"
+                  }
+                }
+              },
+              "gridlineColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "ThemeDataColor": {
+                        "ColorId": 0,
+                        "Percent": -0.3
+                      }
+                    }
+                  }
+                }
+              },
+              "titleText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Vendite'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "categoryAxis": [
+          {
+            "properties": {
+              "gridlineStyle": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'solid'"
+                  }
+                }
+              },
+              "gridlineColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "ThemeDataColor": {
+                        "ColorId": 0,
+                        "Percent": -0.3
+                      }
+                    }
+                  }
+                }
+              },
+              "titleText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Margine'"
+                  }
+                }
+              },
+              "treatNullsAsZero": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "xAxisReferenceLine": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "displayName": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Linea costante asse X 1'"
+                  }
+                }
+              },
+              "lineColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "ThemeDataColor": {
+                        "ColorId": 3,
+                        "Percent": 0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "selector": {
+              "id": "1"
+            }
+          }
+        ],
+        "y1AxisReferenceLine": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "displayName": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Linea costante asse Y 1'"
+                  }
+                }
+              },
+              "lineColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "ThemeDataColor": {
+                        "ColorId": 3,
+                        "Percent": 0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "selector": {
+              "id": "1"
+            }
+          }
+        ]
+      },
+      "vcObjects": {
+        "title": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "text": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'CITTA'''"
+                  }
+                }
+              },
+              "alignment": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'center'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "expression": {
+        "Measure": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "ANALISI_VENDITE"
+            }
+          },
+          "Property": "Margin Growth %"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ANALISI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Measure": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "a"
+                          }
+                        },
+                        "Property": "Margin Growth %"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "0L"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Advanced",
+      "howCreated": 0,
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

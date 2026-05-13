@@ -1,0 +1,589 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "bd9e256ea4e78fc39487",
+  "position": {
+    "x": 23.519434628975265,
+    "y": 53.371024734982335,
+    "z": 4000,
+    "height": 666.68551236749113,
+    "width": 1256.4805653710248,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CALENDARIO"
+                    }
+                  },
+                  "Property": "MonthName"
+                }
+              },
+              "queryRef": "CALENDARIO.MonthName",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CLIENTI"
+                    }
+                  },
+                  "Property": "Nome & Codice"
+                }
+              },
+              "queryRef": "CLIENTI.Nome & Codice",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "NR ATB Giorno"
+                }
+              },
+              "queryRef": "ANALISI_MIX.NR ATB Giorno",
+              "displayName": "Nr ATB"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Qta_BIL"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Qta_BIL"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Qta_RESA"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Qta_RESA"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Tasso Giorno Cliente"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Tasso Giorno Cliente"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Prezzo USD MIX"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Prezzo USD MIX",
+              "displayName": "Prezzo USD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Importo USD"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Importo USD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Costo MIX"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Costo MIX"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Prezzo € MIX Mese"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Prezzo € MIX Mese",
+              "displayName": "Prezzo € MIX"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Importo €"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Importo €"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Importo Accisa €"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Importo Accisa €"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Importo Trasporto"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Importo Trasporto"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MIX"
+                    }
+                  },
+                  "Property": "Costo Totale"
+                }
+              },
+              "queryRef": "ANALISI_MIX.Costo Totale"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "CALENDARIO"
+                  }
+                },
+                "Property": "MonthName"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "CALENDARIO.MonthName"
+            ],
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "CALENDARIO"
+                    }
+                  },
+                  "Property": "MonthName"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "CLIENTI.Nome & Codice"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "63.821213448083185D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo Accisa €"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "94.3003278442309D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo Trasporto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56.53337594353064D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.NR ATB Giorno"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70.87539003026868D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo € 2"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72.63307892376041D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Qta_BIL"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56.78609906785914D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo USD MIX"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.4965009245629D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Prezzo € MIX Mese"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.38014701314795D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Importo €"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "119.46303070248048D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Costo Totale"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "197.45373829985832D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CALENDARIO.MonthName"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "66.7484546760891D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_MIX.Tasso Giorno Cliente"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "valuesOnRow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "d034c02630dbdd7aad51",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_MIX"
+              }
+            },
+            "Property": "Qta_BIL"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "a1",
+              "Entity": "ANALISI_MIX",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "Comparison": {
+                      "ComparisonKind": 0,
+                      "Left": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a1"
+                            }
+                          },
+                          "Property": "Qta_BIL"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Filterb6d7f9a367fdb81645b3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CLIENTI"
+              }
+            },
+            "Property": "Nome"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "eceecc20dd1b0e2ad777",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CLIENTI"
+              }
+            },
+            "Property": "Nome & Codice"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "CLIENTI",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "c"
+                          }
+                        },
+                        "Property": "Nome & Codice"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'MITSUI E&P ITALIA B SRL_C01049'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'TOTAL E & P ITALIA SPA_C00991'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

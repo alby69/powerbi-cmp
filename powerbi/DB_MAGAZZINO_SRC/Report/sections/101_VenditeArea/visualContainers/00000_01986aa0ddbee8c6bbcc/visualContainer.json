@@ -1,0 +1,353 @@
+{
+  "x": 0.0,
+  "y": 131.3933415536,
+  "z": 0.0,
+  "width": 325.8199753391,
+  "height": 588.6066584464,
+  "config": {
+    "name": "01986aa0ddbee8c6bbcc",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 131.3933415536375,
+          "z": 0,
+          "width": 325.81997533908753,
+          "height": 588.6066584463625,
+          "tabOrder": 0
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "pivotTable",
+      "projections": {
+        "Rows": [
+          {
+            "queryRef": "AREA.Regione",
+            "active": true
+          },
+          {
+            "queryRef": "AREA.Provincia",
+            "active": true
+          },
+          {
+            "queryRef": "CLIENTI.Citt\u00e0"
+          }
+        ],
+        "Values": [
+          {
+            "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita"
+          }
+        ],
+        "Columns": [
+          {
+            "queryRef": "Select a Measure CG.Select a Measure",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a1",
+            "Entity": "AREA",
+            "Type": 0
+          },
+          {
+            "Name": "c",
+            "Entity": "CLIENTI",
+            "Type": 0
+          },
+          {
+            "Name": "a",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          },
+          {
+            "Name": "s",
+            "Entity": "Select a Measure CG",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Regione"
+            },
+            "Name": "AREA.Regione"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Citt\u00e0"
+            },
+            "Name": "CLIENTI.Citt\u00e0"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Provincia"
+            },
+            "Name": "AREA.Provincia",
+            "NativeReferenceName": "Provincia"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Qta Vendita"
+            },
+            "Name": "ANALISI_DOC_VENDITA.Qta Vendita",
+            "NativeReferenceName": "Qta Vendita"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "s"
+                }
+              },
+              "Property": "Select a Measure"
+            },
+            "Name": "Select a Measure CG.Select a Measure",
+            "NativeReferenceName": "Select a Measure"
+          }
+        ],
+        "OrderBy": [
+          {
+            "Direction": 2,
+            "Expression": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Source": "a"
+                  }
+                },
+                "Property": "Qta Vendita"
+              }
+            }
+          }
+        ]
+      },
+      "expansionStates": [
+        {
+          "roles": [
+            "Rows"
+          ],
+          "levels": [
+            {
+              "queryRefs": [
+                "AREA.Regione"
+              ],
+              "isCollapsed": true,
+              "identityKeys": [
+                {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "AREA"
+                      }
+                    },
+                    "Property": "Regione"
+                  }
+                }
+              ],
+              "isPinned": true
+            },
+            {
+              "queryRefs": [
+                "AREA.Provincia"
+              ],
+              "isCollapsed": true,
+              "identityKeys": [
+                {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "AREA"
+                      }
+                    },
+                    "Property": "Provincia"
+                  }
+                }
+              ],
+              "isPinned": true
+            },
+            {
+              "queryRefs": [
+                "CLIENTI.Citt\u00e0"
+              ],
+              "isCollapsed": true,
+              "isPinned": true
+            }
+          ],
+          "root": {
+            "identityValues": null,
+            "children": [
+              {
+                "identityValues": [
+                  {
+                    "Literal": {
+                      "Value": "'Campania'"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "identityValues": [
+                      {
+                        "Literal": {
+                          "Value": "'Napoli'"
+                        }
+                      }
+                    ],
+                    "isToggled": true
+                  }
+                ]
+              },
+              {
+                "identityValues": [
+                  {
+                    "Literal": {
+                      "Value": "'Puglia'"
+                    }
+                  }
+                ],
+                "isToggled": true
+              },
+              {
+                "identityValues": [
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  }
+                ],
+                "children": [
+                  {
+                    "identityValues": [
+                      {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    ],
+                    "isToggled": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "drillFilterOtherVisuals": true,
+      "objects": {},
+      "vcObjects": {
+        "title": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "Filterf05afebea6089ed7ed48",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "CALC_Previous Period"
+            }
+          },
+          "Property": "Previous Period"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CALC_Previous Period",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "In": {
+                "Expressions": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "Previous Period"
+                    }
+                  }
+                ],
+                "Values": [
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'Value'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'Last YEAR'"
+                      }
+                    }
+                  ]
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 1,
+      "objects": {
+        "general": [
+          {
+            "properties": {}
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}
