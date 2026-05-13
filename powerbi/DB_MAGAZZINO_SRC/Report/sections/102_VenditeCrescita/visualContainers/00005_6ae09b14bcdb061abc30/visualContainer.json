@@ -1,0 +1,234 @@
+{
+  "x": 0.0,
+  "y": 36.3995067818,
+  "z": 5000.0,
+  "width": 171.3440197287,
+  "height": 398.6189889026,
+  "config": {
+    "name": "6ae09b14bcdb061abc30",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 36.39950678175092,
+          "z": 5000,
+          "width": 171.34401972872996,
+          "height": 398.6189889025894,
+          "tabOrder": 5000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "AREA.Regione",
+            "active": true
+          },
+          {
+            "queryRef": "AREA.Provincia"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "AREA",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Regione"
+            },
+            "Name": "AREA.Regione"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Provincia"
+            },
+            "Name": "AREA.Provincia"
+          }
+        ]
+      },
+      "expansionStates": [
+        {
+          "roles": [
+            "Values"
+          ],
+          "levels": [
+            {
+              "queryRefs": [
+                "AREA.Regione"
+              ],
+              "isCollapsed": true,
+              "identityKeys": [
+                {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "AREA"
+                      }
+                    },
+                    "Property": "Regione"
+                  }
+                }
+              ],
+              "isPinned": true
+            },
+            {
+              "queryRefs": [
+                "AREA.Provincia"
+              ],
+              "isCollapsed": true,
+              "isPinned": true
+            }
+          ],
+          "root": {
+            "identityValues": null
+          }
+        }
+      ],
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {}
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "header": [
+          {
+            "properties": {
+              "text": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Area'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "f5701f9ce316116cb028",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "AREA"
+            }
+          },
+          "Property": "Regione"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "AREA",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a"
+                            }
+                          },
+                          "Property": "Regione"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "null"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {
+        "general": [
+          {
+            "properties": {
+              "isInvertedSelectionMode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

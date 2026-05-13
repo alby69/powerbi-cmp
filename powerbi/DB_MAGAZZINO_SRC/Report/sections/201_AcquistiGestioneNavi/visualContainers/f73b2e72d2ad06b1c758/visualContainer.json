@@ -1,0 +1,442 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "f73b2e72d2ad06b1c758",
+  "position": {
+    "x": 0,
+    "y": 110.85880640465793,
+    "z": 1000,
+    "height": 335.3711790393013,
+    "width": 1280,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEZZI_TRASPORTO"
+                    }
+                  },
+                  "Property": "Codice Mezzo"
+                }
+              },
+              "queryRef": "MEZZI_TRASPORTO.Codice Mezzo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_MAGAZZINO"
+                    }
+                  },
+                  "Property": "Qta Ton Acquisto IPEM CD"
+                }
+              },
+              "queryRef": "ANALISI_MAGAZZINO.Qta Ton Acquisto IPEM CD",
+              "displayName": "Qta Ton"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "COSTO GPL"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.COSTO GPL"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Materia Prima €"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Materia Prima €"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Agenzia"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Agenzia"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Perizia"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Perizia"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Dogana"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Dogana"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Controstallie"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Controstallie"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Rimorchio"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Rimorchio"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Recupero Dazi Doganali"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Recupero Dazi Doganali"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "COSTI_ACCESSORI_GPL"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.COSTI_ACCESSORI_GPL"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Trasporto Acquisti"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Trasporto Acquisti"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "Total Costs NAVI"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.Total Costs NAVI"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ANALISI_PRODOTTO"
+                    }
+                  },
+                  "Property": "€/Ton CostoGPL_Resa"
+                }
+              },
+              "queryRef": "ANALISI_PRODOTTO.€/Ton CostoGPL_Resa",
+              "displayName": "€/Ton"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "114.06180338679498D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Costi Nave.COSTI_ACCESSORI_GPL"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "129.3357472268011D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Measures.COSTO PRODOTTO"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "102.57307428609535D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Key Measures.€/Ton CostoGPL_Resa"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "75.81291186798654D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Recupero Dazi Doganali"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "imageHeight": {
+              "expr": {
+                "Literal": {
+                  "Value": "78D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter6eef86150d03cfe4928b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "MEZZI_TRASPORTO"
+              }
+            },
+            "Property": "Codice Mezzo"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "m",
+              "Entity": "MEZZI_TRASPORTO",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "m"
+                              }
+                            },
+                            "Property": "Codice Mezzo"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'ATB'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "7e04d6a307027e5d6dac",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_MAGAZZINO"
+              }
+            },
+            "Property": "Qta Ton Acquisto IPEM CD"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "a2",
+              "Entity": "ANALISI_MAGAZZINO",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "Comparison": {
+                      "ComparisonKind": 0,
+                      "Left": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a2"
+                            }
+                          },
+                          "Property": "Qta Ton Acquisto IPEM CD"
+                        }
+                      },
+                      "Right": {
+                        "Literal": {
+                          "Value": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

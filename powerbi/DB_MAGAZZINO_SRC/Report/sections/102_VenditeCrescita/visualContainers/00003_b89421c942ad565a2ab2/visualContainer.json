@@ -1,0 +1,230 @@
+{
+  "x": 680.4624277457,
+  "y": 35.3757225434,
+  "z": 3000.0,
+  "width": 599.3063583815,
+  "height": 36.4161849711,
+  "config": {
+    "name": "b89421c942ad565a2ab2",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 680.4624277456647,
+          "y": 35.3757225433526,
+          "z": 3000,
+          "width": 599.3063583815028,
+          "height": 36.41618497109827,
+          "tabOrder": 3000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "GRUPPI_VENDITE.Gruppo",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "g",
+            "Entity": "GRUPPI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "g"
+                }
+              },
+              "Property": "Gruppo"
+            },
+            "Name": "GRUPPI_VENDITE.Gruppo"
+          }
+        ]
+      },
+      "syncGroup": {
+        "groupName": "Gruppo",
+        "fieldChanges": true,
+        "filterChanges": true
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "orientation": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              },
+              "filter": {
+                "filter": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "g",
+                      "Entity": "GRUPPI_VENDITE",
+                      "Type": 0
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "g"
+                                  }
+                                },
+                                "Property": "Gruppo"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'DIRETTE'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "c8cc9e9eac8b6abc4a08",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "GRUPPI_VENDITE"
+            }
+          },
+          "Property": "Gruppo"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "g",
+            "Entity": "GRUPPI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "g"
+                            }
+                          },
+                          "Property": "Gruppo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "null"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'ALTRE'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {
+        "general": [
+          {
+            "properties": {
+              "isInvertedSelectionMode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

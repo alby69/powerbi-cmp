@@ -1,0 +1,195 @@
+{
+  "x": 729.9856527977,
+  "y": 28.4648493544,
+  "z": 3000.0,
+  "width": 550.0143472023,
+  "height": 33.055954089,
+  "config": {
+    "name": "186d30c08df31ccdce18",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 729.9856527977045,
+          "y": 28.464849354375897,
+          "z": 3000,
+          "width": 550.0143472022955,
+          "height": 33.05595408895265,
+          "tabOrder": 3000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "UBICAZIONE.Codice Ubicazione",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "u",
+            "Entity": "UBICAZIONE",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "u"
+                }
+              },
+              "Property": "Codice Ubicazione"
+            },
+            "Name": "UBICAZIONE.Codice Ubicazione",
+            "NativeReferenceName": "Codice Ubicazione"
+          }
+        ]
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "orientation": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "1437bb5017b0b8454f1d",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "UBICAZIONE"
+            }
+          },
+          "Property": "Codice Ubicazione"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "u",
+            "Entity": "UBICAZIONE",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "In": {
+                "Expressions": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "u"
+                        }
+                      },
+                      "Property": "Codice Ubicazione"
+                    }
+                  }
+                ],
+                "Values": [
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'BU'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'IPEM'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'LIQUIGAS'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'MITSUI'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'TOTAL'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'A.NORD'"
+                      }
+                    }
+                  ]
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {},
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

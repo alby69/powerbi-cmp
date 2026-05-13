@@ -1,0 +1,218 @@
+{
+  "x": 380.143472023,
+  "y": 61.5208034433,
+  "z": 4000.0,
+  "width": 534.4045911047,
+  "height": 658.3644189383,
+  "config": {
+    "name": "8960c0a9d9db3711e188",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 380.1434720229555,
+          "y": 61.520803443328546,
+          "z": 4000,
+          "width": 534.4045911047345,
+          "height": 658.364418938307,
+          "tabOrder": 4000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "pivotTable",
+      "projections": {
+        "Rows": [
+          {
+            "queryRef": "CALENDARIO.Date",
+            "active": true
+          }
+        ],
+        "Columns": [
+          {
+            "queryRef": "Tab VENDITE.Gruppo",
+            "active": true
+          }
+        ],
+        "Values": [
+          {
+            "queryRef": "Tab VENDITE.Qta Tab Vendite"
+          },
+          {
+            "queryRef": "Tab VENDITE.# Qta Vendite"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CALENDARIO",
+            "Type": 0
+          },
+          {
+            "Name": "t",
+            "Entity": "Tab VENDITE",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Date"
+            },
+            "Name": "CALENDARIO.Date",
+            "NativeReferenceName": "Date"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "t"
+                }
+              },
+              "Property": "Gruppo"
+            },
+            "Name": "Tab VENDITE.Gruppo",
+            "NativeReferenceName": "Gruppo"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "t"
+                }
+              },
+              "Property": "Qta Tab Vendite"
+            },
+            "Name": "Tab VENDITE.Qta Tab Vendite",
+            "NativeReferenceName": "Qta"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "t"
+                }
+              },
+              "Property": "# Qta Vendite"
+            },
+            "Name": "Tab VENDITE.# Qta Vendite",
+            "NativeReferenceName": "Nr"
+          }
+        ]
+      },
+      "columnProperties": {
+        "Tab VENDITE.Qta Tab Vendite": {
+          "displayName": "Qta"
+        },
+        "Tab VENDITE.# Qta Vendite": {
+          "displayName": "Nr"
+        }
+      },
+      "queryOptions": {
+        "keepProjectionOrder": true
+      },
+      "showAllRoles": [
+        "Rows",
+        "Columns"
+      ],
+      "drillFilterOtherVisuals": true,
+      "vcObjects": {
+        "title": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "text": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'IPEM - Vendite MIX a Tempa'"
+                  }
+                }
+              },
+              "alignment": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'center'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "12a38732f582566c4a66",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "Tab VENDITE"
+            }
+          },
+          "Property": "Categoria"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "t",
+            "Entity": "Tab VENDITE",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "In": {
+                "Expressions": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "t"
+                        }
+                      },
+                      "Property": "Categoria"
+                    }
+                  }
+                ],
+                "Values": [
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'NAZPERM'"
+                      }
+                    }
+                  ]
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 1,
+      "objects": {},
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

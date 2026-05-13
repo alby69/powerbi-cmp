@@ -1,0 +1,166 @@
+{
+  "x": 0.0,
+  "y": 69.0613451589,
+  "z": 6000.0,
+  "width": 380.310421286,
+  "height": 650.8795269771,
+  "config": {
+    "name": "fdbdc4fd005073e53140",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 69.06134515890614,
+          "z": 6000,
+          "width": 380.310421286031,
+          "height": 650.879526977088,
+          "tabOrder": 6000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "pivotTable",
+      "projections": {
+        "Rows": [
+          {
+            "queryRef": "CALENDARIO.Date",
+            "active": true
+          }
+        ],
+        "Columns": [
+          {
+            "queryRef": "ACQUISTI_MIX_TEMPA.Fornitore",
+            "active": true
+          }
+        ],
+        "Values": [
+          {
+            "queryRef": "ANALISI_MIX.# Qta Acquisto MIX Tempa"
+          },
+          {
+            "queryRef": "ANALISI_MIX.Qta Acquisto MIX Tempa"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CALENDARIO",
+            "Type": 0
+          },
+          {
+            "Name": "a",
+            "Entity": "ACQUISTI_MIX_TEMPA",
+            "Type": 0
+          },
+          {
+            "Name": "a1",
+            "Entity": "ANALISI_MIX",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Date"
+            },
+            "Name": "CALENDARIO.Date",
+            "NativeReferenceName": "Date"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Fornitore"
+            },
+            "Name": "ACQUISTI_MIX_TEMPA.Fornitore",
+            "NativeReferenceName": "Fornitore"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "# Qta Acquisto MIX Tempa"
+            },
+            "Name": "ANALISI_MIX.# Qta Acquisto MIX Tempa",
+            "NativeReferenceName": "ATB"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Qta Acquisto MIX Tempa"
+            },
+            "Name": "ANALISI_MIX.Qta Acquisto MIX Tempa",
+            "NativeReferenceName": "Ton"
+          }
+        ]
+      },
+      "columnProperties": {
+        "ANALISI_MIX.# Qta Acquisto MIX Tempa": {
+          "displayName": "ATB"
+        },
+        "ANALISI_MIX.Qta Acquisto MIX Tempa": {
+          "displayName": "Ton"
+        }
+      },
+      "queryOptions": {
+        "keepProjectionOrder": true
+      },
+      "showAllRoles": [
+        "Rows",
+        "Columns"
+      ],
+      "drillFilterOtherVisuals": true,
+      "vcObjects": {
+        "title": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "text": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'IPEM - Acquisti da Tempa'"
+                  }
+                }
+              },
+              "alignment": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'center'"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [],
+  "query": null,
+  "dataTransforms": null
+}

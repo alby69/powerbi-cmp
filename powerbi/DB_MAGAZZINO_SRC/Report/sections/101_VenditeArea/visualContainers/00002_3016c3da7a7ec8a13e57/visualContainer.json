@@ -1,0 +1,237 @@
+{
+  "x": 373.810741688,
+  "y": 34.0664961637,
+  "z": 2000.0,
+  "width": 432.73657289,
+  "height": 39.5907928389,
+  "config": {
+    "name": "3016c3da7a7ec8a13e57",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 373.81074168797954,
+          "y": 34.066496163682864,
+          "z": 2000,
+          "width": 432.7365728900256,
+          "height": 39.590792838874684,
+          "tabOrder": 2000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "ARTICOLI.Gruppo Articolo",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ARTICOLI",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Gruppo Articolo"
+            },
+            "Name": "ARTICOLI.Gruppo Articolo"
+          }
+        ]
+      },
+      "syncGroup": {
+        "groupName": "Gruppo Articolo",
+        "fieldChanges": true,
+        "filterChanges": true
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "orientation": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              },
+              "filter": {
+                "filter": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "a",
+                      "Entity": "ARTICOLI",
+                      "Type": 0
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "a"
+                                  }
+                                },
+                                "Property": "Gruppo Articolo"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'PROPANO'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "Filter97d7c82bfd65b37708bd",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "ARTICOLI"
+            }
+          },
+          "Property": "Gruppo Articolo"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ARTICOLI",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a"
+                            }
+                          },
+                          "Property": "Gruppo Articolo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "null"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'BLEND'"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'BUTANO'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {
+        "general": [
+          {
+            "properties": {
+              "isInvertedSelectionMode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

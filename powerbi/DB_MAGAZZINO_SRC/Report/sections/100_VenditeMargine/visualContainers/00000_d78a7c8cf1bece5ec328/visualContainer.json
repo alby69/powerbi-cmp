@@ -1,0 +1,565 @@
+{
+  "x": 418.3177570093,
+  "y": 35.8878504673,
+  "z": 0.0,
+  "width": 485.6074766355,
+  "height": 38.1308411215,
+  "config": {
+    "name": "d78a7c8cf1bece5ec328",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 418.31775700934577,
+          "y": 35.88785046728972,
+          "z": 0,
+          "width": 485.607476635514,
+          "height": 38.13084112149532,
+          "tabOrder": 0
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "GRUPPI_VENDITE.Gruppo",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "g",
+            "Entity": "GRUPPI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "g"
+                }
+              },
+              "Property": "Gruppo"
+            },
+            "Name": "GRUPPI_VENDITE.Gruppo"
+          }
+        ]
+      },
+      "syncGroup": {
+        "groupName": "Gruppo",
+        "fieldChanges": true,
+        "filterChanges": true
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "orientation": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              },
+              "filter": {
+                "filter": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "g",
+                      "Entity": "GRUPPI_VENDITE",
+                      "Type": 0
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "g"
+                                  }
+                                },
+                                "Property": "Gruppo"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'DIRETTE'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "c8cc9e9eac8b6abc4a08",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "GRUPPI_VENDITE"
+            }
+          },
+          "Property": "Gruppo"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "g",
+            "Entity": "GRUPPI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "g"
+                            }
+                          },
+                          "Property": "Gruppo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "null"
+                          }
+                        }
+                      ],
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'ALTRE'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {
+        "general": [
+          {
+            "properties": {
+              "isInvertedSelectionMode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": {
+    "Commands": [
+      {
+        "SemanticQueryDataShapeCommand": {
+          "Query": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "g",
+                "Entity": "GRUPPI_VENDITE",
+                "Type": 0
+              },
+              {
+                "Name": "c",
+                "Entity": "CALENDARIO",
+                "Type": 0
+              },
+              {
+                "Name": "a",
+                "Entity": "ARTICOLI",
+                "Type": 0
+              }
+            ],
+            "Select": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "g"
+                    }
+                  },
+                  "Property": "Gruppo"
+                },
+                "Name": "GRUPPI_VENDITE.Gruppo"
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "g"
+                                }
+                              },
+                              "Property": "Gruppo"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "null"
+                              }
+                            }
+                          ],
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'ALTRE'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "c"
+                            }
+                          },
+                          "Property": "Year"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'2025'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "c"
+                            }
+                          },
+                          "Property": "MonthName"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'gennaio'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a"
+                            }
+                          },
+                          "Property": "Gruppo Articolo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'PROPANO'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "Binding": {
+            "Primary": {
+              "Groupings": [
+                {
+                  "Projections": [
+                    0
+                  ]
+                }
+              ]
+            },
+            "DataReduction": {
+              "DataVolume": 3,
+              "Primary": {
+                "Window": {}
+              }
+            },
+            "IncludeEmptyGroups": true,
+            "Version": 1
+          },
+          "ExecutionMetricsKind": 1
+        }
+      }
+    ]
+  },
+  "dataTransforms": {
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Basic'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "filter": {
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "g",
+                    "Entity": "GRUPPI_VENDITE",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "In": {
+                        "Expressions": [
+                          {
+                            "Column": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "g"
+                                }
+                              },
+                              "Property": "Gruppo"
+                            }
+                          }
+                        ],
+                        "Values": [
+                          [
+                            {
+                              "Literal": {
+                                "Value": "'DIRETTE'"
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "items": [
+        {
+          "properties": {
+            "textSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "projectionOrdering": {
+      "Values": [
+        0
+      ]
+    },
+    "projectionActiveItems": {
+      "Values": [
+        {
+          "queryRef": "GRUPPI_VENDITE.Gruppo",
+          "suppressConcat": false
+        }
+      ]
+    },
+    "queryMetadata": {
+      "Select": [
+        {
+          "Restatement": "Gruppo",
+          "Name": "GRUPPI_VENDITE.Gruppo",
+          "Type": 2048
+        }
+      ],
+      "Filters": [
+        {
+          "type": 0,
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "GRUPPI_VENDITE"
+                }
+              },
+              "Property": "Gruppo"
+            }
+          }
+        }
+      ]
+    },
+    "visualElements": [
+      {
+        "DataRoles": [
+          {
+            "Name": "Values",
+            "Projection": 0,
+            "isActive": true
+          }
+        ]
+      }
+    ],
+    "selects": [
+      {
+        "displayName": "Gruppo",
+        "queryName": "GRUPPI_VENDITE.Gruppo",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 1
+        },
+        "expr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "GRUPPI_VENDITE"
+              }
+            },
+            "Property": "Gruppo"
+          }
+        }
+      }
+    ]
+  }
+}

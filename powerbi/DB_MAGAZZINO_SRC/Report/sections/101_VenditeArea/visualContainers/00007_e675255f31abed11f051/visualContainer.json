@@ -1,0 +1,218 @@
+{
+  "x": 424.3649815043,
+  "y": 84.3403205919,
+  "z": 8000.0,
+  "width": 855.8323057953,
+  "height": 635.6596794081,
+  "config": {
+    "name": "e675255f31abed11f051",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 424.36498150431567,
+          "y": 84.3403205918619,
+          "z": 8000,
+          "width": 855.8323057953145,
+          "height": 635.6596794081381,
+          "tabOrder": 8000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "azureMap",
+      "projections": {
+        "Category": [
+          {
+            "queryRef": "CLIENTI.Citt\u00e0",
+            "active": true
+          }
+        ],
+        "Size": [
+          {
+            "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CLIENTI",
+            "Type": 0
+          },
+          {
+            "Name": "a",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Citt\u00e0"
+            },
+            "Name": "CLIENTI.Citt\u00e0",
+            "NativeReferenceName": "Citt\u00e0"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Qta Vendita"
+            },
+            "Name": "ANALISI_DOC_VENDITA.Qta Vendita",
+            "NativeReferenceName": "Qta Vendita"
+          }
+        ]
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "mapControls": [
+          {
+            "properties": {
+              "defaultStyle": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'road'"
+                  }
+                }
+              },
+              "showLabels": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "showStylePicker": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "showNavigationControls": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "showSelectionControl": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "zoom": {
+                "expr": {
+                  "Literal": {
+                    "Value": "5.62D"
+                  }
+                }
+              },
+              "centerLongitude": {
+                "expr": {
+                  "Literal": {
+                    "Value": "15.397374629974365D"
+                  }
+                }
+              },
+              "centerLatitude": {
+                "expr": {
+                  "Literal": {
+                    "Value": "40.7256574810589D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "bubbleLayer": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "bubbleRadius": {
+                "expr": {
+                  "Literal": {
+                    "Value": "6L"
+                  }
+                }
+              },
+              "minBubbleRadius": {
+                "expr": {
+                  "Literal": {
+                    "Value": "6L"
+                  }
+                }
+              },
+              "maxRadius": {
+                "expr": {
+                  "Literal": {
+                    "Value": "21L"
+                  }
+                }
+              },
+              "bubbleStrokeWidth": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1L"
+                  }
+                }
+              },
+              "autoStrokeColor": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              },
+              "layerPosition": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "vcObjects": {
+        "title": [
+          {
+            "properties": {
+              "show": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [],
+  "query": null,
+  "dataTransforms": null
+}

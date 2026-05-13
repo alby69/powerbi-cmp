@@ -1,0 +1,253 @@
+{
+  "x": 0.0,
+  "y": 0.0,
+  "z": 1000.0,
+  "width": 381.7385159011,
+  "height": 36.183745583,
+  "config": {
+    "name": "c230f844ae52c31e866a",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 1000,
+          "width": 381.73851590106005,
+          "height": 36.18374558303887,
+          "tabOrder": 1000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "slicer",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "CALENDARIO.Year",
+            "active": true
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CALENDARIO",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c"
+                }
+              },
+              "Property": "Year"
+            },
+            "Name": "CALENDARIO.Year"
+          }
+        ]
+      },
+      "syncGroup": {
+        "groupName": "Year",
+        "fieldChanges": true,
+        "filterChanges": true
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "data": [
+          {
+            "properties": {
+              "mode": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Basic'"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "general": [
+          {
+            "properties": {
+              "orientation": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              },
+              "filter": {
+                "filter": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "c",
+                      "Entity": "CALENDARIO",
+                      "Type": 0
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "c"
+                                  }
+                                },
+                                "Property": "Year"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'2025'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "items": [
+          {
+            "properties": {
+              "textSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "name": "Filteraa8f5c89d9bf0fdb6a31",
+      "expression": {
+        "Column": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "CALENDARIO"
+            }
+          },
+          "Property": "Year"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "c",
+            "Entity": "CALENDARIO",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "In": {
+                "Expressions": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c"
+                        }
+                      },
+                      "Property": "Year"
+                    }
+                  }
+                ],
+                "Values": [
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2020'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2021'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2022'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2023'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2024'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2025'"
+                      }
+                    }
+                  ],
+                  [
+                    {
+                      "Literal": {
+                        "Value": "'2026'"
+                      }
+                    }
+                  ]
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "type": "Categorical",
+      "howCreated": 0,
+      "objects": {
+        "general": [
+          {
+            "properties": {}
+          }
+        ]
+      },
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": null,
+  "dataTransforms": null
+}

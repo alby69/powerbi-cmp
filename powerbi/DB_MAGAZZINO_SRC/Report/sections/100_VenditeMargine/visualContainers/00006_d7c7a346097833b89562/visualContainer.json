@@ -1,0 +1,1189 @@
+{
+  "x": 0.0,
+  "y": 85.7882711348,
+  "z": 6000.0,
+  "width": 753.5719725819,
+  "height": 633.6633663366,
+  "config": {
+    "name": "d7c7a346097833b89562",
+    "layouts": [
+      {
+        "id": 0,
+        "position": {
+          "x": 0,
+          "y": 85.78827113480578,
+          "z": 6000,
+          "width": 753.5719725818735,
+          "height": 633.6633663366337,
+          "tabOrder": 6000
+        }
+      }
+    ],
+    "singleVisual": {
+      "visualType": "tableEx",
+      "projections": {
+        "Values": [
+          {
+            "queryRef": "CLIENTI.Nome"
+          },
+          {
+            "queryRef": "ANALISI_DOC_VENDITA.Qta Vendita"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Prezzo Vendite"
+          },
+          {
+            "queryRef": "ANALISI_PRODOTTO.CMP Acquisto"
+          },
+          {
+            "queryRef": "ANALISI_PRODOTTO.Margine Unitario"
+          },
+          {
+            "queryRef": "ANALISI_VENDITE.Importo Vendite"
+          },
+          {
+            "queryRef": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente"
+          },
+          {
+            "queryRef": "ANALISI_PRODOTTO.Importo Margine"
+          },
+          {
+            "queryRef": "ANALISI_PRODOTTO.% Profitto"
+          }
+        ]
+      },
+      "prototypeQuery": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          },
+          {
+            "Name": "c1",
+            "Entity": "CLIENTI",
+            "Type": 0
+          },
+          {
+            "Name": "a2",
+            "Entity": "ANALISI_PRODOTTO",
+            "Type": 0
+          },
+          {
+            "Name": "a1",
+            "Entity": "ANALISI_VENDITE",
+            "Type": 0
+          }
+        ],
+        "Select": [
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Qta Vendita"
+            },
+            "Name": "ANALISI_DOC_VENDITA.Qta Vendita"
+          },
+          {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "c1"
+                }
+              },
+              "Property": "Nome"
+            },
+            "Name": "CLIENTI.Nome"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a2"
+                }
+              },
+              "Property": "Margine Unitario"
+            },
+            "Name": "ANALISI_PRODOTTO.Margine Unitario"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a2"
+                }
+              },
+              "Property": "Importo Margine"
+            },
+            "Name": "ANALISI_PRODOTTO.Importo Margine"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a2"
+                }
+              },
+              "Property": "% Profitto"
+            },
+            "Name": "ANALISI_PRODOTTO.% Profitto"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a"
+                }
+              },
+              "Property": "Importo Acquisto Cliente"
+            },
+            "Name": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a2"
+                }
+              },
+              "Property": "CMP Acquisto"
+            },
+            "Name": "ANALISI_PRODOTTO.CMP Acquisto",
+            "NativeReferenceName": "Costo"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Prezzo Vendite"
+            },
+            "Name": "ANALISI_VENDITE.Prezzo Vendite",
+            "NativeReferenceName": "Prezzo Vendite"
+          },
+          {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Source": "a1"
+                }
+              },
+              "Property": "Importo Vendite"
+            },
+            "Name": "ANALISI_VENDITE.Importo Vendite",
+            "NativeReferenceName": "Tot Vendite"
+          }
+        ],
+        "OrderBy": [
+          {
+            "Direction": 2,
+            "Expression": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Source": "a"
+                  }
+                },
+                "Property": "Qta Vendita"
+              }
+            }
+          }
+        ]
+      },
+      "columnProperties": {
+        "ANALISI_PRODOTTO.Margine Unitario": {
+          "displayName": "Margine"
+        },
+        "ANALISI_PRODOTTO.Importo Margine": {
+          "displayName": "Tot Margine"
+        },
+        "ANALISI_PRODOTTO.% Profitto": {
+          "displayName": "%"
+        },
+        "ANALISI_DOC_VENDITA.Importo Acquisto Cliente": {
+          "displayName": "Tot Costo"
+        },
+        "ANALISI_PRODOTTO.CMP Acquisto": {
+          "displayName": "Costo"
+        },
+        "ANALISI_VENDITE.Importo Vendite": {
+          "displayName": "Tot Vendite"
+        }
+      },
+      "drillFilterOtherVisuals": true,
+      "objects": {
+        "values": [
+          {
+            "properties": {
+              "fontSize": {
+                "expr": {
+                  "Literal": {
+                    "Value": "8D"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "columnWidth": [
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "132.79692738883514D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "CLIENTI.Nome"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "54.987184694568086D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_PRODOTTO.% Profitto"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "91.83222932504157D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "67.53462359271614D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_PRODOTTO.Margine Unitario"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "62.71568208537448D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_DOC_VENDITA.Qta Vendita"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "100.85267744444046D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_PRODOTTO.Importo Margine"
+            }
+          },
+          {
+            "properties": {
+              "value": {
+                "expr": {
+                  "Literal": {
+                    "Value": "65.54358571696588D"
+                  }
+                }
+              }
+            },
+            "selector": {
+              "metadata": "ANALISI_VENDITE.Prezzo Vendite"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "filters": [
+    {
+      "expression": {
+        "Measure": {
+          "Expression": {
+            "SourceRef": {
+              "Entity": "ANALISI_DOC_VENDITA"
+            }
+          },
+          "Property": "Qta Vendita"
+        }
+      },
+      "filter": {
+        "Version": 2,
+        "From": [
+          {
+            "Name": "a",
+            "Entity": "ANALISI_DOC_VENDITA",
+            "Type": 0
+          }
+        ],
+        "Where": [
+          {
+            "Condition": {
+              "Not": {
+                "Expression": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Measure": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "a"
+                          }
+                        },
+                        "Property": "Qta Vendita"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "null"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "type": "Advanced",
+      "howCreated": 0,
+      "isHiddenInViewMode": false
+    }
+  ],
+  "query": {
+    "Commands": [
+      {
+        "SemanticQueryDataShapeCommand": {
+          "Query": {
+            "Version": 2,
+            "From": [
+              {
+                "Name": "a",
+                "Entity": "ANALISI_DOC_VENDITA",
+                "Type": 0
+              },
+              {
+                "Name": "c1",
+                "Entity": "CLIENTI",
+                "Type": 0
+              },
+              {
+                "Name": "a2",
+                "Entity": "ANALISI_PRODOTTO",
+                "Type": 0
+              },
+              {
+                "Name": "a1",
+                "Entity": "ANALISI_VENDITE",
+                "Type": 0
+              },
+              {
+                "Name": "g",
+                "Entity": "GRUPPI_VENDITE",
+                "Type": 0
+              },
+              {
+                "Name": "c",
+                "Entity": "CALENDARIO",
+                "Type": 0
+              },
+              {
+                "Name": "a11",
+                "Entity": "ARTICOLI",
+                "Type": 0
+              }
+            ],
+            "Select": [
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a"
+                    }
+                  },
+                  "Property": "Qta Vendita"
+                },
+                "Name": "ANALISI_DOC_VENDITA.Qta Vendita"
+              },
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "c1"
+                    }
+                  },
+                  "Property": "Nome"
+                },
+                "Name": "CLIENTI.Nome"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a2"
+                    }
+                  },
+                  "Property": "Margine Unitario"
+                },
+                "Name": "ANALISI_PRODOTTO.Margine Unitario"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a2"
+                    }
+                  },
+                  "Property": "Importo Margine"
+                },
+                "Name": "ANALISI_PRODOTTO.Importo Margine"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a2"
+                    }
+                  },
+                  "Property": "% Profitto"
+                },
+                "Name": "ANALISI_PRODOTTO.% Profitto"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a"
+                    }
+                  },
+                  "Property": "Importo Acquisto Cliente"
+                },
+                "Name": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a2"
+                    }
+                  },
+                  "Property": "CMP Acquisto"
+                },
+                "Name": "ANALISI_PRODOTTO.CMP Acquisto",
+                "NativeReferenceName": "Costo"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a1"
+                    }
+                  },
+                  "Property": "Prezzo Vendite"
+                },
+                "Name": "ANALISI_VENDITE.Prezzo Vendite",
+                "NativeReferenceName": "Prezzo Vendite"
+              },
+              {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Source": "a1"
+                    }
+                  },
+                  "Property": "Importo Vendite"
+                },
+                "Name": "ANALISI_VENDITE.Importo Vendite",
+                "NativeReferenceName": "Tot Vendite"
+              }
+            ],
+            "Where": [
+              {
+                "Condition": {
+                  "Not": {
+                    "Expression": {
+                      "Comparison": {
+                        "ComparisonKind": 0,
+                        "Left": {
+                          "Measure": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "a"
+                              }
+                            },
+                            "Property": "Qta Vendita"
+                          }
+                        },
+                        "Right": {
+                          "Literal": {
+                            "Value": "null"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Target": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "c1"
+                        }
+                      },
+                      "Property": "Nome"
+                    }
+                  }
+                ]
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "g"
+                            }
+                          },
+                          "Property": "Gruppo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'DIRETTE'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "c"
+                            }
+                          },
+                          "Property": "Year"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'2025'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "c"
+                            }
+                          },
+                          "Property": "MonthName"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'gennaio'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "Condition": {
+                  "In": {
+                    "Expressions": [
+                      {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "a11"
+                            }
+                          },
+                          "Property": "Gruppo Articolo"
+                        }
+                      }
+                    ],
+                    "Values": [
+                      [
+                        {
+                          "Literal": {
+                            "Value": "'PROPANO'"
+                          }
+                        }
+                      ]
+                    ]
+                  }
+                }
+              }
+            ],
+            "OrderBy": [
+              {
+                "Direction": 2,
+                "Expression": {
+                  "Measure": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Source": "a"
+                      }
+                    },
+                    "Property": "Qta Vendita"
+                  }
+                }
+              }
+            ]
+          },
+          "Binding": {
+            "Primary": {
+              "Groupings": [
+                {
+                  "Projections": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8
+                  ],
+                  "Subtotal": 1
+                }
+              ]
+            },
+            "DataReduction": {
+              "DataVolume": 3,
+              "Primary": {
+                "Window": {
+                  "Count": 500
+                }
+              }
+            },
+            "Version": 1
+          },
+          "ExecutionMetricsKind": 1
+        }
+      }
+    ]
+  },
+  "dataTransforms": {
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "132.79692738883514D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CLIENTI.Nome"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "54.987184694568086D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.% Profitto"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "91.83222932504157D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "67.53462359271614D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Margine Unitario"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62.71568208537448D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_DOC_VENDITA.Qta Vendita"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "100.85267744444046D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_PRODOTTO.Importo Margine"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "65.54358571696588D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ANALISI_VENDITE.Prezzo Vendite"
+          }
+        }
+      ]
+    },
+    "projectionOrdering": {
+      "Values": [
+        1,
+        0,
+        7,
+        6,
+        2,
+        8,
+        5,
+        3,
+        4
+      ]
+    },
+    "queryMetadata": {
+      "Select": [
+        {
+          "Restatement": "Qta Vendita",
+          "Name": "ANALISI_DOC_VENDITA.Qta Vendita",
+          "Type": 1,
+          "Format": "#,0.00"
+        },
+        {
+          "Restatement": "Nome",
+          "Name": "CLIENTI.Nome",
+          "Type": 2048
+        },
+        {
+          "Restatement": "Margine",
+          "Name": "ANALISI_PRODOTTO.Margine Unitario",
+          "Type": 1
+        },
+        {
+          "Restatement": "Tot Margine",
+          "Name": "ANALISI_PRODOTTO.Importo Margine",
+          "Type": 1,
+          "Format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00"
+        },
+        {
+          "Restatement": "%",
+          "Name": "ANALISI_PRODOTTO.% Profitto",
+          "Type": 1,
+          "Format": "0.00%;-0.00%;0.00%"
+        },
+        {
+          "Restatement": "Tot Costo",
+          "Name": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente",
+          "Type": 1,
+          "Format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00"
+        },
+        {
+          "Restatement": "Costo",
+          "Name": "ANALISI_PRODOTTO.CMP Acquisto",
+          "Type": 1,
+          "Format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00"
+        },
+        {
+          "Restatement": "Prezzo Vendite",
+          "Name": "ANALISI_VENDITE.Prezzo Vendite",
+          "Type": 1,
+          "Format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00"
+        },
+        {
+          "Restatement": "Tot Vendite",
+          "Name": "ANALISI_VENDITE.Importo Vendite",
+          "Type": 1,
+          "Format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00"
+        }
+      ],
+      "Filters": [
+        {
+          "type": 2,
+          "expression": {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "ANALISI_DOC_VENDITA"
+                }
+              },
+              "Property": "Qta Vendita"
+            }
+          }
+        }
+      ]
+    },
+    "visualElements": [
+      {
+        "DataRoles": [
+          {
+            "Name": "Values",
+            "Projection": 1,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 0,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 7,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 6,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 2,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 8,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 5,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 3,
+            "isActive": false
+          },
+          {
+            "Name": "Values",
+            "Projection": 4,
+            "isActive": false
+          }
+        ]
+      }
+    ],
+    "selects": [
+      {
+        "displayName": "Qta Vendita",
+        "format": "#,0.00",
+        "queryName": "ANALISI_DOC_VENDITA.Qta Vendita",
+        "roles": {
+          "Values": true
+        },
+        "sort": 2,
+        "sortOrder": 0,
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_DOC_VENDITA"
+              }
+            },
+            "Property": "Qta Vendita"
+          }
+        }
+      },
+      {
+        "displayName": "Nome",
+        "queryName": "CLIENTI.Nome",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 1
+        },
+        "expr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "CLIENTI"
+              }
+            },
+            "Property": "Nome"
+          }
+        }
+      },
+      {
+        "displayName": "Margine",
+        "queryName": "ANALISI_PRODOTTO.Margine Unitario",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_PRODOTTO"
+              }
+            },
+            "Property": "Margine Unitario"
+          }
+        }
+      },
+      {
+        "displayName": "Tot Margine",
+        "format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00",
+        "queryName": "ANALISI_PRODOTTO.Importo Margine",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_PRODOTTO"
+              }
+            },
+            "Property": "Importo Margine"
+          }
+        }
+      },
+      {
+        "displayName": "%",
+        "format": "0.00%;-0.00%;0.00%",
+        "queryName": "ANALISI_PRODOTTO.% Profitto",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_PRODOTTO"
+              }
+            },
+            "Property": "% Profitto"
+          }
+        }
+      },
+      {
+        "displayName": "Tot Costo",
+        "format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00",
+        "queryName": "ANALISI_DOC_VENDITA.Importo Acquisto Cliente",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_DOC_VENDITA"
+              }
+            },
+            "Property": "Importo Acquisto Cliente"
+          }
+        }
+      },
+      {
+        "displayName": "Costo",
+        "format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00",
+        "queryName": "ANALISI_PRODOTTO.CMP Acquisto",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_PRODOTTO"
+              }
+            },
+            "Property": "CMP Acquisto"
+          }
+        }
+      },
+      {
+        "displayName": "Prezzo Vendite",
+        "format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00",
+        "queryName": "ANALISI_VENDITE.Prezzo Vendite",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_VENDITE"
+              }
+            },
+            "Property": "Prezzo Vendite"
+          }
+        }
+      },
+      {
+        "displayName": "Tot Vendite",
+        "format": "\"\u20ac\"\\ #,0.00;-\"\u20ac\"\\ #,0.00;\"\u20ac\"\\ #,0.00",
+        "queryName": "ANALISI_VENDITE.Importo Vendite",
+        "roles": {
+          "Values": true
+        },
+        "type": {
+          "category": null,
+          "underlyingType": 259
+        },
+        "expr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ANALISI_VENDITE"
+              }
+            },
+            "Property": "Importo Vendite"
+          }
+        }
+      }
+    ]
+  }
+}
