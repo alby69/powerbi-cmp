@@ -1,7 +1,7 @@
 ﻿table KPI_VenditeDocumento
 
 	measure 'Importo Doc Vendita' =
-			
+			// Somma totale degli importi lordi presenti nei documenti di vendita
 			SUMX ( 'FACT_DocumentoVendita', 'FACT_DocumentoVendita'[Importo] )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite Documento
@@ -10,10 +10,10 @@
 		changedProperty = FormatString
 
 	measure 'Importo Articolo Doc Vendita' =
-			
+			// Importo filtrato esclusivamente per le righe di tipo 'Articolo' (esclude spese, conti, etc.)
 			CALCULATE (
-			    [Importo Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
+				[Importo Doc Vendita],
+				'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo filtrato per righe di tipo Articolo"
@@ -21,11 +21,11 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo FT Doc Vendita' =
-			
+			// Importo delle sole fatture di vendita (FT VENDITA) per righe articolo
 			CALCULATE (
-			    [Importo Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
-			        && 'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
+				[Importo Doc Vendita],
+				'FACT_DocumentoVendita'[TipoRiga] = "Articolo" &&
+				'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo totale fatture di vendita (FT VENDITA)"
@@ -33,10 +33,10 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo NC Doc Vendita' =
-			
+			// Importo totale delle note di credito di vendita (NC VENDITA)
 			CALCULATE (
-			    [Importo Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
+				[Importo Doc Vendita],
+				'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo totale note di credito di vendita (NC VENDITA)"
@@ -44,7 +44,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Netto Doc Vendita' =
-			
+			// Fatturato netto calcolato come: Fatture - Trasporti - Note di Credito
 			[Importo FT Doc Vendita] - [Importo Trasporto Doc Vendita] - [Importo NC Doc Vendita]
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Vendite Documento
@@ -53,7 +53,7 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Costo Prodotto Doc Vendita' =
-			
+			// Valorizzazione del costo prodotto: Costo unitario x Quantità documenti
 			[Costo Prodotto] * [Qta Doc Vendita Articolo]
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Vendite Documento
@@ -62,7 +62,7 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Margine Doc Vendita' =
-			
+			// Margine totale calcolato come: Margine per Ton x Quantità documenti
 			[Margine Ton Doc Vendita] * [Qta Doc Vendita Articolo]
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Vendite Documento
@@ -71,12 +71,12 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo FT PASSAGGIO Doc Vendita' =
-			
+			// Importo delle fatture di passaggio (TipoRiga = Conto) ignorando i filtri sugli articoli
 			CALCULATE (
-			    [Importo Doc Vendita],
-			    REMOVEFILTERS ( DIM_Articoli ),
-			    'FACT_DocumentoVendita'[TipoRiga] = "Conto",
-			    'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
+				[Importo Doc Vendita],
+				REMOVEFILTERS ( DIM_Articoli ),
+				'FACT_DocumentoVendita'[TipoRiga] = "Conto",
+				'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo fatture per movimenti di passaggio"
@@ -84,11 +84,11 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo NC PASSAGGIO Doc Vendita' =
-			
+			// Importo delle note di credito per i movimenti di passaggio
 			CALCULATE (
-			    [Importo Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoRiga] = "Conto"
-			        && 'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
+				[Importo Doc Vendita],
+				'FACT_DocumentoVendita'[TipoRiga] = "Conto" &&
+				'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo note di credito per movimenti di passaggio"
@@ -96,7 +96,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Netto PASSAGGIO Doc Vendita' =
-			
+			// Fatturato netto dei passaggi: Fatture - Note di Credito
 			[Importo FT PASSAGGIO Doc Vendita] - [Importo NC PASSAGGIO Doc Vendita]
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo netto per movimenti di passaggio"
@@ -104,11 +104,11 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Netto FILTER Doc Vendita' =
-			
+			// Switch dinamico dell'importo netto in base al gruppo vendita selezionato (PASSAGGIO vs DIRETTI)
 			IF (
-			    SELECTEDVALUE ( DIM_GruppiVendita[Gruppo] ) = "PASSAGGIO",
-			    [Importo Netto PASSAGGIO Doc Vendita],
-			    [Importo Netto Doc Vendita]
+				SELECTEDVALUE ( DIM_GruppiVendita[Gruppo] ) = "PASSAGGIO",
+				[Importo Netto PASSAGGIO Doc Vendita],
+				[Importo Netto Doc Vendita]
 			)
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Vendite Documento
@@ -119,7 +119,7 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Controllo (Doc - CG)' =
-			
+			// Delta di controllo tra il fatturato calcolato dai documenti e quello da Contabilità Generale
 			KPI_Vendite[Importo Vendite] - KPI_Vendite[Importo Vendite (CG)]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite Documento
@@ -130,7 +130,7 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Trasporto Doc Vendita' =
-			
+			// Somma dei costi di trasporto esplicitati nelle righe dei documenti di vendita
 			SUMX ( 'FACT_DocumentoVendita', 'FACT_DocumentoVendita'[CostoTrasporto] )
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo totale dei costi di trasporto da documenti"
@@ -138,16 +138,16 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Doc Vendita - Trasporto' =
-			
+			// Importo lordo dei documenti depurato dai costi di trasporto
 			[Importo Doc Vendita] - [Importo Trasporto Doc Vendita]
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo lordo documenti al netto del trasporto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Vendita' = ```
+	measure 'Importo Vendita' =
+			// Alias per l'importo netto da documenti di vendita
 			[Importo Netto Doc Vendita]
-			```
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo vendita principale (netto documenti)"
 
@@ -155,7 +155,9 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Acquisto Cliente' = [Qta Vendita] * [CMP Acquisto]
+	measure 'Importo Acquisto Cliente' =
+			// Stima del costo di acquisto per il volume venduto al cliente (Qta x CMP)
+			[Qta Vendita] * [CMP Acquisto]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo stimato di acquisto per il cliente basato sul CMP"
@@ -163,15 +165,15 @@
 		changedProperty = FormatString
 
 	measure 'Importo Vendita %' =
-			
-			VAR vendite_cliente = [Importo Vendita]
-			VAR tot_vendite =
-			    CALCULATE (
-			        [Importo Vendita],
-			        REMOVEFILTERS ( DIM_Clienti[Nome] )
-			    )
+			// Incidenza percentuale delle vendite del cliente corrente sul totale vendite del periodo
+			VAR VenditeCliente = [Importo Vendita]
+			VAR TotaleVendite =
+				CALCULATE (
+					[Importo Vendita],
+					REMOVEFILTERS ( DIM_Clienti[Nome] )
+				)
 			RETURN
-			    DIVIDE ( vendite_cliente, tot_vendite, 0 )
+				DIVIDE ( VenditeCliente, TotaleVendite, 0 )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Percentuale dell'importo vendita del cliente sul totale"
@@ -181,14 +183,15 @@
 
 	measure 'Importo Vendita N DAYS' = ```
 			
+			// Calcola l'importo delle vendite riferito a una finestra temporale di N giorni (default 90)
 			VAR NrOfDays = 90
-			VAR ris = 
+			VAR Risultato =
 			    CALCULATE(
 			        [Importo Vendita],
-			        DATEADD(DIM_Calendario[Date],-NrOfDays,DAY)
+			        DATEADD(DIM_Calendario[Date], -NrOfDays, DAY)
 			    )
 			RETURN
-			    ris
+			    Risultato
 			```
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo vendita riferito agli ultimi N giorni (default 90)"
@@ -199,20 +202,21 @@
 
 	measure 'Importo Vendita IPEM N DAYS' = ```
 			
+			// Calcola le vendite del deposito IPEM riferite a una finestra di N giorni
 			VAR NrOfDays = 90
-			VAR importo_vendita_IPEM = 
+			VAR ImportoVenditaIPEM =
 			    CALCULATE(
 			        [Importo Vendita],
 			        'FACT_DocumentoVendita'[CodiceDeposito] = "IPEM"
 			    )
 			
-			VAR ris = 
+			VAR Risultato =
 			    CALCULATE(
-			        importo_vendita_IPEM,
+			        ImportoVenditaIPEM,
 			        DATEADD(DIM_Calendario[Date], -NrOfDays, DAY)
 			    )
 			RETURN
-			    ris
+			    Risultato
 			```
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Importo vendita deposito IPEM negli ultimi N giorni"
@@ -220,20 +224,20 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita Articolo' =
-			
+			// Quantità totale per le sole righe di tipo 'Articolo'
 			CALCULATE (
-			    [Qta Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
+				[Qta Doc Vendita],
+				'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
 			)
 		formatString: #,0.00
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta per righe di tipo Articolo"
 
 	measure 'Qta Doc Vendita Cliente' =
-			
+			// Quantità venduta specifica per il cliente nel contesto corrente
 			CALCULATE (
-			    [Qta Doc Vendita Articolo],
-			    DIM_Clienti[CodiceCliente] = SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
+				[Qta Doc Vendita Articolo],
+				DIM_Clienti[CodiceCliente] = SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
 			)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta filtrata per il cliente selezionato"
@@ -241,7 +245,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita' =
-			
+			// Somma totale delle quantità presenti nei documenti di vendita
 			SUMX ( 'FACT_DocumentoVendita', 'FACT_DocumentoVendita'[Quantity] )
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità totale da documenti di vendita"
@@ -249,10 +253,10 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita IPEM' =
-			
+			// Quantità venduta dal deposito IPEM per le righe articolo
 			CALCULATE (
-			    [Qta Doc Vendita Articolo],
-			    'FACT_DocumentoVendita'[CodiceDeposito] = "IPEM"
+				[Qta Doc Vendita Articolo],
+				'FACT_DocumentoVendita'[CodiceDeposito] = "IPEM"
 			)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta da deposito IPEM"
@@ -260,10 +264,10 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita FT' =
-			
+			// Quantità totale caricata nelle fatture di vendita
 			CALCULATE (
-			    [Qta Doc Vendita Articolo],
-			    'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
+				[Qta Doc Vendita Articolo],
+				'FACT_DocumentoVendita'[TipoDocumento] = "FT VENDITA"
 			)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità totale fatture di vendita"
@@ -271,10 +275,10 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita NC' =
-			
+			// Quantità totale stornata nelle note di credito di vendita
 			CALCULATE (
-			    [Qta Doc Vendita],
-			    'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
+				[Qta Doc Vendita],
+				'FACT_DocumentoVendita'[TipoDocumento] = "NC VENDITA"
 			)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità totale note di credito di vendita"
@@ -282,7 +286,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Doc Vendita Netta' =
-			
+			// Differenza tra quantità fatturata e quantità stornata (FT - NC)
 			[Qta Doc Vendita FT] - [Qta Doc Vendita NC]
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità netta venduta (FT - NC)"
@@ -291,22 +295,24 @@
 
 
 	measure 'Qta Doc Vendita Gruppo Articolo' =
-			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
+			// Quantità venduta filtrata per gruppo registrazione prodotto (MIX/PROPANO)
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] )
 			RETURN
-			    IF(filtro_gruppo <> BLANK(),
-			        CALCULATE (
-			            [Qta Doc Vendita],
-			            'FACT_DocumentoVendita'[GruppoRegistrazioneProdotto] = filtro_gruppo
-			        ),
-			        0
-			    )
+				IF(Gruppo <> BLANK(),
+					CALCULATE (
+						[Qta Doc Vendita],
+						'FACT_DocumentoVendita'[GruppoRegistrazioneProdotto] = Gruppo
+					),
+					0
+				)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta per gruppo registrazione prodotto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita' = [Qta Doc Vendita Netta]
+	measure 'Qta Vendita' =
+			// Misura principale per la quantità venduta (netta FT - NC)
+			[Qta Doc Vendita Netta]
 		formatString: #,0.00
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Misura principale per la quantità venduta"
@@ -316,7 +322,7 @@
 
 
 	measure 'Qta Vendita ALL' =
-			
+			// Quantità totale venduta ignorando tutti i filtri contestuali sulla tabella documenti
 			SUMX ( ALL ( 'FACT_DocumentoVendita' ), [Qta Vendita] )
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità totale venduta (senza filtri)"
@@ -325,6 +331,7 @@
 
 	measure 'Qta Doc Vendita 3000002' = ```
 			
+			// Quantità venduta specificamente per l'articolo 3000002 in fattura
 			CALCULATE (
 			    [Qta Doc Vendita],
 			    'FACT_DocumentoVendita'[CodiceArticolo] = "3000002" &&
@@ -339,13 +346,13 @@
 
 	measure 'Qta Vendita AVG YTD Monthly' = ```
 			
-			
-			    CALCULATE(
-			        [Qta Vendita AVG Day],
-			        ALL(DIM_Calendario),
-			        DIM_Calendario[MonthInCalendar] <= MAX(DIM_Calendario[MonthInCalendar]) &&
-			        DIM_Calendario[Year] = MAX(DIM_Calendario[Year])
-			    )
+			// Media della quantità venduta giornaliera calcolata sul periodo YTD
+			CALCULATE(
+			    [Qta Vendita AVG Day],
+			    ALL(DIM_Calendario),
+			    DIM_Calendario[MonthInCalendar] <= MAX(DIM_Calendario[MonthInCalendar]) &&
+			    DIM_Calendario[Year] = MAX(DIM_Calendario[Year])
+			)
 			```
 		formatString: #,0.00
 		displayFolder: KPI Qta
@@ -353,13 +360,12 @@
 
 		changedProperty = FormatString
 
-	measure 'Qta Vendita IPEM' = ```
-			
-			    CALCULATE(
-			        [Qta Vendita],
-			        'FACT_DocumentoVendita'[CodiceDeposito] = "IPEM"
-			    )
-			```
+	measure 'Qta Vendita IPEM' =
+			// Quantità venduta netta dal deposito IPEM
+			CALCULATE(
+				[Qta Vendita],
+				'FACT_DocumentoVendita'[CodiceDeposito] = "IPEM"
+			)
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta da deposito IPEM (misura base)"
 
@@ -367,25 +373,26 @@
 
 	measure 'Qta Vendita Media Pesata' = ```
 			
-			VAR qta_vendita_anno = 
+			// Calcola la quantità media pesando i mesi in base al loro volume rispetto all'anno
+			VAR QtaAnno =
 			    CALCULATE(
 			        [Qta Vendita],
-			        ALL(DIM_Calendario[MonthName],DIM_Calendario[MonthOfYear])
+			        ALL(DIM_Calendario[MonthName], DIM_Calendario[MonthOfYear])
 			    )
-			VAR tab_mese =
+			VAR TabellaMesi =
 			    ADDCOLUMNS(
 			        SUMMARIZE(
 			            'FACT_DocumentoVendita',
 			            DIM_Calendario[Year],
 			            DIM_Calendario[MonthName]
 			        ),
-			        "Qta Mese", [Qta Vendita],
-			        "Peso", DIVIDE([Qta Vendita],qta_vendita_anno,0)
+			        "Qta_Mese", [Qta Vendita],
+			        "Peso", DIVIDE([Qta Vendita], QtaAnno, 0)
 			    )
 			RETURN
 			    SUMX(
-			        tab_mese,
-			        [Peso] * [Qta Mese]
+			        TabellaMesi,
+			        [Peso] * [Qta_Mese]
 			    )
 			```
 		formatString: #,0.00
@@ -396,19 +403,20 @@
 
 	measure 'Qta Vendita Cliente CUM' = ```
 			
-			VAR cliente_rank =
+			// Calcola il totale cumulato della quantità venduta seguendo il ranking dei clienti
+			VAR ClienteRank =
 			    RANKX(
 			        ALL(DIM_Clienti[Nome & Codice]),
 			        [Qta Vendita],,
 			        DESC,
 			        Dense
 			    )
-			VAR RunningTotal =
+			VAR TotaleCumulato =
 			    CALCULATE(
 			        [Qta Vendita],
 			        FILTER(
 			            ALL(DIM_Clienti[Nome & Codice]),
-			            cliente_rank >= RANKX(
+			            ClienteRank >= RANKX(
 			                                ALL(DIM_Clienti[Nome & Codice]),
 			                                [Qta Vendita],,
 			                                DESC,
@@ -417,10 +425,7 @@
 			        )
 			    )
 			RETURN
-			    IF(
-			        [Qta Vendita]<> BLANK(),
-			        RunningTotal
-			    )
+			    IF( [Qta Vendita] <> BLANK(), TotaleCumulato )
 			```
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità cumulata per classifica clienti"
@@ -430,13 +435,13 @@
 
 
 	measure 'Importo Netto Doc Vendita LM CUM' =
-			
+			// Importo netto del mese precedente (LM) accumulato nel tempo
 			CALCULATE (
-			    [Importo Netto Doc Vendita LM],
-			    FILTER (
-			        ALLSELECTED ( DIM_Calendario ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+				[Importo Netto Doc Vendita LM],
+				FILTER (
+					ALLSELECTED ( DIM_Calendario ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Time Intelligence
 		annotation PBI_Description = "Importo netto mese precedente cumulato"
@@ -445,13 +450,13 @@
 
 
 	measure 'Importo Netto Doc Vendita -2M CUM' =
-			
+			// Importo netto di due mesi fa accumulato nel tempo
 			CALCULATE (
-			    [Importo Netto Doc Vendita -2M],
-			    FILTER (
-			        ALLSELECTED ( DIM_Calendario ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+				[Importo Netto Doc Vendita -2M],
+				FILTER (
+					ALLSELECTED ( DIM_Calendario ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Time Intelligence
 		annotation PBI_Description = "Importo netto 2 mesi fa cumulato"
@@ -460,7 +465,7 @@
 
 
 	measure 'Importo Vendite CY-LY' =
-			
+			// Variazione assoluta del fatturato netto tra l'anno corrente e l'anno precedente
 			[Importo Netto FILTER Doc Vendita] - CALCULATE([Importo Netto FILTER Doc Vendita], SAMEPERIODLASTYEAR(DIM_Calendario[Date]))
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Time Intelligence
@@ -469,50 +474,46 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 
-	measure 'Qta Vendita Forecast CUM' = ```
-			
+	measure 'Qta Vendita Forecast CUM' =
+			// Somma progressiva della quantità di forecast
 			SUMX(
-			    FILTER (
-			        ALLSELECTED ( DIM_Calendario[Date] ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    ),
-			    [Qta Vendita Forecast]
-			    
+				FILTER (
+					ALLSELECTED ( DIM_Calendario[Date] ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				),
+				[Qta Vendita Forecast]
 			)
-			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Quantità forecast cumulata"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast MA 30D' =
-			
-			VAR day_week =
-			    SELECTEDVALUE ( DIM_Calendario[DayOfWeekName] )
-			VAR weekend =
-			    IF ( day_week IN { "sabato", "domenica" }, TRUE (), FALSE () )
+			// Media mobile a 30 giorni per il forecast, calcolata solo sui giorni lavorativi (esclude weekend)
+			VAR GiornoSettimana = SELECTEDVALUE ( DIM_Calendario[DayOfWeekName] )
+			VAR IsWeekend = GiornoSettimana IN { "sabato", "domenica" }
 			RETURN
-			    IF( ISBLANK([Qta Vendita]) && weekend = FALSE(),
-			        AVERAGEX (
-			            DATESINPERIOD ( DIM_Calendario[Date], LASTDATE ( DIM_Calendario[Date] ), -30, DAY ),
-			            [Qta Vendita]
-			        ),
-			        BLANK ()
-			    )
+				IF( ISBLANK([Qta Vendita]) && NOT(IsWeekend),
+					AVERAGEX (
+						DATESINPERIOD ( DIM_Calendario[Date], LASTDATE ( DIM_Calendario[Date] ), -30, DAY ),
+						[Qta Vendita]
+					),
+					BLANK ()
+				)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Media mobile 30 giorni per il forecast quantità"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast TOT' =
-			
+			// Forecast totale che combina la media mobile 30gg applicata allo stesso periodo dell'anno precedente
 			IF (
-			    ISBLANK ( [Qta Vendita] ),
-			    CALCULATE (
-			        [Qta Vendita Forecast MA 30D],
-			        SAMEPERIODLASTYEAR ( DIM_Calendario[Date] )
-			    ),
-			    BLANK ()
+				ISBLANK ( [Qta Vendita] ),
+				CALCULATE (
+					[Qta Vendita Forecast MA 30D],
+					SAMEPERIODLASTYEAR ( DIM_Calendario[Date] )
+				),
+				BLANK ()
 			)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast totale quantità combinato"
@@ -521,15 +522,15 @@
 
 	measure 'Qta Vendita Forecast Remain' = ```
 			
-			VAR LastDateWithSales =
-			    CALCULATE ( MAX ( 'FACT_DocumentoVendita'[DataSpedizione] ), REMOVEFILTERS () )
-			VAR ForecastRemain =
+			// Calcola il forecast per il periodo residuo, partendo dall'ultima data di vendita registrata
+			VAR DataUltimaVendita = CALCULATE ( MAX ( 'FACT_DocumentoVendita'[DataSpedizione] ), REMOVEFILTERS () )
+			VAR ForecastResiduo =
 			    CALCULATE (
 			        [Qta Vendita Forecast],
-			        KEEPFILTERS ( DIM_Calendario[Date] >= LastDateWithSales )
+			        KEEPFILTERS ( DIM_Calendario[Date] >= DataUltimaVendita )
 			    )
 			RETURN
-			    ForecastRemain
+			    ForecastResiduo
 			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast rimanente dalla data dell'ultima vendita"
@@ -537,7 +538,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita & Forecast' =
-			
+			// Totale quantità reale (consuntivo) + quantità forecast per il periodo residuo
 			[Qta Vendita] + [Qta Vendita Forecast Remain]
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Combinazione di quantità venduta reale e forecast rimanente"
@@ -545,11 +546,11 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita CUM vs Forecast CUM' =
-			
+			// Delta tra il totale cumulato reale e il totale cumulato previsto (forecast)
 			IF (
-			    ISBLANK ( [Qta Vendita CUM] ),
-			    BLANK (),
-			    [Qta Vendita CUM] - [Qta Vendita Forecast CUM]
+				ISBLANK ( [Qta Vendita CUM] ),
+				BLANK (),
+				[Qta Vendita CUM] - [Qta Vendita Forecast CUM]
 			)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Differenza tra quantità cumulata reale e cumulata forecast"
@@ -557,13 +558,13 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast Remain CUM' =
-			
+			// Somma progressiva del forecast rimanente
 			CALCULATE (
-			    [Qta Vendita Forecast Remain],
-			    FILTER (
-			        ALLSELECTED ( DIM_Calendario[Date] ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+				[Qta Vendita Forecast Remain],
+				FILTER (
+					ALLSELECTED ( DIM_Calendario[Date] ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast rimanente cumulato"
@@ -571,7 +572,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast Remain Mediana' =
-			
+			// Mediana del forecast rimanente nel contesto calendario
 			MEDIANX ( DIM_Calendario, [Qta Vendita Forecast Remain] )
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Mediana del forecast rimanente"
@@ -580,37 +581,27 @@
 
 	measure 'Regression Line' = ```
 			
-			VAR data =
+			// Calcola i punti della retta di regressione lineare (Y = a + bX) per la quantità cumulata
+			VAR TabellaDati =
 			    FILTER (
 			        SELECTCOLUMNS (
 			            ALLSELECTED ( DIM_Calendario ),
-			            "x_values", DIM_Calendario[Date],
-			            "y_values", [Qta Vendita CUM]
+			            "x_val", DIM_Calendario[Date],
+			            "y_val", [Qta Vendita CUM]
 			        ),
-			        AND ( NOT ( ISBLANK ( [x_values] ) ), NOT ( ISBLANK ( [y_values] ) ) )
+			        NOT ( ISBLANK ( [x_val] ) ) && NOT ( ISBLANK ( [y_val] ) )
 			    )
-			VAR y_sum =
-			    SUMX ( data, [y_values] )
-			VAR x_sum =
-			    SUMX ( data, [x_values] )
-			VAR x2 =
-			    SUMX ( data, [x_values] ^ 2 )
-			VAR xy =
-			    SUMX ( data, [x_values] * [y_values] )
-			VAR row_count =
-			    COUNTROWS ( data ) -- Formula regressione lineare
-			VAR Intercept =
-			    DIVIDE ( ( y_sum * x2 - x_sum * xy ), ( row_count * x2 - ( x_sum ) ^ 2 ), 0 )
-			VAR Slope =
-			    DIVIDE (
-			        ( row_count * xy - x_sum * y_sum ),
-			        ( row_count * x2 - ( x_sum ) ^ 2 ),
-			        0
-			    )
-			VAR Regression =
-			    SUMX ( DIM_Calendario, Slope * DIM_Calendario[Date] + Intercept )
+			VAR SumY = SUMX ( TabellaDati, [y_val] )
+			VAR SumX = SUMX ( TabellaDati, [x_val] )
+			VAR SumX2 = SUMX ( TabellaDati, [x_val] ^ 2 )
+			VAR SumXY = SUMX ( TabellaDati, [x_val] * [y_val] )
+			VAR N = COUNTROWS ( TabellaDati )
+
+			VAR Intercetta = DIVIDE ( ( SumY * SumX2 - SumX * SumXY ), ( N * SumX2 - ( SumX ) ^ 2 ), 0 )
+			VAR Pendenza = DIVIDE ( ( N * SumXY - SumX * SumY ), ( N * SumX2 - ( SumX ) ^ 2 ), 0 )
+
 			RETURN
-			    Regression
+			    SUMX ( DIM_Calendario, Pendenza * DIM_Calendario[Date] + Intercetta )
 			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Retta di regressione lineare sulle vendite cumulate"
@@ -619,53 +610,47 @@
 
 	measure 'Regression Slope' = ```
 			
-			VAR data =
+			// Calcola solo la pendenza (coefficiente angolare) della retta di regressione lineare
+			VAR TabellaDati =
 			    FILTER (
 			        SELECTCOLUMNS (
 			            ALLSELECTED ( DIM_Calendario ),
-			            "x_values", DIM_Calendario[Date],
-			            "y_values", [Qta Vendita CUM]
+			            "x_val", DIM_Calendario[Date],
+			            "y_val", [Qta Vendita CUM]
 			        ),
-			        AND ( NOT ( ISBLANK ( [x_values] ) ), NOT ( ISBLANK ( [y_values] ) ) )
+			        NOT ( ISBLANK ( [x_val] ) ) && NOT ( ISBLANK ( [y_val] ) )
 			    )
-			VAR y_sum =
-			    SUMX ( data, [y_values] )
-			VAR x_sum =
-			    SUMX ( data, [x_values] )
-			VAR x2 =
-			    SUMX ( data, [x_values] ^ 2 )
-			VAR xy =
-			    SUMX ( data, [x_values] * [y_values] )
-			VAR row_count =
-			    COUNTROWS ( data ) -- Formula regressione lineare
-			VAR Slope = ( row_count * xy - x_sum * y_sum ) / ( row_count * x2 - ( x_sum ) ^ 2 )
+			VAR SumY = SUMX ( TabellaDati, [y_val] )
+			VAR SumX = SUMX ( TabellaDati, [x_val] )
+			VAR SumX2 = SUMX ( TabellaDati, [x_val] ^ 2 )
+			VAR SumXY = SUMX ( TabellaDati, [x_val] * [y_val] )
+			VAR N = COUNTROWS ( TabellaDati )
+
+			VAR Pendenza = DIVIDE ( ( N * SumXY - SumX * SumY ), ( N * SumX2 - ( SumX ) ^ 2 ), 0 )
 			RETURN
-			    Slope
+			    Pendenza
 			```
 		displayFolder: KPI Forecast
-		annotation PBI_Description = "Pendenza della retta di regressione"
+		annotation PBI_Description = "Pendenza della retta di regressione (velocità di vendita)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita ToDo' =
-			
-			VAR diff = [Valore Obiettivo Vendite] - [Qta Vendita ALL]
+			// Calcola la quantità mancante per raggiungere l'obiettivo di vendita fissato
+			VAR Differenza = [Valore Obiettivo Vendite] - [Qta Vendita ALL]
 			RETURN
-			    IF(diff >= 0, diff,0)
+				IF(Differenza >= 0, Differenza, 0)
 		formatString: #,0
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Quantità ancora da vendere per raggiungere l'obiettivo"
 
 		changedProperty = FormatString
 
-	measure 'Giorni Vendita x Obiettivo' = ```
-			
-			
-			VAR div = DIVIDE ( [Qta Vendita ToDo], [Regression Slope], 0 )
+	measure 'Giorni Vendita x Obiettivo' =
+			// Stima il numero di giorni necessari a raggiungere l'obiettivo dividendo il ToDo per la pendenza di regressione
+			VAR GiorniStimati = DIVIDE ( [Qta Vendita ToDo], [Regression Slope], 0 )
 			RETURN
-			    IF( div >= 0, div, 0 ) 
-			
-			```
+				IF( GiorniStimati >= 0, GiorniStimati, 0 )
 		formatString: 0
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Stima dei giorni necessari per raggiungere l'obiettivo"
@@ -673,8 +658,8 @@
 		changedProperty = FormatString
 
 	measure 'Data Obiettivo Vendita' =
-			
-			DATE ( YEAR ( TODAY () ), MONTH ( TODAY () ), DAY ( TODAY () ) + [Giorni Vendita x Obiettivo] )
+			// Proiezione della data di raggiungimento obiettivo aggiungendo i giorni stimati ad oggi
+			TODAY() + [Giorni Vendita x Obiettivo]
 		formatString: Short Date
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Data prevista per il raggiungimento dell'obiettivo di vendita"
@@ -683,10 +668,10 @@
 
 
 	measure 'Importo Vendita AVG N Days LQ' =
-			
+			// Media dell'importo vendita negli ultimi N giorni, riferita al trimestre precedente (Last Quarter)
 			CALCULATE (
-			    [Importo Vendita AVG N Days],
-			    DATEADD ( 'FACT_DocumentoVendita'[DataRegistrazione], -1, QUARTER )
+				[Importo Vendita AVG N Days],
+				DATEADD ( 'FACT_DocumentoVendita'[DataRegistrazione], -1, QUARTER )
 			)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Media importo vendita N giorni, riferita al trimestre precedente"
@@ -695,31 +680,21 @@
 
 	measure 'Qta Vendita Forecast' = ```
 			
-			
-			VAR first_year = VALUE(MIN(DIM_Calendario[YEAR]))
-			
-			VAR tab_dati = 
+			// Forecast quantità basato sulla media storica mensile degli anni passati (fino ad oggi)
+			VAR PrimoAnno = VALUE(MIN(DIM_Calendario[YEAR]))
+			VAR TabellaStorica =
 			    FILTER(
-			    	SUMMARIZE(
+			        SUMMARIZE(
 			            DIM_Calendario,
 			            DIM_Calendario[Year],
 			            DIM_Calendario[MonthName],
-			            "qta_vendite_anno", [Qta Vendita]
-			    	),
-			    	VALUE(DIM_Calendario[Year]) >= first_year &&
-				VALUE(DIM_Calendario[Year]) <= YEAR(TODAY())
-			    	
+			            "Qta_Vendite", [Qta Vendita]
+			        ),
+			        VALUE(DIM_Calendario[Year]) >= PrimoAnno && VALUE(DIM_Calendario[Year]) <= YEAR(TODAY())
 			    )
 			
-			VAR media = 
-			    AVERAGEX(
-			        tab_dati,
-			        [qta_vendite_anno]
-			    )
-			
-			VAR forecast = media
 			RETURN
-			    forecast
+			    AVERAGEX(TabellaStorica, [Qta_Vendite])
 			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast quantità basato su medie storiche annuali"
@@ -728,32 +703,23 @@
 
 	measure 'Qta Vendita Forecast Mediana' = ```
 			
-			
-			VAR first_year = VALUE(MIN(DIM_Calendario[YEAR]))
-			
-			VAR tab_dati = 
+			// Forecast quantità basato sulla mediana storica mensile degli anni passati (escludendo i mesi a zero)
+			VAR PrimoAnno = VALUE(MIN(DIM_Calendario[YEAR]))
+			VAR TabellaStorica =
 			    FILTER(
-			    	SUMMARIZE(
+			        SUMMARIZE(
 			            DIM_Calendario,
 			            DIM_Calendario[Year],
 			            DIM_Calendario[MonthName],
-			            "qta_vendite_anno", [Qta Vendita]
-			    	),
-			    	VALUE(DIM_Calendario[Year]) >= first_year &&
-			    	VALUE(DIM_Calendario[Year]) <= YEAR(TODAY()) &&
+			            "Qta_Vendite", [Qta Vendita]
+			        ),
+			        VALUE(DIM_Calendario[Year]) >= PrimoAnno &&
+			        VALUE(DIM_Calendario[Year]) <= YEAR(TODAY()) &&
 			        [Qta Vendita] > 0
-			    	
 			    )
 			
-			VAR mediana = 
-			    MEDIANX(
-			        tab_dati,
-			        [qta_vendite_anno]
-			    )
-			
-			VAR forecast = mediana
 			RETURN
-			    forecast
+			    MEDIANX(TabellaStorica, [Qta_Vendite])
 			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast quantità basato su mediana storica"
@@ -761,7 +727,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo Netto Doc Vendita OLD' =
-			
+			// Calcolo legacy del prezzo netto unitario: Importo Netto / Quantità Articolo
 			DIVIDE ( [Importo Netto FILTER Doc Vendita], [Qta Doc Vendita Articolo], 0 )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		annotation PBI_Description = "Prezzo netto da documenti (versione precedente)"
@@ -770,42 +736,39 @@
 
 	measure 'Costo Prodotto' = ```
 			
-			VAR cod_cliente =
-			    SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
-			VAR filtro_anno =
-			    SELECTEDVALUE ( DIM_Calendario[Year] )
-			VAR qta_cliente =
+			// Calcola il costo prodotto aggregato per cliente e anno confrontando vendite documenti e costi CG
+			VAR CodiceCliente = SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
+			VAR AnnoFiltro = SELECTEDVALUE ( DIM_Calendario[Year] )
+			VAR QtaCliente =
 			    CALCULATE (
 			        [Qta Doc Vendita Articolo],
-			        'FACT_DocumentoVendita'[CodiceClienteFatturazione] = cod_cliente
-			            && YEAR ( 'FACT_DocumentoVendita'[DataSpedizione] ) = VALUE ( filtro_anno )
+			        'FACT_DocumentoVendita'[CodiceClienteFatturazione] = CodiceCliente &&
+			        YEAR ( 'FACT_DocumentoVendita'[DataSpedizione] ) = VALUE ( AnnoFiltro )
 			    )
-			VAR costo_prod =
+			VAR CostoTotaleGPL =
 			    CALCULATE (
 			        [COSTO GPL],
-			        YEAR ( FACT_MovimentiCG[DataRegistrazione] ) = VALUE ( filtro_anno )
+			        YEAR ( FACT_MovimentiCG[DataRegistrazione] ) = VALUE ( AnnoFiltro )
 			    )
-			VAR costo_cli =
-			    DIVIDE ( [COSTO GPL], qta_cliente, 0 )
 			RETURN
-			    qta_cliente & "_" & [COSTO GPL]
+			    QtaCliente & "_" & CostoTotaleGPL
 			```
 		annotation PBI_Description = "Calcolo del costo prodotto per cliente e anno"
 
 	measure 'Costo Prodotto 2' =
-			
+			// Costo prodotto filtrato specificamente per il cliente C00033
 			CALCULATE ( [Costo Prodotto], DIM_Clienti[CodiceCliente] = "C00033" )
 		annotation PBI_Description = "Costo prodotto specifico per cliente C00033"
 
 	measure '% Importo Margine Doc Vendita' =
-			
+			// Incidenza percentuale del margine sull'importo netto dei documenti
 			DIVIDE ( [Importo Margine Doc Vendita], [Importo Netto Doc Vendita], 0 )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Percentuale del margine sull'importo netto da documenti"
 
 	measure 'Margine Ton Doc Vendita' =
-			
+			// Margine unitario per tonnellata: Prezzo Netto - CMP Acquisto
 			[Prezzo Netto Doc Vendita OLD] - [CMP Acquisto]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite Documento
@@ -814,7 +777,7 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Prezzo Netto Doc Vendita' =
-			
+			// Prezzo netto unitario: Importo Netto / Quantità Fatturata
 			DIVIDE ( [Importo Netto FILTER Doc Vendita], [Qta Doc Vendita FT], 0 )
 		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
 		displayFolder: KPI Vendite Documento
@@ -823,10 +786,10 @@
 		changedProperty = FormatString
 
 	measure 'Prezzo Trasporto Doc Vendita' =
-			
+			// Media dei costi di trasporto unitari registrati nelle righe articolo dei documenti
 			CALCULATE (
-			    AVERAGEX ( 'FACT_DocumentoVendita', 'FACT_DocumentoVendita'[CostoTrasporto] ),
-			    'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
+				AVERAGEX ( 'FACT_DocumentoVendita', 'FACT_DocumentoVendita'[CostoTrasporto] ),
+				'FACT_DocumentoVendita'[TipoRiga] = "Articolo"
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Prezzo medio di trasporto da documenti"
@@ -834,11 +797,11 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo Doc Vendita - Trasporto' =
-			
+			// Prezzo unitario al netto del trasporto: (Importo - Trasporto) / Qta Gruppo Articolo
 			DIVIDE (
-			    [Importo Doc Vendita - Trasporto],
-			    [Qta Doc Vendita Gruppo Articolo],
-			    0
+				[Importo Doc Vendita - Trasporto],
+				[Qta Doc Vendita Gruppo Articolo],
+				0
 			)
 		displayFolder: KPI Vendite Documento
 		annotation PBI_Description = "Prezzo al netto del trasporto"
@@ -847,9 +810,10 @@
 
 	measure 'Prezzo Vendita' = ```
 			
+			    // Calcola il prezzo medio di vendita filtrando per le categorie principali di ricavo
 			    CALCULATE(
-			        DIVIDE([Importo Vendita],[Qta Vendita],0),
-			        'FACT_DocumentoVendita'[CodiceCategoria] IN {"NAZ","UE","NAZPERM"}
+			        DIVIDE([Importo Vendita], [Qta Vendita], 0),
+			        'FACT_DocumentoVendita'[CodiceCategoria] IN {"NAZ", "UE", "NAZPERM"}
 			    )
 			```
 		displayFolder: KPI Vendite Documento
@@ -859,9 +823,9 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita Forecast Media 2' = ```
-			AVERAGEX(DIM_Calendario,[Qta Vendita Forecast])
-			```
+	measure 'Qta Vendita Forecast Media 2' =
+			// Media complessiva del forecast quantità
+			AVERAGEX(DIM_Calendario, [Qta Vendita Forecast])
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Media del forecast quantità sull'intero calendario"
 
@@ -869,29 +833,24 @@
 
 	measure 'Qta Vendita Forecast NEW' = ```
 			
+			// Forecast quantità basato sulla proiezione CAGR (Compound Annual Growth Rate) storica
+			VAR AnnoCorrente = SELECTEDVALUE(DIM_Calendario[Year])
+			VAR PrimoAnno = MIN(DIM_Calendario[Year])
+			VAR UltimoAnno = MAX(DIM_Calendario[Year])
+			VAR NrAnniProiezione = AnnoCorrente - UltimoAnno
 			
-			VAR CurYear = SELECTEDVALUE(DIM_Calendario[Year])
-			VAR FirstYear = MIN(DIM_Calendario[Year])
-			VAR LastYear = MAX(DIM_Calendario[Year])
-			VAR No_of_years = CurYear - LastYear
-			
-			VAR qta_last_year = CALCULATE([Qta Vendita], DIM_Calendario[Year] = LastYear)
-			VAR qta_first_year = CALCULATE([Qta Vendita], DIM_Calendario[Year] = FirstYear)
+			VAR QtaUltimoAnno = CALCULATE([Qta Vendita], DIM_Calendario[Year] = UltimoAnno)
+			VAR QtaPrimoAnno = CALCULATE([Qta Vendita], DIM_Calendario[Year] = PrimoAnno)
 			
 			VAR CAGR = POWER(
-			                DIVIDE(qta_last_year,qta_first_year),
-			                DIVIDE(1,LastYear - FirstYear)
+			                DIVIDE(QtaUltimoAnno, QtaPrimoAnno),
+			                DIVIDE(1, UltimoAnno - PrimoAnno)
 			            ) - 1
 			
-			VAR forecast = qta_last_year * POWER((1 + CAGR), No_of_years)
+			VAR ForecastCAGR = QtaUltimoAnno * POWER((1 + CAGR), NrAnniProiezione)
 			
 			RETURN
-			
-			    IF(
-			        CurYear > LastYear,
-			        forecast
-			    )
-			
+			    IF( AnnoCorrente > UltimoAnno, ForecastCAGR )
 			```
 		formatString: 0.00
 		displayFolder: KPI Forecast
@@ -901,9 +860,10 @@
 
 	measure 'Qta Vendita Data Reg' = ```
 			
+			    // Forza il calcolo delle quantità utilizzando la relazione inattiva con DataRegistrazione
 			    CALCULATE(
 			        [Qta Vendita],
-			        USERELATIONSHIP(DIM_Calendario[Date],'FACT_DocumentoVendita'[DataRegistrazione])
+			        USERELATIONSHIP(DIM_Calendario[Date], 'FACT_DocumentoVendita'[DataRegistrazione])
 			    )
 			```
 		displayFolder: KPI Qta
@@ -911,20 +871,22 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita Forecast 3Y' = DIVIDE([Qta Vendita LY] + [Qta Vendita 2LY] + [Qta Vendita 3LY], 3,0)
+	measure 'Qta Vendita Forecast 3Y' =
+			// Forecast semplificato basato sulla media delle quantità degli ultimi 3 anni (LY, 2LY, 3LY)
+			DIVIDE([Qta Vendita LY] + [Qta Vendita 2LY] + [Qta Vendita 3LY], 3, 0)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast quantità basato sulla media degli ultimi 3 anni"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Forecast 3Y CUM' =
-			
+			// Somma progressiva del forecast 3 anni
 			CALCULATE (
-			    [Qta Vendita Forecast 3Y],
-			    FILTER (
-			        ALLSELECTED ( DIM_Calendario[Date] ),
-			        DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+				[Qta Vendita Forecast 3Y],
+				FILTER (
+					ALLSELECTED ( DIM_Calendario[Date] ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast 3 anni cumulato"
@@ -933,34 +895,35 @@
 
 	measure 'Qta Vendita NEW' = ```
 			
+			// Nuova misura di quantità per test architettura Star Schema (mappa articoli su MIX e PROPANO)
+			VAR GruppoProdotto = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			
-			VAR qta_mix = CALCULATE(
+			VAR QtaMix = CALCULATE(
 			        SUMX('FACT_Vendite', 'FACT_Vendite'[Quantity]),
-			        'FACT_Vendite'[CodiceArticolo] IN {"1","1T"}
-			)
+			        'FACT_Vendite'[CodiceArticolo] IN {"1", "1T"}
+			    )
 			
-			VAR qta_propano = CALCULATE(
+			VAR QtaPropano = CALCULATE(
 			        SUMX('FACT_Vendite', 'FACT_Vendite'[Quantity]),
-			        'FACT_Vendite'[CodiceArticolo] IN {"2","2T"}
-			)
+			        'FACT_Vendite'[CodiceArticolo] IN {"2", "2T"}
+			    )
 			    
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", qta_mix,
-			        filtro_gruppo = "PROPANO", qta_propano,
-			        filtro_gruppo = BLANK (), qta_mix + qta_propano
+			        GruppoProdotto = "MIX", QtaMix,
+			        GruppoProdotto = "PROPANO", QtaPropano,
+			        QtaMix + QtaPropano
 			    )
-			
 			```
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Nuova misura quantità per test star schema"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Bar = MIN([Importo Vendita],[Importo Vendita Forecast])
+	measure Bar =
+			// Restituisce il valore minimo tra il reale e il forecast (utilizzata per visualizzazione grafici target)
+			MIN([Importo Vendita], [Importo Vendita Forecast])
 		displayFolder: Target vs Actual CHART
 		annotation PBI_Description = "Base per grafico Target vs Actual"
 
@@ -968,36 +931,22 @@
 
 	measure 'Importo Vendita Forecast' = ```
 			
-			
-			VAR first_year = VALUE(MIN(DIM_Calendario[YEAR]))
-			
-			VAR tab_dati = 
+			// Forecast del fatturato basato sulla media storica mensile degli anni passati
+			VAR PrimoAnno = VALUE(MIN(DIM_Calendario[YEAR]))
+			VAR TabellaStorica =
 			    FILTER(
-			    	SUMMARIZE(
+			        SUMMARIZE(
 			            DIM_Calendario,
 			            DIM_Calendario[Year],
 			            DIM_Calendario[MonthName],
-			            "importo_vendite_anno", [Importo Vendita]
-			    	),
-			    	VALUE(DIM_Calendario[Year]) >= first_year &&
-				VALUE(DIM_Calendario[Year]) <= YEAR(TODAY())
-			    	
+			            "Importo_Vendite", [Importo Vendita]
+			        ),
+			        VALUE(DIM_Calendario[Year]) >= PrimoAnno && VALUE(DIM_Calendario[Year]) <= YEAR(TODAY())
 			    )
 			
-			VAR media = 
-			    AVERAGEX(
-			        tab_dati,
-			        [importo_vendite_anno]
-			    )
-			
-			VAR forecast = media
+			VAR MediaStorica = AVERAGEX(TabellaStorica, [Importo_Vendite])
 			RETURN
-			    IF(
-			        forecast <> BLANK(),
-			        forecast,
-			        0
-			    )
-			
+			    IF( MediaStorica <> BLANK(), MediaStorica, 0 )
 			```
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Forecast importo vendita basato su medie storiche"
@@ -1005,91 +954,84 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Unmet Bar' =
-			
+			// Calcola la quota di target non ancora raggiunta per la visualizzazione a barre
 			VAR Sales = [Importo Vendita]
 			VAR Target = [Importo Vendita Forecast]
+			VAR Marker = [Marker Value]
+			VAR Base = [Bar]
 			RETURN
-			    IF(
-			        Target > Sales,
-			        [Marker Value] - [Bar]
-			    )
+				IF( Target > Sales, Marker - Base )
 		displayFolder: Target vs Actual CHART
 		annotation PBI_Description = "Quota mancante per raggiungere il target (grafico)"
 
 	measure 'Met Bar' =
-			
+			// Calcola la quota di target superata per la visualizzazione a barre
 			VAR Sales = [Importo Vendita]
 			VAR Target = [Importo Vendita Forecast]
+			VAR Marker = [Marker Value]
+			VAR Base = [Bar]
 			RETURN
-			    IF(
-			        Sales >= Target,
-			        [Marker Value] - [Bar]
-			    )
+				IF( Sales >= Target, Marker - Base )
 		displayFolder: Target vs Actual CHART
 		annotation PBI_Description = "Quota raggiunta del target (grafico)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Marker Value' = MAX([Importo Vendita],[Importo Vendita Forecast])
+	measure 'Marker Value' =
+			// Valore massimo tra il consuntivo e il target per definire il limite del marker nel grafico
+			MAX([Importo Vendita], [Importo Vendita Forecast])
 		displayFolder: Target vs Actual CHART
 		annotation PBI_Description = "Valore massimo tra vendita e target (per marker grafico)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita PREV' = SUM(LinestResult[Intercept]) + SUM(LinestResult[Slope1])*SUM('FACT_Vendite'[Date])
+	measure 'Qta Vendita PREV' =
+			// Proiezione della quantità venduta utilizzando i coefficienti Slope e Intercept calcolati via LINEST
+			SUM(LinestResult[Intercept]) + SUM(LinestResult[Slope1]) * SUM('FACT_Vendite'[Date])
 		displayFolder: KPI Forecast
 		annotation PBI_Description = "Quantità prevista tramite LINEST"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Vendita CONTINUA' = ```
-			
-			    IF(ISBLANK([Qta Vendita]),
-			        [Qta Vendita AVG Month],
-			        [Qta Vendita]
-			    )
-			```
+	measure 'Qta Vendita CONTINUA' =
+			// Quantità venduta che riempie i valori nulli (gap) con la media mensile (utile per analisi di trend)
+			IF(ISBLANK([Qta Vendita]), [Qta Vendita AVG Month], [Qta Vendita])
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta continua (riempie i vuoti con la media)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita AVG Month' =
-			
+			// Media semplice delle quantità vendute aggregate per mese e anno
 			AVERAGEX ( VALUES(DIM_Calendario[MonthnYear]), [Qta Vendita] )
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Media mensile della quantità venduta"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Diff Actual/Previous' = [Value Previous] - SELECTEDMEASURE()
+	measure 'Diff Actual/Previous' =
+			// Calcola la variazione tra il valore della misura selezionata e lo stesso valore nel periodo precedente
+			[Value Previous] - SELECTEDMEASURE()
 		annotation PBI_Description = "Differenza tra valore attuale e periodo precedente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Prodotto' = ```
 			
+			// Calcola la quantità venduta totale applicando uno switch logico tra i prodotti (PROPANO/MIX)
+			VAR GruppoProdotto = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
 			
-			 
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
-			
-			VAR qta_propano = [Qta Vendita]
-			VAR qta_mix = [Qta Doc Vendita IPEM]
-			VAR qta_tot = qta_propano + qta_mix
-			
-			VAR qta = 
-			    { 
-			        SWITCH (
-			            TRUE (),
-			            filtro_gruppo = "PROPANO", qta_propano,
-			            filtro_gruppo = "MIX", qta_mix,
-			            qta_tot
-			        )
-			    }
+			VAR QtaPropano = [Qta Vendita]
+			VAR QtaMix = [Qta Doc Vendita IPEM]
+			VAR QtaTotale = QtaPropano + QtaMix
 			
 			RETURN
-			    qta
+			    SWITCH (
+			        TRUE (),
+			        GruppoProdotto = "PROPANO", QtaPropano,
+			        GruppoProdotto = "MIX", QtaMix,
+			        QtaTotale
+			    )
 			```
 		displayFolder: KPI Qta
 		annotation PBI_Description = "Quantità venduta per prodotto con logica di switch"

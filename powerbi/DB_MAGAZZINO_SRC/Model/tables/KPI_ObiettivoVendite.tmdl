@@ -1,6 +1,9 @@
 ﻿table KPI_ObiettivoVendite
 
-	measure 'Valore Obiettivo Vendite' = SELECTEDVALUE('KPI_ObiettivoVendite'[Obiettivo Vendite])
+	measure 'Valore Obiettivo Vendite' =
+			// Restituisce il valore dell'obiettivo di vendita selezionato dal parametro
+			SELECTEDVALUE('KPI_ObiettivoVendite'[Obiettivo Vendite])
+		annotation PBI_Description = "Valore obiettivo vendite (da parametro)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -22,4 +25,3 @@
 		source = GENERATESERIES([Qta Vendita CUM], 10000000, 1000)
 
 	annotation PBI_Id = 64bf9f735e764451bfb0b374bf41f363
-

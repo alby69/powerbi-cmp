@@ -1,10 +1,16 @@
 ﻿table FACT_Vendite
 
-	measure 'Qta Tab Vendite' = SUMX('FACT_Vendite','FACT_Vendite'[Quantity])
+	measure 'Qta Tab Vendite' =
+			// Somma totale delle quantità presenti nella tabella FACT_Vendite
+			SUMX('FACT_Vendite', 'FACT_Vendite'[Quantity])
+		annotation PBI_Description = "Somma quantità tabella vendite"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure '# Qta Vendite' = SUM('FACT_Vendite'[CountQta])
+	measure '# Qta Vendite' =
+			// Conteggio totale dei movimenti di vendita (basato sulla colonna CountQta)
+			SUM('FACT_Vendite'[CountQta])
+		annotation PBI_Description = "Conteggio record vendite"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -61,17 +67,16 @@
 		annotation SummarizationSetBy = Automatic
 
 	column Gruppo =
-			
 			IF (
-			    'FACT_Vendite'[CodiceCategoria] = "NAZPERM",
-			    SWITCH (
-			        TRUE(),
-			        'FACT_Vendite'[CodiceSoggetto] = "C00261", "LIQUIGAS",
-			        'FACT_Vendite'[CodiceSoggetto] = "C00229", "BUTANGAS",
-			        'FACT_Vendite'[CodiceSoggetto] = "C00525", "ANORD",
-			        "IPEM"
-			    ),
-			    BLANK()
+				'FACT_Vendite'[CodiceCategoria] = "NAZPERM",
+				SWITCH (
+					TRUE(),
+					'FACT_Vendite'[CodiceSoggetto] = "C00261", "LIQUIGAS",
+					'FACT_Vendite'[CodiceSoggetto] = "C00229", "BUTANGAS",
+					'FACT_Vendite'[CodiceSoggetto] = "C00525", "ANORD",
+					"IPEM"
+				),
+				BLANK()
 			)
 		summarizeBy: none
 

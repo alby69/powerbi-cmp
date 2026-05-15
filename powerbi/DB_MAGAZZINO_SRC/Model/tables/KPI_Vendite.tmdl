@@ -1,21 +1,24 @@
 ﻿table KPI_Vendite
 
 	measure 'Importo Vendite (Doc)' =
-			
+			// Restituisce l'importo totale delle vendite dai documenti
 			[Importo Vendita]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Importo vendite basato su documenti di vendita"
 
 	measure 'Margine Cliente' =
-			
-			[Importo Vendite (Doc)] - [Costo Venduto Cliente]
+			// Calcola il margine assoluto per cliente
+			VAR Vendite = [Importo Vendite (Doc)]
+			VAR Costo = [Costo Venduto Cliente]
+			RETURN
+				Vendite - Costo
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Margine calcolato come differenza tra vendite e costo venduto"
 
 	measure 'Importo Acquisti' =
-			
+			// Importo totale degli acquisti
 			[Importo Acquisto]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
@@ -24,8 +27,11 @@
 		changedProperty = FormatString
 
 	measure '% Margine Cliente' =
-			
-			DIVIDE ( [Margine Cliente], [Importo Vendite (Doc)], 0 )
+			// Percentuale di marginalità sul fatturato
+			VAR Margine = [Margine Cliente]
+			VAR Vendite = [Importo Vendite (Doc)]
+			RETURN
+				DIVIDE ( Margine, Vendite, 0 )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Percentuale di margine sul cliente"
@@ -33,7 +39,7 @@
 		changedProperty = FormatString
 
 	measure '% Margine Cliente LY' =
-			
+			// Marginalità percentuale dello stesso periodo dell'anno precedente
 			CALCULATE ( [% Margine Cliente], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Margine
@@ -42,12 +48,15 @@
 		changedProperty = FormatString
 
 	measure '% Crescita Margine' =
-			
-			DIVIDE (
-			    [% Margine Cliente] - [% Margine Cliente LY],
-			    [% Margine Cliente LY],
-			    0
-			)
+			// Variazione percentuale della marginalità rispetto all'anno precedente
+			VAR MargineAttuale = [% Margine Cliente]
+			VAR MarginePrecedente = [% Margine Cliente LY]
+			RETURN
+				DIVIDE (
+					MargineAttuale - MarginePrecedente,
+					MarginePrecedente,
+					0
+				)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Percentuale di crescita del margine rispetto allo scorso anno"
@@ -57,8 +66,11 @@
 		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"Clienti_Fatt_Vendita","TableItemName":"Nome & Codice (cluster)","ObjectType":4},"LinkType":"UsedInGroup"}]
 
 	measure '% Crescita YoY' =
-			
-			DIVIDE ( [Importo Vendite (Doc)] - [Importo Vendite (Doc) LY], [Importo Vendite (Doc) LY], 0 )
+			// Crescita percentuale del fatturato anno su anno
+			VAR VenditeAttuali = [Importo Vendite (Doc)]
+			VAR VenditePrecedenti = [Importo Vendite (Doc) LY]
+			RETURN
+				DIVIDE ( VenditeAttuali - VenditePrecedenti, VenditePrecedenti, 0 )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Percentuale di crescita delle vendite anno su anno"
@@ -68,7 +80,7 @@
 		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"Clienti_Fatt_Vendita","TableItemName":"Nome & Codice (cluster)","ObjectType":4},"LinkType":"UsedInGroup"}]
 
 	measure 'Importo Vendite (Doc) LY' =
-			
+			// Fatturato dello stesso periodo dell'anno precedente
 			CALCULATE ( [Importo Vendite (Doc)], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
@@ -77,7 +89,7 @@
 		changedProperty = FormatString
 
 	measure 'Margine Cliente LY' =
-			
+			// Margine assoluto dello stesso periodo dell'anno precedente
 			CALCULATE ( [Margine Cliente], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
@@ -86,8 +98,11 @@
 		changedProperty = FormatString
 
 	measure 'Costo Venduto Cliente' =
-			
-			[Qta Vendita] * [CMP Acquisto Prodotto]
+			// Valorizzazione del venduto: Quantità x Costo Medio Ponderato (CMP)
+			VAR Quantita = [Qta Vendita]
+			VAR CMP = [CMP Acquisto Prodotto]
+			RETURN
+				Quantita * CMP
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
 		annotation PBI_Description = "Costo del venduto calcolato su quantità venduta e CMP"
@@ -97,11 +112,12 @@
 
 	measure '# Nuovi Clienti' = ```
 			
-			// Calcola nr di clienti che hanno acquistato in un certo mese e non acquistano da nr_giorni
-			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[Codice Cliente Fatturazione] )
+			// Conta i clienti che hanno effettuato il primo acquisto nel periodo selezionato
+			// Un cliente è considerato "nuovo" se non ha acquistato nei precedenti N giorni (default 90)
+			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni], 90)
+			VAR Tab_Clienti_Attuali = VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione] )
 			
-			VAR Clienti_Precedenti =
+			VAR Clienti_Storici =
 			    CALCULATETABLE (
 			        VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione]  ),
 			        FILTER (
@@ -112,8 +128,7 @@
 			    )
 			RETURN
 			    COUNTROWS (
-			        EXCEPT ( Tab_Clienti, Clienti_Precedenti )
-			        // estrae nr Clienti in Tab_Clienti ma non presenti in Clienti_Precedenti
+			        EXCEPT ( Tab_Clienti_Attuali, Clienti_Storici )
 			    )
 			```
 		formatString: 0
@@ -121,12 +136,10 @@
 		annotation PBI_Description = "Numero di nuovi clienti che non acquistavano da N giorni"
 
 	measure '# Clienti Persi' =
-			
-			// Clienti che non acquistano da 365 giorni si considerano persi
+			// Calcola i clienti "persi": quelli che hanno acquistato in passato (fino a 365 gg fa)
+			// ma non hanno effettuato acquisti negli ultimi N giorni (default 60)
 			VAR nr_giorni = 60
-			VAR Tab_Clienti_Vendita = VALUES ('FACT_DocumentoVendita'[CodiceClienteFatturazione]  )
-			
-			VAR Tab_Clienti_Attivi =
+			VAR Tab_Clienti_Attivi_Passato =
 			    CALCULATETABLE (
 			        VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione]  ),
 			        FILTER (
@@ -135,7 +148,7 @@
 			            DIM_Calendario[Date] <= MIN ( DIM_Calendario[Date] ) - nr_giorni
 			        )
 			    )
-			VAR Clienti_Precedenti =
+			VAR Clienti_Recenti =
 			    CALCULATETABLE (
 			        VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione]  ),
 			        FILTER (
@@ -145,141 +158,143 @@
 			        )
 			    )
 			RETURN
-			    COUNTROWS ( EXCEPT ( Tab_Clienti_Attivi, Clienti_Precedenti ) ) * -1
+			    COUNTROWS ( EXCEPT ( Tab_Clienti_Attivi_Passato, Clienti_Recenti ) ) * -1
 		formatString: 0
 		displayFolder: KPI Churn
 		annotation PBI_Description = "Numero di clienti persi (non acquistano da 365 giorni)"
 
-	measure 'Data Ultimo Acquisto Cliente' = LASTDATE('FACT_DocumentoVendita'[Data Spedizione])
+	measure 'Data Ultimo Acquisto Cliente' =
+			// Restituisce la data dell'ultimo documento di vendita per il cliente nel contesto
+			LASTDATE('FACT_DocumentoVendita'[DataSpedizione])
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Data dell'ultima spedizione per il cliente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Data Ultimo Acquisto' = ```
-			
-			    MAXX(
-			        ALL('FACT_DocumentoVendita'),
-			       'FACT_DocumentoVendita'[DataSpedizione]
-			    )
-			```
+	measure 'Data Ultimo Acquisto' =
+			// Restituisce la data massima assoluta di vendita nel sistema (ignora i filtri temporali ma non quelli cliente)
+			MAXX(
+				ALL('FACT_DocumentoVendita'),
+				'FACT_DocumentoVendita'[DataSpedizione]
+			)
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Data massima di spedizione assoluta a sistema"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure '# Giorni da ultimo Acquisto' = ```
-			
-			    IF(
-			        ISBLANK([Data Ultimo Acquisto Cliente]),
-			        BLANK(),
-			        VALUE([Data Ultimo Acquisto] - [Data Ultimo Acquisto Cliente] )
-			    )
-			```
+	measure '# Giorni da ultimo Acquisto' =
+			// Calcola la distanza in giorni tra l'ultima vendita assoluta e l'ultima vendita del cliente
+			VAR DataUltimaCliente = [Data Ultimo Acquisto Cliente]
+			VAR DataUltimaAssoluta = [Data Ultimo Acquisto]
+			RETURN
+				IF(
+					ISBLANK(DataUltimaCliente),
+					BLANK(),
+					VALUE(DataUltimaAssoluta - DataUltimaCliente)
+				)
 		formatString: 0
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Giorni trascorsi dall'ultimo acquisto del cliente rispetto alla data massima di sistema"
 
 		changedProperty = FormatString
 
 	measure '# Clienti Persi (2)' = ```
 			
-			// Sono Clienti che non hanno acquistato negli ultimi nr_days, ma hanno acquistato prima
+			// Identifica i clienti che non hanno acquistato negli ultimi N giorni selezionati
+			VAR Lista_Tutti_Clienti = ALL('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni], 90)
 			
-			VAR Lista_Clienti = ALL('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
-			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			
-			VAR tab_data = 
+			VAR tab_periodo_controllo =
 			    FILTER(
 			        ALLSELECTED(DIM_Calendario),
 			        DIM_Calendario[Date] > ( MIN(DIM_Calendario[Date]) - nr_days ) &&
 			        DIM_Calendario[Date] < MIN(DIM_Calendario[Date])
 			    )
-			VAR tab_clienti_persi = 
+			VAR tab_clienti_senza_vendite =
 			    FILTER(
-			        Lista_Clienti,
+			        Lista_Tutti_Clienti,
 			        CALCULATE(
 			            COUNTROWS('FACT_DocumentoVendita'),
-			            tab_data
+			            tab_periodo_controllo
 			        ) = 0
 			    )
 			
 			RETURN
-			    COUNTROWS(tab_clienti_persi)
+			    COUNTROWS(tab_clienti_senza_vendite)
 			```
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Clienti senza acquisti nel range temporale selezionato"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '# Nuovi Clienti (2)' = ```
 			
-			// Sono Clienti che hanno acquistato negli ultimi nr_days, ma NON hanno acquistato prima
+			// Identifica i clienti che hanno acquistato ora ma non avevano MAI acquistato prima della data minima selezionata
+			VAR Clienti_Attuali = VALUES('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni], 90)
 			
-			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
-			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			
-			VAR tab_data = 
+			VAR tab_calendario_storico =
 			    FILTER(
 			        ALLSELECTED(DIM_Calendario),
 			        DIM_Calendario[Date] < MIN(DIM_Calendario[Date])
 			    )
 			
-			VAR tab_clienti_nuovi = 
+			VAR tab_nuovi =
 			    FILTER(
-			        Lista_Clienti,
+			        Clienti_Attuali,
 			        CALCULATE(
 			            COUNTROWS('FACT_DocumentoVendita'),
-			            tab_data
+			            tab_calendario_storico
 			        ) = 0
 			    )
 			
 			RETURN
 			    CALCULATE(
 			        COUNTROWS(VALUES('FACT_DocumentoVendita'[CodiceClienteFatturazione])),
-			            tab_clienti_nuovi
+			        tab_nuovi
 			    )
-			
-			
 			```
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Clienti al loro primo acquisto assoluto nel periodo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '# Clienti Ritornati' = ```
 			
+			// Clienti che hanno acquistato nel periodo attuale e avevano acquistato in passato,
+			// ma non nel periodo immediatamente precedente (definito da nr_days)
+			VAR Clienti_Attuali = VALUES('FACT_DocumentoVendita'[CodiceClienteFatturazione])
+			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni], 90)
 			
-			// Sono Clienti che hanno acquistato negli ultimi nr_days e anche prima
-			
-			VAR Lista_Clienti = VALUES('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
-			VAR nr_days = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			
-			VAR tab_data =
+			VAR tab_finestra_assenza =
 			    FILTER(
 			        ALLSELECTED(DIM_Calendario),
 			        DIM_Calendario[Date] > ( MIN(DIM_Calendario[Date]) - nr_days ) &&
 			        DIM_Calendario[Date] < MIN(DIM_Calendario[Date])
 			    )
 			
-			
-			VAR tab_clienti_ritornati = 
+			VAR tab_ritornati =
 			    FILTER(
-			        Lista_Clienti,
+			        Clienti_Attuali,
 			        CALCULATE(
 			            COUNTROWS('FACT_DocumentoVendita'),
-			            tab_data
+			            tab_finestra_assenza
 			        ) = 0
 			    )
 			
 			RETURN
-			    COUNTROWS(tab_clienti_ritornati)
-			// valuta nr_clienti ritornati se non ci sono vendite negli ultimi nr_days
+			    COUNTROWS(tab_ritornati)
 			```
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Clienti che tornano ad acquistare dopo un periodo di inattività"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendite' =
-			
+			// Somma delle quantità in tonnellate filtrate per movimenti di tipo 'Vendita' in FACT_Magazzino
 			CALCULATE (
-			    ABS ( [Qta Ton] ),
-			    FILTER ( FACT_Magazzino, FACT_Magazzino[TipoMovimento] = "Vendita" )
+				ABS ( [Qta Ton] ),
+				FACT_Magazzino[TipoMovimento] = "Vendita"
 			)
 		formatString: #,0.00
 		displayFolder: KPI Vendite
@@ -289,23 +304,14 @@
 
 	measure 'Prezzo Medio Vendita' = ```
 			
-			 CALCULATE(
+			// Calcola il prezzo medio unitario per le categorie NAZ, UE e NAZPERM
+			CALCULATE(
 			    AVERAGEX(
 			        'FACT_DocumentoVendita',
-			        'FACT_DocumentoVendita'[PrezzoUnitario]),
-			    'FACT_DocumentoVendita'[CodiceCategoria] IN {"NAZ","UE","NAZPERM"}
-			 )
-			
-			/*        
-			VAR filtro_vendite =
-			    { SELECTEDVALUE ( DIM_GruppiVendita[Gruppo], BLANK () ) }
-			RETURN
-			    IF (
-			        filtro_vendite = "PASSAGGIO",
-			        [Prezzo Passaggio],
-			        [Prezzo Netto Doc Vendita] - [Prezzo Trasporto Doc Vendita]
-			    )
-			*/    
+			        'FACT_DocumentoVendita'[PrezzoUnitario]
+			    ),
+			    'FACT_DocumentoVendita'[CodiceCategoria] IN {"NAZ", "UE", "NAZPERM"}
+			)
 			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
@@ -316,46 +322,48 @@
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Rank Cliente' =
-			
-			RANKX ( ALL ( DIM_Clienti ), [Importo Vendita],, DESC )
+			// Classifica i clienti in base all'importo delle vendite
+			RANKX ( ALL ( DIM_Clienti ), [Importo Vendita], , DESC )
 		formatString: 0
 		displayFolder: KPI Vendite
 		annotation PBI_Description = "Classifica del cliente per importo vendita"
 
 	measure 'Top 10 Clienti Vendite' =
-			
-			IF (
-			    ISFILTERED ( DIM_Clienti[Nome] ),
-			    IF ( [Rank Cliente] <= 10, [Importo Vendite (CG)], BLANK () ),
-			    CALCULATE (
-			        [Importo Vendite (CG)],
-			        TOPN ( 10, VALUES ( DIM_Clienti[Nome] ), [Importo Vendite (CG)] )
-			    )
-			)
+			// Restituisce l'importo vendite solo per i primi 10 clienti in classifica
+			VAR Classifica = [Rank Cliente]
+			RETURN
+				IF (
+					ISFILTERED ( DIM_Clienti[Nome] ),
+					IF ( Classifica <= 10, [Importo Vendite (CG)], BLANK () ),
+					CALCULATE (
+						[Importo Vendite (CG)],
+						TOPN ( 10, VALUES ( DIM_Clienti[Nome] ), [Importo Vendite (CG)] )
+					)
+				)
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Vendite
 		annotation PBI_Description = "Importo vendite per i primi 10 clienti"
 
 	measure 'Importo Vendite (CG)' =
-			
-			IF (
-			    [Importo Clienti Vendite] <> 0,
-			    [Importo Clienti Vendite],
-			    //[Importo Clienti Vendite] - [Recupero Spese Trasporto],
-			    [Importo Clienti Passaggi]
-			)
+			// Valore delle vendite derivante dalla Contabilità Generale (CG)
+			// Se presente l'importo clienti vendite usa quello, altrimenti usa i passaggi
+			VAR VenditeCG = [Importo Clienti Vendite]
+			VAR PassaggiCG = [Importo Clienti Passaggi]
+			RETURN
+				IF (
+					VenditeCG <> 0,
+					VenditeCG,
+					PassaggiCG
+				)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
 		annotation PBI_Description = "Importo vendite basato sui movimenti di contabilità generale (CG)"
 
 	measure 'Importo Clienti Passaggi' =
-			
+			// Fatturato relativo ai conti di 'Passaggio' (Conti 31*)
 			CALCULATE (
-			    ABS ( [Importo] ),
-			    FILTER (
-			        FACT_MovimentiCG,
-			        FACT_MovimentiCG[Conto] IN { "3100001", "3100002", "3100003", "3100004" }
-			    )
+				ABS ( [Importo] ),
+				FACT_MovimentiCG[Conto] IN { "3100001", "3100002", "3100003", "3100004" }
 			)
 		displayFolder: KPI Vendite
 		annotation PBI_Description = "Importo vendite per passaggi (conti CG 31*)"
@@ -364,148 +372,131 @@
 
 	measure 'Importo Clienti Vendite' = ```
 			
-			//VAR filtro_conti = {"3000002","3000003","3000004","3000005"}
-			VAR filtro_conti = { "3000002", "3000003", "3000005" }
-			VAR filtro_anno =
-			    { SELECTEDVALUE ( DIM_Calendario[Year], 0 ) }
-			VAR filtro_mese =
-			    { SELECTEDVALUE ( DIM_Calendario[MonthName], 0 ) }
-			VAR filtro_cliente =
-			    { SELECTEDVALUE ( DIM_Clienti[Nome] ) }
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
-			VAR filtro_doc =
-			    { SELECTEDVALUE ( 'FACT_DocumentoVendita'[Documento] ) }
-			VAR filtro_progetto =
+			// Filtra i movimenti CG per i conti ricavi (30*) e per tipo Fattura/Nota Credito
+			VAR ContiRicavi = { "3000002", "3000003", "3000005" }
+			VAR ProdottoSelezionato = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] )
+			VAR ProgettoCG =
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "PROPANO", "PROPAN",
-			        filtro_gruppo = "MIX", "MIX",
-			        filtro_gruppo = BLANK (), BLANK ()
+			        ProdottoSelezionato = "PROPANO", "PROPAN",
+			        ProdottoSelezionato = "MIX", "MIX",
+			        BLANK ()
 			    )
-			VAR tab_filtro =
+
+			VAR TabellaFiltrata =
 			    FILTER (
 			        'FACT_MovimentiCG',
-			        //FORMAT(YEAR(FACT_MovimentiCG[Document Date]),"String") IN filtro_anno &&
-			        FACT_MovimentiCG[Conto]
-			            IN filtro_conti
-			            && //FACT_MovimentiCG[Source No_] IN filtro_cliente ||
-			        FACT_MovimentiCG[Progetto] = filtro_progetto
-			            && //FORMAT(MONTH(FACT_MovimentiCG[Document Date]),"String") IN filtro_mese ||                                    
-			        //FACT_MovimentiCG[Document No_] = filtro_doc ||            
-			        FACT_MovimentiCG[Tipo Documento]
-			            IN { "Fattura", "Nota Credito" }
-			    ) /*
-			VAR tab_filtro = 
-					FILTER(
-						ALL('FACT_MovimentiCG'),
-			            //FACT_MovimentiCG,
-			            FORMAT(YEAR(FACT_MovimentiCG[Document Date]),"String") IN filtro_anno &&
-			            FACT_MovimentiCG[Conto CG] IN filtro_conti &&
-			            FACT_MovimentiCG[Source No_] IN filtro_cliente ||
-			            FACT_MovimentiCG[Progetto] = filtro_progetto ||            
-			            FORMAT(MONTH(FACT_MovimentiCG[Document Date]),"String") IN filtro_mese ||                                    
-			            //FACT_MovimentiCG[Document No_] = filtro_doc ||            
-			            FACT_MovimentiCG[Document Type] IN {"Fattura","Nota Credito"}                                   
-			            
-			        )
-			*/
-			VAR importo =
-			    CALCULATE ( ABS ( [Importo] ), tab_filtro )
+			        FACT_MovimentiCG[Conto] IN ContiRicavi &&
+			        (ISBLANK(ProgettoCG) || FACT_MovimentiCG[Progetto] = ProgettoCG) &&
+			        FACT_MovimentiCG[Tipo Documento] IN { "Fattura", "Nota Credito" }
+			    )
+
 			RETURN
-			    importo
+			    CALCULATE ( ABS ( [Importo] ), TabellaFiltrata )
 			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		displayFolder: KPI Vendite
+		annotation PBI_Description = "Importo ricavi da Contabilità Generale filtrato per conti 30*"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Prezzo Dirette' =
-			
+			// Prezzo medio per le vendite dirette (Ricavi CG / Qta Ton)
 			DIVIDE ( [Importo Clienti Vendite], [Qta Vendite], 0 )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Rapporto tra ricavi diretti CG e quantità venduta"
 
 	measure 'Prezzo Passaggio' =
-			
+			// Prezzo medio per i passaggi (Passaggi CG / Qta Ton)
 			DIVIDE ( [Importo Clienti Passaggi], [Qta Vendite], 0 )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Rapporto tra ricavi passaggi CG e quantità venduta"
 
 	measure 'Importo Acquisti Progressivo (NAVI)' =
-			
+			// Somma progressiva dei costi legati alle Navi (Acquisti)
 			CALCULATE (
-			    [Total Costs NAVI],
-			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+				[Total Costs NAVI],
+				FILTER (
+					ALL ( DIM_Calendario ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Costi totali navi accumulati nel tempo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '# Clienti Vendita' =
-			
+			// Conta i codici soggetti distinti che hanno effettuato una vendita in FACT_Magazzino
 			VAR Tab_Clienti_Vendita =
-			    CALCULATETABLE (
-			        VALUES ( FACT_Magazzino[Codice] ),
-			        FILTER ( FACT_Magazzino, FACT_Magazzino[Tipo Movimento] = "Vendita" )
-			    )
+				CALCULATETABLE (
+					VALUES ( FACT_Magazzino[Codice] ),
+					FACT_Magazzino[Tipo Movimento] = "Vendita"
+				)
 			RETURN
-			    COUNTROWS ( Tab_Clienti_Vendita )
+				COUNTROWS ( Tab_Clienti_Vendita )
 		formatString: 0
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Numero di clienti unici con movimenti di vendita"
 
 	measure 'Importo Vendite Gruppo Cliente' =
-			
+			// Calcola le vendite aggregate per gruppi definiti in base a soglie di importo
 			CALCULATE (
-			    [Importo Vendite (CG)],
-			    FILTER (
-			        VALUES ( FACT_MovimentiCG[Importo] ),
-			        COUNTROWS (
-			            FILTER (
-			                'Gruppo Vendite Clienti',
-			                FACT_MovimentiCG[Importo] >= MIN ( 'Gruppo Vendite Clienti'[Min] )
-			                    && FACT_MovimentiCG[Importo] < MAX ( 'Gruppo Vendite Clienti'[Max] )
-			            )
-			        ) > 0
-			    )
+				[Importo Vendite (CG)],
+				FILTER (
+					VALUES ( FACT_MovimentiCG[Importo] ),
+					COUNTROWS (
+						FILTER (
+							'Gruppo Vendite Clienti',
+							FACT_MovimentiCG[Importo] >= MIN ( 'Gruppo Vendite Clienti'[Min] )
+								&& FACT_MovimentiCG[Importo] < MAX ( 'Gruppo Vendite Clienti'[Max] )
+						)
+					) > 0
+				)
 			)
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Fatturato segmentato per cluster di importo cliente"
 
 	measure 'Qta Vendite Progressivo' =
-			
-			VAR tab_filtro =
-			    FILTER (
-			        ALL ( DIM_Calendario[Date] ),
-			        DIM_Calendario[Date] >= DATE ( 2015, 1, 1 )
-			            && DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+			// Quantità venduta accumulata a partire dal 2015
+			VAR tab_periodo_storico =
+				FILTER (
+					ALL ( DIM_Calendario[Date] ),
+					DIM_Calendario[Date] >= DATE ( 2015, 1, 1 )
+						&& DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			RETURN
-			    CALCULATE ( [Qta Vendite], tab_filtro )
+				CALCULATE ( [Qta Vendite], tab_periodo_storico )
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Somma progressiva delle quantità vendute (dal 2015)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo Medio Vendita Mix' = ```
 			
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			VAR filtro_calendario =
-			    { SELECTEDVALUE ( DIM_Calendario[MonthInCalendar] ) }
-			VAR tab_articolo =
-			    CALCULATETABLE ( DIM_Articoli, DIM_Articoli[GruppoProdotto] IN filtro_gruppo )
-			VAR filtro_articolo =
-			    SELECTCOLUMNS ( tab_articolo, "@Articolo", DIM_Articoli[CodiceArticolo] )
-			VAR tab_filtro =
+			// Calcola il prezzo medio ponderato per i prodotti del gruppo MIX
+			VAR GruppoArticolo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
+			VAR MeseCalendario = SELECTEDVALUE ( DIM_Calendario[MonthInCalendar] )
+
+			VAR ArticoliGruppo =
+			    CALCULATETABLE (
+			        SELECTCOLUMNS(DIM_Articoli, "@Codice", DIM_Articoli[CodiceArticolo]),
+			        DIM_Articoli[GruppoProdotto] = GruppoArticolo
+			    )
+
+			VAR TabellaMixFiltrata =
 			    FILTER (
 			        'FACT_Mix',
-			        'FACT_Mix'[CodiceArticolo]
-			            IN filtro_articolo
-			            && 'FACT_Mix'[MonthInCalendar] IN filtro_calendario
+			        'FACT_Mix'[CodiceArticolo] IN ArticoliGruppo &&
+			        'FACT_Mix'[MonthInCalendar] = MeseCalendario
 			    )
 			RETURN
 			    AVERAGEX (
-			        tab_filtro,
+			        TabellaMixFiltrata,
 			        'FACT_Mix'[Prezzo Euro Mese]
 			    )
 			```
@@ -514,93 +505,108 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Prezzo Permute' = [CMP Acquisto]
+	measure 'Prezzo Permute' =
+			// Il prezzo delle permute viene equiparato al Costo Medio Ponderato di acquisto
+			[CMP Acquisto]
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Prezzo di riferimento per le permute"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Vendite' = [Qta Vendita] * [Prezzo Medio Vendita]
+	measure 'Importo Vendite' =
+			// Calcolo teorico fatturato: Quantità Venduta x Prezzo Medio
+			[Qta Vendita] * [Prezzo Medio Vendita]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Fatturato teorico calcolato come Qta x Prezzo Medio"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Vendite OLD2' =
-			
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			VAR filtro_vendite =
-			    { SELECTEDVALUE ( DIM_GruppiVendita[CodiceCategoria], BLANK () ) }
+			// Logica di switch per determinare la fonte del fatturato in base al gruppo prodotto
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
+			VAR Categoria = SELECTEDVALUE ( DIM_GruppiVendita[CodiceCategoria], BLANK () )
 			RETURN
-			    SWITCH (
-			        TRUE (),
-			        filtro_gruppo = "MIX", [Importo Clienti Vendite],
-			        filtro_gruppo = "PROPANO",
-			            SWITCH (
-			                TRUE (),
-			                filtro_vendite = "DIRETTE", KPI_Vendite[Importo Clienti Vendite],
-			                filtro_vendite = "PASSAGGIO", KPI_Vendite[Importo Clienti Passaggi],
-			                filtro_vendite = "PERMUTE", BLANK ()
-			            ),
-			        filtro_gruppo = BLANK (), BLANK ()
-			    )
+				SWITCH (
+					TRUE (),
+					Gruppo = "MIX", [Importo Clienti Vendite],
+					Gruppo = "PROPANO",
+						SWITCH (
+							TRUE (),
+							Categoria = "DIRETTE", [Importo Clienti Vendite],
+							Categoria = "PASSAGGIO", [Importo Clienti Passaggi],
+							BLANK ()
+						),
+					BLANK ()
+				)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		annotation PBI_Description = "Misura legacy per calcolo vendite con switch logico"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Prezzo Medio Vendita (CG)' =
-			
-			DIVIDE ( KPI_Vendite[Importo Vendite (CG)], [Qta Vendite], 0 )
+			// Calcola il prezzo medio unitario basandosi sui ricavi di Contabilità Generale
+			DIVIDE ( [Importo Vendite (CG)], [Qta Vendite], 0 )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Prezzo medio unitario derivato dai dati CG"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Qta Vendite LY' =
-			
+			// Quantità venduta nello stesso periodo dell'anno precedente
 			CALCULATE ( [Qta Vendite], DATEADD ( DIM_Calendario[Date], -1, YEAR ) )
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Quantità venduta anno precedente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo Medio Vendita QTD' =
-			
+			// Media del prezzo di vendita accumulata nel trimestre (Quarter-To-Date)
 			TOTALQTD ( [Prezzo Medio Vendita], DIM_Calendario[Date] )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Prezzo medio vendita QTD"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Costo Venduto (Doc)' =
-			
-			[Qta Doc Vendita Articolo] * [CMP Acquisto]
+			// Valorizzazione del venduto basata su documenti: Qta Doc x CMP
+			VAR QtaDoc = [Qta Doc Vendita Articolo]
+			VAR CMP = [CMP Acquisto]
+			RETURN
+				QtaDoc * CMP
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Margine
+		annotation PBI_Description = "Costo del venduto basato su documenti e CMP"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
-	measure '# Clienti' = DISTINCTCOUNT('FACT_DocumentoVendita'[Codice Cliente Fatturazione])
+	measure '# Clienti' =
+			// Conteggio univoco dei clienti che hanno documenti di vendita
+			DISTINCTCOUNT('FACT_DocumentoVendita'[CodiceClienteFatturazione])
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Numero totale di clienti distinti"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Nuovi Clienti' = ```
 			
-			// Calcola vendite di clienti che hanno acquistato in un certo mese e non acquistano da nr_giorni
-			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni],90)
-			VAR Tab_Clienti = VALUES ( 'FACT_DocumentoVendita'[Codice Cliente Fatturazione] )
+			// Calcola il fatturato generato esclusivamente dai nuovi clienti (definizione N giorni)
+			VAR nr_giorni = SELECTEDVALUE(PARAM_NrGiorni[PARAM_NrGiorni], 90)
+			VAR Tab_Clienti_Attuali = VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione] )
 			
-			VAR Clienti_Precedenti =
+			VAR Clienti_Storici =
 			    CALCULATETABLE (
 			        VALUES ( 'FACT_DocumentoVendita'[CodiceClienteFatturazione]  ),
 			        FILTER (
@@ -609,30 +615,42 @@
 			            DIM_Calendario[Date] < MIN ( DIM_Calendario[Date] )
 			        )
 			    )
+			VAR Tab_Nuovi = EXCEPT ( Tab_Clienti_Attuali, Clienti_Storici )
+
 			RETURN
 			    CALCULATE( 
 			        [Importo Vendita],
-			        EXCEPT ( Tab_Clienti, Clienti_Precedenti )
+			        Tab_Nuovi
 			    )
 			```
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Importo vendite generato dai nuovi clienti"
 
 		changedProperty = FormatString
 
-	measure '% Importo Nuovi Clienti' = DIVIDE([Importo Nuovi Clienti],[Importo Vendita],0)
+	measure '% Importo Nuovi Clienti' =
+			// Incidenza percentuale del fatturato dei nuovi clienti sul totale
+			DIVIDE([Importo Nuovi Clienti], [Importo Vendita], 0)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Percentuale di fatturato da nuovi clienti"
 
 		changedProperty = FormatString
 
-	measure '% Nuovi Clienti' = DIVIDE([# Nuovi Clienti],[# Clienti],0)
+	measure '% Nuovi Clienti' =
+			// Incidenza percentuale del numero di nuovi clienti sul totale clienti
+			DIVIDE([# Nuovi Clienti], [# Clienti], 0)
 		displayFolder: KPI Churn
+		annotation PBI_Description = "Percentuale di nuovi clienti sul totale"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Vendite (CMP)' = [Qta Vendita] * [CMP Giacenza]
+	measure 'Importo Vendite (CMP)' =
+			// Valorizzazione delle vendite al costo di giacenza (CMP)
+			[Qta Vendita] * [CMP Giacenza]
 		displayFolder: KPI Vendite
+		annotation PBI_Description = "Fatturato valorizzato al CMP di giacenza"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -647,4 +665,3 @@
 				    #"Rimosse colonne"
 
 	annotation PBI_ResultType = Table
-
