@@ -168,10 +168,10 @@
 
 ### Organization Rule
 ```
-KPI <Area>          → Business KPIs
-PARAM <Area>        → Parameters
-CALC <Area>         → Calculation Groups
-UTIL <Area>         → Utility
+KPI Area            → Business KPIs
+PARAM Area          → Parameters
+CALC Area           → Calculation Groups
+UTIL Area           → Utility
 ```
 
 ---
@@ -180,8 +180,8 @@ UTIL <Area>         → Utility
 
 | Object | Convention | Example |
 |--------|-----------|---------|
-| CG table | `CALC_<Name>` | `CALC_ToDate` |
-| CG column | `<name>` (lowercase) | `dim`, `previousperiod` |
+| CG table | `CALC_Name` | `CALC_ToDate` |
+| CG column | `name` (lowercase) | `dim`, `previousperiod` |
 | CG item | Active voice | `Value`, `YTD`, `MTD`, `Last Year` |
 
 ---
@@ -212,6 +212,6 @@ Model/
 
 | Object | Convention | Example |
 |--------|-----------|---------|
-| Tables/Views | `v_<area>_<name>` | `v_magazzino_movimenti` |
-| Stored Procedures | `sp_<area>_<action>` | `sp_magazzino_aggiorna_cmp` |
+| Tables/Views | `v_area_name` | `v_magazzino_movimenti` |
+| Stored Procedures | `sp_area_action` | `sp_magazzino_aggiorna_cmp` |
 | Ad-hoc queries | descriptive filename | `analisi_vendite_ytd.sql` |

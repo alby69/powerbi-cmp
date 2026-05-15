@@ -1,92 +1,89 @@
 ﻿table KPI_Mix
 
 	measure '# Tassi Mese' =
-			
+			// Conta il numero di rilevazioni di tassi di cambio nel periodo selezionato
 			COUNTROWS ( ALLSELECTED ( FACT_Cambi ) )
 		formatString: 0
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Numero di tassi di cambio rilevati nel mese"
 
-	measure 'Tasso Giorno' =
+	measure 'Tasso Giorno' = ```
 			
-			VAR data_cur =
-			    SELECTEDVALUE ( FACT_Ordini[DataSpedizione] )
-			VAR tasso_cur =
+			// Determina il tasso di cambio USD/EUR per la data di spedizione dell'ordine
+			// Se il tasso non è presente per il giorno esatto, prova a recuperare quello di 3 giorni dopo (fall-back)
+			VAR DataOrdine = SELECTEDVALUE ( FACT_Ordini[DataSpedizione] )
+			VAR TassoEsatto =
 			    CALCULATE (
 			        SELECTEDVALUE ( FACT_Cambi[Tasso] ),
-			        FILTER ( FACT_Cambi, FACT_Cambi[Data] = data_cur )
+			        FACT_Cambi[Data] = DataOrdine
 			    )
-			VAR tasso_cur_succ =
+			VAR TassoFallback =
 			    CALCULATE (
 			        SELECTEDVALUE ( FACT_Cambi[Tasso] ),
-			        FILTER ( FACT_Cambi, FACT_Cambi[Data] = data_cur + 3 )
+			        FACT_Cambi[Data] = DataOrdine + 3
 			    )
 			RETURN
-			    IF ( tasso_cur <> 0, tasso_cur, tasso_cur_succ )
+			    IF ( TassoEsatto <> 0 && NOT(ISBLANK(TassoEsatto)), TassoEsatto, TassoFallback )
+			```
 		formatString: 0.0000
 		displayFolder: KPI Mix
-		annotation PBI_Description = "Tasso di cambio giornaliero (USD/EUR)"
+		annotation PBI_Description = "Tasso di cambio giornaliero (USD/EUR) con logica di fallback"
 
 	measure 'Tasso Medio Mese' =
-			
-			VAR nr =
-			    COUNTROWS ( FACT_Cambi )
-			VAR tot =
-			    CALCULATE ( SUMX ( FACT_Cambi, FACT_Cambi[Tasso] ), FACT_Cambi )
+			// Calcola la media aritmetica semplice dei tassi di cambio del periodo
+			VAR NrGiorni = COUNTROWS ( FACT_Cambi )
+			VAR SommaTassi = CALCULATE ( SUMX ( FACT_Cambi, FACT_Cambi[Tasso] ), FACT_Cambi )
 			RETURN
-			    DIVIDE ( tot, nr, 0 )
+				DIVIDE ( SommaTassi, NrGiorni, 0 )
 		formatString: 0.0000
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Tasso di cambio medio mensile"
 
-	measure 'Prezzo USD' =
+	measure 'Prezzo USD' = ```
 			
-			VAR cliente_mix = { SELECTEDVALUE ( DIM_Clienti[CodiceCliente], 0 ) }
-			VAR filtro_anno = { SELECTEDVALUE ( DIM_Calendario[Year], 0 ) }
-			VAR filtro_mese = { SELECTEDVALUE ( DIM_Calendario[MonthName], 0 ) }
+			// Recupera il prezzo in USD dalla tabella dei prezzi Mix filtrando per cliente e periodo
+			VAR ClienteCodice = SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
+			VAR Anno = SELECTEDVALUE ( DIM_Calendario[Year] )
+			VAR Mese = SELECTEDVALUE ( DIM_Calendario[MonthName] )
 			
-			VAR tab_filtro =
+			VAR TabellaFiltrata =
 			    FILTER (
 			        FACT_PrezziMix,
-			        'FACT_PrezziMix'[Cliente] IN cliente_mix
-			                && (
-			                    FORMAT ( YEAR ( FACT_PrezziMix[Data] ), "String" )
-			                        IN filtro_anno
-			                            || MONTH ( FACT_PrezziMix[Data] ) IN filtro_mese
-			                )
+			        'FACT_PrezziMix'[Cliente] = ClienteCodice &&
+			        (FORMAT(YEAR(FACT_PrezziMix[Data]), "String") = Anno || MONTH(FACT_PrezziMix[Data]) = Mese)
 			    )
-			VAR prezzo =
-			    SELECTCOLUMNS ( tab_filtro, "Prezzo", FACT_PrezziMix[Prezzo USD] )
 			RETURN
-			    prezzo
+			    SELECTCOLUMNS ( TabellaFiltrata, "Prezzo", FACT_PrezziMix[Prezzo USD] )
+			```
+		annotation PBI_Description = "Prezzo unitario in USD dalla tabella prezzi Mix"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure '# ATB Giorno' =
-			
+			// Conta il numero di ordini effettuati nel giorno (ATB)
 			COUNT ( FACT_Ordini[CodiceOrdine] )
 		formatString: 0
+		annotation PBI_Description = "Numero di ordini giornalieri"
 
 	measure 'Prezzo Euro' =
+			// Converte il prezzo da USD a EUR in base alle regole specifiche del cliente:
+			// TOTAL: usa tasso medio mese
+			// MITSUI: usa tasso del giorno
+			VAR Cliente = SELECTEDVALUE ( FACT_Ordini[CodiceClienteFatturazione] )
+			VAR Deposito = SELECTEDVALUE ( FACT_Ordini[CodiceDeposito] )
+			VAR IsTotal = ( Cliente = "C00991" || Deposito = "TOTAL" )
+			VAR IsMitsui = ( Cliente = "C01049" || Deposito = "MITSUI" )
 			
-			VAR cliente_mix =
-			    SELECTEDVALUE ( FACT_Ordini[CodiceClienteFatturazione] )
-			VAR base_cliente =
-			    SELECTEDVALUE ( FACT_Ordini[CodiceDeposito] )
-			VAR sono_TOTAL =
-			    OR ( cliente_mix = "C00991", base_cliente = "TOTAL" )
-			VAR sono_MITSUI =
-			    OR ( cliente_mix = "C01049", base_cliente = "MITSUI" )
 			RETURN
-			    IF (
-			        OR ( sono_TOTAL, sono_MITSUI ),
-			        SWITCH (
-			            TRUE (),
-			            sono_TOTAL, DIVIDE ( [Prezzo USD], [Tasso Medio Mese], 0 ),
-			            sono_MITSUI, DIVIDE ( [Prezzo USD], [Tasso Giorno], 0 )
-			        ),
-			        BLANK ()
-			    )
+				IF (
+					IsTotal || IsMitsui,
+					SWITCH (
+						TRUE (),
+						IsTotal, DIVIDE ( [Prezzo USD], [Tasso Medio Mese], 0 ),
+						IsMitsui, DIVIDE ( [Prezzo USD], [Tasso Giorno], 0 )
+					),
+					BLANK ()
+				)
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Prezzo in Euro calcolato in base al cliente (MITSUI tasso giorno, TOTAL tasso mese)"
 
@@ -94,6 +91,8 @@
 
 	measure 'Qta BIL' = ```
 			
+			// Calcola la quantità fatturata (BIL) in tonnellate filtrando per ordini ODA
+			// Converte automaticamente da Kg a Ton se il valore è >= 1000
 			CALCULATE(
 			    SUMX(
 			        FILTER(
@@ -112,10 +111,10 @@
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Resa' =
+	measure 'Qta Resa' = ```
 			
-			
-			VAR qta =
+			// Calcola la quantità resa (NetWeight) in tonnellate filtrando per ordini ODA
+			VAR QuantitaResa =
 			    SUMX(
 			        FILTER(
 			            FACT_Ordini,
@@ -127,14 +126,15 @@
 			        )
 			    )
 			RETURN
-			    qta
+			    QuantitaResa
+			```
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Quantità RESA in tonnellate (da ordini ODA)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo USD' =
-			
+			// Calcola il valore totale degli ordini in USD: Prezzo unitario x Qta BIL
 			SUMX ( VALUES ( DIM_Calendario[MonthName] ), [Prezzo USD MIX] * [Qta BIL] )
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Importo totale in USD per il Mix"
@@ -142,7 +142,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Accisa Unitario' =
-			
+			// Somma delle accise unitarie registrate sugli ordini
 			SUMX ( FACT_Ordini, FACT_Ordini[Accisa])
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Accisa unitaria per tonnellata"
@@ -150,7 +150,7 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Accisa' =
-			
+			// Importo totale dell'accisa: Accisa Unitaria x Qta BIL
 			SUMX ( VALUES ( DIM_Calendario[MonthName] ), [Accisa Unitario] * [Qta BIL] )
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Importo totale accisa"
@@ -158,22 +158,21 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Trasporto Unitario' =
-			
-			VAR base_cliente =
-			    SELECTEDVALUE ( FACT_Ordini[CodiceDeposito] )
+			// Determina il costo di trasporto unitario per tonnellata in base alla base logistica
+			VAR Deposito = SELECTEDVALUE ( FACT_Ordini[CodiceDeposito] )
 			RETURN
-			    SWITCH (
-			        TRUE (),
-			        base_cliente IN { "MITSUI", "TOTAL" }, 0,
-			        base_cliente = "IPEM", 23,
-			        0
-			    )
+				SWITCH (
+					TRUE (),
+					Deposito IN { "MITSUI", "TOTAL" }, 0,
+					Deposito = "IPEM", 23,
+					0
+				)
 		formatString: 0
 		displayFolder: KPI Mix
-		annotation PBI_Description = "Costo di trasporto unitario per tonnellata"
+		annotation PBI_Description = "Costo di trasporto unitario per tonnellata in base alla logistica"
 
 	measure 'Importo Trasporto' =
-			
+			// Valore totale del trasporto: Costo Unitario x Qta BIL
 			[Trasporto Unitario] * [Qta BIL]
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Importo totale trasporto"
@@ -181,60 +180,65 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Totale' =
-			
-			KPI_Mix[Importo Euro] + KPI_Mix[Importo Trasporto]
+			// Somma dell'importo merce in Euro e dei costi di trasporto
+			[Importo Euro] + [Importo Trasporto]
 		displayFolder: KPI Mix
-		annotation PBI_Description = "Costo totale (Importo + Trasporto)"
+		annotation PBI_Description = "Costo totale (Importo Euro + Trasporto)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Unitario' =
-			
+			// Rapporto tra costo totale (merce + trasporto) e quantità BIL
 			DIVIDE ( [Costo Totale], [Qta BIL], 0 )
 		displayFolder: KPI Mix
-		annotation PBI_Description = "Costo unitario per tonnellata"
+		annotation PBI_Description = "Costo unitario per tonnellata incl. trasporto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Nome Spedizioniere' =
-			
+			// Recupera il nome dello spedizioniere associato all'ordine corrente
 			CALCULATE (
-			    FIRSTNONBLANK ( DIM_Spedizionieri[Name], 1 ),
-			    FILTER (
-			        DIM_Spedizionieri,
-			        DIM_Spedizionieri[CodiceSpedizioniere] = SELECTEDVALUE ( FACT_Ordini[CodiceSpedizioniere] )
-			    )
+				FIRSTNONBLANK ( DIM_Spedizionieri[Name], 1 ),
+				FILTER (
+					DIM_Spedizionieri,
+					DIM_Spedizionieri[CodiceSpedizioniere] = SELECTEDVALUE ( FACT_Ordini[CodiceSpedizioniere] )
+				)
 			)
+		annotation PBI_Description = "Ragione sociale dello spedizioniere dell'ordine"
 
 	measure 'Tasso Giorno Medio' =
-			
+			// Media dei tassi di cambio giornalieri nel contesto temporale
 			AVERAGEX ( VALUES ( DIM_Calendario[Date] ), [Tasso Giorno] )
 		formatString: 0.0000
+		annotation PBI_Description = "Media dei tassi di cambio giornalieri nel periodo"
 
 	measure 'Costo €/T NEW' =
-			
+			// Calcola il costo per tonnellata gestendo il contesto di singola data o aggregato
 			IF (
-			    HASONEVALUE ( FACT_Ordini[DataSpedizione] ),
-			    [Costo €/T],
-			    AVERAGEX ( VALUES ( FACT_Ordini[DataSpedizione] ), [Costo €/T] )
+				HASONEVALUE ( FACT_Ordini[DataSpedizione] ),
+				[Costo €/T],
+				AVERAGEX ( VALUES ( FACT_Ordini[DataSpedizione] ), [Costo €/T] )
 			)
+		annotation PBI_Description = "Costo per tonnellata (logica di aggregazione media)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo USD Mese' =
-			
+			// Media del prezzo USD nel periodo selezionato
 			AVERAGEX ( VALUES ( FACT_Ordini[DataSpedizione] ), [Prezzo USD MIX] )
+		annotation PBI_Description = "Media mensile del prezzo in USD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo €/T Medio' =
-			
+			// Media del costo per tonnellata aggregata per mese in calendario
 			AVERAGEX ( VALUES ( DIM_Calendario[MonthInCalendar] ), [Costo €/T] )
+		annotation PBI_Description = "Costo medio per tonnellata su base mensile"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Euro' =
-			
+			// Valore totale degli ordini in Euro: Prezzo unitario medio mese x Qta BIL
 			[Prezzo € MIX Mese] * [Qta BIL]
 		displayFolder: KPI Mix
 		annotation PBI_Description = "Importo totale in Euro per il Mix"
@@ -242,189 +246,167 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo MIX' =
+			// Restituisce il valore della misura base [Costo Mix]
 			[Costo Mix]
-			/*
-			VAR curr_cli = { SELECTEDVALUE(ClientiFattFiltrati[No_]) }
-			
-			RETURN
-			    IF(HASONEVALUE(ClientiFattFiltrati[No_]),
-			        CALCULATE(
-			            AVERAGEX('Tab Costo MIX','Tab Costo MIX'[Costo]),
-			            FILTER('Tab Costo MIX',
-			                'Tab Costo MIX'[Cliente Fatturazione] IN curr_cli
-			            )
-			        ),
-			        AVERAGEX('Tab Costo MIX','Tab Costo MIX'[Costo])
-			    )
-			*/
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		annotation PBI_Description = "Costo di riferimento per il prodotto Mix"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Prezzo USD MIX' =
-			
+			// Media aritmetica dei prezzi USD presenti nella tabella FACT_PrezziMix
 			AVERAGEX ( FACT_PrezziMix, FACT_PrezziMix[Prezzo USD] )
+		annotation PBI_Description = "Prezzo medio USD dalla tabella prezzi Mix"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo MIX 2' =
-			
+			// Costo per tonnellata filtrato per i clienti principali (TOTAL/MITSUI) e prodotti MIX (1, 1T)
 			CALCULATE (
-			    [Costo €/T],
-			    FILTER (
-			        FACT_Ordini,
-			        FACT_Ordini[CodiceClienteFatturazione]
-			            IN { "C00991", "C01049" }
-			            && FACT_Ordini[CodiceArticolo] IN { "1", "1T" }
-			    )
+				[Costo €/T],
+				FILTER (
+					FACT_Ordini,
+					FACT_Ordini[CodiceClienteFatturazione] IN { "C00991", "C01049" } &&
+					FACT_Ordini[CodiceArticolo] IN { "1", "1T" }
+				)
 			)
+		annotation PBI_Description = "Costo unitario MIX filtrato per clienti strategici"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Prezzo € MIX' = ```
+	measure 'Prezzo € MIX' =
+			// Conversione del prezzo USD in Euro utilizzando il tasso specifico del cliente
 			DIVIDE ( [Prezzo USD MIX], [Tasso Giorno Cliente], 0 )
-			/*
-			VAR cliente_mix =
-			    SELECTEDVALUE ( 'ACQUISTO RIGHE'[Cliente Fatturazione] )
-			VAR base_cliente =
-			    SELECTEDVALUE ( 'ACQUISTO RIGHE'[Ubicazione] )
-			VAR sono_TOTAL =
-			    OR ( cliente_mix = "C00991", base_cliente = "TOTAL" )
-			VAR sono_MITSUI =
-			    OR ( cliente_mix = "C01049", base_cliente = "MITSUI" )
-			VAR prezzo =
-			    IF (
-			        OR ( sono_TOTAL, sono_MITSUI ),
-			        SWITCH (
-			            TRUE (),
-			            sono_TOTAL, DIVIDE ( [Prezzo USD MIX], [Tasso Medio Mese], 0 ),
-			            sono_MITSUI, DIVIDE ( [Prezzo USD MIX], [Tasso Giorno Medio], 0 )
-			        ),
-			        BLANK ()
-			    )
-			RETURN
-			    prezzo
-			*/    
-			```
+		annotation PBI_Description = "Prezzo MIX convertito in Euro (tasso specifico cliente)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Prezzo € MIX Mese' =
-			
-			
+			// Media ponderata del prezzo Euro MIX aggregata per cliente
 			AVERAGEX (
-			    VALUES(DIM_Clienti[Nome & Codice]),
-			    [Prezzo € MIX]
+				VALUES(DIM_Clienti[Nome & Codice]),
+				[Prezzo € MIX]
 			)
+		annotation PBI_Description = "Prezzo medio Euro MIX per cliente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Totale Mese' =
-			
+			// Somma dei costi totali giornalieri per l'intero mese
 			SUMX ( VALUES ( FACT_Ordini[DataSpedizione] ), [Costo Totale] )
+		annotation PBI_Description = "Costo totale mensile aggregato per giorno"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Tasso Giorno Medio 2' =
-			
+			// Logica dinamica: se nel contesto c'è un solo mese usa la media giornaliera, altrimenti la media mensile
 			IF ( HASONEVALUE ( DIM_Calendario[MonthName] ), [Tasso Giorno Medio], [Tasso Medio Mese] )
 		formatString: 0.0000
+		annotation PBI_Description = "Tasso di cambio medio con logica di contesto (Mese vs Totale)"
 
 		changedProperty = FormatString
 
 	measure 'Tasso Mese 2' = ```
 			
-			
-			VAR anno_curr = VALUE({ SELECTEDVALUE ( DIM_Calendario[Year] ) })
-			VAR mese_curr = VALUE({SELECTEDVALUE ( DIM_Calendario[MonthnYear] )})
+			// Calcolo manuale del tasso medio mensile filtrato per l'anno e mese selezionati
+			VAR AnnoCorrente = VALUE({ SELECTEDVALUE ( DIM_Calendario[Year] ) })
+			VAR MeseCorrente = VALUE({ SELECTEDVALUE ( DIM_Calendario[MonthnYear] ) })
 			   
-			VAR nr =
+			VAR ConteggioGiorni =
 			    CALCULATE (
 			        COUNTROWS ( ALLSELECTED ( FACT_Cambi[Data] ) ),
-			        YEAR(FACT_Cambi[Data]) = anno_curr &&
-			        MONTH( FACT_Cambi[Data] ) = mese_curr
+			        YEAR(FACT_Cambi[Data]) = AnnoCorrente &&
+			        MONTH( FACT_Cambi[Data] ) = MeseCorrente
 			    )
-			VAR tot =
+			VAR SommaTassi =
 			    CALCULATE ( SUMX ( FACT_Cambi, FACT_Cambi[Tasso] ), ALLSELECTED ( FACT_Cambi ) )
 			
 			RETURN
-			    {DIVIDE(tot,nr,0)}
+			    DIVIDE(SommaTassi, ConteggioGiorni, 0)
 			    
 			```
 		formatString: 0
+		annotation PBI_Description = "Tasso medio mensile ricalcolato con filtri espliciti"
 
-	measure 'Tasso Giorno Cliente' =
+	measure 'Tasso Giorno Cliente' = ```
+
+			// Determina quale tasso applicare al cliente selezionato:
+			// TOTAL: Tasso Medio Mese
+			// MITSUI: Tasso Giorno Medio
+			VAR CodiceCliente = SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
+			VAR CodiceDeposito = SELECTEDVALUE ( DIM_Deposito[CodiceDeposito] )
+			VAR IsTotal = ( CodiceCliente = "C00991" || CodiceDeposito = "TOTAL" )
+			VAR IsMitsui = ( CodiceCliente = "C01049" || CodiceDeposito = "MITSUI" )
 			
-			VAR cliente_mix =
-			    SELECTEDVALUE ( DIM_Clienti[CodiceCliente] )
-			VAR base_cliente =
-			    SELECTEDVALUE ( DIM_Deposito[CodiceDeposito] )
-			VAR sono_TOTAL =
-			    OR ( cliente_mix = "C00991", base_cliente = "TOTAL" )
-			VAR sono_MITSUI =
-			    OR ( cliente_mix = "C01049", base_cliente = "MITSUI" )
 			RETURN
 			    IF (
-			        OR ( sono_TOTAL, sono_MITSUI ),
+			        IsTotal || IsMitsui,
 			        SWITCH (
 			            TRUE (),
-			            sono_TOTAL, [Tasso Medio Mese],
-			            sono_MITSUI, [Tasso Giorno Medio]
+			            IsTotal, [Tasso Medio Mese],
+			            IsMitsui, [Tasso Giorno Medio]
 			        ),
 			        BLANK ()
 			    )
+			```
 		formatString: 0.0000
+		annotation PBI_Description = "Tasso applicabile al cliente (Mese per TOTAL, Giorno per MITSUI)"
 
 		changedProperty = FormatString
 
 	measure '# Qta_BIL' = COUNT(FACT_Ordini[CodiceOrdine])
+		annotation PBI_Description = "Conteggio record ordini ODA"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta BIL (2)' =
-			
+			// Somma grezza delle quantità per gli ordini di tipo ODA
 			CALCULATE(
-			    SUMX(FACT_Ordini,FACT_Ordini[Quantity]),
-			    FILTER(
-			            FACT_Ordini,
-			            LEFT(FACT_Ordini[CodiceOrdine], 3) = "ODA"
-			        )
-			    )
+				SUMX(FACT_Ordini, FACT_Ordini[Quantity]),
+				LEFT(FACT_Ordini[CodiceOrdine], 3) = "ODA"
+			)
 		displayFolder: KPI Mix
+		annotation PBI_Description = "Quantità BIL totale per ordini ODA"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Spedizionieri Attivi' =
-			
+			// Restituisce il nome dello spedizioniere se ha effettuato almeno una consegna di prodotti MIX (1, 1T)
 			IF(
-			    CALCULATE(
-			        COUNTROWS(FACT_Ordini),
-			        FACT_Ordini[CodiceArticolo] IN {"1", "1T"}
-			    ) > 0,
-			    SELECTEDVALUE(DIM_Spedizionieri[Name])
+				CALCULATE(
+					COUNTROWS(FACT_Ordini),
+					FACT_Ordini[CodiceArticolo] IN {"1", "1T"}
+				) > 0,
+				SELECTEDVALUE(DIM_Spedizionieri[Name])
 			)
+		annotation PBI_Description = "Spedizionieri con movimenti MIX nel periodo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Ordini MIX' =
-			
+			// Conta gli ordini di prodotti MIX effettuati dai clienti strategici
 			CALCULATE(
-			    COUNTROWS(FACT_Ordini),
-			    FILTER(FACT_Ordini,
-			    FACT_Ordini[CodiceArticolo] IN {"1", "1T"} &&
-			    FACT_Ordini[CodiceClienteVendita] IN {"C00991","C01049"}
-			    )
+				COUNTROWS(FACT_Ordini),
+				FACT_Ordini[CodiceArticolo] IN {"1", "1T"} &&
+				FACT_Ordini[CodiceClienteVendita] IN {"C00991", "C01049"}
 			)
+		annotation PBI_Description = "Numero ordini MIX clienti TOTAL/MITSUI"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Acquisto MIX Tempa' = SUMX(FACT_AcquistiMixTemp,FACT_AcquistiMixTemp[Qta])
+	measure 'Qta Acquisto MIX Tempa' =
+			// Somma delle quantità di acquisto MIX dalla tabella temporanea Tempa
+			SUMX(FACT_AcquistiMixTemp, FACT_AcquistiMixTemp[Qta])
+		annotation PBI_Description = "Quantità acquisto MIX (Tab Tempa)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure '# Qta Acquisto MIX Tempa' = COUNTX(FACT_AcquistiMixTemp,FACT_AcquistiMixTemp[Qta])
+	measure '# Qta Acquisto MIX Tempa' =
+			// Conteggio dei record di acquisto MIX nella tabella temporanea Tempa
+			COUNTX(FACT_AcquistiMixTemp, FACT_AcquistiMixTemp[Qta])
+		annotation PBI_Description = "Numero carichi MIX (Tab Tempa)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -439,4 +421,3 @@
 				    #"Rimosse colonne"
 
 	annotation PBI_ResultType = Table
-

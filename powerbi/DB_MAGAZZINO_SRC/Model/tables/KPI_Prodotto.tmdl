@@ -1,519 +1,552 @@
 ﻿table KPI_Prodotto
 
 	measure Agenzia =
-			
-			VAR importo_cg =
-			    CALCULATE (
-			        [Importo],
-			        FACT_MovimentiCG[CodiceConto] = "4030004" && FACT_MovimentiCG[CodiceSorgente] = "ACQUISTI"
-			    )
-			VAR importo_acc =
-			    CALCULATE (
-			        [Importo Accantonamenti],
-			        FACT_Accantonamenti[CodiceConto] = "4030004"
-			    )
+			// Somma i costi di agenzia registrati in CG (conto 4030004) e gli accantonamenti associati
+			VAR ImportoCG =
+				CALCULATE (
+					[Importo],
+					FACT_MovimentiCG[CodiceConto] = "4030004" && FACT_MovimentiCG[CodiceSorgente] = "ACQUISTI"
+				)
+			VAR ImportoAccantonamenti =
+				CALCULATE (
+					[Importo Accantonamenti],
+					FACT_Accantonamenti[CodiceConto] = "4030004"
+				)
 			RETURN
-			    importo_cg + importo_acc
+				ImportoCG + ImportoAccantonamenti
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Spese di agenzia (CG 4030004 + Accantonamenti)"
 
 	measure Controstallie =
-			
+			// Costi per controstallie registrati su conto 4030008 e progetto ML04
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4030008" && FACT_MovimentiCG[Progetto] = "ML04"
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "4030008" && FACT_MovimentiCG[Progetto] = "ML04"
 			)
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Oneri per controstallie (CG 4030008, Progetto ML04)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure Dogana =
-			
+			// Oneri doganali registrati su conto 4030002 con sorgente ACQUISTI
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4030002" && FACT_MovimentiCG[CodiceSorgente] = "ACQUISTI"
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "4030002" && FACT_MovimentiCG[CodiceSorgente] = "ACQUISTI"
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Spese doganali (CG 4030002, Sorgente ACQUISTI)"
 
 	measure Perizia =
-			
+			// Spese per perizie tecniche registrate su conto 4030007 e progetto ML04
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04"
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04"
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Spese per perizie (CG 4030007, Progetto ML04)"
 
 	measure 'Recupero Controstallie' =
-			
+			// Ricavi da recupero controstallie registrati su conto 3400025
 			CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "3400025" )
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Ricavi da recupero controstallie (CG 3400025)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Recupero Dazi Doganali' =
+	measure 'Recupero Dazi Doganali' = ```
 			
-			VAR filtro_nave =
-			    { SELECTEDVALUE ( DIM_MezziTrasporto[CodiceMezzo] ) }
-			VAR importo_rec =
+			// Recupero dei dazi doganali basato su documenti di vendita (Articolo 3400026 o Progetto ML04)
+			VAR NaveSelezionata = SELECTEDVALUE ( DIM_MezziTrasporto[CodiceMezzo] )
+			VAR ImportoRecupero =
 			    CALCULATE (
 			        [Importo Doc Vendita],
-			        'FACT_DocumentoVendita'[CodiceArticolo] = "3400026"
-			            || 'FACT_DocumentoVendita'[Progetto] = "ML04"
-			            || 'FACT_DocumentoVendita'[MezzoTrasporto] IN filtro_nave
+			        'FACT_DocumentoVendita'[CodiceArticolo] = "3400026" ||
+			        'FACT_DocumentoVendita'[Progetto] = "ML04" ||
+			        'FACT_DocumentoVendita'[MezzoTrasporto] = NaveSelezionata
 			    )
 			RETURN
-			    importo_rec
+			    ImportoRecupero
+			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Recupero dazi doganali da documenti di vendita"
 
 	measure 'Recupero Spese Terzi' =
-			
+			// Ricavi per recupero spese effettuate per conto terzi (Conto 3400023)
 			CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "3400023" )
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Ricavi recupero spese terzi (CG 3400023)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure Rimorchio =
-			
+			// Costi per servizi di rimorchio (Conto 4030006, Progetto ML04)
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4030006" && FACT_MovimentiCG[Progetto] = "ML04"
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "4030006" && FACT_MovimentiCG[Progetto] = "ML04"
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Spese di rimorchio (CG 4030006, Progetto ML04)"
 
 	measure 'Trasporto Acquisti' =
-			
+			// Costi di trasporto su acquisti registrati su conto 4030003
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4030003" && FACT_MovimentiCG[CodiceSorgente] = "REGACQ"
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "4030003" && FACT_MovimentiCG[CodiceSorgente] = "REGACQ"
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costi trasporto acquisti (CG 4030003, Sorgente REGACQ)"
 
 	measure COSTI_ACCESSORI_GPL =
-			
-			VAR costi_acc = [Dogana] + [Agenzia] + [Rimorchio] + [Perizia] + [Controstallie] - [Recupero Spese Terzi] - [Recupero Controstallie] - [Recupero Dazi Doganali]
+			// Somma algebrica di tutti i costi accessori legati all'acquisto di GPL (Dogana, Agenzia, Rimorchio, etc.) al netto dei recuperi
+			VAR SommaCosti = [Dogana] + [Agenzia] + [Rimorchio] + [Perizia] + [Controstallie]
+			VAR SommaRecuperi = [Recupero Spese Terzi] + [Recupero Controstallie] + [Recupero Dazi Doganali]
 			RETURN
-			    costi_acc
+				SommaCosti - SommaRecuperi
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Totale costi accessori acquisto GPL (Costi - Recuperi)"
 
 	measure '€/Ton CostoGPL_Resa' =
-			
+			// Incidenza unitaria per tonnellata del costo totale nave sulla quantità resa IPEM
 			DIVIDE ( [Total Costs NAVI], [QuantityIPEM], 0 )
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costo totale nave per tonnellata resa"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'COSTO GPL' =
-			
+			// Somma dei costi di materia prima e trasporto acquisti
 			[Materia Prima €] + [Trasporto Acquisti]
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costo base GPL (Materia Prima + Trasporto)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Materia Prima € OLD' =
-			
-			VAR imp_mp =
-			    CALCULATE (
-			        [Importo Accantonamenti],
-			        FACT_Accantonamenti[CodiceConto] = "4020002"
-			    )
-			VAR imp_mp_2 =
-			    CALCULATE (
-			        [Importo Accantonamenti],
-			        FACT_Accantonamenti[CodiceConto] = "2030004"
-			    )
+			// Misura legacy per il calcolo della materia prima basato su accantonamenti
+			VAR ImpMP =
+				CALCULATE (
+					[Importo Accantonamenti],
+					FACT_Accantonamenti[CodiceConto] = "4020002"
+				)
+			VAR ImpMP2 =
+				CALCULATE (
+					[Importo Accantonamenti],
+					FACT_Accantonamenti[CodiceConto] = "2030004"
+				)
 			RETURN
-			    imp_mp + imp_mp_2
+				ImpMP + ImpMP2
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costo materia prima (legacy via accantonamenti)"
 
 	measure 'Total Costs NAVI' =
-			
+			// Costo complessivo associato alle navi: GPL + Accessori
 			[COSTO GPL] + [COSTI_ACCESSORI_GPL]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costo totale navi (GPL + Accessori)"
 
-	measure 'Materia Prima €' =
+	measure 'Materia Prima €' = ```
 			
-			VAR imp_mp =
+			// Calcola il valore della materia prima dai movimenti CG (Conti 4020002 e 2030004)
+			VAR ImportoMP1 =
 			    CALCULATE (
 			        [Importo],
 			        FACT_MovimentiCG[CodiceConto] = "4020002" && FACT_MovimentiCG[CodiceSorgente] = "REGACQ"
 			    )
-			VAR imp_mp_2 =
+			VAR ImportoMP2 =
 			    CALCULATE (
 			        [Importo],
-			        FACT_MovimentiCG[CodiceConto] = "2030004"
-			            && FACT_MovimentiCG[CodiceSorgente]
-			            IN { "REGACQ", "REGACQIC" }
-			            && FACT_MovimentiCG[Progetto] = ""
+			        FACT_MovimentiCG[CodiceConto] = "2030004" &&
+			        FACT_MovimentiCG[CodiceSorgente] IN { "REGACQ", "REGACQIC" } &&
+			        FACT_MovimentiCG[Progetto] = ""
 			    )
 			RETURN
-			    imp_mp + imp_mp_2
+			    ImportoMP1 + ImportoMP2
+			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Valore materia prima da Contabilità Generale"
 
 	measure 'Materia Prima € 2' =
-			
+			// Altra versione del calcolo materia prima filtrata per mezzo di trasporto
 			CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "2030004"
-			        && FACT_MovimentiCG[TipoSorgente] = ""
-			        && FACT_MovimentiCG[MezzoTrasporto] <> ""
+				[Importo],
+				FACT_MovimentiCG[CodiceConto] = "2030004"
+					&& FACT_MovimentiCG[TipoSorgente] = ""
+					&& FACT_MovimentiCG[MezzoTrasporto] <> ""
 			)
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Materia prima filtrata per record con mezzo trasporto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Perizia 2' =
-			
+			// Versione alternativa della misura Perizia utilizzando [Importo ACQ]
 			CALCULATE (
-			    [Importo ACQ],
-			    FACT_MovimentiCG[CodiceConto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04"
+				[Importo ACQ],
+				FACT_MovimentiCG[CodiceConto] = "4030007" && FACT_MovimentiCG[Progetto] = "ML04"
 			)
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Spese perizia (versione ACQ)"
 
 	measure 'Costo Acquisto Qta Ton' =
-			
+			// Restituisce il CMP di acquisto solo se è presente una quantità nel contesto
 			IF ( ISBLANK ( [Quantity] ), BLANK (), [CMP Acquisto] )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Costo di acquisto unitario (CMP) nel contesto quantità"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Recupero Spese Trasporto' =
-			
+			// Ricavi da recupero spese di trasporto (Conto 3400024)
 			CALCULATE ( ABS ( [Importo] ), FACT_MovimentiCG[CodiceConto] = "3400024" )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: COSTO_ACQUISTO
+		annotation PBI_Description = "Recupero spese di trasporto (CG 3400024)"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'CMP Acquisto CUM' =
-			
+			// Calcola il CMP di acquisto accumulato storicamente
 			CALCULATE (
-			    [CMP Acquisto],
-			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+				[CMP Acquisto],
+				FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: CMP
+		annotation PBI_Description = "CMP Acquisto cumulato nel tempo"
 
 	measure 'CMP Prodotto' =
-			
+			// Rapporto tra i costi totali nave e la quantità totale prodotta/acquistata
 			DIVIDE ( [Total Costs NAVI], [Quantity] )
 		displayFolder: CMP
+		annotation PBI_Description = "CMP calcolato sulla quantità totale"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'CMP Acquisto CD' =
-			
+			// Rapporto tra i costi totali nave e la quantità resa in Conto Deposito
 			DIVIDE ( [Total Costs NAVI], [QuantityIPEM] )
 		displayFolder: CMP
+		annotation PBI_Description = "CMP calcolato sulla quantità resa CD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'CMP Prodotto CUM' =
-			
+			// Calcola il CMP prodotto accumulato storicamente
 			CALCULATE (
-			    [CMP Prodotto],
-			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+				[CMP Prodotto],
+				FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
 			)
 		displayFolder: CMP
+		annotation PBI_Description = "CMP Prodotto cumulato nel tempo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'CMP Acquisto' = ```
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			// Calcola il CMP di acquisto differenziato per gruppo prodotto (MIX vs PROPANO)
+			// Se nessun gruppo è filtrato, esegue una media ponderata tra i due prodotti
+			VAR GruppoFiltrato = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			
-			VAR cmp_mix = [Costo Mix Resa]
-			VAR cmp_propano = [Costo Propano]
+			VAR CMP_Mix = [Costo Mix Resa]
+			VAR CMP_Propano = [Costo Propano]
 			
-			VAR qta_mix = SUMX(FACT_Mix, FACT_Mix[Qta BIL] )
-			VAR qta_propano = SUMX(FACT_Propano, FACT_Propano[QuantityIPEM] )
+			VAR Qta_Mix = SUMX(FACT_Mix, FACT_Mix[Qta BIL] )
+			VAR Qta_Propano = SUMX(FACT_Propano, FACT_Propano[QuantityIPEM] )
 			
-			VAR cmp_ALL = DIVIDE((cmp_mix * qta_mix) + (cmp_propano * qta_propano),qta_mix + qta_propano)
+			VAR CMP_Ponderato = DIVIDE((CMP_Mix * Qta_Mix) + (CMP_Propano * Qta_Propano), Qta_Mix + Qta_Propano)
 			
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", cmp_mix,
-			        filtro_gruppo = "PROPANO", cmp_propano,
-			        filtro_gruppo = BLANK (), cmp_ALL
+			        GruppoFiltrato = "MIX", CMP_Mix,
+			        GruppoFiltrato = "PROPANO", CMP_Propano,
+			        GruppoFiltrato = BLANK (), CMP_Ponderato
 			    )
 			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: CMP
+		annotation PBI_Description = "CMP di acquisto dinamico per MIX, PROPANO o totale ponderato"
 
 		changedProperty = FormatString
 
 	measure 'CMP Acquisto Prodotto' =
-			
+			// Rapporto semplice tra importo totale acquisti e quantità acquistata
 			DIVIDE ( [Importo Acquisto], [Qta Acquisto], 0 )
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: CMP
+		annotation PBI_Description = "Rapporto tra Importo Acquisto e Qta Acquisto"
 
 		changedProperty = FormatString
 
 	measure 'Importo Costo Acquisto' =
-			
+			// Valorizzazione della quantità resa CD al CMP di acquisto
 			[QuantityIPEM] * [CMP Acquisto]
 		formatString: "€"\ #,0;-"€"\ #,0;"€"\ #,0
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Valore acquisto (QuantityIPEM x CMP)"
 
 		changedProperty = FormatString
 
 	measure 'Importo Acquisto' = ```
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			// Somma gli importi di acquisto per MIX e PROPANO in base al contesto
+			VAR GruppoFiltrato = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR Imp_Mix = [Importo Costo Mix]
+			VAR Imp_Propano = [Importo Costo Propano]
 			
-			VAR imp_mix = [Importo Costo Mix]
-			VAR imp_propano = [Importo Costo Propano]
-			
-			    
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", imp_mix,
-			        filtro_gruppo = "PROPANO", imp_propano,
-			        filtro_gruppo = BLANK (), imp_mix + imp_propano
+			        GruppoFiltrato = "MIX", Imp_Mix,
+			        GruppoFiltrato = "PROPANO", Imp_Propano,
+			        GruppoFiltrato = BLANK (), Imp_Mix + Imp_Propano
 			    )
 			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Importo totale acquisti per gruppo prodotto"
 
 		changedProperty = FormatString
 
-	measure 'Margine Unitario' = ```
-			
-			    IF ([Prezzo Medio Vendita] > 0,
-			        [Prezzo Medio Vendita] - [CMP Acquisto],
-			        0
-			    )
-			```
+	measure 'Margine Unitario' =
+			// Differenza tra prezzo medio di vendita e CMP di acquisto
+			VAR Prezzo = [Prezzo Medio Vendita]
+			VAR Costo = [CMP Acquisto]
+			RETURN
+				IF (Prezzo > 0, Prezzo - Costo, 0)
 		displayFolder: MARGINE
+		annotation PBI_Description = "Differenza unitaria tra Prezzo Medio e CMP"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure '% Profitto' = DIVIDE ( [Importo Margine], [Importo Vendita], 0 )
+	measure '% Profitto' =
+			// Rapporto tra importo margine e importo vendita
+			DIVIDE ( [Importo Margine], [Importo Vendita], 0 )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: MARGINE
+		annotation PBI_Description = "Percentuale di profitto sul fatturato"
 
 		changedProperty = FormatString
 
 
 	measure 'Trasporto Vendite' =
-			
+			// Costi di trasporto legati alle vendite (Conto 4110045)
 			CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "4110045" )
+		annotation PBI_Description = "Spese trasporto su vendite (CG 4110045)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Filtro Anno' =
-			
+			// Restituisce l'anno selezionato nel filtro calendario
 			SELECTEDVALUE ( DIM_Calendario[Year] )
+		annotation PBI_Description = "Valore dell'anno selezionato"
 
 	measure 'Filtro Mese' =
-			
+			// Restituisce il nome del mese selezionato nel filtro calendario
 			SELECTEDVALUE ( DIM_Calendario[MonthName] )
+		annotation PBI_Description = "Valore del mese selezionato"
 
-	measure 'Costo Venduto' = ```
+	measure 'Costo Venduto' =
+			// Calcola il costo del venduto: Giacenza CMP x Quantità Venduta
 			[CMP Giacenza] * [Qta Vendita]
-			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		annotation PBI_Description = "Costo del venduto basato su CMP Giacenza"
 
 		changedProperty = FormatString
 
-	measure 'Importo Giacenza Iniziale' =
+	measure 'Importo Giacenza Iniziale' = ```
 			
+			// Valore delle giacenze iniziali (Conti 4010002 per Propano, 4010003 per Mix)
+			VAR GruppoFiltrato = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			
-			VAR qta_mix = CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4010003"
-			)
-			VAR qta_propano = CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "4010002"
-			)
-			
-			VAR qta_ALL = qta_mix + qta_propano
+			VAR Imp_Mix = CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "4010003" )
+			VAR Imp_Propano = CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "4010002" )
 			
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", qta_mix,
-			        filtro_gruppo = "PROPANO", qta_propano,
-			        filtro_gruppo = BLANK (), qta_ALL
+			        GruppoFiltrato = "MIX", Imp_Mix,
+			        GruppoFiltrato = "PROPANO", Imp_Propano,
+			        GruppoFiltrato = BLANK (), Imp_Mix + Imp_Propano
 			    )
-			
+			```
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Importo rimanenze iniziali (CG 401*)"
 
 		changedProperty = FormatString
 
-	measure 'CMP Giacenza' = ```
-			(([Importo Acquisto] + [Importo Giacenza Iniziale]) / ([Qta Acquisto] + [Qta Giacenza Iniziale]))
-			```
+	measure 'CMP Giacenza' =
+			// Calcolo del CMP di giacenza come media ponderata tra (Acquisti + Iniziali)
+			VAR ValoreTotale = [Importo Acquisto] + [Importo Giacenza Iniziale]
+			VAR QuantitaTotale = [Qta Acquisto] + [Qta Giacenza Iniziale]
+			RETURN
+				DIVIDE(ValoreTotale, QuantitaTotale)
 		displayFolder: CMP
+		annotation PBI_Description = "CMP calcolato sulla somma di acquisti e rimanenze iniziali"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'CMP Acquisto AVG QTD' = ```
-			
-			    AVERAGEX (
-			        VALUES(DIM_Calendario[MonthInCalendar]),
-			        TOTALQTD([CMP Acquisto],DIM_Calendario[Date])
-			    )
-			```
+	measure 'CMP Acquisto AVG QTD' =
+			// Media del CMP di acquisto calcolata sui trimestri (Quarter-To-Date)
+			AVERAGEX (
+				VALUES(DIM_Calendario[MonthInCalendar]),
+				TOTALQTD([CMP Acquisto], DIM_Calendario[Date])
+			)
 		formatString: 0.00
 		displayFolder: CMP
+		annotation PBI_Description = "Media trimestrale del CMP Acquisto"
 
 		changedProperty = FormatString
 
-	measure 'CMP Acquisto AVG YTD' = ```
+	measure 'CMP Acquisto AVG YTD' =
+			// Media del CMP di acquisto calcolata dall'inizio dell'anno (Year-To-Date)
+			AVERAGEX (
+				VALUES(DIM_Calendario[MonthInCalendar]),
+				TOTALYTD([CMP Acquisto], DIM_Calendario[Date])
+			)
+		displayFolder: CMP
+		annotation PBI_Description = "Media annuale progressiva del CMP Acquisto"
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'CMP Giacenza YTD' = ```
 			
-			    AVERAGEX (
-			        VALUES(DIM_Calendario[MonthInCalendar]),
-			        TOTALYTD([CMP Acquisto],DIM_Calendario[Date])
-			    )
+			// Calcola la media dei CMP YTD degli ultimi 4 mesi
+			VAR MediaYTD = [CMP Acquisto AVG YTD]
+			VAR CMP_LM1 = CALCULATE ( MediaYTD, DATEADD ( DIM_Calendario[Date], -1, MONTH ) )
+			VAR CMP_LM2 = CALCULATE ( MediaYTD, DATEADD ( DIM_Calendario[Date], -2, MONTH ) )
+			VAR CMP_LM3 = CALCULATE ( MediaYTD, DATEADD ( DIM_Calendario[Date], -3, MONTH ) )
+			VAR CMP_LM4 = CALCULATE ( MediaYTD, DATEADD ( DIM_Calendario[Date], -4, MONTH ) )
+			
+			VAR SommaCMP = CMP_LM1 + CMP_LM2 + CMP_LM3 + CMP_LM4
+			RETURN
+				DIVIDE(SommaCMP, 4, 0)
 			```
 		displayFolder: CMP
+		annotation PBI_Description = "Media mobile a 4 mesi del CMP YTD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'CMP Giacenza YTD' =
-			
-			VAR misura = [CMP Acquisto AVG YTD]
-			VAR cmp_LM = CALCULATE ( misura, DATEADD ( DIM_Calendario[Date], -1, MONTH ) )
-			VAR cmp_2LM = CALCULATE ( misura, DATEADD ( DIM_Calendario[Date], -2, MONTH ) )
-			VAR cmp_3LM = CALCULATE ( misura, DATEADD ( DIM_Calendario[Date], -3, MONTH ) )
-			VAR cmp_4LM = CALCULATE ( misura, DATEADD ( DIM_Calendario[Date], -4, MONTH ) )
-			
-			VAR tot_cmp = cmp_LM + cmp_2LM + cmp_3LM + cmp_4LM
-			VAR nr_cmp = 4
+	measure 'CMP Acquisto 2' =
+			// Media aritmetica semplice dei costi medi MIX e PROPANO
+			VAR GruppoFiltrato = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR CMP_Mix = AVERAGEX(FACT_Mix, FACT_Mix[Costo] )
+			VAR CMP_Propano = AVERAGEX(FACT_Propano, FACT_Propano[Costo] )
 			
 			RETURN
-				DIVIDE(tot_cmp,nr_cmp,0)
+				SWITCH (
+					TRUE (),
+					GruppoFiltrato = "MIX", CMP_Mix,
+					GruppoFiltrato = "PROPANO", CMP_Propano,
+					DIVIDE(CMP_Mix + CMP_Propano, 2, 0)
+				)
 		displayFolder: CMP
+		annotation PBI_Description = "CMP Acquisto basato su medie tabelle FACT_Mix/Propano"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'CMP Acquisto 2' = ```
-			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			
-			VAR cmp_mix = AVERAGEX(FACT_Mix, FACT_Mix[Costo] )
-			VAR cmp_propano = AVERAGEX(FACT_Propano, FACT_Propano[Costo] )
-			
-			    
-			RETURN
-			    SWITCH (
-			        TRUE (),
-			        filtro_gruppo = "MIX", cmp_mix,
-			        filtro_gruppo = "PROPANO", cmp_propano,
-			        filtro_gruppo = BLANK (), DIVIDE(cmp_mix + cmp_propano,2,0)
-			    )
-			```
-		displayFolder: CMP
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Importo Margine' = [Qta Vendita] * [Margine Unitario]
+	measure 'Importo Margine' =
+			// Margine totale calcolato come Quantità Venduta x Margine Unitario
+			[Qta Vendita] * [Margine Unitario]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: MARGINE
+		annotation PBI_Description = "Margine totale (Qta x Margine Unitario)"
 
 	measure '# Mezzi' =
+			// Conta il numero di mezzi di trasporto diversi da 'ATB'
 			CALCULATE(
-			    COUNTX(DIM_MezziTrasporto,[QuantityIPEM]),
-			    DIM_MezziTrasporto[CodiceMezzo] <> "ATB"
+				COUNTX(DIM_MezziTrasporto, [QuantityIPEM]),
+				DIM_MezziTrasporto[CodiceMezzo] <> "ATB"
 			)
+		annotation PBI_Description = "Conteggio mezzi di trasporto (escluso ATB)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Venduto 2' =
+			// Calcolo alternativo del costo venduto (Differenza tra Iniziali e Acquisti - logica specifica)
 			[Importo Giacenza Iniziale] - [Importo Acquisto]
+		annotation PBI_Description = "Delta tra giacenza iniziale e acquisti"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Costo Venduto 3' =
+	measure 'Costo Venduto 3' = ```
 			
-			
-			VAR imp_giacenza = [Importo Giacenza Iniziale]
-			VAR imp_giacenza_LM = CALCULATE ( imp_giacenza, DATEADD ( DIM_Calendario[Date], -1, MONTH ) )
-			VAR imp_giacenza_NM = CALCULATE ( imp_giacenza, DATEADD ( DIM_Calendario[Date], 1, MONTH ) )
-			
-			VAR importo_acquisto_cm = [Importo Acquisto]
+			// Calcola il costo del venduto basato sulla formula: Giacenza Iniziale + Acquisti - Giacenza Finale
+			VAR Imp_Giacenza = [Importo Giacenza Iniziale]
+			VAR Imp_Giacenza_LM = CALCULATE ( Imp_Giacenza, DATEADD ( DIM_Calendario[Date], -1, MONTH ) )
+			VAR Imp_Giacenza_NM = CALCULATE ( Imp_Giacenza, DATEADD ( DIM_Calendario[Date], 1, MONTH ) )
+			VAR Imp_Acquisto_CM = [Importo Acquisto]
 			
 			RETURN
-			    imp_giacenza_LM +
-			    importo_acquisto_cm -
-			    imp_giacenza_NM
+			    Imp_Giacenza_LM + Imp_Acquisto_CM - Imp_Giacenza_NM
+			```
+		annotation PBI_Description = "Costo del venduto calcolato per differenza inventariale (Iniziale + Acquisti - Finale)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'CMP Acquisto MEDIAN YTD' = ```
-			
-			    MEDIANX(
-			        VALUES(DIM_Calendario[MonthInCalendar]),
-			        TOTALYTD([CMP Acquisto],DIM_Calendario[Date])
-			    )
-			```
+	measure 'CMP Acquisto MEDIAN YTD' =
+			// Mediana del CMP di acquisto calcolata dall'inizio dell'anno (YTD)
+			MEDIANX(
+				VALUES(DIM_Calendario[MonthInCalendar]),
+				TOTALYTD([CMP Acquisto], DIM_Calendario[Date])
+			)
 		displayFolder: CMP
+		annotation PBI_Description = "Mediana annuale progressiva del CMP Acquisto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Giacenza Finale' = ```
 			
+			// Valore delle giacenze finali (Conti 3300002 per Propano, 3300003 per Mix)
+			VAR GruppoFiltrato = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			
-			VAR qta_mix = CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "3300003"
-			)
-			VAR qta_propano = CALCULATE (
-			    [Importo],
-			    FACT_MovimentiCG[CodiceConto] = "3300002"
-			)
-			
-			VAR qta_ALL = qta_mix + qta_propano
+			VAR Imp_Mix = CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "3300003" )
+			VAR Imp_Propano = CALCULATE ( [Importo], FACT_MovimentiCG[CodiceConto] = "3300002" )
 			
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", qta_mix,
-			        filtro_gruppo = "PROPANO", qta_propano,
-			        filtro_gruppo = BLANK (), qta_ALL
+			        GruppoFiltrato = "MIX", Imp_Mix,
+			        GruppoFiltrato = "PROPANO", Imp_Propano,
+			        GruppoFiltrato = BLANK (), Imp_Mix + Imp_Propano
 			    )
-			
-			
 			```
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Importo rimanenze finali (CG 330*)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Movimento Mese' = ```
+	measure 'Importo Movimento Mese' =
+			// Calcola la variazione di valore del magazzino nel mese (Acquisti - Costo Venduto CMP)
 			[Importo Acquisto] - ([Qta Vendita] * [CMP Giacenza])
-			```
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Delta valore magazzino nel mese (Acquisti - Vendite valorizzate CMP)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Giacenza' =
+	measure 'Importo Giacenza' = ```
 			
-			VAR Risultato =
+			// Calcola il valore della giacenza come: Iniziale + Somma dei delta mensili YTD
+			VAR GiacenzaCorrente =
 			    [Importo Giacenza Iniziale] +
 			    CALCULATE (
 			        [Importo Movimento Mese],
@@ -521,9 +554,10 @@
 			    )
 			
 			RETURN
-			    IF ( ABS ( Risultato ) > 100000000, BLANK (), Risultato )
-			
+			    IF ( ABS ( GiacenzaCorrente ) > 100000000, BLANK (), GiacenzaCorrente )
+			```
 		displayFolder: IMPORTO_PRODOTTO
+		annotation PBI_Description = "Valore giacenza calcolato come progressivo dei movimenti YTD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -538,3 +572,5 @@
 				    #"Rimosse colonne"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigazione
