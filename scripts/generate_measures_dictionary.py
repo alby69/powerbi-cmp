@@ -6,6 +6,7 @@ def extract_measures(tmdl_path):
         content = f.read()
 
     # Split by measure keyword at the start of a line (after a tab or newline)
+    # TMDL measures are usually indented once under the table
     parts = re.split(r'\n\tmeasure ', content)
 
     table_match = re.search(r'table\s+(\S+)', parts[0])
@@ -26,8 +27,10 @@ def extract_measures(tmdl_path):
         first_line_val = name_match.group(2).strip()
 
         formula_lines = []
+        is_block = False
 
         if first_line_val == "```":
+            is_block = True
             for line in lines[1:]:
                 if line.strip() == "```":
                     break
@@ -38,20 +41,29 @@ def extract_measures(tmdl_path):
             # Formula starts on next lines
             for line in lines[1:]:
                 stripped = line.strip()
+                # Check if it's a property
                 if not stripped:
                     continue
-                # Heuristic for TMDL properties
                 if (':' in stripped and not stripped.startswith('//') and not ('"' in stripped and stripped.find(':') > stripped.find('"'))) or stripped.startswith('annotation') or stripped.startswith('changedProperty'):
+                    # Likely a property or annotation
+                    # TMDL properties are key: value or changedProperty = ...
+                    # But we must be careful with DAX formulas containing : (e.g. in strings or some operators?)
+                    # Actually TMDL properties are usually at the same indentation level as the formula
+                    # but they have a distinct format.
+
+                    # Heuristic: if line has ':', check if it's likely a property
                     if ':' in stripped:
                         key = stripped.split(':')[0]
                         if key in ['formatString', 'displayFolder', 'isHidden', 'lineageTag', 'dataCategory']:
                              break
                     if stripped.startswith('annotation') or stripped.startswith('changedProperty'):
                         break
+
                 formula_lines.append(line.strip('\t '))
 
         formula = "\n".join(formula_lines).strip()
 
+        # Extract description from annotation PBI_Description
         description = ""
         description_match = re.search(r'annotation PBI_Description = "(.*?)"', part)
         if description_match:
@@ -92,13 +104,13 @@ def main():
 
         for table in sorted(grouped.keys()):
             f.write(f"## {table}\n\n")
+            f.write("| Measure Name | Description | Formula |\n")
+            f.write("|--------------|-------------|---------|\n")
             for m in grouped[table]:
-                f.write(f"### {m['name']}\n")
-                if m['description']:
-                    f.write(f"**Description:** {m['description']}\n\n")
-                f.write("```dax\n")
-                f.write(f"{m['formula']}\n")
-                f.write("```\n\n")
+                # Clean formula for markdown table (replace newlines with <br>, escape |)
+                clean_formula = m['formula'].replace('\n', '<br>').replace('|', '\\|')
+                f.write(f"| {m['name']} | {m['description']} | `{clean_formula}` |\n")
+            f.write("\n")
 
     print(f"Measures dictionary generated at {output_file}")
 
