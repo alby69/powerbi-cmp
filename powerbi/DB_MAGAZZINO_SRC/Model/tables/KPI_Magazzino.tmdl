@@ -1,52 +1,56 @@
 ﻿table KPI_Magazzino
 
 	measure 'Qta Magazzino' =
-			
-			VAR qta = SUMX ( FACT_Magazzino, FACT_Magazzino[Quantity] )
-			
+			// Calcola la quantità totale in magazzino convertendo Kg in Tonnellate
+			VAR QtaKg = SUMX ( FACT_Magazzino, FACT_Magazzino[Quantity] )
 			RETURN
-			    DIVIDE ( qta, 1000, 0 )
+				DIVIDE ( QtaKg, 1000, 0 )
 		displayFolder: KPI Magazzino
 		annotation PBI_Description = "Quantità in magazzino in tonnellate (da Kg)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Progressivo' =
-			
+			// Quantità in magazzino accumulata nel tempo (saldo ad oggi)
 			CALCULATE (
-			    [Qta Magazzino],
-			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+				[Qta Magazzino],
+				FILTER (
+					ALL ( DIM_Calendario ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: QTA
+		annotation PBI_Description = "Saldo progressivo della quantità in magazzino"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 
 	measure 'Qta Acquisti' = ```
 			
+			// Somma le quantità acquistate in base al gruppo prodotto (MIX o PROPANO)
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
 			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
+			VAR QtaMix = [Qta RESA MIX]
+			VAR QtaPropano = SUMX(FACT_Propano, FACT_Propano[QuantityIPEM] )
 			
-			VAR qta_mix = [Qta RESA MIX]
-			VAR qta_propano = SUMX(FACT_Propano, FACT_Propano[QuantityIPEM] )
-			
-			    
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", qta_mix,
-			        filtro_gruppo = "PROPANO", qta_propano,
-			        filtro_gruppo = BLANK (), qta_mix + qta_propano
+			        Gruppo = "MIX", QtaMix,
+			        Gruppo = "PROPANO", QtaPropano,
+			        QtaMix + QtaPropano // Default: somma entrambi
 			    )
 			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Quantità acquistata totale (Resa Mix + Quantity IPEM Propano)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Magazzino' = ```
 			
+			// Importo totale dei movimenti di magazzino registrati in CG
 			CALCULATE(
-			    SUMX(FACT_MovimentiCG,FACT_MovimentiCG[Importo]),
+			    SUMX(FACT_MovimentiCG, FACT_MovimentiCG[Importo]),
 			    REMOVEFILTERS(FACT_MovimentiCG[CodiceCategoria])
 			)
 			```
@@ -56,58 +60,69 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Fornitori' =
-			
-			CALCULATE ( [Importo Magazzino], FACT_MovimentiCG[CodiceConto] = "2030001" )
+			// Importo dei movimenti CG filtrati per il conto fornitori '2030001'
+			CALCULATE (
+				[Importo Magazzino],
+				FACT_MovimentiCG[CodiceConto] = "2030001"
+			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Debiti verso fornitori (Conto CG 2030001)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Acquisti (CG)' =
-			
+			// Importo degli acquisti registrati sul conto '4020002'
 			CALCULATE (
-			    ABS ( [Importo Magazzino] ),
-			    FACT_MovimentiCG[CodiceConto] = "4020002"
+				ABS ( [Importo Magazzino] ),
+				FACT_MovimentiCG[CodiceConto] = "4020002"
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Ricavi/Costi acquisti da CG (Conto 4020002)"
 
 	measure 'Importo per Data Documento' =
-			
+			// Calcola l'importo CG utilizzando la relazione con la data del documento anziché la registrazione
 			CALCULATE (
-			    SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo] ),
-			    USERELATIONSHIP ( DIM_Calendario[Date], FACT_MovimentiCG[DataDocumento] )
+				SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo] ),
+				USERELATIONSHIP ( DIM_Calendario[Date], FACT_MovimentiCG[DataDocumento] )
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo movimenti CG basato sulla data documento"
 
 	measure 'Importo Acquisti Altro' =
-			
+			// Importo per acquisti vari su conto '3100001' e progetto 'PS01'
 			CALCULATE (
-			    ABS ( [Importo Magazzino] ),
-			    FACT_MovimentiCG[CodiceConto] = "3100001" && FACT_MovimentiCG[Progetto] = "PS01"
+				ABS ( [Importo Magazzino] ),
+				FACT_MovimentiCG[CodiceConto] = "3100001" &&
+				FACT_MovimentiCG[Progetto] = "PS01"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo altri acquisti (Conto 3100001, Progetto PS01)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Accantonamenti' =
-			
+			// Somma totale degli accantonamenti registrati
 			SUMX ( FACT_Accantonamenti, FACT_Accantonamenti[Importo] )
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Totale accantonamenti"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Qta Ton Progressivo YTD' =
-			
+			// Valorizzazione della giacenza YTD al costo di acquisto unitario
 			[Qta Magazzino Progressivo YTD] * [Costo Acquisto Qta Ton]
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione della giacenza progressiva annuale al costo di acquisto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Qta Ton' =
-			
+			// Valorizzazione della giacenza istantanea al costo di acquisto
 			[Qta Magazzino] * [Costo Acquisto Qta Ton]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione quantità magazzino al costo acquisto"
 
 		changedProperty = FormatString
 
@@ -115,65 +130,70 @@
 
 
 	measure 'Importo Qta Ton Differenza CY-LY' =
-			
-			[Importo Qta Ton Progressivo YTD] - CALCULATE([Importo Qta Ton Progressivo YTD], SAMEPERIODLASTYEAR(DIM_Calendario[Date]))
+			// Delta di valorizzazione tra l'anno corrente e l'anno precedente (stesso periodo)
+			VAR ValCY = [Importo Qta Ton Progressivo YTD]
+			VAR ValLY = CALCULATE([Importo Qta Ton Progressivo YTD], SAMEPERIODLASTYEAR(DIM_Calendario[Date]))
+			RETURN
+				ValCY - ValLY
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Differenza di valorizzazione giacenza YTD tra anno corrente e precedente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Qta Ton Vendita' =
-			
+			// Costo del venduto calcolato su quantità venduta e costo acquisto unitario
 			[Qta Vendite] * [Costo Acquisto Qta Ton]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione quantità venduta al costo acquisto"
 
 		changedProperty = FormatString
 
 		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Importo Magazzino Progressivo' =
-			
-			VAR filtro_articolo =
-			    { SELECTEDVALUE ( DIM_Articoli[CodiceArticolo] ) }
-			VAR anno_inizio = 2021
-			VAR tab_filtro =
-			    FILTER (
-			        ALL ( FACT_Magazzino ),
-			        FACT_Magazzino[CodiceDeposito] = "IPEM"
-			            && FACT_Magazzino[CodiceArticolo]
-			                IN filtro_articolo
-			                    && FACT_Magazzino[Date] >= DATE ( anno_inizio, 1, 1 )
-			                    && FACT_Magazzino[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+			// Importo progressivo dei movimenti di magazzino filtrato per deposito IPEM (dal 2021)
+			VAR Articolo = SELECTEDVALUE ( DIM_Articoli[CodiceArticolo] )
+			VAR AnnoInizio = 2021
+			VAR TabellaFiltrata =
+				FILTER (
+					ALL ( FACT_Magazzino ),
+					FACT_Magazzino[CodiceDeposito] = "IPEM" &&
+					FACT_Magazzino[CodiceArticolo] = Articolo &&
+					FACT_Magazzino[Date] >= DATE ( AnnoInizio, 1, 1 ) &&
+					FACT_Magazzino[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			RETURN
-			    CALCULATE ( [Importo Magazzino], tab_filtro )
+				CALCULATE ( [Importo Magazzino], TabellaFiltrata )
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo progressivo movimenti magazzino per deposito IPEM"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Magazzino Progressivo (2)' =
-			
+			// Valorizzazione progressiva: CMP Acquisto x Quantità Acquisto
 			[CMP Acquisto Mag Progr] * [Qta Acquisto Progr]
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione progressiva acquisti (CMP x Qta)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo Qta Ton Previsto' =
+	measure 'Importo Qta Ton Previsto' = ```
 			
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
-			VAR cur_date =
-			    { SELECTEDVALUE ( DIM_Calendario[Date] ) }
-			VAR importo_iniziale =
+			// Calcola l'importo previsto di magazzino partendo da una giacenza iniziale al 01/01/2021
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] )
+			VAR DataCorrente = SELECTEDVALUE ( DIM_Calendario[Date] )
+
+			VAR ImportoIniziale =
 			    SUMX (
 			        FILTER (
 			            FACT_Giacenza,
-			            FACT_Giacenza[Date] = DATE ( 2021, 1, 1 )
-			                && FACT_Giacenza[GruppoProdotto] = filtro_gruppo
+			            FACT_Giacenza[Date] = DATE ( 2021, 1, 1 ) &&
+			            FACT_Giacenza[GruppoProdotto] = Gruppo
 			        ),
 			        FACT_Giacenza[Importo]
 			    )
-			VAR tab_filtro =
+			VAR TabellaFiltroCalendario =
 			    FILTER (
 			        ALLSELECTED ( DIM_Calendario ),
 			        DIM_Calendario[Date] < MAX ( DIM_Calendario[Date] )
@@ -181,122 +201,140 @@
 			RETURN
 			    CALCULATE (
 			        IF (
-			            cur_date = DATE ( 2021, 1, 1 )
-			                || ISBLANK ( [Qta Magazzino] ),
-			            importo_iniziale,
+			            DataCorrente = DATE ( 2021, 1, 1 ) || ISBLANK ( [Qta Magazzino] ),
+			            ImportoIniziale,
 			            [Qta Magazzino]
 			        ),
-			        tab_filtro
+			        TabellaFiltroCalendario
 			    )
+			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo magazzino previsto basato su giacenza iniziale 2021"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Vendite (CG)' =
-			
+			// Ricavi totali dalle vendite registrate sui conti CG 30*
 			CALCULATE (
-			    ABS ( [Importo Magazzino] ),
-			    FACT_MovimentiCG[CodiceConto] IN { "3000002", "3000003", "3000004", "3000005" }
+				ABS ( [Importo Magazzino] ),
+				FACT_MovimentiCG[CodiceConto] IN { "3000002", "3000003", "3000004", "3000005" }
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Ricavi vendite da CG (Conti 30*)"
 
 		changedProperty = FormatString
 
 	measure 'Importo Passaggi (CG)' =
-			
+			// Ricavi totali dai passaggi registrati sui conti CG 31*
 			CALCULATE (
-			    ABS ( [Importo Magazzino] ),
-			    FACT_MovimentiCG[CodiceConto] IN { "3100001", "3100002", "3100003", "3100004", "3100005" }
+				ABS ( [Importo Magazzino] ),
+				FACT_MovimentiCG[CodiceConto] IN { "3100001", "3100002", "3100003", "3100004", "3100005" }
 			)
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Ricavi passaggi da CG (Conti 31*)"
 
 		changedProperty = FormatString
 
 	measure 'Importo Rimanenze Iniziali Propano (CG)' =
-			
+			// Valore delle giacenze iniziali di Propano (Conto 4010002)
 			CALCULATE (
-			    ABS ( [Importo Dare (CG)] ),
-			    FACT_MovimentiCG[CodiceConto] = "4010002"
+				ABS ( [Importo Dare (CG)] ),
+				FACT_MovimentiCG[CodiceConto] = "4010002"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo rimanenze iniziali Propano (Conto 4010002)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Rimanenze Finali Propano (CG)' =
-			
+			// Valore delle giacenze finali di Propano (Conto 3300002)
 			CALCULATE (
-			    ABS ( [Importo Dare (CG)] ),
-			    FACT_MovimentiCG[CodiceConto] = "3300002"
+				ABS ( [Importo Dare (CG)] ),
+				FACT_MovimentiCG[CodiceConto] = "3300002"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo rimanenze finali Propano (Conto 3300002)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo CMP' =
-			
+			// Base di calcolo per il Costo Medio Ponderato: Giacenza Iniziale + Acquisti
 			[Importo Rimanenze Iniziali Propano (CG)] + [Importo Acquisti (CG)]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo totale per calcolo CMP (Iniziali + Acquisti)"
 
 		changedProperty = FormatString
 
-	measure 'Importo Inventario' = ([Qta Acquisti] + [Qta Magazzino CD Giacenza IPEM]) * [CMP Acquisto]
+	measure 'Importo Inventario' =
+			// Valore totale dell'inventario: (Qta Acquisti + Qta Giacenza IPEM) x CMP
+			([Qta Acquisti] + [Qta Magazzino CD Giacenza IPEM]) * [CMP Acquisto]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione inventario (Acquisti + CD IPEM) x CMP"
 
 		changedProperty = FormatString
 
 	measure 'Importo Rimanenze Finali Mix (CG)' =
-			
+			// Valore delle giacenze finali di Mix (Conto 3300003)
 			CALCULATE (
-			    ABS ( [Importo Dare (CG)] ),
-			    FACT_MovimentiCG[CodiceConto] = "3300003"
+				ABS ( [Importo Dare (CG)] ),
+				FACT_MovimentiCG[CodiceConto] = "3300003"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo rimanenze finali Mix (Conto 3300003)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Rimanenze Iniziali Mix (CG)' =
-			
+			// Valore delle giacenze iniziali di Mix (Conto 4010003)
 			CALCULATE (
-			    ABS ( [Importo Dare (CG)] ),
-			    FACT_MovimentiCG[CodiceConto] = "4010003"
+				ABS ( [Importo Dare (CG)] ),
+				FACT_MovimentiCG[CodiceConto] = "4010003"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Importo rimanenze iniziali Mix (Conto 4010003)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Acquisto IPEM CD' =
-			
+			// Quantità acquistata per il deposito IPEM in regime di Conto Deposito
 			CALCULATE (
-			    [Qta Magazzino CD],
-			    FACT_ContoDeposito[TipoMovimento] = "Acquisto"
-			        && FACT_ContoDeposito[CodiceDeposito] = "IPEM"
+				[Qta Magazzino CD],
+				FACT_ContoDeposito[TipoMovimento] = "Acquisto" &&
+				FACT_ContoDeposito[CodiceDeposito] = "IPEM"
 			)
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Quantità acquisti in Conto Deposito deposito IPEM"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino CD' =
-			
+			// Somma delle quantità presenti in Conto Deposito
 			SUMX ( FACT_ContoDeposito, FACT_ContoDeposito[Quantity] )
 		formatString: #,0.000
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Quantità totale movimenti in Conto Deposito"
 
 	measure 'Qta Magazzino Acquisto IPEM CD Progressivo' =
-			
+			// Saldo progressivo degli acquisti in Conto Deposito per IPEM
 			CALCULATE (
-			    [Qta Magazzino Acquisto IPEM CD],
-			    FILTER ( ALL ( DIM_Calendario ), DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] ) )
+				[Qta Magazzino Acquisto IPEM CD],
+				FILTER (
+					ALL ( DIM_Calendario ),
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Somma progressiva acquisti CD per deposito IPEM"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino CD Progressivo' = ```
 			
+			// Calcola la giacenza progressiva in Conto Deposito gestendo correttamente i movimenti di tipo 'Giacenza' (set point)
 			VAR InizioPeriodo =
 			    CALCULATE(
 			        MIN(FACT_ContoDeposito[DataMovimento]),
@@ -306,138 +344,155 @@
 			VAR OrdineCorrente = MAX(FACT_ContoDeposito[EntryNo])
 			
 			VAR UltimaGiacenzaPrecedente =
-			MAXX(
-			    FILTER(
-			        ALL(FACT_ContoDeposito),
-			        FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
-			        FACT_ContoDeposito[DataMovimento] <= InizioPeriodo
-			    ),
-			    FACT_ContoDeposito[DataMovimento]
-			)
+			    MAXX(
+			        FILTER(
+			            ALL(FACT_ContoDeposito),
+			            FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
+			            FACT_ContoDeposito[DataMovimento] <= InizioPeriodo
+			        ),
+			        FACT_ContoDeposito[DataMovimento]
+			    )
 			
 			VAR Tab_Filtro =
-			FILTER(
-			    ALLSELECTED(FACT_ContoDeposito),
-			    (
-			        FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
-			        FACT_ContoDeposito[DataMovimento] = UltimaGiacenzaPrecedente
-			    )
-			    ||
-			    (
-			        FACT_ContoDeposito[TipoMovimento] <> "Giacenza" &&
-			        FACT_ContoDeposito[DataMovimento] >= InizioPeriodo &&
+			    FILTER(
+			        ALLSELECTED(FACT_ContoDeposito),
 			        (
-			            FACT_ContoDeposito[DataMovimento] < DataCorrente
-			            ||
+			            FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
+			            FACT_ContoDeposito[DataMovimento] = UltimaGiacenzaPrecedente
+			        )
+			        ||
+			        (
+			            FACT_ContoDeposito[TipoMovimento] <> "Giacenza" &&
+			            FACT_ContoDeposito[DataMovimento] >= InizioPeriodo &&
 			            (
-			                FACT_ContoDeposito[DataMovimento] = DataCorrente &&
-			                FACT_ContoDeposito[EntryNo] <= OrdineCorrente
+			                FACT_ContoDeposito[DataMovimento] < DataCorrente ||
+			                (
+			                    FACT_ContoDeposito[DataMovimento] = DataCorrente &&
+			                    FACT_ContoDeposito[EntryNo] <= OrdineCorrente
+			                )
 			            )
 			        )
 			    )
-			)
 			
 			VAR Risultato = CALCULATE([Qta Magazzino CD], Tab_Filtro)
 			
 			RETURN
-			IF(
-			    HASONEVALUE(FACT_ContoDeposito[DataMovimento]),
-			    Risultato,
-			    BLANK()
-			)
+			    IF(
+			        HASONEVALUE(FACT_ContoDeposito[DataMovimento]),
+			        Risultato,
+			        BLANK()
+			    )
 			```
 		displayFolder: QTA CONTO DEPOSITO
+		annotation PBI_Description = "Giacenza progressiva in Conto Deposito con gestione dei set-point 'Giacenza'"
 
 
 	measure 'Qta Magazzino CD Giacenza IPEM' =
-			
+			// Quantità registrata come set-point di giacenza per il deposito IPEM
 			CALCULATE (
-			    [Qta Magazzino CD],
-			    FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
-			    FACT_ContoDeposito[CodiceDeposito] = "IPEM"
+				[Qta Magazzino CD],
+				FACT_ContoDeposito[TipoMovimento] = "Giacenza" &&
+				FACT_ContoDeposito[CodiceDeposito] = "IPEM"
 			)
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Quantità di giacenza iniziale/set-point per deposito IPEM in CD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Valore Magazzino' =
-			
+			// Valorizzazione della giacenza progressiva al CMP cumulato di acquisto
 			[Qta Magazzino Progressivo] * [CMP Acquisto CUM]
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione giacenza al CMP cumulato"
 
 	measure 'Valore Magazzino (2)' =
-			
+			// Valorizzazione della giacenza progressiva al CMP cumulato di prodotto
 			[Qta Magazzino Progressivo] * [CMP Prodotto CUM]
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Valorizzazione giacenza al CMP cumulato prodotto"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Rapporto Inventario' = DIVIDE([Importo Vendita N DAYS],[Importo Inventario],0)
+	measure 'Rapporto Inventario' =
+			// Indice di rotazione o copertura: Rapporto tra vendite ultimi N giorni e valore inventario attuale
+			DIVIDE([Importo Vendita N DAYS], [Importo Inventario], 0)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Indice di rotazione: Rapporto tra vendite N giorni e valore inventario"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Dare (CG)' = ```
 			
-			    CALCULATE(
-			        SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo]),
-			        FACT_MovimentiCG[Importo] > 0
-			    )
+			// Somma degli importi positivi (Dare) nei movimenti di Contabilità Generale
+			CALCULATE(
+			    SUMX ( FACT_MovimentiCG, FACT_MovimentiCG[Importo]),
+			    FACT_MovimentiCG[Importo] > 0
+			)
 			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Somma degli importi 'Dare' (positivi) in CG"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Unità Misura' = MINX(FACT_Magazzino,FACT_Magazzino[UnitàMisura])
+	measure 'Unità Misura' =
+			// Restituisce l'unità di misura utilizzata nei movimenti di magazzino
+			MINX(FACT_Magazzino, FACT_Magazzino[UnitàMisura])
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Unità di misura di magazzino"
 
 	measure 'Qta Magazzino Progressivo YTD' =
-			
+			// Giacenza progressiva calcolata dall'inizio dell'anno (Year-To-Date)
 			CALCULATE (
-			    [Qta Magazzino],
-			    FILTER (
-			        ALL ( DIM_Calendario ),
-			        DIM_Calendario[Year] <= MAX ( DIM_Calendario[Year] )
-			            && DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			    )
+				[Qta Magazzino],
+				FILTER (
+					ALL ( DIM_Calendario ),
+					DIM_Calendario[Year] = MAX ( DIM_Calendario[Year] ) &&
+					DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+				)
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Saldo quantità progressivo dall'inizio dell'anno corrente"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Magazzino Giacenza' = [Qta Giacenza Iniziale] + [Qta Acquisti] - [Qta Vendite]
+	measure 'Qta Magazzino Giacenza' =
+			// Calcolo teorico giacenza: Iniziale + Acquisti - Vendite
+			[Qta Giacenza Iniziale] + [Qta Acquisti] - [Qta Vendite]
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Giacenza calcolata come Iniziale + Acquisti - Vendite"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Giacenza OLD' = ```
 			
-			    CALCULATE(
-			        [Qta Magazzino Progressivo],
-			        REMOVEFILTERS(DIM_GruppiVendita)
-			    )
+			// Quantità progressiva ignorando i filtri sui gruppi vendita
+			CALCULATE(
+			    [Qta Magazzino Progressivo],
+			    REMOVEFILTERS(DIM_GruppiVendita)
+			)
 			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Giacenza progressiva senza filtri gruppo vendita"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Magazzino Prevista' =
+	measure 'Qta Magazzino Prevista' = ```
 			
-			VAR filtro_gruppo =
-			    { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] ) }
-			VAR cur_date =
-			    { SELECTEDVALUE ( DIM_Calendario[Date] ) }
-			VAR qta_iniziale =
+			// Stima della giacenza prevista partendo dalla giacenza iniziale del 2021
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto] )
+			VAR DataCorrente = SELECTEDVALUE ( DIM_Calendario[Date] )
+
+			VAR QtaIniziale =
 			    SUMX (
 			        FILTER (
 			            FACT_Giacenza,
-			            FACT_Giacenza[Date] = DATE ( 2021, 1, 1 )
-			                && FACT_Giacenza[GruppoProdotto] = filtro_gruppo
+			            FACT_Giacenza[Date] = DATE ( 2021, 1, 1 ) &&
+			            FACT_Giacenza[GruppoProdotto] = Gruppo
 			        ),
 			        FACT_Giacenza[Quantity]
 			    )
-			VAR tab_filtro =
+			VAR TabellaFiltroCalendario =
 			    FILTER (
 			        ALLSELECTED ( DIM_Calendario ),
 			        DIM_Calendario[Date] < MAX ( DIM_Calendario[Date] )
@@ -445,210 +500,201 @@
 			RETURN
 			    CALCULATE (
 			        IF (
-			            cur_date = DATE ( 2021, 1, 1 )
-			                || ISBLANK ( [Qta Magazzino] ),
-			            qta_iniziale,
+			            DataCorrente = DATE ( 2021, 1, 1 ) || ISBLANK ( [Qta Magazzino] ),
+			            QtaIniziale,
 			            [Qta Magazzino]
 			        ),
-			        tab_filtro
+			        TabellaFiltroCalendario
 			    )
+			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Quantità magazzino prevista basata su giacenza 2021"
 
 	measure 'Qta Magazzino Giacenza LM' =
-			
+			// Giacenza calcolata allo stesso giorno del mese precedente
 			CALCULATE ( [Qta Magazzino Giacenza OLD], DATEADD ( DIM_Calendario[Date], -1, MONTH ) )
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Giacenza al mese precedente (Last Month)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Giacenza IPEM' = ```
 			
-			    CALCULATE(
-			        [Qta Magazzino Giacenza OLD],
-			        FACT_Magazzino[CodiceDeposito] = "IPEM"
-			    )
+			// Giacenza filtrata per il solo deposito IPEM
+			CALCULATE(
+			    [Qta Magazzino Giacenza OLD],
+			    FACT_Magazzino[CodiceDeposito] = "IPEM"
+			)
 			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Giacenza calcolata per il deposito IPEM"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino CD per Movimento' =
-			
-			VAR cur_mov = SELECTEDVALUE(FACT_ContoDeposito[TipoMovimento],0)
-			
+			// Determina se mostrare la quantità vendita o la quantità CD in base al tipo movimento selezionato
+			VAR MovimentoCorrente = SELECTEDVALUE(FACT_ContoDeposito[TipoMovimento], 0)
 			RETURN
-			    IF(cur_mov = "Vendita", [Qta Vendita Deposito], [Qta Magazzino CD])
+				IF(MovimentoCorrente = "Vendita", [Qta Vendita Deposito], [Qta Magazzino CD])
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Quantità CD dinamica in base al tipo movimento (Vendita vs Altri)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Vendita Deposito' = ```
 			
-			
-			VAR filtro_gruppo = { SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () ) }
-			VAR filtro_deposito = { SELECTEDVALUE ( FACT_ContoDepositoOLD[CodiceDeposito], BLANK () ) }
-			VAR filtro_cliente = 
-			    {
+			// Calcola le quantità vendute dai depositi, mappando i depositi CD sui codici soggetti (C00*)
+			VAR Gruppo = SELECTEDVALUE ( DIM_Articoli[GruppoProdotto], BLANK () )
+			VAR Deposito = SELECTEDVALUE ( FACT_ContoDepositoOLD[CodiceDeposito], BLANK () )
+			VAR SoggettoFiltro =
 			    SWITCH (
 			        TRUE (),
-			        filtro_deposito = "IPEM", "",
-			        filtro_deposito = "AUTOGASNORD", "C00525",
-			        filtro_deposito = "BUTANGAS", "C00229",
-			        filtro_deposito = "LIQUIGAS", "C00261",
-			        filtro_deposito = "VERSALIS", "C00794"
-			    ) }
+			        Deposito = "AUTOGASNORD", "C00525",
+			        Deposito = "BUTANGAS", "C00229",
+			        Deposito = "LIQUIGAS", "C00261",
+			        Deposito = "VERSALIS", "C00794",
+			        ""
+			    )
 			    
-			VAR qta_mix = CALCULATE(
+			VAR QtaMix =
+			    CALCULATE(
 			        SUMX(FACT_Vendite, FACT_Vendite[Quantity]),
-			        FILTER(FACT_Vendite,FACT_Vendite[CodiceArticolo] IN {"1","1T"} &&
-			            IF( filtro_cliente <> "",FACT_Vendite[CodiceSoggetto] IN filtro_cliente,
-			                (FACT_Vendite[CodiceCategoria] <> "PASSAGGIO")
-			            )
+			        FACT_Vendite[CodiceArticolo] IN {"1","1T"} &&
+			        IF( SoggettoFiltro <> "",
+			            FACT_Vendite[CodiceSoggetto] = SoggettoFiltro,
+			            FACT_Vendite[CodiceCategoria] <> "PASSAGGIO"
 			        )
-			)
+			    )
 			
-			VAR qta_propano = CALCULATE(
+			VAR QtaPropano =
+			    CALCULATE(
 			        SUMX(FACT_Vendite, FACT_Vendite[Quantity]),
-			        FILTER(FACT_Vendite,FACT_Vendite[CodiceArticolo] IN {"2","2T"} &&
-			            IF( filtro_cliente <> "",FACT_Vendite[CodiceSoggetto] IN filtro_cliente,
-			                (FACT_Vendite[CodiceCategoria] <> "PASSAGGIO")
-			            )
+			        FACT_Vendite[CodiceArticolo] IN {"2","2T"} &&
+			        IF( SoggettoFiltro <> "",
+			            FACT_Vendite[CodiceSoggetto] = SoggettoFiltro,
+			            FACT_Vendite[CodiceCategoria] <> "PASSAGGIO"
 			        )
-			)
+			    )
 			    
 			RETURN
 			    SWITCH (
 			        TRUE (),
-			        filtro_gruppo = "MIX", qta_mix,
-			        filtro_gruppo = "PROPANO", qta_propano,
-			        filtro_gruppo = BLANK (), qta_mix + qta_propano
+			        Gruppo = "MIX", QtaMix,
+			        Gruppo = "PROPANO", QtaPropano,
+			        QtaMix + QtaPropano
 			    )
-			
 			```
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Quantità venduta per deposito mappato su soggetti CD"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Giacenza (2)' = ```
 			
-			VAR prodotto = SELECTEDVALUE(DIM_Articoli[GruppoProdotto])
-			VAR start_date = DATE(2024,1,1)
+			// Calcolo giacenza 2024 basato su set-point iniziale e movimenti YTD
+			VAR Prodotto = SELECTEDVALUE(DIM_Articoli[GruppoProdotto])
+			VAR DataInizio2024 = DATE(2024,1,1)
 			
-			VAR giacenza_prop = 4901
-			VAR giacenza_mix = 219.520
-			VAR giacenza = IF(prodotto = "PROPANO",giacenza_prop,giacenza_mix)
+			VAR GiacenzaInizialePropano = 4901
+			VAR GiacenzaInizialeMix = 219.520
+			VAR GiacenzaIniziale = IF(Prodotto = "PROPANO", GiacenzaInizialePropano, GiacenzaInizialeMix)
 			
-			VAR qta_acquisto_prop = TOTALYTD ( [Qta Acquisti], DIM_Calendario[Date] )
-			VAR qta_acquisto_mix = TOTALYTD ( [Qta Acquisti], DIM_Calendario[Date] )
-			VAR qta_acquisto_tot = qta_acquisto_prop + qta_acquisto_mix
-			
-			VAR qta_vendita_propano = TOTALYTD ( [Qta Vendite], DIM_Calendario[Date] )
-			VAR qta_vendita_mix = TOTALYTD ( [Qta Vendita Prodotto], DIM_Calendario[Date] )
-			VAR qta_vendita_tot = qta_vendita_propano + qta_vendita_mix
-			
-			VAR qta_vendita = 
-			    { 
-			        SWITCH (
-			            TRUE (),
-			            prodotto = "PROPANO", qta_vendita_propano,
-			            prodotto = "MIX", qta_vendita_mix,
-			            qta_vendita_tot
-			        )
-			    }
-			
-			
-			VAR qta_acquisto = 
-			    { 
-			        SWITCH (
-			            TRUE (),
-			            prodotto = "PROPANO", qta_acquisto_prop,
-			            prodotto = "MIX", qta_acquisto_mix,
-			            qta_acquisto_tot
-			        )
-			    }
-			
+			VAR QtaAcquistoYTD = TOTALYTD ( [Qta Acquisti], DIM_Calendario[Date] )
+			VAR QtaVenditaYTD = TOTALYTD ( [Qta Vendita Prodotto], DIM_Calendario[Date] )
 			
 			RETURN
-			
 			    IF(
-			        AND(MIN(DIM_Calendario[Date]) = start_date, MAX(DIM_Calendario[Date]) = DATE(2024,1,31)),
-			        giacenza, // + start_qta,
-			        giacenza + qta_acquisto - qta_vendita
+			        MIN(DIM_Calendario[Date]) = DataInizio2024 && MAX(DIM_Calendario[Date]) = DATE(2024,1,31),
+			        GiacenzaIniziale,
+			        GiacenzaIniziale + QtaAcquistoYTD - QtaVenditaYTD
 			    )
 			```
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Giacenza specifica 2024 con set-point iniziale al 01/01"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Vendita (MAG)' =
+			// Quantità scaricata dal magazzino per movimenti di tipo 'Vendita'
 			CALCULATE(
-			    [Qta Magazzino],
-			    FACT_Magazzino[TipoMovimento] = "Vendita"
+				[Qta Magazzino],
+				FACT_Magazzino[TipoMovimento] = "Vendita"
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Quantità scaricata da FACT_Magazzino per vendite"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Acquisti Progressivo' =
-			
+			// Quantità totale acquistata accumulata nel periodo selezionato
 			IF (
-			    ISBLANK ( [Qta Acquisti] ),
-			    BLANK (),
-			    CALCULATE (
-			        [Qta Acquisti],
-			        FILTER (
-			            ALLSELECTED ( DIM_Calendario ),
-			            DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
-			        )
-			    )
+				ISBLANK ( [Qta Acquisti] ),
+				BLANK (),
+				CALCULATE (
+					[Qta Acquisti],
+					FILTER (
+						ALLSELECTED ( DIM_Calendario ),
+						DIM_Calendario[Date] <= MAX ( DIM_Calendario[Date] )
+					)
+				)
 			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Quantità acquisti accumulata nel tempo (periodo corrente)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Magazzino Acquisto' =
-			
-			    CALCULATE(
-			        [Qta Magazzino],
-			        FACT_Magazzino[TipoMovimento] IN {"Acquisto","Rettifica Positiva"}
-			    )
+			// Quantità caricata a magazzino per Acquisti o Rettifiche Positive
+			CALCULATE(
+				[Qta Magazzino],
+				FACT_Magazzino[TipoMovimento] IN {"Acquisto", "Rettifica Positiva"}
+			)
 		displayFolder: KPI Magazzino
+		annotation PBI_Description = "Carichi di magazzino (Acquisti + Rettifiche Positive)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Mostra Giacenza No Movimenti' = ```
 			
+			// Flag tecnico per gestire la visualizzazione delle giacenze anche in assenza di movimenti nel periodo
 			VAR HaQuantita = NOT(ISBLANK([Qta Magazzino CD]))
-			VAR InizioAnno = DATE(YEAR(MAX(FACT_ContoDeposito[DataMovimento])), 1, 1)
+			VAR AnnoCorrente = YEAR(MAX(FACT_ContoDeposito[DataMovimento]))
+			VAR InizioAnno = DATE(AnnoCorrente, 1, 1)
 			VAR IsGiacenzaIniziale = 
-			    MAX(FACT_ContoDeposito[TipoMovimento]) = "Giacenza"
-			    && MAX(FACT_ContoDeposito[DataMovimento]) <= InizioAnno
+			    MAX(FACT_ContoDeposito[TipoMovimento]) = "Giacenza" &&
+			    MAX(FACT_ContoDeposito[DataMovimento]) <= InizioAnno
 			VAR IsAltroMovimento = MAX(FACT_ContoDeposito[TipoMovimento]) <> "Giacenza"
+
 			RETURN
-			IF(
-			    HaQuantita && (IsGiacenzaIniziale || IsAltroMovimento),
-			    1,
-			    BLANK()
-			)
+			    IF(
+			        HaQuantita && (IsGiacenzaIniziale || IsAltroMovimento),
+			        1,
+			        BLANK()
+			    )
 			```
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Flag per visualizzazione righe di giacenza senza movimenti nel periodo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure FiltroAttivo = ```
 			
-			VAR filtroGruppo = ISFILTERED(DIM_GruppiVendita[Gruppo])
-			VAR filtroCat = ISFILTERED(FACT_MovimentiCG[CodiceCategoria])
+			// Visualizza lo stato dei filtri attivi per Gruppo e Categoria (debug)
+			VAR IsGruppoFiltrato = ISFILTERED(DIM_GruppiVendita[Gruppo])
+			VAR IsCategoriaFiltrata = ISFILTERED(FACT_MovimentiCG[CodiceCategoria])
 			RETURN
-			"Gruppo: " & IF(filtroGruppo, "✅", "❌") & 
-			" | Categoria: " & IF(filtroCat, "✅", "❌")
-			
+			    "Gruppo: " & IF(IsGruppoFiltrato, "✅", "❌") &
+			    " | Categoria: " & IF(IsCategoriaFiltrata, "✅", "❌")
 			```
+		annotation PBI_Description = "Stato dei filtri principali (Debug)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Qta Giacenza Iniziale' = [Qta Magazzino CD Giacenza IPEM]
+	measure 'Qta Giacenza Iniziale' =
+			// Alias per la giacenza iniziale IPEM in Conto Deposito
+			[Qta Magazzino CD Giacenza IPEM]
 		displayFolder: KPI Magazzino CD
+		annotation PBI_Description = "Alias quantità giacenza iniziale IPEM"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
