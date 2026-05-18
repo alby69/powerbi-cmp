@@ -35,11 +35,11 @@ def extract_measures(tmdl_path):
         elif first_line_val != "":
             formula_lines.append(first_line_val)
         else:
-            # Formula starts on next lines
             for line in lines[1:]:
                 stripped = line.strip()
                 if not stripped:
                     continue
+                # Heuristic for TMDL properties
                 if (':' in stripped and not stripped.startswith('//') and not ('"' in stripped and stripped.find(':') > stripped.find('"'))) or stripped.startswith('annotation') or stripped.startswith('changedProperty'):
                     if ':' in stripped:
                         key = stripped.split(':')[0]
