@@ -17,7 +17,6 @@ def extract_measures(tmdl_path):
         lines = part.split('\n')
         header = lines[0]
 
-        # Match Name = ...
         name_match = re.match(r"'?([^'=]+)'?\s*=\s*(.*)", header)
         if not name_match:
             continue
@@ -39,7 +38,6 @@ def extract_measures(tmdl_path):
                 stripped = line.strip()
                 if not stripped:
                     continue
-                # Heuristic for TMDL properties
                 if (':' in stripped and not stripped.startswith('//') and not ('"' in stripped and stripped.find(':') > stripped.find('"'))) or stripped.startswith('annotation') or stripped.startswith('changedProperty'):
                     if ':' in stripped:
                         key = stripped.split(':')[0]
