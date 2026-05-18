@@ -17,7 +17,6 @@ def extract_measures(tmdl_path):
         lines = part.split('\n')
         header = lines[0]
 
-        # Match Name = ...
         name_match = re.match(r"'?([^'=]+)'?\s*=\s*(.*)", header)
         if not name_match:
             continue
@@ -71,7 +70,6 @@ def main():
 
     all_measures = []
     if not os.path.exists(tables_dir):
-        print(f"Directory {tables_dir} not found.")
         return
 
     for filename in os.listdir(tables_dir):
