@@ -82,4 +82,5 @@ Vedi [`docs/refactoring_plan.md`](docs/refactoring_plan.md) per dettagli sul pia
 - **Fase 2** — Standardizzazione naming
 - **Fase 3** — Ottimizzazione DAX e star schema
 - **Fase 4** — Documentazione enterprise
-- **Fase 5** — Integrazione Report e Refactoring Visual (Integrazione ACQUISTI_PRODOTTO, ANALISI_VENDITE, DB_MAGAZZINO_REPORT)
+- **Fase 5** — Integrazione Report e Refactoring Visual
+- **Fase 6** — Refactoring DAX e Dizionario Misure ([`docs/measures_dictionary.md`](docs/measures_dictionary.md))

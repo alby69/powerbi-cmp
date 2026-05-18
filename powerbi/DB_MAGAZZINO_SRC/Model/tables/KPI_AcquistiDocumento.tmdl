@@ -1,26 +1,29 @@
 ﻿table KPI_AcquistiDocumento
 
 	measure 'Importo Acquisti (Doc)' =
-			
+			// Somma totale degli importi dai documenti di acquisto
 			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Importo] )
 		displayFolder: KPI Acquisti Documento
+		annotation PBI_Description = "Importo totale acquisti basato su documenti"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Importo Materia Prima (Doc)' =
-			
+			// Importo acquisti filtrato per il codice articolo materia prima '4020002'
 			CALCULATE (
-			    [Importo Acquisti (Doc)],
-			    'FACT_DocumentoAcquisto'[CodiceArticolo] = "4020002"
+				[Importo Acquisti (Doc)],
+				'FACT_DocumentoAcquisto'[CodiceArticolo] = "4020002"
 			)
 		displayFolder: KPI Acquisti Documento
+		annotation PBI_Description = "Importo acquisti materia prima (Articolo 4020002)"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Qta Acquisti (Doc)' =
-			
+			// Somma totale delle quantità dai documenti di acquisto
 			SUMX ( 'FACT_DocumentoAcquisto', 'FACT_DocumentoAcquisto'[Quantity] )
 		displayFolder: KPI Acquisti Documento
+		annotation PBI_Description = "Quantità totale acquisti basata su documenti"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
