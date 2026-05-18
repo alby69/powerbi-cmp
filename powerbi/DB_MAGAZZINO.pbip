@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "datasetReference": {
+    "byPath": "DB_MAGAZZINO_SRC/Model"
+  },
+  "reportReference": {
+    "byPath": "DB_MAGAZZINO_SRC/Report"
+  }
+}
