@@ -17,6 +17,7 @@ def extract_measures(tmdl_path):
         lines = part.split('\n')
         header = lines[0]
 
+        # Match Name = ...
         name_match = re.match(r"'?([^'=]+)'?\s*=\s*(.*)", header)
         if not name_match:
             continue
@@ -95,8 +96,6 @@ def main():
                 f.write("```dax\n")
                 f.write(f"{m['formula']}\n")
                 f.write("```\n\n")
-
-    print(f"Measures dictionary generated at {output_file}")
 
 if __name__ == "__main__":
     main()
