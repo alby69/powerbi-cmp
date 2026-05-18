@@ -168,10 +168,10 @@
 
 ### Organization Rule
 ```
-KPI Area            → Business KPIs
-PARAM Area          → Parameters
-CALC Area           → Calculation Groups
-UTIL Area           → Utility
+KPI Area          → Business KPIs
+PARAM Area        → Parameters
+CALC Area         → Calculation Groups
+UTIL Area         → Utility
 ```
 
 ---

@@ -35,7 +35,6 @@ def extract_measures(tmdl_path):
         elif first_line_val != "":
             formula_lines.append(first_line_val)
         else:
-            # Formula starts on next lines
             for line in lines[1:]:
                 stripped = line.strip()
                 if not stripped:
@@ -81,7 +80,6 @@ def main():
             if measures:
                 all_measures.extend(measures)
 
-    # Group by table
     grouped = {}
     for m in all_measures:
         grouped.setdefault(m['table'], []).append(m)
