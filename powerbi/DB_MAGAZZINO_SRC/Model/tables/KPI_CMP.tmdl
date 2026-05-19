@@ -1,18 +1,24 @@
 ﻿table KPI_CMP
 
-	measure 'Qta CMP' = SUM(FACT_MagazzinoCMP[Qta_BIL])
+	measure 'Qta CMP' =
+			// Quantità bilanciata per il calcolo del Costo Medio Ponderato
+			SUM(FACT_MagazzinoCMP[Qta_BIL])
 		displayFolder: KPI CMP
 		annotation PBI_Description = "Quantità BIL per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Costo Medio Acquisto' = DIVIDE([Imp_Acquisto_CMP],[Qta CMP])
+	measure 'Costo Medio Acquisto' =
+			// Rapporto tra importo acquisto CMP e quantità CMP
+			DIVIDE([Imp_Acquisto_CMP], [Qta CMP])
 		displayFolder: KPI CMP
 		annotation PBI_Description = "Costo medio di acquisto per il calcolo del CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Giacenza Quantità (CMP)' = ```
+
+			// Restituisce la quantità progressiva di stock all'ultima data utile del periodo
 			CALCULATE(
 			    MAX(FACT_Stock[QtaProgressiva]),
 			    LASTDATE(DIM_Calendario[Date])
@@ -24,6 +30,8 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Giacenza Valore (CMP)' = ```
+
+			// Restituisce il valore progressivo di stock all'ultima data utile del periodo
 			CALCULATE(
 			    MAX(FACT_Stock[ValoreProgressivo]),
 			    LASTDATE(DIM_Calendario[Date])
@@ -35,38 +43,45 @@
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'CMP (Calcolato)' =
-			
-			DIVIDE(
-			    [Giacenza Valore (CMP)],
-			    [Giacenza Quantità (CMP)]
-			)
+			// Calcola il CMP come rapporto tra Valore Stock e Quantità Stock
+			VAR Valore = [Giacenza Valore (CMP)]
+			VAR Quantita = [Giacenza Quantità (CMP)]
+			RETURN
+				DIVIDE(Valore, Quantita)
 		displayFolder: KPI CMP
+		annotation PBI_Description = "Costo Medio Ponderato calcolato su stock progressivo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Costo Venduto (CMP)' =
-			
+			// Valorizzazione del venduto utilizzando il CMP calcolato
 			SUM(FACT_Stock[Quantità]) * [CMP (Calcolato)]
 		displayFolder: KPI CMP
+		annotation PBI_Description = "Costo del venduto basato su CMP calcolato"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Giacenza Quantità Periodo' =
-			
+			// Somma delle quantità progressive nel periodo selezionato
 			SUM(FACT_Stock[QtaProgressiva])
 		displayFolder: KPI CMP
+		annotation PBI_Description = "Somma quantità stock nel periodo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Giacenza Valore Periodo' =
-			
+			// Somma dei valori progressivi nel periodo selezionato
 			SUM(FACT_Stock[ValoreProgressivo])
 		displayFolder: KPI CMP
+		annotation PBI_Description = "Somma valore stock nel periodo"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Importo CMP' = SUM(FACT_MagazzinoCMP[Importo])
+	measure 'Importo CMP' =
+			// Somma totale degli importi in FACT_MagazzinoCMP
+			SUM(FACT_MagazzinoCMP[Importo])
 		displayFolder: KPI CMP
+		annotation PBI_Description = "Importo totale movimenti CMP"
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

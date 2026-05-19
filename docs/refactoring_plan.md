@@ -51,11 +51,20 @@
 
 ---
 
-### Phase 5 — Report Integration & Consolidation (NEW) ✅
+### Phase 5 — Report Integration & Consolidation ✅
 - Extracted and integrated visuals from `ACQUISTO_PRODOTTO`, `ANALISI_VENDITE`, and `DB_MAGAZZINO_REPORT`.
 - Refactored report structure into semantic ranges (100-VENDITE, 200-ACQUISTI, 300-MAGAZZINO, 400-ANALISI).
 - Converted legacy Layout format to modern PBIR structure.
 - Renamed all report pages to Italian PascalCase (e.g., `VenditeMargine`, `AcquistiGestioneNavi`).
 - Standardized `ordinal` values for consistent page ordering.
 
-## Status: 100% COMPLETED (Revised)
+---
+
+### Phase 6 — DAX Refactoring & Documentation (NEW) ✅
+- Deep refactoring of 200+ DAX measures in `KPI_` tables.
+- Standardized code style using `VAR`/`RETURN` for performance and readability.
+- Added comprehensive inline documentation (`//`) explaining business logic.
+- Ensured every measure has a `PBI_Description` annotation.
+- Generated an automated Measures Dictionary ([`docs/measures_dictionary.md`](measures_dictionary.md)).
+
+## Status: 100% COMPLETED (Updated)

@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "artifacts": [
+    {
+      "type": "semanticModel",
+      "path": "DB_MAGAZZINO_SRC/Model"
+    },
+    {
+      "type": "report",
+      "path": "DB_MAGAZZINO_SRC/Report"
+    }
+  ]
+}
