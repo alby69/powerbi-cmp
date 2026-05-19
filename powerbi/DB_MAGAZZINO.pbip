@@ -1,13 +1,9 @@
 {
   "version": "1.0",
-  "artifacts": [
-    {
-      "type": "semanticModel",
-      "path": "DB_MAGAZZINO_SRC/Model"
-    },
-    {
-      "type": "report",
-      "path": "DB_MAGAZZINO_SRC/Report"
-    }
-  ]
+  "datasetReference": {
+    "byPath": "DB_MAGAZZINO_SRC/Model"
+  },
+  "reportReference": {
+    "byPath": "DB_MAGAZZINO_SRC/Report"
+  }
 }
